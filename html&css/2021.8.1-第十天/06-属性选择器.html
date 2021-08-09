@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>属性选择器</title>
+    <style>
+        /* input 具有value属性 */
+        
+        input[value] {
+            color: tomato;
+        }
+        
+        input[type="password"] {
+            color: pink;
+        }
+        
+        div[class^="icon"] {
+            color: skyblue;
+        }
+        
+        section[class$="data"] {
+            color: skyblue;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="text" name="" id="" value="XD ">
+    <input type="" name="" id="">
+    <input type="password" name="" id="">
+    <!-- 选择属性值开头的某些元素 -->
+    <div class="icon1">1</div>
+    <div class="icon2">2</div>
+    <div class="icon3">3</div>
+    <div class="icon4">4</div>
+    <div class="icon5">5</div>
+    <div>XDD</div>
+
+    <!-- 选择属性值 结尾等于某些值的元素 -->
+    <section class="icon1-data">亚瑟王</section>
+    <section class="icon3-ico">弟弟</section>
+    <section class="icon2-data">赵云</section>
+
+
+</body>
+
+</html>

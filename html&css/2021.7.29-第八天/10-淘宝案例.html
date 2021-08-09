@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>淘宝案例</title>
+    <style>
+        /* 大盒子 */
+        
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        li {
+            list-style: none;
+        }
+        
+        .taobao {
+            position: relative;
+            width: 520px;
+            height: 280px;
+            margin: 20px auto;
+        }
+        
+        .taobao img {
+            width: 520px;
+            height: 280px;
+        }
+        
+        .taobao .pre,
+        .taobao .next {
+            position: absolute;
+            bottom: 50%;
+            margin-bottom: -15px;
+            width: 20px;
+            height: 30px;
+            background-color: rgba(0, 0, 0, 0.3);
+            text-align: center;
+            line-height: 30px;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .taobao .pre {
+            left: 0;
+            border-radius: 0 15px 15px 0;
+        }
+        
+        .taobao .next {
+            right: 0;
+            border-radius: 15px 0 15px 0;
+        }
+        
+        .taobao .promo-nav {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            margin-left: -35px;
+            width: 70px;
+            height: 13px;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 7px;
+        }
+        
+        .taobao .promo-nav li {
+            float: left;
+            width: 8px;
+            height: 8px;
+            background-color: white;
+            margin: 3px;
+            border-radius: 50%;
+        }
+        
+        .taobao .promo-nav .selected {
+            background-color: tomato;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="taobao">
+        <img src="images/tb.jpg" alt="">
+        <a href="#" class="pre">&lt;</a>
+        <a href="#" class="next">&gt;</a>
+        <ul class=promo-nav>
+            <li class="selected"></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+
+    </div>
+</body>
+
+</html>

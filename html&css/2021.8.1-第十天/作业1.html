@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>作业1</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        
+        a {
+            text-decoration: none;
+        }
+        
+        em {
+            font-style: normal;
+        }
+        
+        .phone {
+            width: 290px;
+            height: 400px;
+            background-color: white;
+            box-sizing: border-box;
+            text-align: center;
+        }
+        
+        .phone .link {
+            display: block;
+            width: 290px;
+            height: 290px;
+            box-sizing: border-box;
+            padding: 20px 30px 0;
+            text-align: center;
+        }
+        
+        .phone .link img {
+            height: 200px;
+            width: auto;
+        }
+        
+        .phone .link h4 {
+            display: block;
+            height: 20px;
+            margin: 20px -10px 9px;
+            text-align: left;
+            line-height: 20px;
+            font-size: 14px;
+            font-weight: 400;
+            color: #333;
+        }
+        
+        .phone .link p {
+            display: block;
+            height: 20px;
+            line-height: 20px;
+            text-align: left;
+            margin: 0 -10px;
+            color: #e01222;
+            font-size: 14px;
+            font-weight: 400;
+        }
+        
+        .info {
+            display: block;
+            position: relative;
+            width: 290px;
+            height: 100px;
+            border-top: 1px solid #f6f6f6;
+            text-align: left;
+        }
+        
+        .info .qianggou {
+            position: absolute;
+            display: block;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            background-color: red;
+            width: 80px;
+            height: 40px;
+            text-align: center;
+            line-height: 40px;
+            margin: auto 0;
+            color: white;
+        }
+        
+        .info .text {
+            padding: 30px 0 0 30px;
+            display: block;
+            position: relative;
+            line-height: 1;
+            padding-left: 20px;
+        }
+        
+        .info .text .price {
+            position: relative;
+            display: block;
+            line-height: 1.1;
+        }
+        
+        .info .text .price .lowest {
+            position: absolute;
+            top: -22px;
+            left: 0;
+            padding: 0 8px;
+            height: 16px;
+            line-height: 16px;
+            background-color: #e6e6e6;
+            font-size: 10px;
+            color: #999;
+            border-radius: 2px;
+        }
+        
+        .info .text .price .lowest::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: -6px;
+            margin: 0 auto;
+            width: 0;
+            height: 0;
+            border-width: 3px;
+            border-style: solid dashed dashed;
+            border-color: #e6e6e6 transparent transparent;
+            pointer-events: none;
+        }
+        
+        .info .text .price .price_now {
+            display: inline-block;
+            font-size: 24px;
+            line-height: 1;
+            font-family: Arial;
+            color: #e01222;
+            margin-right: 2px;
+        }
+        
+        .info .text .price .price_now em {
+            font-size: 14px;
+        }
+        
+        .info .text .price .price_pre {
+            font-size: 12px;
+            color: #999;
+            text-decoration: line-through;
+        }
+        
+        .info .text .process {
+            display: block;
+            margin-top: 5px;
+        }
+        
+        .info .text .process .text1 {
+            font-style: normal;
+            font-size: 12px;
+            color: rgb(102, 102, 102);
+        }
+        
+        .info .text .process .inner {
+            width: 88px;
+            height: 8px;
+            background-color: #e6e6e6;
+            display: inline-block;
+            position: relative;
+            margin-left: 5px;
+            border-radius: 8px;
+        }
+        
+        .info .text .process .inner .completed {
+            background-color: #df0021;
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 8px;
+            border-radius: 8px 0 0 8px;
+        }
+    </style>
+</head>
+
+
+<body>
+    <div class="phone">
+        <a href="#" class="link">
+            <img src="素材/作业1.jpg" alt="">
+            <h4 class="title">红米K40 5G手机 幻境 12+256GB</h4>
+            <p class="desc">高通骁龙870</p>
+        </a>
+        <div class="info">
+            <span class="text">
+                <span class="price">
+                    <span class="lowest">45天历史最低价</span>
+            <span class="price_now">
+                <em>￥</em>
+                2669</span>
+            <span class="price_pre">￥3299</span>
+            </span>
+            <span class="process">
+               <i class="text1">已售33%</i>
+               <i class="inner">
+                   <b class="completed" style="width: 33%;"></b>
+               </i>
+
+            </span>
+            </span>
+
+            <a href="#" class="qianggou">立即抢购</a>
+        </div>
+    </div>
+</body>
+
+</html>

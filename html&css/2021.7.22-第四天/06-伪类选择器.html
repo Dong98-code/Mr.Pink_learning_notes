@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>伪类选择器</title>
+    <style>
+        /* 为访问的链接 */
+        
+        a:link {
+            color: #333;
+            text-decoration: none;
+        }
+        
+        a:visited {
+            color: orange;
+        }
+        /* 鼠标经过的那个链接，变成对应的颜色 */
+        
+        a:hover {
+            color: skyblue;
+        }
+        /* 鼠标按下没有松开 */
+        
+        a:active {
+            color: green;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="#">小猪佩奇</a>
+</body>
+
+</html>

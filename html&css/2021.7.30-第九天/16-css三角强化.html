@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>css三角强化</title>
+    <style>
+        .box1 {
+            height: 42px;
+            width: 285px;
+            border: 2px solid red;
+            /* line-height: 42px; */
+            margin: 100px auto;
+        }
+        
+        .box1 .current-price {
+            position: relative;
+            float: left;
+            background-color: red;
+            width: 165px;
+            height: 100%;
+            text-align: center;
+            line-height: 42px;
+            color: white;
+            font-size: 28px;
+            font-weight: 700;
+        }
+        
+        .box1 .current-price i {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 0;
+            height: 0;
+            border-width: 42px 20px 0 0;
+            border-color: transparent white transparent transparent;
+            border-style: solid;
+        }
+        
+        .box1 .origin-price {
+            text-align: center;
+            line-height: 42px;
+            text-decoration: line-through;
+            color: gray;
+            font-size: 24px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box1">
+        <span class="current-price">￥1749.00
+            <i></i>
+        </span>
+        <span class="origin-price">￥2299.00</span>
+    </div>
+</body>
+
+</html>

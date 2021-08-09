@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>后代选择器</title>
+    <style>
+        ol li {
+            color: red;
+        }
+        
+        ol li a {
+            color: pink;
+        }
+        
+        .nav li a {
+            color: yellow;
+        }
+    </style>
+</head>
+
+<body>
+    <ol>
+        <li>我是ol的孩子</li>
+        <li><a href="#">我是孙子</a></li>
+    </ol>
+    <ul class="nav">
+        <li>我是ul的孩子啊</li>
+        <li>
+            <a href="#">不会变化</a>
+            <a href="#">不会变化</a>
+            <a href="#">不会变化</a>
+
+        </li>
+    </ul>
+</body>
+
+</html>

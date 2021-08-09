@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        @font-face {
+            font-family: 'iconfont';
+            /* Project id 2712792 */
+            src: url('http://at.alicdn.com/t/font_2712792_56bspv97ovu.woff2?t=1627899138614') format('woff2'), url('http://at.alicdn.com/t/font_2712792_56bspv97ovu.woff?t=1627899138614') format('woff'), url('http://at.alicdn.com/t/font_2712792_56bspv97ovu.ttf?t=1627899138614') format('truetype');
+        }
+        
+        div {
+            position: relative;
+            width: 400px;
+            height: 50px;
+            background-color: skyblue;
+        }
+        
+        div::after {
+            position: absolute;
+            content: "\e649";
+            font-family: 'iconfont';
+            right: 10px;
+            top: 15px;
+            color: tomato;
+            font-weight: 700;
+            font-size: 20px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div></div>
+</body>
+
+</html>

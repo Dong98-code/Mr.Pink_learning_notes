@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .father {
+            display: table-cell;
+            /* display: inline-block; */
+            height: 100px;
+            width: 100px;
+            background-color: tomato;
+            text-align: center;
+            vertical-align: middle;
+        }
+        
+        .son {
+            display: inline-block;
+            height: calc(100% - 20px);
+            width: calc(100% - 20px);
+            text-align: center;
+            background-color: skyblue;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+
+<body>
+
+</body>
+<div class="father">
+    <div class="son"></div>
+</div>
+
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        li {
+            list-style: none;
+        }
+        
+        ul li {
+            position: relative;
+            float: left;
+            width: 100px;
+            height: 100px;
+            border: 1px solid tomato;
+            margin-left: -1px;
+        }
+        /* 盒子没有定位，鼠标经过添加相对定位 */
+        /* ul li:hover {
+            position: relative;
+            border: 1px skyblue solid;
+        } */
+        
+        ul li:hover {
+            z-index: 2;
+            border: 1px skyblue solid;
+        }
+    </style>
+</head>
+
+<body>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+    </ul>
+</body>
+
+</html>

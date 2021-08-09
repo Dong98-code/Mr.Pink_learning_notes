@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>元素显示转换</title>
+    <style>
+        a {
+            width: 100px;
+            height: 100px;
+            /* 行内元素 转换为块级元素 */
+            display: block;
+            background-color: pink;
+        }
+        
+        div {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            display: inline;
+        }
+        
+        span {
+            width: 100px;
+            height: 100px;
+            background-color: plum;
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="#">金星</a>
+    <div>
+        块级元素
+    </div>
+    <div>
+        块
+    </div>
+    <span>行内块元素</span>
+    <span>行内块元素</span>
+
+</body>
+
+</html>

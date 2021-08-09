@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 父亲没有定位 */
+        /* .father {
+            width: 500px;
+            height: 500px;
+            background-color: tomato;
+        } */
+        /* 父亲有定位 */
+        
+        .grandf {
+            position: relative;
+            width: 600px;
+            height: 600px;
+            background-color: pink;
+        }
+        
+        .father {
+            /* position: relative; */
+            width: 500px;
+            height: 500px;
+            background-color: tomato;
+        }
+        
+        .son {
+            position: absolute;
+            top: 50px;
+            right: 50px;
+            width: 100px;
+            height: 100px;
+            background-color: skyblue;
+        }
+        
+        .son2 {
+            /* position: absolute;
+            top: 50px;
+            right: 50px; */
+            width: 100px;
+            height: 100px;
+            background-color: black;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 没有父亲或者父亲没有定位的情况 -->
+    <!-- 1。 没有父亲 -->
+    <!-- <div class="son"></div> -->
+
+    <!-- 2, 有父亲没定位 -->
+    <div class="grandf">
+        <div class="father">
+            <div class="son"></div>
+            <div class="son2"></div>
+        </div>
+    </div>
+
+</body>
+
+</html>

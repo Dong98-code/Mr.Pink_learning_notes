@@ -1,0 +1,136 @@
+.w {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+header .logo {
+    height: 84px;
+    border-bottom: 2px solid #b1191a;
+    padding-top:15px;
+}
+
+.register_area {
+    height: 523px;
+    margin-top: 20px;
+    border:1px solid #dfdfdf;
+}
+.register_area h3{
+    height: 41px;
+    background-color: #ececec;
+    border-bottom: 1px solid #dfdfdf;
+    line-height: 41px;
+    padding:0 9px;
+    font-size: 18px;
+    color: #333;
+    font-weight: 400;
+}
+
+.register_area h3 .log_in{
+    float: right;
+    font-size: 14px;
+    color: #333;
+
+}
+.register_area h3 .log_in a{
+color:#c81623;}
+
+.register_form {
+    width: 600px;
+    /* height: 420px; */
+    margin: 40px auto 0;
+    /* background-color: pink; */
+}
+.register_form ul li{
+    padding: 10px 0;
+}
+.register_form ul li input[type="text"] {
+    width: 240px;
+    height: 36px;
+    border:1px solid #999;
+}
+.register_form ul li label{
+    display: inline-block;
+    width: 100px;
+    text-align: right;
+    font-size: 14px;
+    color: #4c4c4c;
+}
+
+.error {
+    color: #df3033;
+}
+.error_icon,
+.correct_icon{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background: url(../images/error.png) no-repeat;
+    vertical-align: middle;
+    margin:0 2px 2px 10px;
+    
+}
+.correct {
+    color: #40b83f;
+}
+.correct_icon{
+    background: url(../images/success.png) no-repeat;
+}
+
+.register_form ul .security_degree{
+    padding: 0 0 10px 180px;
+    font-size: 12px;
+    color: #b2b2b2;
+}
+.register_form ul .security_degree em {
+    padding: 0 10px;
+    color: #fff;
+    font-size: 12px;
+}
+.register_form ul .security_degree em:nth-of-type(1){
+    background-color: #de1111;
+    margin-left: 8px; ;
+}
+.register_form ul .security_degree em:nth-of-type(2){
+    background-color: #40b83f;
+}
+
+.register_form ul .security_degree em:nth-of-type(3) {
+    background-color:#f79100}
+
+
+.register_form ul .agreement {
+    margin-top: 20px;
+    font-size: 12px;
+    padding-left: 100px;
+
+}
+.register_form ul .agreement a {
+    color: #1ba1e6;
+}
+
+.register_form ul li:last-child{
+    margin-top: 30px;
+    padding-left:120px; ;
+}
+.submit {
+    height: 34px;
+    width: 200px;
+    border: 0;
+    background-color: #c81623;
+    font-size: 14px;
+    color: #fff;
+}
+
+.mod_copyright{
+    margin-top: 20px;
+    text-align: center;
+}
+
+.mod_copyright .links {
+    margin-bottom: 10px;
+}
+
+.mod_copyright .links span{
+    width: 1px;
+    height: 12px;
+    margin: 0 7px;}

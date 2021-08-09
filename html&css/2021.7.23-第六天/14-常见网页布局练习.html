@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>常见网页布局练习</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        li {
+            list-style: none;
+        }
+        
+        .top {
+            height: 50px;
+            background-color: tomato;
+            text-align: center;
+            line-height: 50px;
+            border-style: dotted;
+        }
+        
+        .banner {
+            height: 150px;
+            width: 980px;
+            background-color: tomato;
+            text-align: center;
+            line-height: 150px;
+            margin: 10px auto;
+            border-style: dotted;
+        }
+        
+        .box {
+            height: 300px;
+            width: 980px;
+            background-color: tomato;
+            margin: 10px auto;
+        }
+        
+        .box li {
+            float: left;
+            height: 300px;
+            width: 237px;
+            margin-right: 10px;
+            background-color: powderblue;
+        }
+        
+        .box .last {
+            margin-right: 0;
+        }
+        
+        .footer {
+            height: 200px;
+            background-color: tomato;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="top">top</div>
+    <div class="banner">banner</div>
+    <div class="box">
+        <ul class="box">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li class="last">4</li>
+        </ul>
+    </div>
+    <div class="footer">footer</div>
+</body>
+
+</html>
