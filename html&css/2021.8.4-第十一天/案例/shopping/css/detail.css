@@ -1,0 +1,111 @@
+@font-face {
+    font-family: 'iconfont';  /* Project id 2712792 */
+    src: url('http://at.alicdn.com/t/font_2712792_cfcpiwri2th.woff2?t=1628591713010') format('woff2'),
+         url('http://at.alicdn.com/t/font_2712792_cfcpiwri2th.woff?t=1628591713010') format('woff'),
+         url('http://at.alicdn.com/t/font_2712792_cfcpiwri2th.ttf?t=1628591713010') format('truetype');
+  }
+
+.de_container {
+    margin-top:20px ;
+}
+.crumb_wrap {
+    height: 25px;
+}
+.crumb_wrap a {
+margin-right: 10px;
+}
+
+
+.preview_wrap {
+    width: 400px;
+    height: 560px;
+    /* background-color: skyblue; */
+}
+.preview_img {
+    width: 400px;
+    height: 400px;
+    border: 1px solid #ccc;
+    text-align: center;
+    line-height: 400px;
+}
+
+.preview_list{
+    position: relative;
+    height: 60px;
+    margin-top: 64px;
+    /* background-color: pink; */
+}
+.preview_list ul {
+    height: 60px;
+    width: 320px;
+    margin: 0 auto;
+}
+.preview_list ul li {
+    float: left;
+    width: 60px;
+    height: 60px;
+    border: 2px solid transparent;
+    text-align: center;
+    padding: 0 2px;
+
+}
+.preview_list ul li.current {
+    border: 2px solid #c81623;
+}
+.arrow_left,
+.arrow_right {
+    position: absolute;
+    width: 19px;
+    height: 34px;
+    top: 50%;
+    margin-top: -17px;
+
+}
+
+.arrow_left {
+    left: 0;
+}
+.arrow_right{
+    right: 0;
+}
+
+.preview_footer {
+    height: 18px;
+    line-height: 16px;
+    margin-top: 20px;
+    font-size: 12px;
+    color: #666;
+
+}
+
+.preview_footer em:nth-of-type(2){
+    margin-left: 20px;
+}
+
+.preview_footer em:nth-of-type(2)::before{
+    content: "\e662";
+    font-family: "iconfont";
+    color:#ce313d;
+    font-size: 12px;
+}
+.preview_footer em:nth-of-type(3){
+    margin-left: 34px;
+}
+
+.preview_footer em:nth-of-type(3)::before{
+    content: "\e60e";
+    font-family: "iconfont";
+    color:#ce313d;
+    font-size: 12px;
+}
+
+.preview_footer em:nth-of-type(4){
+    margin-left: 55px;
+}
+
+.preview_footer em:nth-of-type(4)::before{
+    content: "\e629";
+    font-family: "iconfont";
+    color:#ccc;
+    font-size: 12px;
+}

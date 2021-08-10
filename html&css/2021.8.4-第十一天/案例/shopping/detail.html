@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>列表页-综合网购首选-正品低价、品质保障、配送及时、轻松购物！
+    <title>手机详情页面-综合网购首选-正品低价、品质保障、配送及时、轻松购物！
     </title>
     <!-- 网站说明 -->
     <meta name="description" content="品优购商城-专业的综合网上购物商城,销售家电、数码通讯、电脑、家居百货、服装服饰、母婴、图书、食品等数万个品牌优质商品.便捷、诚信的服务，为您提供愉悦的网上购物体验!" />
@@ -17,8 +17,8 @@
     <link rel="stylesheet" href="css/base.css">
     <!-- 引入我们公共的样式文件 -->
     <link rel="stylesheet" href="css/common.css">
-    <!-- 引入列表页样式 -->
-    <link rel="stylesheet" href="css/list.css">
+    <!-- 引入detail。html 的专用样式 -->
+    <link rel="stylesheet" href="css/detail.css">
 </head>
 <body>
     <!-- 快捷导航模块 start -->
@@ -59,10 +59,6 @@
             <h1>
                 <a href="index.html" title="品优购商城">品优购商城</a>
             </h1>
-            
-        </div>
-        <div class="second_kill_img">
-            <img src="images/秒杀.png" alt="">
         </div>
         <!-- search搜索模块 -->
         <div class="search">
@@ -92,80 +88,123 @@
     <!-- nav模块制作 -->
     <nav class="nav">
         <div class="w">
-            <div class="second_kill_list">
+            <div class="dropdown">
+                <div class="dt">全部商品分类</div>
+                <div class="dd" style="display: none;">
+                    <ul>
+                        <li><a href="#">家用电器</a></li> 
+                        <li><a href="list.html">手机、</a><a href="#">数码、</a><a href="#">通信</a></li>
+                        <li><a href="#">电脑、</a><a href="#">办公</a></li>
+                        <li><a href="#">家居、</a><a href="#">家具、</a><a href="#">家装、</a><a href="#">厨具</a></li>
+                        <li><a href="#">男装、</a><a href="#">女装、</a><a href="#">童装、</a><a href="#">内衣</a></li>
+                        <li><a href="#">个户化妆、</a><a href="#">清洁用品、</a><a href="#">宠物</a></li>
+                        <li><a href="#">鞋靴、</a><a href="#">箱包、</a><a href="#">珠宝、</a><a href="#">奢侈品</a></li>
+                        <li><a href="#">运动户外、</a><a href="#">钟表</a></li>
+                        <li><a href="#">汽车、</a><a href="#">汽车用品</a></li>
+                        <li><a href="#">母婴、</a><a href="#">玩具乐器</a></li>
+                        <li><a href="#">食品、</a><a href="#">酒类、</a><a href="#">生鲜、</a><a href="特产"></a></li>
+                        <li><a href="#">医药保健</a></li>
+                        <li><a href="#">图书、</a><a href="#">音像、</a><a href="#">电子书</a></li>
+                        <li><a href="#">彩票、</a><a href="#">旅行、</a><a href="#">充值、</a><a href="#">票务</a></li>
+                        <li><a href="#">理财、</a><a href="#">众筹、</a><a href="#">白条、</a><a href="#">保险</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!--navitems制作 -->
+            <div class="navitems">
                 <ul>
-                    <li><a href="#">品优秒杀</a></li>
-                    <li><a href="#">即将售罄</a></li>
-                    <li><a href="#">超值低价</a></li>
+                    <li>
+                        <a href="#">服装城</a>
+                    </li>
+                    <li>
+                        <a href="#">美妆馆</a>
+                    </li>
+                    <li>
+                        <a href="#">传智超市</a>
+                    </li>
+                    <li>
+                        <a href="#">全球购</a>
+                    </li>
+                    <li>
+                        <a href="#">闪购</a>
+                    </li>
+                    <li>
+                        <a href="#">团购</a>
+                    </li>
+                    <li>
+                        <a href="#">拍卖</a>
+                    </li>
+                    <li>
+                        <a href="#">有趣</a>
+                    </li>
                 </ul>
             </div>
-            <div class="second_kill_items">
-                <ul>
-                    <li><a href="#">女装</a></li>
-                    <li><a href="#" class="style_red">女鞋</a></li>
-                    <li><a href="#">男装</a></li>
-                    <li><a href="#">男鞋</a></li>
-                    <li><a href="#">母婴童装</a></li>
-                    <li><a href="#">视频</a></li>
-                    <li><a href="#">智能数码</a></li>
-                    <li><a href="#">户外运动</a></li>
-                    <li><a href="#">更多分类</a></li>
-                    
-                </ul>
-            </div>
+
+            <!-- navitems制作 -->
 
         </div>
     </nav>
     <!-- nav 模块制作 -->
-    <div class="w second_kill_container">
-        <div class="second_kill_container_hd">
-            <img src="images/正在抢购.png" alt="">
-        </div>
-        <div class="second_kill_container_bd">
-            <ul class="clearfix">
-                <li><a href="detail.html"><img src="images/单品1.png" alt=""></a></li>
-                <li><a href="#"><img src="images/单品1.png" alt=""></a></li>
-                <li><a href="#"><img src="images/单品1.png" alt=""></a></li>
-                <li><a href="#"><img src="images/单品1.png" alt=""></a></li>
-                <li><a href="#"><img src="images/单品1.png" alt=""></a></li>
-                <li><a href="#"><img src="images/单品1.png" alt=""></a></li>
-                <li><a href="#"><img src="images/单品1.png" alt=""></a></li>
-                <li><a href="#"><img src="images/单品1.png" alt=""></a></li>
-                <li><a href="#"><img src="images/单品1.png" alt=""></a></li>
-                <li><a href="#"><img src="images/单品1.png" alt=""></a></li>
-                <li><a href="#"><img src="images/单品1.png" alt=""></a></li>
-                <li><a href="#"><img src="images/单品1.png" alt=""></a></li>
-                <li><a href="#"><img src="images/单品1.png" alt=""></a></li>
-                <li><a href="#"><img src="images/单品1.png" alt=""></a></li>
-                <li><a href="#"><img src="images/单品1.png" alt=""></a></li>
-                <li><a href="#"><img src="images/单品1.png" alt=""></a></li>
-                
-            </ul>
-        </div>
-        <!-- 分页制作 -->
-        <div class="page">
-            <span class="page_num">
-               <a href="#">&lt;&lt;上一页</a>
-               <a href="#">2</a>
-               <a href="#">3</a>
-               <a href="#">4</a>
-               <a href="#">5</a>
-               <a href="#">6</a>
-               <a href="#">...</a>
-               <a href="#">下一页&gt;&gt;</a>
-            </span>
-            <span class="page_skip">
-                共100页 &nbsp;
-                到第<input type="text">页
-                <input type="submit" value="确定">
-            </span>
-        </div>
-    
-        <!-- 分页制作 -->
 
+    <!-- 详情页内容 -->
+    <div class="de_container w">
+        <div class="crumb_wrap">
+            <a href="#">手机、数码、通讯</a>
+            〉 <a href="index.html">手机</a> 
+            〉 <a href="list.html"> Apple苹果  </a>  
+            〉 <a href="#">iphone 6S Plus系类</a> 
+        </div>
+
+        <!-- 产品介绍模块 -->
+        <div class="product_intro clearfix">
+            <!-- 预览区域左 -->
+            <div class="preview_wrap fl">
+                <div class="preview_img">
+                    <img src="upload/iphone_6s.png" alt="">
+                </div>
+                <div class="preview_list">
+                    <a href="#" class="arrow_left"><img src="images/arrow_left.png" alt=""></a>
+                    <a href="#" class="arrow_right"><img src="images/arrow_right.png" alt=""></a>
+                    <ul>
+                        <li class="current">
+                            <img src="upload/preview_list_1.png" alt="">
+                        </li>
+                        <li>
+                            <img src="upload/preview_list_1.png" alt="">
+                        </li>
+                        <li>
+                            <img src="upload/preview_list_1.png" alt="">
+                        </li>
+                        <li>
+                            <img src="upload/preview_list_1.png" alt="">
+                        </li>
+                        <li>
+                            <img src="upload/preview_list_1.png" alt="">
+                        </li>
+                    </ul>
+                </div>
+                <div class="preview_footer">
+                    <em>
+                        商品编号：0468256644
+                    </em>
+                    <em>
+                        分享
+                    </em>
+                    <em>
+                        关注5000
+                    </em>
+                    <em>
+                        对比
+                    </em>
+
+                </div>
+            </div>
+            <!-- 详情部分/右 -->
+            <div class="item_info_wrap fr">abs</div>
+        </div>
+        <!-- 产品介绍模块 结束 -->
     </div>
-
-    
+    <!-- 详情页内容结束 -->
     <footer class="footer">
         <div class="w">
             <!-- mod_service制作 -->

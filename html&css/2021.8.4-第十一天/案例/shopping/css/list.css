@@ -120,6 +120,11 @@
     text-align: center;
     border: 1px solid #000;
     margin: 0 3px;
+    transition: all 0.5s;
+}
+.page_skip input[type="text"]:focus {
+    width: 88px;
+    border: 1px solid skyblue;
 }
 .page_skip input[type="submit"] {
     width: 40px;

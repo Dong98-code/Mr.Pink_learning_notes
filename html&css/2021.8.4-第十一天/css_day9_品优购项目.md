@@ -230,3 +230,65 @@ register_form
 ![20210809175244](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20210809175244.png)
 
 居中对齐
+
+
+
+## 详情页面制作
+
+### 1). 详情页 detail.html  常用单词
+
+| 名称             | 说明                                  |
+| ---------------- | ------------------------------------- |
+| 主体             | de_container                          |
+| 面包屑导航       | crumb_wrap                            |
+| 产品介绍         | product_intro   （ introduction介绍） |
+| 预览包           | preview_wrap（左侧部分）              |
+| 预览缩略图       | preview_img                           |
+| 预览列表         | preview_list                          |
+| 左按钮           | arrow_prev                            |
+| 右按钮           | arrow_next                            |
+| 小图列表         | preview_items                         |
+| 产品详细信息区域 | itemInfo_wrap （右侧部分）            |
+| 头部名称         | sku_name       skull  头骨            |
+| 新闻             | news                                  |
+| 摘要             | summary                               |
+| 评价             | remark                                |
+| 价格摘要         | summary_price                         |
+| 配送至           | summary_stock                         |
+| 支持             | summary_support                       |
+| 选择             | choose                                |
+| 选择按钮组       | choose_btns                           |
+| 选择数量         | choose_amount                         |
+| 减去             | reduce                                |
+| 加入购物车       | addshopcar                            |
+| 产品细节         | product_detail      （   detail描述） |
+| 左侧边           | aside                                 |
+| 详细描述         | detail                                |
+
+
+### 2) 面包屑导航
+
+crumb_wrap 
+![20210810163904](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20210810163904.png)
+
+给经过的路线都撒上面包屑，用于回到上一级的页面
+
+### 3) 产品介绍模块
+
+![20210810172940](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20210810172940.png)
+
+大盒子和右侧的盒子 不给高度
+
+左边手机 的高度是固定的，可以给高度
+
+product_intro
+
+#### preview 制作
+
+preview_list
+margin-top
+
+#### preview_list 制作
+
+中间 给高宽 ，两边箭头给定位
+
