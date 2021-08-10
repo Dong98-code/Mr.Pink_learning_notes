@@ -7,15 +7,15 @@
  
 
  ### 2021.7.19
- [css_day1_notes](./2021.7.17-第三天/css_day1_notes.md)   
+ [css_day1_notes_选择器](./2021.7.17-第三天/css_day1_notes.md)   
 
 ### 2021.7.20
 [css_day2_notes](./2012.7.20-第四天/css_day2_notes.md) 
 ### 2021.7.21$22
-[css_day3_notes](./2021.7.21-第五天/css_day3_notes_盒子模型.md)
+[css_day3_notes_盒子模型](./2021.7.21-第五天/css_day3_notes_盒子模型.md)
 
 ### 2021.7.23 & 24
-[css_day4_notes](./2021.7.23-第六天/css_day4_notes_浮动.md)
+[css_day4_notes_浮动](./2021.7.23-第六天/css_day4_notes_浮动.md)
 
 ### 2021.7.28 
 [css 学成在线案例](./2021.7.26-第七天/css_day5_notes_学成在线.md)
