@@ -69,7 +69,8 @@
     float: left;
     width: 290px;
     height: 460px;
-    margin-right: 12px;
+    margin: 10px 12px 0 0;
+
     border:1px solid transparent;
 }
 
@@ -78,4 +79,53 @@
 }
 .second_kill_container_bd ul li:hover {
     border: 1px solid #c81523;
+}
+
+.page {
+    margin: 40px 0;
+    text-align: center;
+}
+
+
+.page_num a {
+    display: inline-block;
+    width: 36px;
+    height: 36px;
+    line-height: 36px;
+    background-color: #f7f7f7;
+    border: 1px solid #000;
+    color: #333;
+    font-size: 14px;
+}
+
+.page_num a:first-child,
+.page_num a:last-child {
+    width: 85px;
+}
+
+.page_num a:nth-of-type(2),
+.page_num a:nth-of-type(7) {
+    border: 0;
+    background-color: white;
+}
+
+.page_skip {
+    font-size: 14px;
+    color: #333;
+}
+.page_skip input[type="text"] {
+    width: 45px;
+    height: 35px;
+    outline: none;
+    text-align: center;
+    border: 1px solid #000;
+    margin: 0 3px;
+}
+.page_skip input[type="submit"] {
+    width: 40px;
+    height: 36px;
+    border: 1px solid #000;
+    background-color: #f7f7f7;
+    font-size: 14px;
+    color: #333;
 }

@@ -361,6 +361,13 @@
 }
 
 
+/* 过度动画 */
+.tab_content img{
+    transition: all 0.2s;
+}
+.tab_content img:hover {
+    margin-left: 8px;
+}
 /* 电梯导航 */
 .fixedtool {
     position: fixed;

@@ -218,8 +218,12 @@
     margin-left: 2px;
     line-height: 31px;
     padding-left: 10px;
+    transition: all .2s;
 }
 
+.dropdown .dd ul li:hover {
+    padding-left: 15px;
+}
 .dropdown .dd ul li::after {
     content: "\e677";
     font-family: "iconfont";
