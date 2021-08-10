@@ -15,10 +15,11 @@
 [css_day3_notes](./2021.7.21-第五天/css_day3_notes_盒子模型.md)
 
 ### 2021.7.23 & 24
-[css_day4_notes]((./2021.7.23-第六天/css_day4_notes_浮动.md)
+[css_day4_notes](./2021.7.23-第六天/css_day4_notes_浮动.md)
 
 ### 2021.7.28 
 [css 学成在线案例](./2021.7.26-第七天/css_day5_notes_学成在线.md)
+
 ![20210728222208](https://i.loli.net/2021/07/28/M4jUQEeYDFSGAoH.png)
 ### 2021.7.29
 [css 定位学习](./2021.7.29-第八天/css_day6_notes_定位.md)
