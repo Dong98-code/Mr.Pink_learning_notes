@@ -1,0 +1,338 @@
+em,
+i {
+    font-style: normal;
+}
+
+.shortcut li .iconfont {
+    font-family: "icomoon";
+    margin-left: 8px;
+}
+
+.shortcut li a {
+    color: #666;
+}
+
+.bread,
+.selector,
+.type-wrap,
+.value {
+    overflow: hidden;
+}
+
+.bread,
+.details,
+.hot-sale {
+    margin-bottom: 5px;
+}
+
+.selector {
+    margin-bottom: 25px;
+}
+
+.bread .form-dark {
+    margin-bottom: 5px;
+}
+
+.hot-sale,
+.selector,
+.filter {
+    border: 1px solid #ddd;
+}
+
+.key {
+    padding: 10px 10px 0 15px;
+}
+
+.type-wrap ul li {
+    float: left;
+    list-style-type: none;
+}
+
+.sui-btn {
+    border-radius: 0;
+}
+
+.sui-btn .iconfont {
+    font-family: "icomoon";
+}
+
+.bread .sui-breadcrumb {
+    margin: 0;
+    padding: 3px 15px;
+}
+
+.type-wrap {
+    position: relative;
+    margin: 0;
+    border-top: 1px solid #ddd;
+}
+
+.type-wrap:first-child {
+    border-top: 0;
+}
+
+.type-wrap .key {
+    width: 100px;
+    background: #f1f1f1;
+    text-align: right;
+    line-height: 26px;
+}
+
+.logo .brand {
+    padding-bottom: 87px;
+}
+
+.Logo .secKill {
+    position: absolute;
+    height: 32px !important;
+    top: 66px;
+    left: 360px;
+    border-left: 1px solid #b1191a;
+    line-height: 30px;
+    text-align: center;
+    padding-left: 5px;
+}
+
+.type-wrap .value {
+    padding: 10px 0 0 15px;
+    color: #333;
+}
+
+.type-wrap .logos {
+    margin-left: 120px;
+    padding-right: 90px;
+}
+
+.type-wrap .ext {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.ext .sui-btn {
+    padding: 0 10px;
+    background: #fff;
+}
+
+.ext a {
+    color: #666;
+}
+
+ul.type-list li {
+    display: block;
+    margin-right: 30px;
+    line-height: 26px;
+}
+
+ul.type-list li a {
+    padding: 2px;
+    color: #555;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+ul.type-list li a.redhover {
+    padding: 2px;
+    background: #C81623;
+    color: #fff;
+    text-decoration: none;
+}
+
+ul.type-list li a.grayhover {
+    color: #555;
+}
+
+ul.logo-list li {
+    margin: -1px -1px 0 0;
+    width: 105px;
+    border: 1px solid #E4E4E4;
+}
+
+.filter {
+    background: #F1F1F1;
+}
+
+.sui-navbar {
+    margin-bottom: 0;
+}
+
+.sui-navbar .navbar-inner {
+    padding-left: 0;
+    border-radius: 0;
+}
+
+.sui-navbar .sui-nav>.active>a {
+    background: #c81623;
+    color: #fff;
+}
+
+.goods-list {
+    margin: 20px 0;
+}
+
+.goods-list ul li {
+    margin-top: 10px;
+    line-height: 28px;
+}
+
+
+/*.goods-list ul li:hover {
+	box-shadow: 0 0 10px 2px #ededed;
+}*/
+
+.goods-list .p-img {
+    width: 215px;
+    height: 255px;
+}
+
+.p-img {
+    padding-left: 35px;
+}
+
+.attr,
+.cu,
+.commit {
+    height: 55px;
+    padding-left: 5px;
+}
+
+.price {
+    color: #c81623;
+    font-size: 18px;
+    padding-left: 5px;
+}
+
+.cu span {
+    margin-right: 3px;
+    padding: 3px;
+    background: #c81623;
+    color: #fff;
+}
+
+.operate {
+    padding: 12px 15px;
+}
+
+.page {
+    height: 66px;
+    text-align: center;
+}
+
+.sui-pagination ul>.active>a {
+    border-color: #fff;
+    background-color: #fff;
+    color: #c81623;
+    cursor: default;
+}
+
+.sui-pagination ul>.active>a:hover {
+    border: 1px solid #ddd;
+    background: #ccc;
+}
+
+.sui-pagination ul>li {
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+}
+
+.pagination-large ul>li>a,
+.pagination-large ul>li>span {
+    padding: 9px 18px;
+    color: #333;
+}
+
+.sui-pagination ul>li>a:hover {
+    border: 1px solid #ddd;
+    background: #ccc;
+}
+
+.sui-pagination ul>.dotted>span,
+.sui-pagination ul>.dotted>a {
+    border: 0;
+}
+
+.pagination-large div .page-num {
+    padding: 9px 18px;
+}
+
+.pagination-large div .page-num+.page-confirm {
+    padding: 7px 16px;
+    border: 1px solid #ddd;
+    background-color: #f6f6f6;
+    color: #666;
+}
+
+.sui-pagination div {
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+}
+
+.py-container .NavList .nav {
+    height: 30px;
+    width: 100%;
+    padding-top: 15px;
+}
+
+.NavList .nav li {
+    margin: 0 22px;
+    font-size: 14px;
+    letter-spacing: normal;
+}
+
+.NavList .nav li:nth-child(1),
+.NavList .nav li:nth-child(2),
+.NavList .nav li:nth-child(3) {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0 28px;
+}
+
+.nav li:nth-child(1) a,
+.nav li:nth-child(2) a,
+.nav li:nth-child(3) a {
+    color: #000;
+}
+
+.nav li .iconfont {
+    font-family: "icomoon";
+}
+
+.nav li a {
+    color: #666;
+}
+
+.yui3-u-1-5 .price s {
+    font-size: 12px;
+    color: #666;
+    margin-left: 4px;
+}
+
+.yui3-g .yui3-u-1-5 {
+    width: 24%;
+    margin-right: 10px;
+}
+
+.yui3-g .yui3-u-1-5:hover {
+    outline: 1px solid #b1191a;
+}
+
+.yui3-u-1-5 .sold {
+    padding-left: 5px;
+}
+
+.yui3-u-1-5 .sold img {
+    margin: 0 8px 0 4px;
+}
+
+.yui3-u-1-5 .operate {
+    background: url("../uploads/secBuy.png");
+    padding-left: 5px;
+    text-align: center;
+    font-size: 20px;
+}
+
+.yui3-u-1-5 .operate a {
+    color: #fff;
+}

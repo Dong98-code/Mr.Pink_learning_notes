@@ -1,0 +1,256 @@
+/*
+* @Author: andy
+* @Date:   2017-12-13 11:22:37
+* @Last Modified by:   andy
+* @Last Modified time: 2017-12-13 11:22:37
+*/
+/* 京东首页的css */
+.jd {
+	/* height: 480px; */
+	/* background-color: pink; */
+	position: relative;
+}
+.jd-inner {
+	height: 480px;
+	/* background-color: skyblue; */
+	z-index: 999;  /* 只有定位的盒子才有 z-index */
+	position: relative; 
+}
+.ad {
+	height: 480px;
+	background: url(../images/bg.png) no-repeat top center;
+	position: absolute;  /* 行内块转换 */
+	top: 0;
+	left: 0;
+	width: 100%;  /* 强制显示宽度 */
+}
+.ad a {
+	display: block;
+	height: 100%;
+
+}
+.jd-clo1 {
+	width: 190px;
+	height: 465px;
+	background-color: #6E6568;
+	float: left;
+	padding-top: 15px;
+}
+.jd-clo1 li {
+	padding-left: 10px;
+	height: 28px;
+	line-height: 28px;
+}
+.jd-clo1 li:hover {
+	background-color: #999395;
+}
+.jd-clo1 li a {
+	color: #fff;
+	font-size: 14px;
+}
+.jd-clo1 li span {
+	color: #fff;
+	font-size: 12px;
+}
+.jd-clo2 {
+	width: 790px;
+	height: 480px;
+	float: left;
+	margin-left: 10px;
+}
+.jd-clo2-hd {
+	height: 340px;
+	margin-bottom: 10px;
+	position: relative;
+}
+.jd-clo2-bd div {
+	width: 390px;
+	height: 130px;
+	float: left;
+}
+.jd-clo2-bd div img {
+	width: 100%;
+}
+.firstPic {
+	margin-right: 10px;
+}
+.arr-l, .arr-r {
+	position: absolute;
+	top: 50%;
+	margin-top: -30px;
+	width: 30px;
+	height: 60px;
+	background: rgba(0, 0, 0, 0.3);
+	font-family: "icomoon";
+	color: #fff;
+	text-align: center;
+	line-height: 60px;
+	font-size: 25px;
+
+}
+.arr-l {
+	left: 0;
+}
+.arr-r {
+	right: 0;
+}
+.jd-clo2-hd ol {
+	position: absolute;
+	bottom: 20px;
+	left: 50%;
+	margin-left: -90px;
+	width: 180px;
+	height: 20px;
+	background: rgba(255, 255,255, 0.3);
+	border-radius: 10px;
+}
+.jd-clo2-hd ol  li {
+	width: 12px;
+	height: 12px;
+	background-color: #fff;
+	border-radius: 50%;
+	float: left;
+	margin: 4px 5px;
+	cursor: pointer;
+}
+.jd-clo2-hd .current {
+	background-color: #f10215;
+}
+.jd-clo3 {
+	width: 190px;
+	height: 480px;
+	float: right;
+}
+.jd-clo3 a {
+	font-size: 12px;
+	color: #747474;
+}
+.user {
+	height: 95px;
+	background-color: pink;
+	padding: 20px 15px 0;
+}
+
+.user-info {
+	height: 40px;
+	padding-left: 54px;
+	font-size: 12px;
+	color: #747474;
+	line-height: 22px;
+	position: relative;
+}
+.user-info a  {
+	font-size: 12px;
+	color: #747474;
+}
+.user-info a:hover  {
+	
+	color: #f10215;
+}
+.info-img {
+	width: 40px;
+	height: 40px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-radius: 50%;
+	overflow: hidden;
+
+}
+.info-img  img {
+	width: 100%;
+	height: auto; /* 自动 跟随者宽度 一起缩放 */
+}
+.user-profit {
+	margin-top: 14px;
+}
+.user-profit a {
+   width: 70px;
+   height: 20px;
+   border: 2px solid #f10215;
+   display: inline-block;
+   font-size: 12px;
+   color: #f10215;
+   text-align: center;
+   line-height: 20px;
+   margin-right: 4px;
+}
+.user-profit a:hover {
+	background-color: #f10215;
+	color: #fff;
+}
+
+.news {
+	height: 149px;
+	
+	border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	padding: 5px 15px 0;
+}
+.tab-hd {
+	border-bottom: 1px solid #ccc;
+	padding: 3px 0;
+	position: relative;
+}
+.tab-hd a {
+	
+	margin: 0 4px;
+}
+.cuxiao {
+	border-right: 1px solid #ccc;
+	padding-right: 10px;
+}
+.news .more1 {
+	position: absolute;
+	top: 6px;
+	right: 0;
+
+}
+.line {
+	width: 28px;
+	height: 2px;
+	background-color: #f10215;
+	position: absolute;
+	bottom: -1px;
+	left: 0;
+}
+.tab-bd {
+	margin-top: 10px;
+}
+.tab-bd li {
+	height: 23px;
+	line-height: 23px;
+}
+.jd-service  {
+	height: 209px;
+	/* background-color: skyblue; */
+	width: 190px;
+	overflow: hidden;
+}
+.jd-service  ul {
+	width: 195px;
+}
+.jd-service li {
+	width: 47px;
+	height: 69px;
+	/* background-color: purple; */
+	float: left;
+	border-right: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+}
+.jd-service li a {
+	width: 100%;
+	height: 100%;  /* 根据父亲 */
+	/* height: auto; 针对于自己的高度和宽度 */
+	display: block;
+}
+.jd-service  i {
+	display: block;
+	width: 24px;
+	height: 24px;
+	margin: 15px auto 8px;
+	background: url(../images/sprite_fs@1x.png) no-repeat;
+}
+.jd-service  p {
+	text-align: center;
+}

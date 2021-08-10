@@ -1,0 +1,294 @@
+.logoArea {
+    height: 84px;
+}
+
+.loginArea {
+    height: 487px;
+    background-color: #7e00ff;
+}
+
+.copyright {
+    text-align: center;
+    line-height: 24px;
+}
+
+.logo {
+    position: absolute;
+    width: 182px;
+    height: 78px;
+    background: url(../images/icons.png) no-repeat;
+    background-position: -367px 0;
+}
+
+.login {
+    height: 487px;
+    background: url(../images/loginbg.png) no-repeat;
+}
+
+.loginform {
+    position: relative;
+    top: 50%;
+    margin-top: -155px;
+    float: right;
+    width: 350px;
+    background: #fff;
+}
+
+img {
+    display: block;
+    margin: 0 auto;
+}
+
+.sui-form {
+    margin-top: 15px;
+}
+
+span.loginname {
+    background-image: url(../images/icons.png);
+    background-position: -10px -201px;
+}
+
+.sui-form .input-prepend {
+    width: 100%;
+    margin-bottom: 16px;
+}
+
+.sui-form .input-prepend input {
+    width: 258px;
+}
+
+.sui-nav.nav-tabs.tab-wraped>li {
+    width: 50%;
+}
+
+.sui-nav.nav-tabs.tab-wraped>li>a {
+    padding: 0;
+    font-size: 20px;
+    text-align: center;
+    line-height: 2;
+}
+
+.sui-nav.nav-tabs.tab-wraped>li.active>a {
+    padding-top: 0;
+    border-top: 1px solid #28a3ef;
+    color: #c8111a;
+}
+
+.sui-form .input-prepend .add-on {
+    width: 25px;
+    height: 22px;
+    background-color: #ccc;
+    *float: left;
+}
+
+.loginpwd {
+    display: block;
+    width: 25px;
+    height: 23px;
+    background-image: url(../images/icons.png);
+    background-position: -72px -201px;
+}
+
+.setting {
+    position: relative;
+    margin: 0 0 25px;
+}
+
+.setting .forget {
+    position: absolute;
+    right: 0;
+}
+
+.btn-danger {
+    padding: 6px;
+    border-radius: 0;
+    background-color: #c81623;
+    word-spacing: 4px;
+    font-size: 16px;
+    font-family: 微软雅黑;
+}
+
+.otherlogin {
+    position: relative;
+    margin-top: 30px;
+}
+
+.otherlogin .register {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 15px;
+}
+
+.types ul li {
+    display: inline-block;
+    width: 40px;
+    height: 55px;
+    list-style-type: none;
+    *display: inline;
+    *zoom: 1;
+}
+
+.copyright ul li {
+    display: inline-block;
+    margin: 15px 0;
+    padding: 0 20px;
+    border-right: 1px solid #e4e4e4;
+    list-style-type: none;
+    *display: inline;
+    *zoom: 1;
+}
+
+.copyright ul li:last-child {
+    border-right: 0;
+}
+
+.logoArea {
+    height: 78px;
+    /* border-bottom: 2px solid #c81523; */
+}
+
+.logo {
+    position: absolute;
+    width: 182px;
+    height: 78px;
+    background: url(../images/icons.png) no-repeat;
+    background-position: -367px 0;
+}
+
+.registerArea {
+    margin: 15px 0;
+    border: 1px solid #dfdfdf;
+    font-family: "微软雅黑";
+}
+
+.registerArea h3 {
+    margin: 0;
+    padding: 6px 15px;
+    border-bottom: 1px solid #dfdfdf;
+    background: #ececec;
+    color: #333;
+}
+
+h3 .go {
+    float: right;
+    font-size: 14px;
+}
+
+.btn-reg {
+    width: 270px;
+}
+
+.info {
+    margin: 40px auto;
+    width: 600px;
+}
+
+.control-label {
+    font-size: 14px;
+}
+
+.sui-form input[type=text].input-xfat.input-xlarge,
+.sui-form input[type=password].input-xfat.input-xlarge {
+    width: 250px;
+    height: 24px;
+    border: 1px solid #999;
+    border-radius: 0;
+}
+
+.sui-form .control-group label {
+    *display: inline;
+    *zoom: 1;
+    *float: left;
+}
+
+#submit {
+    padding: 5px 80px;
+    background-color: #c81523;
+    font-family: "微软雅黑";
+}
+
+.reg {
+    width: 221px;
+}
+
+.btn-danger {
+    padding: 6px;
+    border-radius: 0;
+    background-color: #c81623;
+    word-spacing: 4px;
+    font-size: 16px;
+    font-family: 微软雅黑;
+}
+
+.copyright {
+    text-align: center;
+    line-height: 24px;
+}
+
+.copyright ul li {
+    display: inline-block;
+    margin: 15px 0;
+    padding: 0 20px;
+    border-right: 1px solid #e4e4e4;
+    list-style-type: none;
+    *display: inline;
+    *zoom: 1;
+}
+
+.copyright ul li:last-child {
+    border-right: 0;
+}
+
+
+/* 修改部分代码 */
+
+.forget {
+    cursor: pointer;
+}
+
+.registration li {
+    list-style: none;
+    float: left;
+    margin-right: 20px;
+}
+
+.registration li a {
+    width: 34px;
+    height: 34px;
+    display: block;
+    background: url("../images/regetype.png") no-repeat -18px -7px;
+}
+
+.registration li:nth-child(2) a {
+    background-position: -70px -7px;
+}
+
+.registration li:nth-child(3) a {
+    background-position: -122px -7px;
+}
+
+.registration li:nth-child(4) a {
+    background-position: -175px -7px;
+}
+
+.registration>a {
+    float: right;
+    margin-top: 5px;
+}
+
+.tab-content.tab-wraped {
+    border-bottom: 0 none;
+}
+
+.registration {
+    padding-bottom: 25px;
+}
+
+.py-container.copyright a {
+    color: #666;
+}
+
+.sui-form.form-horizontal .controls input[type="checkbox"] {
+    background: url("../images/checked.png") no-repeat;
+}

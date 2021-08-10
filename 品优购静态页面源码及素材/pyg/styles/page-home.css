@@ -1,0 +1,622 @@
+.row-405 {
+    width: 404px;
+}
+
+.row-225 {
+    width: 225px;
+}
+
+.row-165 {
+    width: 165px;
+}
+
+.row-330 {
+    width: 330px;
+}
+
+.row-220 {
+    width: 220px;
+}
+
+.row-218 {
+    width: 218px;
+}
+
+img {
+    -webkit-transition: opacity .3s ease-out;
+    transition: opacity .3s ease-out;
+    -webkit-backface-visibility: hidden;
+}
+
+img:hover {
+    opacity: .8;
+}
+
+.Recommend {
+    margin: 10px 0;
+    height: 165px;
+    background-color: #eaeaea;
+}
+
+.Interest {
+    position: relative;
+    margin: -2px;
+    height: 405px;
+    border: 1px solid #ededed;
+}
+
+em {
+    font-style: normal;
+}
+
+.banerArea .sui-carousel {
+    margin-bottom: 0;
+    padding: 5px;
+}
+
+.news {
+    position: relative;
+    z-index: 3;
+    margin-top: 5px;
+    border: 1px solid #e4e4e4;
+}
+
+.news h4 {
+    overflow: hidden;
+    margin: 5px 5px 0;
+    padding: 5px 10px;
+    border-bottom: 1px solid #e4e4e4;
+    line-height: 22px;
+}
+
+.news ul.news-list {
+    padding: 5px 15px;
+}
+
+.news ul li {
+    line-height: 26px;
+}
+
+.Lifeservice {
+    position: relative;
+    z-index: 2;
+    overflow: hidden;
+    border-right: 1px solid #e4e4e4;
+}
+
+.SortList {
+    margin-left: 210px;
+}
+
+.SortList ul.Lifeservice>li {
+    position: relative;
+    margin-right: -1px;
+    height: 4pc;
+    border-bottom: 1px solid #e4e4e4;
+    border-left: 1px solid #e4e4e4;
+    text-align: center;
+    cursor: pointer;
+}
+
+.Lifeservice .life-item .list-item {
+    position: relative;
+    display: block;
+    width: 61px;
+    height: 40px;
+    background-image: url(../images/icons.png);
+    *zoom: 1;
+    _position: relative;
+}
+
+.service-intro {
+    display: block;
+    width: 60px;
+    line-height: 22px;
+}
+
+.list-item-1 {
+    background-position: 2px -5px;
+}
+
+.list-item-2 {
+    background-position: -60px -5px;
+}
+
+.list-item-3 {
+    background-position: -93pt -5px;
+}
+
+.list-item-4 {
+    background-position: -188px -5px;
+}
+
+.list-item-5 {
+    background-position: 2px -76px;
+}
+
+.list-item-6 {
+    background-position: -60px -76px;
+}
+
+.list-item-7 {
+    background-position: -93pt -76px;
+}
+
+.list-item-8 {
+    background-position: -188px -76px;
+}
+
+.list-item-9 {
+    background-position: 2px -146px;
+}
+
+.list-item-10,
+.list-item-11,
+.list-item-12 {
+    background-position: -60px -146px;
+}
+
+.Right .ads {
+    margin-top: 5px;
+}
+
+.clock {
+    background-color: #5c5251;
+    color: #fff;
+    text-align: center;
+    font-size: 18px;
+}
+
+.clock .time {
+    padding: 30px 0;
+}
+
+.clock h3 {
+    font-size: 18px;
+}
+
+.carousel-control {
+    width: 17px;
+    border: 0;
+    border-radius: 0;
+    background: #585757;
+}
+
+a.carousel-control {
+    *font-size: 30px;
+    *padding-left: 3px;
+}
+
+.py-container .title {
+    overflow: hidden;
+    margin-top: 15px;
+}
+
+.title .tip {
+    width: 66px;
+    height: 25px;
+    background-image: url(../images/icons.png);
+    background-position: 182px -78pt;
+    line-height: 30px;
+}
+
+.like .Favourate {
+    border: 1px solid #e4e4e4;
+}
+
+.like ul li img {
+    padding: 0;
+    width: 142px;
+    height: 142px;
+}
+
+.like ul li .like-text {
+    padding: 0;
+    width: 142px;
+    border-right: 1px solid #e4e4e4;
+}
+
+.like ul li:last-child .like-text {
+    border-right: 0;
+}
+
+.like-text h3 {
+    color: #df3033;
+}
+
+.like-text p {
+    margin-bottom: 0;
+}
+
+.blockgary {
+    background: #f7f7f7;
+}
+
+.Interest .Interest-conver-split {
+    overflow: hidden;
+    border-right: 1px solid #e4e4e4;
+}
+
+.Interest .Interest-conver-split h5 {
+    padding: 5px;
+    border-bottom: 1px dotted #e4e4e4;
+    color: #000;
+    text-align: center;
+    font-weight: 700;
+}
+
+.Interest .x-line {
+    position: absolute;
+    top: 250px;
+    left: 405px;
+    z-index: 9999;
+    display: block;
+    width: 630px;
+    height: 1px;
+    background: #e4e4e4;
+}
+
+.floors h3 {
+    color: #c81623;
+}
+
+.floor .floor-content {
+    border-top: 2px solid #c81623;
+    border-bottom: 1px solid #e4e4e4;
+}
+
+.floors .fr ul li {
+    margin-left: 0;
+}
+
+.floors .fr ul li a {
+    padding: 0;
+}
+
+.floors .fr ul li a:after {
+    padding: 0 10px;
+    content: "|";
+}
+
+.floors .fr ul li:last-child a:after {
+    content: "";
+}
+
+.floors .sui-nav.nav-tabs>.active>a {
+    color: #e82633;
+    font-weight: 400;
+}
+
+ul.jd-list {
+    overflow: hidden;
+    padding: 15px 0;
+}
+
+ul.jd-list li {
+    float: left;
+    margin: 0 10px;
+    width: 40%;
+    border-bottom: 1px solid #e4e4e4;
+    list-style-type: none;
+    text-align: center;
+    line-height: 26px;
+}
+
+.floors .sui-nav.nav-tabs>.active>a {
+    padding-top: 1px;
+    border: 0;
+}
+
+.floors .sui-nav.nav-tabs {
+    border-bottom: 0;
+}
+
+.floors .fr .sui-nav {
+    display: inline-block;
+    margin: 10px 0 0;
+}
+
+.brandArea {
+    position: relative;
+}
+
+.brandArea .brand-yline {
+    position: absolute;
+    left: 5pc;
+    width: 1px;
+    height: 405px;
+    border-left: 1px dashed #e4e4e4;
+}
+
+.brandArea ul li {
+    height: 57px;
+    border-bottom: 1px dashed #e4e4e4;
+}
+
+.brandArea ul li img {
+    padding: 11px 0;
+}
+
+.brandArea ul li:last-child,
+.brandArea ul li:nth-last-child(2) {
+    border-bottom: 0;
+}
+
+.split {
+    position: relative;
+}
+
+.split .floor-x-line {
+    position: absolute;
+    top: 180px;
+    width: 220px;
+    height: 1px;
+    background: #e4e4e4;
+}
+
+.row-218.split {
+    width: 218px;
+    border: 1px solid #e4e4e4;
+    border-top: 0;
+    border-bottom: 0;
+}
+
+.brand .Brand-list {
+    overflow: hidden;
+    margin: 10px 0;
+    padding: 15px 0;
+}
+
+.brand ul li img {
+    padding: 0 10px;
+    border-left: 1px dotted #ccc;
+}
+
+.brand ul li:first-child img {
+    border-left: 0;
+}
+
+ul.brand-list li {
+    height: 3pc;
+    line-height: 58px;
+}
+
+#floor-index {
+    position: fixed;
+    top: 90pt;
+    left: 280px;
+    display: none;
+}
+
+#floor-index a,
+#floor-index ul li {
+    text-decoration: none;
+}
+
+#floor-index ul li {
+    width: 60px;
+    height: 30px;
+    list-style-type: none;
+    text-align: center;
+    line-height: 30px;
+}
+
+#floor-index ul li,
+#floor-index ul li:last-child {
+    border-bottom: 1px solid #ddd;
+}
+
+#floor-index ul li .num {
+    background: #f7f7f7;
+    color: #666;
+}
+
+#floor-index ul li .word {
+    display: none;
+    background: #cb1c39;
+    color: #fff;
+}
+
+.Lifeservice {
+    overflow: hidden;
+}
+
+.tab-item {
+    position: relative;
+    top: 0;
+    cursor: pointer;
+}
+
+.life-item-content {
+    position: absolute;
+    top: 218px;
+    z-index: 2;
+    overflow: hidden;
+    padding-left: 1px;
+    width: 246px;
+    height: 164px;
+    border-left: 1px solid #e4e4e4;
+}
+
+.life-detail {
+    display: none;
+    padding: 0 4px;
+    height: 159px;
+    background: #fff;
+}
+
+.lifenow {
+    display: block;
+}
+
+.close {
+    float: right;
+    color: #ea4a36;
+    cursor: pointer;
+}
+
+#picLBxxl li,
+.picLB li {
+    height: 250px;
+}
+
+.picLB li {
+    position: relative;
+    overflow: hidden;
+    margin: 0 -1px;
+    background: #fff;
+}
+
+.picLB {
+    overflow: hidden;
+    padding: 0 10px;
+    zoom: 1;
+}
+
+.picLB li {
+    float: left;
+    display: inline;
+}
+
+.picDl {
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    margin: 0;
+    width: 75pc;
+    height: 250px;
+    zoom: 1;
+}
+
+.picDl dd {
+    float: left;
+    display: inline;
+    overflow: hidden;
+}
+
+.tabbox {
+    font-family: '微软雅黑';
+}
+
+.tabbox .tab {
+    overflow: hidden;
+    width: 312px;
+}
+
+.tabbox .tab p {
+    margin-bottom: 0;
+}
+
+.tabbox .tab a {
+    float: left;
+    display: block;
+    padding: 0 18px;
+    color: #999;
+    text-decoration: none;
+    font-size: 1pc;
+}
+
+.tabbox .tab a:hover {
+    color: #fff;
+    text-decoration: none;
+}
+
+.tabbox .tab a.on {
+    color: #3284e5;
+    text-decoration: none;
+}
+
+.tabbox .tab a i {
+    display: block;
+    margin-left: 10px;
+    width: 35px;
+    height: 35px;
+    background: url(../images/bg0.png);
+}
+
+.tabbox .tab a.on i {
+    display: block;
+    width: 35px;
+    height: 35px;
+    background: url(../images/bg0.png) -35px 0;
+}
+
+.tabbox .text {
+    line-height: 28px;
+}
+
+.tabbox .content {
+    overflow: hidden;
+    padding: 10px;
+}
+
+.tabbox .content li {
+    display: none;
+    overflow: hidden;
+    list-style: none;
+}
+
+.tabbox .img-item {
+    float: left;
+    overflow: hidden;
+    margin: 0 9pt 10px;
+    width: 269px;
+    height: 328px;
+    border: 1px solid #3184e5;
+    background: #fff;
+    box-shadow: 0 4px 6px 0 hsla(0, 0%, 81%, .5);
+}
+
+.tabbox .img-item img {
+    width: 200px;
+    height: 200px;
+}
+
+.tabbox .img-item .tab-pic {
+    position: relative;
+    z-index: 1;
+    display: table;
+    overflow: hidden;
+    width: 230px;
+    height: 210px;
+    text-align: center;
+}
+
+.tabbox .img-item .tab-pic span {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.tabbox .img-item .tab-info {
+    background: #3284e5;
+}
+
+.tabbox .img-item .tab-info .info-title {
+    overflow: hidden;
+    margin: 0 auto;
+    padding-left: 10px;
+    height: 50px;
+    line-height: 28px;
+}
+
+.tabbox .img-item .tab-info .info-title span a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.tabbox .img-item .tab-info .info-price {
+    display: block;
+    margin: 10px auto 0;
+    padding-left: 10px;
+    height: 35px;
+    color: #fff;
+    font-size: 20px;
+    line-height: 24px;
+}
+
+.sort {
+    float: left;
+    display: block!important;
+}

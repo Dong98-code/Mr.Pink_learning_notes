@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>品优购 - 优质！优质！</title>
+    <link rel="stylesheet" href="styles/common.css">
+    <link rel="stylesheet" href="styles/page-cart.css">
+    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+    <!--页面顶部-->
+    <div id="nav-bottom">
+        <!--顶部-->
+        <div class="nav-top">
+            <div class="top">
+                <div class="py-container">
+                    <div class="shortcut">
+                        <ul class="fl">
+                            <li class="f-item">品优购欢迎您！</li>
+                            <li class="f-item">请
+                                <a href="login.html">登录</a>
+                                <span>
+                  <a href="register.html">免费注册</a>
+                </span>
+                            </li>
+                        </ul>
+                        <ul class="fr">
+                            <li class="f-item">
+                                <a href="member-order.html">我的订单</a>
+                            </li>
+                            <li class="f-item space"></li>
+                            <li class="f-item">
+                                <a href="member.html">我的品优购</a>
+                            </li>
+                            <li class="f-item space"></li>
+                            <li class="f-item">关注品优购</li>
+                            <li class="f-item space"></li>
+                            <li class="f-item">网站导航</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!--头部-->
+            <div class="header">
+                <div class="py-container">
+                    <div class="yui3-g Logo">
+                        <div class="yui3-u Left logoArea">
+                            <a class="logo-bd" title="品优购" href="home.html"></a>
+                        </div>
+                        <div class="yui3-u Center searchArea">
+                            <div class="search">
+                                <form action="" class="sui-form form-inline">
+                                    <div class="input-append">
+                                        <input type="text" id="autocomplete" type="text" class="input-error input-xxlarge">
+                                        <button class="sui-btn btn-xlarge btn-danger" type="button">搜索</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="hotwords">
+                                <ul>
+                                    <li class="f-item">品优购首发</li>
+                                    <li class="f-item">亿元优惠</li>
+                                    <li class="f-item">9.9元团购</li>
+                                    <li class="f-item">每满99减30</li>
+                                    <li class="f-item">亿元优惠</li>
+                                    <li class="f-item">9.9元团购</li>
+                                    <li class="f-item">办公用品</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="yui3-u Right shopArea">
+                            <div class="fr shopcar">
+                                <div class="show-shopcar">
+                                    <span class="car"></span>
+                                    <a class="sui-btn btn-default btn-xlarge" href="cart.html">
+                                        <span>我的购物车</span>
+                                        <i class="shopnum">0</i>
+                                    </a>
+                                    <div class="clearfix shopcarlist"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="yui3-g NavList">
+                        <div class="all-sorts-list">
+                            <div class="yui3-u Left all-sort">
+                                <h4>全部商品分类</h4>
+                            </div>
+                            <div class="sort">
+                                <div class="all-sort-list2">
+                                    <div class="item">
+                                        <h3>
+                                            <a href="list.html">图书、音像、数字商品</a>
+                                        </h3>
+                                        <div class="item-list clearfix">
+                                            <div class="subitem">
+                                                <dl>
+                                                    <dt>
+                            <a href="list.html">电子书</a>
+                          </dt>
+                                                    <dd>
+                                                        <em>
+                              <a href="list.html">免费</a>
+                            </em>
+                                                        <em>
+                              <a href="list.html">小说</a>
+                            </em>
+                                                        <em>
+                              <a href="list.html">励志与成功</a>
+                            </em>
+                                                        <em>
+                              <a href="list.html">婚恋/两性</a>
+                            </em>
+                                                        <em>
+                              <a href="list.html">文学</a>
+                            </em>
+                                                        <em>
+                              <a href="list.html">经管</a>
+                            </em>
+                                                        <em>
+                              <a href="list.html">畅读VIP</a>
+                            </em>
+                                                    </dd>
+                                                </dl>
+                                                <dl>
+                                                    <dt>
+                            <a href="list.html">电子书</a>
+                          </dt>
+                                                    <dd>
+                                                        <em>
+                              <a href="list.html">免费</a>
+                            </em>
+                                                        <em>
+                              <a href="list.html">小说</a>
+                            </em>
+                                                        <em>
+                              <a href="list.html">励志与成功</a>
+                            </em>
+                                                        <em>
+                              <a href="list.html">婚恋/两性</a>
+                            </em>
+                                                        <em>
+                              <a href="list.html">文学</a>
+                            </em>
+                                                        <em>
+                              <a href="list.html">经管</a>
+                            </em>
+                                                        <em>
+                              <a href="list.html">畅读VIP</a>
+                            </em>
+                                                    </dd>
+                                                </dl>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="item">
+                                        <h3>
+                                            <a href="list.html">家用电器</a>
+                                        </h3>
+                                        <div class="item-list clearfix"></div>
+                                    </div>
+                                    <div class="item">
+                                        <h3>
+                                            <a href="list.html">手机、数码</a>
+                                        </h3>
+                                        <div class="item-list clearfix"></div>
+                                    </div>
+                                    <div class="item">
+                                        <h3>
+                                            <a href="list.html">电脑、办公</a>
+                                        </h3>
+                                        <div class="item-list clearfix"></div>
+                                    </div>
+                                    <div class="item">
+                                        <h3>
+                                            <a href="list.html">家居、家具、家装、厨具</a>
+                                        </h3>
+                                        <div class="item-list clearfix"></div>
+                                    </div>
+                                    <div class="item">
+                                        <h3>
+                                            <a href="list.html">服饰内衣</a>
+                                        </h3>
+                                        <div class="item-list clearfix"></div>
+                                    </div>
+                                    <div class="item">
+                                        <h3>
+                                            <a href="list.html">个护化妆</a>
+                                        </h3>
+                                        <div class="item-list clearfix"></div>
+                                    </div>
+                                    <div class="item">
+                                        <h3>
+                                            <a href="list.html">运动健康</a>
+                                        </h3>
+                                        <div class="item-list clearfix"></div>
+                                    </div>
+                                    <div class="item">
+                                        <h3>
+                                            <a href="list.html">汽车用品</a>
+                                        </h3>
+                                        <div class="item-list clearfix"></div>
+                                    </div>
+                                    <div class="item">
+                                        <h3>
+                                            <a href="list.html">彩票、旅行</a>
+                                        </h3>
+                                        <div class="item-list clearfix"></div>
+                                    </div>
+                                    <div class="item">
+                                        <h3>
+                                            <a href="list.html">理财、众筹</a>
+                                        </h3>
+                                        <div class="item-list clearfix"></div>
+                                    </div>
+                                    <div class="item">
+                                        <h3>
+                                            <a href="list.html">母婴、玩具</a>
+                                        </h3>
+                                        <div class="item-list clearfix"></div>
+                                    </div>
+                                    <div class="item">
+                                        <h3>
+                                            <a href="list.html">箱包</a>
+                                        </h3>
+                                        <div class="item-list clearfix"></div>
+                                    </div>
+                                    <div class="item">
+                                        <h3>
+                                            <a href="list.html">运动户外</a>
+                                        </h3>
+                                        <div class="item-list clearfix"></div>
+                                    </div>
+                                    <div class="item">
+                                        <h3>
+                                            <a href="list.html">箱包</a>
+                                        </h3>
+                                        <div class="item-list clearfix"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="yui3-u Center navArea">
+                            <ul class="nav">
+                                <li class="f-item">服装城</li>
+                                <li class="f-item">美妆馆</li>
+                                <li class="f-item">品优超市</li>
+                                <li class="f-item">全球购</li>
+                                <li class="f-item">闪购</li>
+                                <li class="f-item">团购</li>
+                                <li class="f-item">有趣</li>
+                                <li class="f-item">秒杀</li>
+                            </ul>
+                        </div>
+                        <div class="yui3-u Right"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="py-container">
+        <div class="allgoods">
+            <h4>全部商品
+                <span>11</span>
+            </h4>
+
+            <div class="cart-main">
+                <div class="cart-th clearfix">
+                    <div>
+                        <input type="checkbox">全选</div>
+                    <div class="">商品</div>
+                    <div class="">单价（元）</div>
+                    <div class="">数量</div>
+                    <div class="">小计（元）</div>
+                    <div class="">操作</div>
+                </div>
+                <div class="cart-title clearfix">
+                    <h5 class="fl">传智自营</h5>
+                    <div class="yunfei fr">
+                        运费：￥6.00
+                        <span>还差￥99.00免运费</span>
+                    </div>
+                </div>
+                <div class="cart-item-list">
+                    <div class="cart-body">
+                        <div class="cart-list">
+                            <ul class="goods-list yui3-g">
+                                <li class="yui3-u-3-8">
+                                    <div class="good-item">
+                                        <div class="item-img">
+                                            <img src="uploads/mobile.png">
+                                        </div>
+                                        <div class="item-msg">Apple Macbook Air 13.3英寸笔记本电脑 银色（Corei5）处理器/8GB内存</div>
+                                    </div>
+                                </li>
+                                <li class="yui3-u-1-8">
+                                    <span>颜色: 银色</span>
+                                    <br>
+                                    <span>处理器: Core I5</span>
+                                    <br>
+                                    <span>内存: 8GB</span>
+                                    <br>
+                                    <span>尺寸: 13.3英寸</span>
+                                    <br>
+                                </li>
+                                <li class="yui3-u-1-8">
+                                    <span class="price">8848.00</span>
+                                </li>
+                                <li class="yui3-u-1-8">
+                                    <div class="clearfix">
+                                        <a href="#" class="increment mins">-</a>
+                                        <input autocomplete="off" type="text" value="1" minnum="1" class="itxt">
+                                        <a href="#" class="increment plus">+</a>
+                                    </div>
+                                    <div class="youhuo">有货</div>
+                                </li>
+                                <li class="yui3-u-1-8">
+                                    <span class="sum">8848.00</span>
+                                </li>
+                                <li class="yui3-u-1-8">
+                                    <div>
+                                        <a href="#none">删除</a>
+                                    </div>
+                                    <div>移到我的关注</div>
+                                </li>
+                            </ul>
+                            <ul class="goods-list yui3-g">
+                                <li class="yui3-u-1-2 huangou-li">
+                                    <div class="good-item">
+                                        <div class="huangou">
+                                            <span>换购</span> 活动商品购满2888.00元，即可加价换购商品1件 >
+                                            <span class="huangou-product">查看换购品</span>去凑单 >
+                                        </div>
+                                        <div class="item-img ">
+                                            <img src="uploads/mobile.png">
+                                        </div>
+                                        <div class="item-msg huangou-msg">Apple Macbook Air 13.3英寸笔记本电脑 银色（Corei5）处理器/8GB内存</div>
+                                        <div class="fl huangou-color">
+
+                                            <span>颜色: 银色</span>
+                                            <br>
+                                            <span>处理器: Core I5</span>
+                                            <br>
+                                            <span>内存: 8GB</span>
+                                            <br>
+                                            <span>尺寸: 13.3英寸</span>
+                                            <br>
+                                        </div>
+                                        <div class="gift">
+                                            <ul>
+                                                <li>[赠品]圣迪威（Sendio）MacBook13.3寸屏幕保... &nbspX1</li>
+                                                <li>[赠品]圣迪威（Sendio）MacBook13.3清洁套装... &nbspX1</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+
+                                <li class="yui3-u-1-8">
+                                    <span class="price huangou-price">8848.00</span>
+                                </li>
+                                <li class="yui3-u-1-8">
+                                    <div class="clearfix">
+                                        <a href="#" class="increment mins">-</a>
+                                        <input autocomplete="off" type="text" value="1" minnum="1" class="itxt">
+                                        <a href="#" class="increment plus">+</a>
+                                    </div>
+                                    <div class="youhuo">有货</div>
+                                </li>
+                                <li class="yui3-u-1-8">
+                                    <span class="sum">8848.00</span>
+                                </li>
+                                <li class="yui3-u-1-8 huangou-del">
+                                    <div>
+                                        <a href="#none">删除</a>
+                                    </div>
+                                    <div>移到我的关注</div>
+                                </li>
+                            </ul>
+                            <ul class="goods-list active yui3-g">
+                                <li class="yui3-u-3-8 pr">
+                                    <!-- <div class="" -->
+                                    <input type="checkbox" class="good-checkbox">
+                                    <!-- </div> -->
+                                    <div class="good-item">
+                                        <div class="item-img">
+                                            <img src="uploads/mobile.png">
+                                        </div>
+                                        <div class="item-msg">Apple Macbook Air 13.3英寸笔记本电脑 银色（Corei5）处理器/8GB内存</div>
+                                    </div>
+                                </li>
+                                <li class="yui3-u-1-8">
+                                    <span>颜色: 银色</span>
+                                    <br>
+                                    <span>处理器: Core I5</span>
+                                    <br>
+                                    <span>内存: 8GB</span>
+                                    <br>
+                                    <span>尺寸: 13.3英寸</span>
+                                    <br>
+                                </li>
+                                <li class="yui3-u-1-8">
+                                    <span class="price">8848.00</span>
+                                </li>
+                                <li class="yui3-u-1-8">
+                                    <div class="clearfix">
+                                        <a href="#" class="increment mins">-</a>
+                                        <input autocomplete="off" type="text" value="1" minnum="1" class="itxt">
+                                        <a href="#" class="increment plus">+</a>
+                                    </div>
+                                    <div class="youhuo">有货</div>
+                                </li>
+                                <li class="yui3-u-1-8">
+                                    <span class="sum">8848.00</span>
+                                </li>
+                                <li class="yui3-u-1-8">
+                                    <div>
+                                        <a href="#none">删除</a>
+                                    </div>
+                                    <div>移到我的关注</div>
+                                </li>
+                            </ul>
+                            <ul class="goods-list yui3-g">
+                                <li class="yui3-u-3-8">
+                                    <div class="good-item">
+                                        <div class="item-img">
+                                            <img src="uploads/mobile.png">
+                                        </div>
+                                        <div class="item-msg">Apple Macbook Air 13.3英寸笔记本电脑 银色（Corei5）处理器/8GB内存</div>
+                                    </div>
+                                </li>
+                                <li class="yui3-u-1-8">
+                                    <span>颜色: 银色</span>
+                                    <br>
+                                    <span>处理器: Core I5</span>
+                                    <br>
+                                    <span>内存: 8GB</span>
+                                    <br>
+                                    <span>尺寸: 13.3英寸</span>
+                                    <br>
+                                </li>
+                                <li class="yui3-u-1-8">
+                                    <span class="price">8848.00</span>
+                                </li>
+                                <li class="yui3-u-1-8">
+                                    <div class="clearfix">
+                                        <a href="#" class="increment mins">-</a>
+                                        <input autocomplete="off" type="text" value="1" minnum="1" class="itxt">
+                                        <a href="#" class="increment plus">+</a>
+                                    </div>
+                                    <div class="youhuo">有货</div>
+                                </li>
+                                <li class="yui3-u-1-8">
+                                    <span class="sum">8848.00</span>
+                                </li>
+                                <li class="yui3-u-1-8">
+                                    <div>
+                                        <a href="#none">删除</a>
+                                    </div>
+                                    <div>移到我的关注</div>
+                                </li>
+                            </ul>
+                            <ul class="goods-list yui3-g">
+                                <li class="yui3-u-3-8">
+                                    <div class="good-item">
+                                        <div class="item-img">
+                                            <img src="uploads/mobile.png">
+                                        </div>
+                                        <div class="item-msg">Apple Macbook Air 13.3英寸笔记本电脑 银色（Corei5）处理器/8GB内存</div>
+                                    </div>
+                                </li>
+                                <li class="yui3-u-1-8">
+                                    <span>颜色: 银色</span>
+                                    <br>
+                                    <span>处理器: Core I5</span>
+                                    <br>
+                                    <span>内存: 8GB</span>
+                                    <br>
+                                    <span>尺寸: 13.3英寸</span>
+                                    <br>
+                                </li>
+                                <li class="yui3-u-1-8">
+                                    <span class="price">8848.00</span>
+                                </li>
+                                <li class="yui3-u-1-8">
+                                    <div class="clearfix">
+                                        <a href="#" class="increment mins">-</a>
+                                        <input autocomplete="off" type="text" value="1" minnum="1" class="itxt">
+                                        <a href="#" class="increment plus">+</a>
+                                    </div>
+                                    <div class="youhuo">有货</div>
+                                </li>
+                                <li class="yui3-u-1-8">
+                                    <span class="sum">8848.00</span>
+                                </li>
+                                <li class="yui3-u-1-8">
+                                    <div>
+                                        <a href="#none">删除</a>
+                                    </div>
+                                    <div>移到我的关注</div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="cart-title clearfix">
+                    <h5 class="fl">神州数码专营</h5>
+                </div>
+            </div>
+            <div class="cart-item-list">
+                <div class="cart-body">
+                    <div class="cart-list">
+                        <ul class="goods-list yui3-g">
+                            <li class="yui3-u-1-2 huangou-li">
+                                <div class="good-item">
+                                    <div class="huangou">
+                                        <span>换购</span> 活动商品购满2888.00元，即可加价换购商品1件 >
+                                        <span class="huangou-product">查看换购品</span>去凑单 >
+                                    </div>
+                                    <div class="item-img ">
+                                        <img src="uploads/mobile.png">
+                                    </div>
+                                    <div class="item-msg huangou-msg">Apple Macbook Air 13.3英寸笔记本电脑 银色（Corei5）处理器/8GB内存</div>
+                                    <div class="fl huangou-color">
+
+                                        <span>颜色: 银色</span>
+                                        <br>
+                                        <span>处理器: Core I5</span>
+                                        <br>
+                                        <span>内存: 8GB</span>
+                                        <br>
+                                        <span>尺寸: 13.3英寸</span>
+                                        <br>
+                                    </div>
+                                    <div class="gift">
+                                        <ul>
+                                            <li>[赠品]圣迪威（Sendio）MacBook13.3寸屏幕保... &nbspX1</li>
+                                            <li>[赠品]圣迪威（Sendio）MacBook13.3清洁套装... &nbspX1</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li class="yui3-u-1-8">
+                                <span class="price huangou-price">8848.00</span>
+                            </li>
+                            <li class="yui3-u-1-8">
+                                <div class="clearfix">
+                                    <a href="#" class="increment mins">-</a>
+                                    <input autocomplete="off" type="text" value="1" minnum="1" class="itxt">
+                                    <a href="#" class="increment plus">+</a>
+                                </div>
+                                <div class="youhuo">有货</div>
+                            </li>
+                            <li class="yui3-u-1-8">
+                                <span class="sum">8848.00</span>
+                            </li>
+                            <li class="yui3-u-1-8 huangou-del">
+                                <div>
+                                    <a href="#none">删除</a>
+                                </div>
+                                <div>移到我的关注</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="cart-tool clearfix">
+                <div class="cart-tool-left clearfix fl">
+                    <ul>
+                        <li>
+                            <a href="javascript:;">全选</a>
+                        </li>
+                        <li>
+                            <a href="javascript:;">删除选中的商品</a>
+                        </li>
+                        <li>
+                            <a href="javascript:;">移到我的关注</a>
+                        </li>
+                        <li>
+                            <a href="javascript:;">清除下柜商品</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="money-box">
+                    <div class="sumprice">
+                        <div class="sumprice-top">
+                            <span>
+                已选择
+                <strong>0</strong> 件商品</span>
+                            <span>
+                <em>总价（不含运费）：</em>
+                <i class="summoney">¥16283.00</i>
+              </span>
+                        </div>
+                        <div class="sumprice-bottom">
+                            已节省：￥20.00
+                        </div>
+                    </div>
+                    <div class="sumbtn">
+                        <a class="sum-btn" href="checkout.html">结算</a>
+                    </div>
+                </div>
+            </div>
+            <div class="deleted">
+                已删除的商品，您可以重新购买或加关注：
+                <div class="del-product">
+                    <ul class="clearfix">
+                        <li>圣迪威（Sendio）MacBook13.3清洁套</li>
+                        <li>8488.00</li>
+                        <li>1</li>
+                        <li>重新购买</li>
+                        <li>移到我的关注</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="youLike">
+                <div class="yk-title">
+                    <span>猜你喜欢</span>特惠换购</div>
+                <div class="yk-product">
+                    <ul class="clearfix">
+                        <li>
+                            <div class="yk-product-top">
+                                <img src="./uploads/fs7805.gif" alt="">
+                            </div>
+                            <div class="yk-product-middle">
+                                飞科（FLYCO）FS7805鼻毛修剪器
+                                <br>电动鼻毛器 修鼻毛孔
+                                <p>￥25.00</p>
+                            </div>
+                            <div class="yk-product-bottom">
+                                <img src="./uploads/car.gif" alt=""> 加入购物车
+                            </div>
+                        </li>
+                        <li>
+                            <div class="yk-product-top">
+                                <img src="./uploads/fs7805.gif" alt="">
+                            </div>
+                            <div class="yk-product-middle">
+                                飞科（FLYCO）FS7805鼻毛修剪器
+                                <br>电动鼻毛器 修鼻毛孔
+                                <p>￥25.00</p>
+                            </div>
+                            <div class="yk-product-bottom">
+                                <img src="./uploads/car.gif" alt=""> 加入购物车
+                            </div>
+                        </li>
+                        <li>
+                            <div class="yk-product-top">
+                                <img src="./uploads/fs7805.gif" alt="">
+                            </div>
+                            <div class="yk-product-middle">
+                                飞科（FLYCO）FS7805鼻毛修剪器
+                                <br>电动鼻毛器 修鼻毛孔
+                                <p>￥25.00</p>
+                            </div>
+                            <div class="yk-product-bottom">
+                                <img src="./uploads/car.gif" alt=""> 加入购物车
+                            </div>
+                        </li>
+                        <li>
+                            <div class="yk-product-top">
+                                <img src="./uploads/fs7805.gif" alt="">
+                            </div>
+                            <div class="yk-product-middle">
+                                飞科（FLYCO）FS7805鼻毛修剪器
+                                <br>电动鼻毛器 修鼻毛孔
+                                <p>￥25.00</p>
+                            </div>
+                            <div class="yk-product-bottom">
+                                <img src="./uploads/car.gif" alt=""> 加入购物车
+                            </div>
+                        </li>
+
+                    </ul>
+                    <span>
+            <</span>
+                    <span>></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--页面底部-->
+    <div class="clearfix footer">
+        <div class="py-container">
+            <div class="footlink">
+                <div class="Mod-service">
+                    <ul class="Mod-Service-list">
+                        <li class="grid-service-item intro  intro1">
+                            <i class="serivce-item fl"></i>
+                            <div class="service-text">
+                                <h4>正品保障</h4>
+                                <p>正品保障，提供发票</p>
+                            </div>
+                        </li>
+                        <li class="grid-service-item  intro intro2">
+                            <i class="serivce-item fl"></i>
+                            <div class="service-text">
+                                <h4>正品保障</h4>
+                                <p>正品保障，提供发票</p>
+                            </div>
+                        </li>
+                        <li class="grid-service-item intro  intro3">
+                            <i class="serivce-item fl"></i>
+                            <div class="service-text">
+                                <h4>正品保障</h4>
+                                <p>正品保障，提供发票</p>
+                            </div>
+                        </li>
+                        <li class="grid-service-item  intro intro4">
+                            <i class="serivce-item fl"></i>
+                            <div class="service-text">
+                                <h4>正品保障</h4>
+                                <p>正品保障，提供发票</p>
+                            </div>
+                        </li>
+                        <li class="grid-service-item intro intro5">
+                            <i class="serivce-item fl"></i>
+                            <div class="service-text">
+                                <h4>正品保障</h4>
+                                <p>正品保障，提供发票</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="clearfix Mod-list">
+                    <div class="yui3-g">
+                        <div class="yui3-u-1-6">
+                            <h4>购物指南</h4>
+                            <ul class="unstyled">
+                                <li>购物流程</li>
+                                <li>会员介绍</li>
+                                <li>生活旅行/团购</li>
+                                <li>常见问题</li>
+                                <li>购物指南</li>
+                            </ul>
+                        </div>
+                        <div class="yui3-u-1-6">
+                            <h4>配送方式</h4>
+                            <ul class="unstyled">
+                                <li>上门自提</li>
+                                <li>211限时达</li>
+                                <li>配送服务查询</li>
+                                <li>配送费收取标准</li>
+                                <li>海外配送</li>
+                            </ul>
+                        </div>
+                        <div class="yui3-u-1-6">
+                            <h4>支付方式</h4>
+                            <ul class="unstyled">
+                                <li>货到付款</li>
+                                <li>在线支付</li>
+                                <li>分期付款</li>
+                                <li>邮局汇款</li>
+                                <li>公司转账</li>
+                            </ul>
+                        </div>
+                        <div class="yui3-u-1-6">
+                            <h4>售后服务</h4>
+                            <ul class="unstyled">
+                                <li>售后政策</li>
+                                <li>价格保护</li>
+                                <li>退款说明</li>
+                                <li>返修/退换货</li>
+                                <li>取消订单</li>
+                            </ul>
+                        </div>
+                        <div class="yui3-u-1-6">
+                            <h4>特色服务</h4>
+                            <ul class="unstyled">
+                                <li>夺宝岛</li>
+                                <li>DIY装机</li>
+                                <li>延保服务</li>
+                                <li>品优购E卡</li>
+                                <li>品优购通信</li>
+                            </ul>
+                        </div>
+                        <div class="yui3-u-1-6">
+                            <h4>帮助中心</h4>
+                            <img src="assets/img/wx_cz.jpg">
+                        </div>
+                    </div>
+                </div>
+                <div class="Mod-copyright">
+                    <ul class="helpLink">
+                        <li>关于我们
+
+                        </li>
+                        <li class="space">|</li>
+                        <li>联系我们
+
+                        </li>
+                        <li class="space">|</li>
+                        <li>关于我们
+
+                        </li>
+                        <li class="space">|</li>
+                        <li>商家入驻
+
+                        </li>
+                        <li class="space">|</li>
+                        <li>营销中心
+
+                        </li>
+                        <li class="space">|</li>
+                        <li>友情链接
+
+                        </li>
+                        <li class="space">|</li>
+                        <li>关于我们
+
+                        </li>
+                        <li class="space">|</li>
+                        <li>营销中心
+
+                        </li>
+                        <li class="space">|</li>
+                        <li>友情链接
+                        </li>
+                        <li class="space">|</li>
+                        <li>关于我们</li>
+                    </ul>
+                    <p>地址：北京市昌平区建材城西路金燕龙办公楼一层 邮编：100096 电话：400-618-4000 传真：010-82935100</p>
+                    <p>京ICP备08001421号京公网安备110108007702</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--页面底部END-->
+
+    <!--侧栏面板开始-->
+    <div class="J-global-toolbar">
+        <div class="toolbar-wrap">
+            <div class="toolbar">
+                <div class="toolbar-panels">
+                    <!-- 购物车 -->
+                    <div class="toolbar-panel tbar-panel-cart" style="visibility: hidden;">
+                        <h3 class="tbar-panel-header">
+                            <a class="title" href="cart.html">
+                                <i></i>
+                                <em class="title">购物车</em>
+                            </a>
+                            <span class="close-panel"></span>
+                        </h3>
+                        <div class="tbar-panel-main">
+                            <div class="tbar-panel-content">
+                                <div class="tbar-tipbox hide">
+                                    <div class="tip-inner">
+                                        <span class="tip-text">还没有登录，登录后商品将被保存</span>
+                                        <a href="login.html" class="tip-btn">登录</a>
+                                    </div>
+                                </div>
+                                <!-- 列表 -->
+                                <div class="tbar-cart-list"></div>
+                            </div>
+                        </div>
+                        <!-- 小计 -->
+                        <div class="tbar-panel-footer">
+                            <div class="tbar-checkout">
+                                <div class="jtc-number">
+                                    <strong>0</strong>件商品</div>
+                                <div class="jtc-sum"> 共计：
+                                    <strong>¥0</strong>
+                                </div>
+                                <a class="jtc-btn" href="cart.html">去购物车结算</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 我的关注 -->
+                    <div class="toolbar-panel tbar-panel-follow" style="visibility: hidden;">
+                        <h3 class="tbar-panel-header">
+                            <a class="title" href="#">
+                                <i></i>
+                                <em class="title">我的关注</em>
+                            </a>
+                            <span class="close-panel"></span>
+                        </h3>
+                        <div class="tbar-panel-main">
+                            <div class="tbar-panel-content"></div>
+                        </div>
+                    </div>
+                    <!-- 我的足迹 -->
+                    <div class="toolbar-panel tbar-panel-history" style="visibility: hidden;">
+                        <h3 class="tbar-panel-header">
+                            <a class="title" href="#">
+                                <i></i>
+                                <em class="title">我的足迹</em>
+                            </a>
+                            <span class="close-panel"></span>
+                        </h3>
+                        <div class="tbar-panel-main">
+                            <div class="tbar-panel-content">
+                                <div class="jt-history-wrap">
+                                    <ul>
+                                        <!-- <li class="jth-item">
+                      <a class="img-wrap" href="item.html"><img src="#" height="100" width="100"></a>
+                      <a class="add-cart-button" href="cart-add.html">加入购物车</a>
+                      <span class="price">￥498.00</span>
+                    </li>
+                    <li class="jth-item">
+                      <a class="img-wrap" href="item.html"><img src="#" height="100" width="100"></a>
+                      <a class="add-cart-button" href="cart-add.html">加入购物车</a>
+                      <span class="price">￥498.00</span>
+                    </li> -->
+                                    </ul>
+                                    <a class="history-bottom-more" href="#">查看更多足迹商品 &gt;&gt;</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 侧栏按钮 -->
+                <div class="toolbar-tabs">
+                    <div class="toolbar-tab tbar-tab-cart" data-title="购物车" data-target="cart">
+                        <i class="tab-ico"></i>
+                        <em class="tab-text"></em>
+                        <span class="tab-sub">0</span>
+                    </div>
+                    <div class="toolbar-tab tbar-tab-follow" data-title="我的关注" data-target="follow">
+                        <i class="tab-ico"></i>
+                        <em class="tab-text"></em>
+                    </div>
+                    <div class="toolbar-tab tbar-tab-history" data-title="我的足迹" data-target="history">
+                        <i class="tab-ico"></i>
+                        <em class="tab-text"></em>
+                    </div>
+                </div>
+                <div class="toolbar-footer">
+                    <div class="toolbar-tab tbar-tab-top">
+                        <a href="#">
+                            <i class="tab-ico"></i>
+                            <em class="footer-tab-text">顶部</em>
+                        </a>
+                    </div>
+                    <div class="toolbar-tab tbar-tab-feedback">
+                        <a href="#">
+                            <i class="tab-ico"></i>
+                            <em class="footer-tab-text">反馈</em>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--购物车单元格 模板-->
+    <script type="text/template" id="tbar-cart-item-template">
+        <div class="tbar-cart-item">
+            <div class="jtc-item-promo">
+                <em class="promo-tag promo-mz">满赠
+          <i class="arrow"></i>
+        </em>
+                <div class="promo-text">已购满600元，您可领赠品</div>
+            </div>
+            <div class="jtc-item-goods">
+                <span class="p-img">
+          <a href="#">
+            <img src="{2}" alt="{1}" height="50" width="50">
+          </a>
+        </span>
+                <div class="p-name">
+                    <a href="#">{1}</a>
+                </div>
+                <div class="p-price">
+                    <strong>¥{3}</strong>×{4} </div>
+                <a class="p-del" href="#">删除</a>
+            </div>
+        </div>
+    </script>
+</body>
+
+</html>

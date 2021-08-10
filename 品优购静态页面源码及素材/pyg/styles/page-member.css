@@ -1,0 +1,476 @@
+input {
+	*display: inline;
+	*zoom: 1;
+}
+
+.home {
+	padding: 10px;
+	color: #333;
+}
+
+.list dl {
+	margin: 0;
+}
+
+.list dt,dd {
+	line-height: 28px;
+}
+
+.list dt {
+	padding: 5px;
+	font-weight: 700;
+}
+
+.list dt i {
+	color: red;
+}
+
+.list dd {
+	margin: 0 0 6px;
+	border-bottom: 1px solid #ededed;
+	text-align: center;
+}
+
+.body {
+	color: #666;
+}
+
+.set {
+	margin: 0 2px;
+	height: 217px;
+	background: #f7f7f7;
+}
+
+.info,.fixed,.package {
+	padding: 8px 0;
+}
+
+.u-pic,.u-name,.u-rank {
+	text-align: center;
+	font-family: '微软雅黑';
+}
+
+.u-safe,.u-medal {
+	margin: 15px auto;
+	width: 195px;
+}
+
+.u-name {
+	font-size: 14px;
+}
+
+.u-rank {
+	margin: 0 auto;
+	width: 94px;
+	border-radius: 9px;
+	background: #f2a123;
+	color: #fff;
+}
+
+.u-safe {
+	margin-top: 15px;
+}
+
+.ads {
+	margin-left: 10px;
+}
+
+.body .aboutme,.body .order,.body .discount {
+	margin: 20px;
+	border: 1px solid #ddd;
+}
+
+.body .aboutme {
+	border: 0;
+}
+
+.body .ever {
+	margin: 20px;
+}
+
+.order .mt {
+	overflow: hidden;
+	padding: 0 5px;
+	border-bottom: 1px solid #ddd;
+	line-height: 25px;
+}
+
+.order .order-detail {
+	padding: 10px;
+	text-align: center;
+}
+
+.order-detail .none {
+	color: #666;
+	font-size: 16px;
+}
+
+.acc-item {
+	position: relative;
+	margin: 15px 40px;
+	width: 156px;
+	color: #999;
+	line-height: 28px;
+}
+
+.acc-item .list {
+	padding: 0 20px;
+}
+
+.acc-item i {
+	position: absolute;
+	margin: 0 -22px;
+	width: 20px;
+	height: 20px;
+	background: url(../img/icons.png) no-repeat;
+}
+
+.acc-item b {
+	height: 26px;
+	font-weight: 400;
+	line-height: 26px;
+}
+
+.acc-item em {
+	padding: 0 5px;
+	color: #c81523;
+	font-weight: 700;
+}
+
+.list1,.list2,.list3,.list4 {
+	position: relative;
+}
+
+.acc-item span {
+	position: absolute;
+	right: 0;
+}
+
+.list1 i {
+	background-position: -526px -73px;
+}
+
+.list2 i {
+	background-position: -526px -104px;
+}
+
+.list3 i {
+	background-position: -526px -132px;
+}
+
+.list4 i {
+	background-position: -526px -163px;
+}
+
+.td ul li {
+	width: 45%;
+	height: 80px;
+	list-style-type: none;
+	text-align: center;
+	line-height: 26px;
+}
+
+.td ul li i {
+	position: absolute;
+	width: 50px;
+	height: 50px;
+	background-image: url(../img/icons.png);
+}
+
+.td {
+	position: relative;
+	display: inline-block;
+	margin: 0 auto;
+	padding: 0 20px;
+	width: 200px;
+}
+
+.td span {
+	color: #999;
+}
+
+.td .td1 {
+	position: absolute;
+	top: 25px;
+	left: 40px;
+	background-position: -314px -7px;
+}
+
+.td .td2 {
+	position: absolute;
+	top: 25px;
+	right: 53px;
+	background-position: -319px -54px;
+}
+
+.td .td3 {
+	position: absolute;
+	top: 109px;
+	left: 46px;
+	background-position: -319px -97px;
+}
+
+.td .td4 {
+	position: absolute;
+	top: 107px;
+	right: 54px;
+	background-position: -319px -143px;
+}
+
+.space {
+	background-color: #ddd;
+}
+
+.space-x {
+	position: absolute;
+	top: 80px;
+	left: 11px;
+	width: 178px;
+	height: 0;
+	border-bottom: 1px solid #ddd;
+}
+
+.space-y {
+	position: absolute;
+	top: 2px;
+	left: 105px;
+	height: 159px;
+	border-right: 1px solid #ddd;
+}
+
+.minus,.change {
+	margin-right: -1px;
+	border-right: 1px solid #ddd;
+}
+
+.title {
+	padding: 20px 10px 10px;
+	color: #666;
+}
+
+.carousel-control {
+	width: 20px;
+	border: 0;
+	border-radius: 0;
+	background: #c3c3c3;
+}
+
+.carousel-inner>.item>img {
+	margin: 0 auto;
+	width: 238px;
+}
+
+.jifen {
+	overflow: hidden;
+	margin: 5px 0;
+	padding: 10px;
+}
+
+.jifen .fr {
+	width: 185px;
+}
+
+.fen {
+	line-height: 28px;
+}
+
+.fen i {
+	color: red;
+}
+
+.dui {
+	padding-right: 10px;
+}
+
+.chong {
+	margin-top: 10px;
+}
+
+.sui-form.form-horizontal .control-group {
+	margin-bottom: 9px;
+	*margin-bottom: 11px;
+	*padding-bottom: 11px;
+}
+
+.control-group .control-label {
+	float: left;
+	o overflow: hidden;
+	width: 96px;
+}
+
+.control-group .controls {
+	float: left;
+	width: 139px;
+}
+
+.ever .tab-content {
+	border: 1px solid #ddd;
+	border-top: 0;
+}
+
+.sui-nav.nav-tabs {
+	overflow: hidden;
+	margin: 0 0 10px;
+	padding-left: 0;
+	border: 1px solid #ddd;
+	background: #f1f1f1;
+}
+
+.sui-nav.nav-tabs>li>a {
+	padding: 10px 20px;
+	border: 0;
+	font-family: "微软雅黑";
+}
+
+.sui-nav.nav-tabs>.active>a {
+	border: 0;
+	border-radius: 0;
+	background-color: #c81623;
+	color: #fff;
+}
+
+.like-list {
+	padding: 20px;
+	color: #666;
+}
+
+.like-list ul li .attr,.like-list ul li .price,.like-list ul li .commit {
+	padding-left: 15px;
+}
+
+.like-list ul li .attr {
+	padding-bottom: 10px;
+}
+
+.list-wrap .price {
+	color: #e4393c;
+	font: 16px "微软雅黑";
+}
+
+.like-list ul li .list-wrap {
+	line-height: 22px;
+}
+
+.avatar-box img {
+	width: 120px;
+}
+
+.avatar-box input {
+	display: none !important;
+}
+
+.profile-form {
+	padding: 50px 20px;
+}
+
+input {
+	*display: inline;
+	*zoom: 1;
+}
+
+.home {
+	padding: 10px;
+	color: #333;
+}
+
+.sui-modal {
+	width: 565px;
+}
+
+.sui-modal .othername {
+	margin-left: 10px;
+}
+
+.list dl {
+	margin: 0;
+}
+
+.list dt,dd {
+	line-height: 28px;
+}
+
+.list dt {
+	padding: 5px;
+	font-weight: 700;
+}
+
+.list dt i {
+	color: red;
+}
+
+.list dd {
+	margin: 0 0 6px;
+	border-bottom: 1px solid #ededed;
+	text-align: center;
+}
+
+.list dd.active {
+	color: #E12228;
+	font-weight: 700;
+}
+
+.body {
+	color: #666;
+}
+
+.addressList {
+	margin: 0 20px;
+	border: 1px solid #ddd;
+}
+
+.addressList .mt {
+	overflow: hidden;
+	padding: 12px 10px;
+	background-color: #f1f1f1;
+	font-size: 15px;
+}
+
+.address-detail {
+	margin: 0 20px;
+	padding: 20px 0;
+}
+
+.addresses .address-item {
+	margin: 10px 0;
+	padding: 15px;
+	border: 1px solid #ddd;
+	line-height: 28px;
+}
+
+.address-item .smt {
+	font-weight: 700;
+	font-size: 15px;
+	line-height: 36px;
+}
+
+.address-item .operate {
+	margin-top: -30px;
+}
+
+.smc .item .label {
+	color: #a09e9e;
+}
+
+.editinfo .address-item h5 {
+	font-weight: 700;
+}
+
+.editinfo .address-item {
+	line-height: 26px;
+}
+
+.editinfo .address-item label {
+	margin-right: 5px;
+}
+
+.orders table {
+	margin-bottom: 0;
+}
+
+.goods-info + .goods-info {
+	border-top: 1px solid #eee;
+}
+
+.goods-info img {
+	max-height: 100px;
+}
