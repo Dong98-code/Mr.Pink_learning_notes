@@ -292,3 +292,27 @@ margin-top
 
 中间 给高宽 ，两边箭头给定位
 
+
+
+### 产品详情区域制作
+
+- iteminfo_wrap
+
+![20210811164021](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20210811164021.png)
+
+- 1号盒子为头部 ： head_name
+- 2号盒子为最新新闻 news
+- 3号盒子为产品详情摘要 summary
+
+
+![20210811164716](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20210811164716.png)
+
+使用dl dt dd 结构来制作里面的小盒子
+
+#### 命名
+
+| 名称 | 说明   |
+| ---- | ------ |
+| 评价 | remark |
+
+![20210811165258](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20210811165258.png)
