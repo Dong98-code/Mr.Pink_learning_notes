@@ -109,3 +109,67 @@ margin-right: 10px;
     color:#ccc;
     font-size: 12px;
 }
+
+/* 产品详情模块制作 */
+.item_info_wrap {
+    width: 720px;
+}
+.item_info_wrap .head_name h4{
+    font-size: 16px;
+    font-weight: 700;
+    height: 33px;
+    }
+
+.news {
+    height: 33px;
+    color: #e12228;
+}
+
+.summary dt,
+.summary dd{
+    float: left;
+    line-height: 36px;}
+.summary dt {
+    width: 70px;
+    padding: 0 10px;
+    text-align: justify;
+    text-align-last:justify ;
+    
+}
+
+/* .summary dt::after {
+    content: "";
+    width: 100%;
+    display: inline-block;
+} */
+
+.summary_price {
+    overflow: hidden;
+    position: relative;
+    padding: 10px;
+    background-color: pink;
+
+}
+.summary_price .price {
+    font-size: 24px;
+    color: #e12228;
+    padding: 0 3px;
+}
+
+.summary_price .price em{
+    font-size: 16px;
+}
+
+.summary_price dd:nth-of-type(2) a {
+    font-size: 12px;
+    color: #c81623;
+}
+
+.summary_price .remark {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+.summary_price .remark em {
+    color: #1474af;
+}
