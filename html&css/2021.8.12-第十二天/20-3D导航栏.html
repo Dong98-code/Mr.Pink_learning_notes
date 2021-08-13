@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+
+        }
+        ul {
+            margin: 100px auto;
+            padding-left:100px ;
+        }
+        ul li {
+            float: left;
+            width: 120px;
+            height: 30px;
+            list-style: none;
+            margin: 5px;
+            perspective: 300px;
+        }
+        .box {
+            
+            position: relative;
+            width: 100%;
+            height: 100%;
+            /* background-color: skyblue; */
+            transform-style: preserve-3d;
+            transition: all 2s;
+
+            
+        }
+        .box:hover {
+            transform: rotateX(90deg);
+
+        }
+        .front,
+        .bottom {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top:0;
+            left: 0;
+            /* margin-left:-60px ; */
+            /* margin-top: -15px; */
+            text-align: center;
+            line-height: 30px;
+            background-color: tomato;
+
+        }
+        .front {
+            background-color: skyblue;
+            z-index: 1;
+            transform: translateZ(15px);
+        
+            
+            
+        }
+
+        .bottom {
+            transform:translateY(15px) rotateX(90deg);
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li>
+            <div class="box">
+                <div class="front">xdd</div>
+                <div class="bottom">XD</div>
+            </div>
+        </li>
+        <li>
+            <div class="box">
+                <div class="front">栋宝</div>
+                <div class="bottom">XD</div>
+            </div>
+        </li>
+        <li>
+            <div class="box">
+                <div class="front"> 栋宝</div>
+                <div class="bottom">XD</div>
+            </div>
+        </li>
+        <li>
+            <div class="box">
+                <div class="front"> 栋宝</div>
+                <div class="bottom">XD</div>
+            </div>
+        </li>
+        <li>
+            <div class="box">
+                <div class="front"> 栋宝</div>
+                <div class="bottom">XD</div>
+            </div>
+        </li>
+
+    </ul>
+</body>
+</html>

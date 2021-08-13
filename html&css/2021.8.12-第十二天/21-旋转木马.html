@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            perspective: 1000px;
+            /* transform: rotateX(10deg); */
+        }
+        section {
+            position: relative;
+            width: 300px;
+            height: 200px;
+            /* perspective: 1000px; */
+            margin: 100px auto;
+            background: url(media/pig.jpg);
+            transform-style: preserve-3d;
+            
+            animation: rotate 5s linear  infinite alternate;
+        }
+        section:hover {
+            animation-play-state: paused;
+        }
+        section div {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 300px;
+            height: 200px;
+            background: url(media/dog.jpg) no-repeat;
+
+        }
+        section div:nth-child(1) {
+            transform: rotateY(0deg) translateZ(300px);
+        }
+        section div:nth-child(2) {
+            transform: rotateY(60deg) translateZ(300px);
+        }
+        section div:nth-child(3) {
+            transform: rotateY(120deg) translateZ(300px);
+        }
+        section div:nth-child(4) {
+            transform: rotateY(180deg) translateZ(300px);
+        }
+        section div:nth-child(5) {
+            transform:rotateY(240deg) translateZ(300px);
+        }
+        section div:nth-child(6) {
+            transform:rotateY(300deg) translateZ(300px);
+        }
+        @keyframes rotate {
+            0% {
+                transform: rotateY(0deg) rotateX(10deg);
+            }
+            100% {
+                transform: rotateY(360deg) rotateX(-10deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <section>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </section>
+</body>
+</html>

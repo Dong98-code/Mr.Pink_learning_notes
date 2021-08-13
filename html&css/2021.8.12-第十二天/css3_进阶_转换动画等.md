@@ -161,3 +161,81 @@ name 和 duration 必须都写
 steps 分几步完成动画
 
 ![20210813174137](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20210813174137.png)
+
+
+## 3D转换
+
+### 3维坐标系 
+
+![20210813192846](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20210813192846.png)
+
+3D位移和3D旋转
+
+透视 3D呈现
+
+### 3D移动
+
+![20210813193041](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20210813193041.png)
+
+translateZ 再透视 时使用 perspective
+
+单位一般维正值
+
+translate3d(x,y,z)
+
+没有的话 0值，不能省略
+
+### 透视 perspective
+
+![20210813193619](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20210813193619.png)
+
+透视写在被观察元素的父盒子上
+
+d 为视距，为眼睛到屏幕的距离
+
+z为 物体到屏幕的距离
+
+透视值 为视距
+
+
+### 3D旋转
+
+元素沿着 x y z轴旋转 
+
+![20210813195209](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20210813195209.png)
+
+
+![20210813195709](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20210813195709.png)
+
+
+rotateY（45deg）
+左手 定则：
+大拇指 左手
+![20210813195942](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20210813195942.png)
+
+### 3D呈现
+
+tranform-style
+
+![20210813201144](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20210813201144.png)
+
+代码写给父盒子 但是 影响的是子盒子
+
+![20210813201909](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20210813201909.png)
+
+**<font color="orange">这个属性很重要</font>**
+
+### 练习：
+1. 两面反转的盒子
+
+![20210813203330](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20210813203330.png)
+
+![20210813203340](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20210813203340.png)
+
+
+2. 3D导航栏
+
+![20210813211736](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20210813211736.png)
+
+
+![20210813220139](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20210813220139.png)
