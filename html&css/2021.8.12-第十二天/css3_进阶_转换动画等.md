@@ -68,3 +68,96 @@ margin-left:-..;
 ![20210812192746](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20210812192746.png)
 
 ![20210812192801](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20210812192801.png)
+
+
+### 缩放
+
+
+`transform：scale(x, y);`
+
+
+- 逗号隔开xy 
+- 可以设置缩放远点
+
+- 缩放写的数字不加单位为 相对原来的倍数
+- 等比例缩放 写一个参数 
+- 不影响其他的 盒子
+
+
+
+案例1. 图片缩放
+
+案例2. 按钮缩放
+![20210813145334](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20210813145334.png)
+
+### 2D转换的书写顺序
+
+综合写法
+
+![20210813145415](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20210813145415.png)
+
+顺序问题  先旋转会改变坐标轴的方向 
+
+先写位移，先放到该到的位置，再做其他操作，**旋转会改变坐标轴的方向**
+
+### 总结
+
+位移 旋转 缩放
+
+![20210813145740](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20210813145740.png)
+
+
+## css3-动画
+
+- 定义动画
+- 使用动画 
+
+1. 使用 keyframes 定义动画
+
+```
+@keyframes 动画名称 {
+    0% {
+
+    }
+    100% {
+
+    }
+
+}
+```
+
+动画序列
+
+![20210813153057](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20210813153057.png)
+
+
+使用动画
+
+animation-name: 名称；
+animation-duration：持续时间；
+
+百分比为整数；
+百分比按照时间划分 
+
+### 动画常见属性
+
+![20210813154619](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20210813154619.png)
+
+css简写 ：
+animation： 名称 持续时间 运动曲线 何时开始 播放次数 是否反向 起始或者结束的状态；
+
+name 和 duration 必须都写 
+- 不包含 animation-paly-state
+
+![20210813160132](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20210813160132.png)
+
+
+![20210813164313](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20210813164313.png)
+
+
+### 速度曲线的细节
+![20210813164411](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20210813164411.png)
+
+steps 分几步完成动画
+
+![20210813174137](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20210813174137.png)

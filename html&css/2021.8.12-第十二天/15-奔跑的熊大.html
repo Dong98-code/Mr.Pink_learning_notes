@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        .bg1 {
+            width: 3840px;
+            height: 569px;
+            background: url(media/bg2.png) no-repeat;
+            padding-top: 233px;
+
+            
+        }
+        .bg2 {
+            position: relative;
+            width: 3640px;
+            height: 336px;
+            background: url(media/bg1.png) no-repeat;
+            /* background-color: tomato; */
+            /* margin-top: 233px; */
+            animation: bg2 30s linear backwards infinite alternate;
+        }
+        .bear {
+            position: absolute;
+            bottom: 0;
+            width: 200px;
+            height: 100px;
+            /* margin: 100px auto; */
+            background: url(media/bear.png) no-repeat;
+            animation: bear 1.5s steps(8) infinite forwards, position 20s forwards;
+        }
+        @keyframes bear {
+            0% {
+                background-position: 0 0 ;
+
+            }
+            100% {
+                background-position: -1600px 0;
+            }
+        }
+        @keyframes position {
+            0% {
+                left: 0%;
+                transform: translate(0,0);
+            }
+
+            100% {
+                left: 50%;
+                transform: translate(-50%,0);
+            }
+
+        }
+        @keyframes bg2 {
+            0% {
+                background-position: 0 0 ;
+
+            }
+            100% {
+                background-position: -200px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg1">
+        <div class="bg2">
+            <div class="bear"></div>
+        </div>
+    </div>
+    
+</body>
+</html>

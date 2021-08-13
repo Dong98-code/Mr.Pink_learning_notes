@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @keyframes move {
+            0% {
+                transform: translate(0,0);
+            }
+            20% {
+                transform: translate(1000px,0);
+            }
+            50% {
+                transform: translate(1000px,500px);
+            }
+            75% {
+                transform: translate(0,500px);
+            }
+            /* 0% {
+                transform: translate(0,0);
+            } */
+
+        }
+        div {
+            width: 100px;
+            height: 100px;
+            background-color: tomato;
+            animation-name: move;
+            animation-duration: 5s;
+            animation-timing-function: ease;
+            animation-delay: 0ms;
+            /* 重复次数 */
+            animation-iteration-count: infinite;
+            /* 是否反向播放 */
+            animation-direction: alternate;
+            /* 停在结束状态 forwards */
+            animation-fill-mode:backwards;
+
+        }
+        div:hover {
+            animation-play-state:paused ;
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+</body>
+</html>
