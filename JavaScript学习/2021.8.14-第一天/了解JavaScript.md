@@ -80,3 +80,40 @@ console.log();
 ## 什么是变量？
 存储数据的容器
 通过变量名 获取数据 
+
+![20210814193448](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20210814193448.png)
+
+
+## 变量的使用
+
+声明变量
+赋值
+
+`var age;`
+age为变量名 
+
+variable 变量声明 
+
+分配内存空间
+
+
+声明变量并赋值 
+
+`var myname = 'XD';`
+
+![20210814194213](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20210814194213.png)
+
+## 更新变量
+![20210814194608](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20210814194608.png)
+
+声明多个变量
+
+```
+var name1,
+    name2,
+    name3;
+```
+
+声明不赋值：
+未定义 
+![20210814194859](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20210814194859.png)
