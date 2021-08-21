@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,4 +31,38 @@
 <body>
     
 </body>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // //10行，每行10-i个星星
+        // let num = 10;
+        // for (let i = 0;i < 10;i++){
+        //     let str = '';
+        //     for (let j = 0;j < (10-i); j++) {
+        //         str += '*';
+        //     }
+        //     console.log(str);
+        // }
+        //n行nlie的星星
+        let rows = parseInt(prompt('打印多少行：'));
+        let str = '';
+        for (let i = 1; i <= rows; i++) {
+            for (let j = 1; j <= (rows-i+1); j++) {
+                str += '*';
+            }
+            str += '\n';
+        }
+        console.log(str);
+    </script>
+</head>
+<body>
+    
+</body>
+>>>>>>> 3d36594fb37012ee58d2b2f0f8bf0530d1e3a68c
 </html>

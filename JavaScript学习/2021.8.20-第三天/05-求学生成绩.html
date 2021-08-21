@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,4 +21,28 @@
 <body>
     
 </body>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let student_num = prompt("输入学生人数");
+        student_num = parseInt(student_num);
+        let grades_sum = 0, grade = 0;
+
+        for (let i = 1; i <= student_num; i++) {
+            grade = prompt(`第 ${i} 个学生的成绩为：`);
+            grades_sum += parseInt(grade);
+        }
+        console.log('学生的平均成绩为：'+(grades_sum/student_num));
+    </script>
+</head>
+<body>
+    
+</body>
+>>>>>>> 3d36594fb37012ee58d2b2f0f8bf0530d1e3a68c
 </html>
