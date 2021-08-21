@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // let operation = prompt('请输入您要的操作：' + '\n1.存钱' + '\n2.取钱' + '\n3.显示余额' + '\n4.退出')
+        let yue = 100; // 初始化余额
+
+        do {
+            operation = prompt('请输入您要的操作：' + '\n1.存钱' + '\n2.取钱' + '\n3.显示余额' + '\n4.退出')
+            switch (operation) {
+                case '1':
+                    let sum_in = prompt('请输入存入的钱数：');
+                    yue += parseInt(sum_in);
+                    alert(`现在的钱数是：${yue}`);
+                    break;
+
+                case '2':
+                    let sum_out = prompt('请您输入取得钱数：');
+                    yue -= parseInt(sum_out);
+                    alert(`现在的钱数是：${yue}`);
+
+                    break;
+
+                case '3':
+                    alert(`现在的钱数是：${yue}`);
+                    break;
+                case '4':
+                    alert(`您正在退出`);
+                    break;
+            }
+        } while (operation !== '4');
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
