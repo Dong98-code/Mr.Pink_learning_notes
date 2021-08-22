@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let arr = [2, 6, 1, 7, 4];
+        let max_num = -Infinity; // 无限小值开始比较
+        for (let i = 0; i < arr.length; i++) {
+            max_num = max_num >= arr[i] ? max_num : arr[i]; // 遍历数组，三元表达式， 比较max_num和arr[i]的值，将较大值赋值给max_num
+
+        }
+        console.log(max_num);
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

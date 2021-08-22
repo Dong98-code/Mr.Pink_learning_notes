@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let arr = ['red', 'green', 'blue', 'pink'];
+        // let arr_2 = [];
+        // for (let i = arr.length - 1; i >= 0; i--) {
+        //     arr_2[arr_2.length] = arr[i];
+        // }
+        // console.log(arr_2);
+        let l = 0; // 左指针
+        let r = arr.length - 1; //右指针
+        let temp;
+        while (l < r) {
+            // let temp = arr[l]; // 临时变量用于交换
+            temp = arr[l];
+            arr[l] = arr[r];
+            arr[r] = temp;
+            l++;
+            r--;
+
+        }
+        console.log(arr);
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function isPrimeNumber(num) {
+            for (let i = 2; i <= parseInt(Math.sqrt(num)); i++) {
+                if (num % i == 0) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        let num = prompt('请输入一个整数');
+        if (isPrimeNumber(num) == false) {
+            alert('您输入的不是素数')
+        } else {
+            alert('您输入的数是素数')
+        }
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
