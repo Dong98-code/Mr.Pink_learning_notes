@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        var i = 0;
+        var j = 10;
+        checkiandj:
+            while (i < 4) {
+                console.log(i);
+                i += 1;
+                // checkj:
+                while (j > 4) {
+                    console.log(j);
+                    j -= 1;
+                    if ((j % 2) == 0) {
+                        continue;
+                        // continue checkj; // 跳转到标签 checkj处，继续该循环
+                    }
+                    console.log(j + ' 是奇数。');
+                }
+                console.log('i = ' + i);
+                console.log('j = ' + j);
+            }
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
