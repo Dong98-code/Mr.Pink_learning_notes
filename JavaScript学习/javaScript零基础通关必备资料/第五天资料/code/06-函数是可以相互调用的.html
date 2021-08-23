@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        // 函数是可以相互调用的
+        // function fn1() {
+        //     console.log(11);
+        //     fn2(); // 在fn1 函数里面调用了 fn2 函数
+        // }
+        // fn1();
+
+        // function fn2() {
+        //     console.log(22);
+
+        // }
+
+        function fn1() {
+            console.log(111);
+            fn2();
+            console.log('fn1');
+        }
+
+        function fn2() {
+            console.log(222);
+            console.log('fn2');
+        }
+        fn1();
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

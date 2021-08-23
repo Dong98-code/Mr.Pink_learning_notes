@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <style>
+        <style>#mid-data ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        #mid-data ul li {
+            display: inline-block;
+            padding: 2px 4px;
+            margin: 2px;
+            border: 1px solid #000;
+        }
+        
+        #myList {
+            list-style: none;
+            padding-left: 0;
+            font-size: 20px;
+        }
+        
+        #myList li {
+            display: inline-block;
+            padding: 6px 10px;
+            margin: 4px;
+            border: 2px solid #000;
+        }
+        
+        #myList .active {
+            border: 2px solid #ff0000;
+        }
+    </style>
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2>冒泡排序动画演示</h2>
+                <div class="well">
+                    <h4>摘要</h4>
+                    <p>
+                        冒泡排序是一种简单的排序算法。它重复地走访过要排序的数列，一次比较两个元素，如果他们的顺序错误就把他们交换过来。走访数列的工作是重复地进行直到没有再需要交换，也就是说该数列已经排序完成。这个算法的名字由来是因为越小的元素会经由交换慢慢“浮”到数列的顶端。</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="page-header">过程演示</h2>
+                <ul id="myList">
+                    <li>5</li>
+                    <li>4</li>
+                    <li>3</li>
+                    <li>2</li>
+                    <li>1</li>
+                </ul>
+                <button type="button" class="btn btn-primary btn-lg" id="start-btn">开始演示</button>
+                <button type="button" class="btn btn-primary btn-lg" id="pause-btn">暂停演示</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="page-header">中间数据</h2>
+                <div id="mid-data">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="alert alert-info" role="alert">提示：刷新页面，可重新进行排序。</div>
+        </div>
+        <script src="js/jquery.js"></script>
+        <script src="js/jquery.swap.js"></script>
+        <script>
+            $(function() {
+                var $lis = $("#myList li");
+                var count = $lis.length;
+                var current = 0;
+                var next = 1;
+                var times = 0;
+                var interval;
+
+                function setCss() {
+                    $lis.removeClass("active");
+                    $($lis[current]).addClass("active");
+                    $($lis[next]).addClass("active");
+                }
+
+                function exchange() {
+                    $lis = $("#myList li");
+                    var v1 = $($lis[current]).text();
+                    var v2 = $($lis[next]).text();
+                    if (parseInt(v1) > parseInt(v2)) {
+                        $lis.swap(current, next);
+                        return true;
+                    }
+                    return false;
+                }
+
+                function drawData() {
+                    if (times === 0) {
+                        return;
+                    }
+                    $lis = $("#myList li");
+                    var str = "第" + times + "趟：<ul>";
+                    str += $("#myList").html();
+                    str += "</ul>";
+                    $("#mid-data").append(str);
+                }
+
+                function go() {
+                    setCss();
+                    interval = setInterval(function() {
+                        if (isPause) {
+                            return;
+                        }
+                        if (times < count - 1) {
+                            var change = exchange();
+                            if (!change) {
+                                current++;
+                                next++;
+                                if (current == count - 1 - times) {
+                                    times++;
+                                    current = 0;
+                                    next = 1;
+                                    drawData();
+                                }
+                                setCss();
+                            }
+                        } else {
+                            $lis.removeClass("active");
+                            clearInterval(interval);
+                        }
+                    }, 1000);
+                }
+                $("#start-btn").click(function() {
+                    isPause = false;
+
+                    if (!interval) {
+                        drawData();
+                        go();
+                    }
+                });
+                var isPause = false;
+                $('#pause-btn').click(function() {
+                    isPause = true;
+                })
+            });
+        </script>
+</body>
+
+</html>

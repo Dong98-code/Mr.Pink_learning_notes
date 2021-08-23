@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        // 1. 求数组 [2,6,1,7, 4] 里面所有元素的和以及平均值。
+        // (1)声明一个求和变量 sum。
+        // (2)遍历这个数组，把里面每个数组元素加到 sum 里面。
+        // (3)用求和变量 sum 除以数组的长度就可以得到数组的平均值。
+        var arr = [2, 6, 1, 7, 4];
+        var sum = 0;
+        var average = 0;
+        for (var i = 0; i < arr.length; i++) {
+            sum += arr[i]; // 我们加的是数组元素 arr[i] 不是计数器 i
+        }
+        average = sum / arr.length;
+        console.log(sum, average); // 想要输出多个变量，用逗号分隔即可
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

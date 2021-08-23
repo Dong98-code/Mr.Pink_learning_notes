@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        // 用户输入年份，输出当前年份2月份的天数
+        function backDay() {
+            var year = prompt('请您输入年份:');
+            if (isRunYear(year)) { // 调用函数需要加小括号
+                alert('当前年份是闰年2月份有29天');
+            } else {
+                alert('当前年份是平年2月份有28天');
+            }
+        }
+        backDay();
+
+
+        // 判断是否为闰年的函数
+        function isRunYear(year) {
+            // 如果是闰年我们返回 true  否则 返回 false 
+            var flag = false;
+            if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0) {
+                flag = true;
+            }
+            return flag;
+        }
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

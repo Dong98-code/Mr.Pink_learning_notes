@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        //         用户输入0~59之间的一个数字
+        // 如果数字小于10，则在这个数字前面补0,（加0 拼接） 否则  不做操作
+        // 用一个变量接受这个返回值，输出
+        var time = prompt('请您输入一个 0 ~ 59 之间的一个数字');
+        // 三元表达式   表达式 ？ 表达式1 ：表达式2 
+        var result = time < 10 ? '0' + time : time; //   把返回值赋值给一个变量
+        alert(result);
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

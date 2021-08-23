@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        // 弹出一个输入框（prompt)，让用户输入出生年份 （用户输入）
+        // 把用户输入的值用变量保存起来，然后用今年的年份减去变量值，结果就是现在的年龄  （程序内部处理）
+        // 弹出警示框（alert) ， 把计算的结果输出 （输出结果）
+        var year = prompt('请您输入您的出生年份');
+        var age = 2018 - year; // year 取过来的是字符串型  但是这里用的减法 有隐式转换
+        alert('您今年已经' + age + '岁了');
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

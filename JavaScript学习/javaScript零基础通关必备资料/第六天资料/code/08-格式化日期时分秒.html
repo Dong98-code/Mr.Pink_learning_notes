@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        // 格式化日期 时分秒
+        var date = new Date();
+        console.log(date.getHours()); // 时
+        console.log(date.getMinutes()); // 分
+        console.log(date.getSeconds()); // 秒
+        // 要求封装一个函数返回当前的时分秒 格式 08:08:08
+        function getTimer() {
+            var time = new Date();
+            var h = time.getHours();
+            h = h < 10 ? '0' + h : h;
+            var m = time.getMinutes();
+            m = m < 10 ? '0' + m : m;
+            var s = time.getSeconds();
+            s = s < 10 ? '0' + s : s;
+            return h + ':' + m + ':' + s;
+        }
+        console.log(getTimer());
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        // 函数返回值注意事项
+        // 1. return 终止函数
+        function getSum(num1, num2) {
+            return num1 + num2; // return 后面的代码不会被执行
+            alert('我是不会被执行的哦！')
+        }
+        console.log(getSum(1, 2));
+        // 2. return 只能返回一个值
+        function fn(num1, num2) {
+            return num1, num2; // 返回的结果是最后一个值
+        }
+        console.log(fn(1, 2));
+
+        // 3.  我们求任意两个数的 加减乘数结果
+        function getResult(num1, num2) {
+            return [num1 + num2, num1 - num2, num1 * num2, num1 / num2];
+        }
+        var re = getResult(1, 2); // 返回的是一个数组
+        console.log(re);
+        // 4. 我们的函数如果有return 则返回的是 return 后面的值，如果函数么有 return 则返回undefined
+        function fun1() {
+            return 666;
+        }
+        console.log(fun1()); // 返回 666
+        function fun2() {
+
+        }
+        console.log(fun2()); // 函数返回的结果是 undefined
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        // 将数组 ['red', 'green', 'blue', 'pink', 'purple'] 的内容反过来存放
+        // 1、声明一个新数组 newArr
+        // 2、把旧数组索引号第4个取过来（arr.length - 1)，给新数组索引号第0个元素 (newArr.length)
+        // 3、我们采取 递减的方式  i--
+        var arr = ['red', 'green', 'blue', 'pink', 'purple', 'hotpink'];
+        var newArr = [];
+        for (var i = arr.length - 1; i >= 0; i--) {
+            newArr[newArr.length] = arr[i]
+        }
+        console.log(newArr);
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
