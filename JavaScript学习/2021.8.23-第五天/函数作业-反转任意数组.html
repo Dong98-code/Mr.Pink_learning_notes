@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function reverse(arr) {
+            let l = 0;
+            let r = arr.length - 1;
+            while (l < r) {
+                let tmp = arr[l];
+                arr[l] = arr[r];
+                arr[r] = tmp;
+                l += 1;
+                r -= 1;
+            }
+            return arr;
+        }
+        console.log(reverse([1, 2, 14, 25, 3]));
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

@@ -15,8 +15,12 @@
         let lian_po = new Hero('lian_po', '力量型', 500, '近战');
         let hou_yi = new Hero('hou_yi', '射手型', 100, '远程');
 
-        console.log(lian_po.attack_type, lian_po.hp);
-        console.log(hou_yi.attack_type, hou_yi.name);
+        // console.log(lian_po.attack_type, lian_po.hp);
+        // console.log(hou_yi.attack_type, hou_yi.name);
+        for (k in lian_po) {
+            console.log(k); //属性名
+            console.log(lian_po[k]); // 不加引号，输出属性的值
+        }
     </script>
 </head>
 <body>

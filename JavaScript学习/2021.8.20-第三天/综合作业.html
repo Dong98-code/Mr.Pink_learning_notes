@@ -21,9 +21,12 @@
 
                 case '2':
                     let sum_out = prompt('请您输入取得钱数：');
-                    yue -= parseInt(sum_out);
-                    alert(`现在的钱数是：${yue}`);
-
+                    if (sum_out > yue) {
+                        alert('余额不足，请重新输入');
+                    }else {
+                        yue -= parseInt(sum_out);
+                        alert(`现在的钱数是：${yue}`);
+                    }
                     break;
 
                 case '3':
