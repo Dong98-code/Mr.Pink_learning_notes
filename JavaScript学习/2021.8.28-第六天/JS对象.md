@@ -210,3 +210,156 @@ sb
         console.log(countTime('2021-8-31 00:00:00'));
     </script>
 ```
+
+
+
+
+## 数组
+
+new Array(n) 长度为n的数组
+
+### 检查是否为数组？
+
+反转数组
+
+`instanceof Array` 判断是否为数组
+
+`Array.isArray()`
+
+Array.isArray(obj) 
+obj 为参数
+``` javascript
+// 下面的函数调用都返回 true
+Array.isArray([]);
+Array.isArray([1]);
+Array.isArray(new Array());
+Array.isArray(new Array('a', 'b', 'c', 'd'))
+// 鲜为人知的事实：其实 Array.prototype 也是一个数组。
+Array.isArray(Array.prototype);
+
+// 下面的函数调用都返回 false
+Array.isArray();
+Array.isArray({});
+Array.isArray(null);
+Array.isArray(undefined);
+Array.isArray(17);
+Array.isArray('Array');
+Array.isArray(true);
+Array.isArray(false);
+Array.isArray(new Uint8Array(32))
+Array.isArray({ __proto__: Array.prototype });
+
+```
+当检测Array实例时, Array.isArray 优于 instanceof,因为Array.isArray能检测iframes.
+
+
+### 添加元素
+push() 方法将一个或多个元素添加到数组的末尾，并返回该数组的新长度。
+参数：需要添加的数组元素
+
+返回值：
+新的length自动返回
+
+开头添加：
+unshift
+unshift() 方法将一个或多个元素添加到数组的开头，并返回该数组的新长度(该方法修改原有数组)。
+语法：
+`arr.unshift(element1, ..., elementN)`
+![20210902212301](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20210902212301.png)
+
+
+### 删除元素
+
+`pop()`
+返回值
+从数组中删除的元素(当数组为空时返回undefined)。
+
+空数组 返回`undefined`
+
+```JavaScript
+let myFish = ["angel", "clown", "mandarin", "surgeon"];
+
+let popped = myFish.pop();
+
+console.log(myFish);
+// ["angel", "clown", "mandarin"]
+
+console.log(popped);
+// surgeon
+
+```
+
+### 练习 筛选数组
+
+```JavaScript
+    <script>
+        let arr = [1500, 2500, 33500, 2000]
+        let newArray = [];
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i] <= 2000) {
+                newArray.push(arr[i]);
+            }
+        }
+        console.log(newArray);
+    </script>
+```
+
+
+### reverse
+
+`arr.reverse()`
+reverse() 方法将数组中元素的位置颠倒，并返回该数组。数组的第一个元素会变成最后一个，数组的最后一个元素变成第一个。该方法会改变原数组。
+
+
+### sort()
+排序数组
+
+sort() 方法用原地算法对数组的元素进行排序，并返回数组。默认排序顺序是在将元素转换为字符串，然后比较它们的UTF-16代码单元值序列时构建的
+
+由于它取决于具体实现，因此无法保证排序的时间和空间复杂性。
+
+
+`compareFunction` 可选
+用来指定按某种顺序进行排列的函数。如果省略，元素按照转换为的字符串的各个字符的Unicode位点进行排序。
+`firstEl`
+第一个用于比较的元素。
+`secondEl`
+第二个用于比较的元素
+
+如果没有指明 compareFunction ，那么元素会按照转换为的字符串的诸个字符的Unicode位点进行排序。例如 "Banana" 会被排列到 "cherry" 之前。当数字按由小到大排序时，9 出现在 80 之前，但因为（没有指明 compareFunction），比较的数字会先被转换为字符串，所以在Unicode顺序上 "80" 要比 "9" 要靠前。
+
+
+比较函数 用于比较 列表中的值
+
+要比较数字而非字符串，比较函数可以简单的以 a 减 b，如下的函数将会将数组升序排列
+
+```JavaScript 
+function compareNumbers(a, b) {
+  return a - b;
+}
+
+```
+a-b>0 b在前，升序排列
+
+```JavaScript
+var numbers = [4, 2, 5, 1, 3];
+numbers.sort((a, b) => a - b);
+console.log(numbers);
+```
+
+
+### 元素索引
+
+`Array.prototype.indexOf()`
+`indexOf()`方法返回在数组中可以找到一个给定元素的第一个索引，如果不存在，则返回-1。
+
+只返回第一个要查找的值的索引
+
+`arr.indexOf(searchElement[, fromIndex])`
+
+fromIndex 可选
+开始查找的位置。如果该索引值大于或等于数组长度，意味着不会在数组里查找，返回-1。如果参数中提供的索引值是一个负值，则将其作为数组末尾的一个抵消，即-1表示从最后一个元素开始查找，-2表示从倒数第二个元素开始查找 ，以此类推。 注意：如果参数中提供的索引值是一个负值，并不改变其查找顺序，查找顺序仍然是从前向后查询数组。如果抵消后的索引值仍小于0，则整个数组都将会被查询。其默认值为0.
+
+
+### 练习：数组去重
+
