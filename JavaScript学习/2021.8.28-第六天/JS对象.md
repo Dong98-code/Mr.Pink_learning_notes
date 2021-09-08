@@ -363,3 +363,172 @@ fromIndex 可选
 
 ### 练习：数组去重
 
+```javascript
+    <script>
+        let arr = [1,2,3,1,2];
+        let newArray = [];
+        for (let i = 0;i<=arr.length;i++) {
+            if (newArray.indexOf(arr[i]) === -1) {
+                newArray.push(arr[i])
+            }
+        }
+        console.log(newArray);
+    </script>
+```
+
+### 数组转换成字符串
+
+```
+arr.toString()
+```
+返回值：表示制定数组及其元素的字符串
+
+```javscript
+const array1 = [1, 2, 'a', '1a'];
+
+console.log(array1.toString());
+```
+默认分隔符为逗号`，`
+
+`join(分割符)`
+
+```JavaScript
+const elements = ['Fire', 'Air', 'Water'];
+
+console.log(elements.join());
+// expected output: "Fire,Air,Water"
+
+console.log(elements.join(''));
+// expected output: "FireAirWater"
+
+console.log(elements.join('-'));
+// expected output: "Fire-Air-Water"
+```
+
+### splice()方法
+
+删除或者替换 现有的元素或者原地 添加新的元素 来修改数组 并以数组形式返回修改的内容
+
+
+#### 语法：
+```
+array.splice(start[, deleteCount[, item1[, item2[, ...]]]])
+```
+
+`start`:指定修改的 开始位置：
+ 超出数组长度，尾部添加；
+ 负数： 倒数第几个位置添加；负数的绝对值超过数组长度则 从第0位开始操作
+
+ `deleteCount`
+ 整数，需要移除的数组的个数
+
+ 大于 start开始的后面的元素的个数，则将 包含start 之后的所有元素删除
+ 0 或者负数， 至少添加新元素
+
+ `item1`
+ 要添加进数组的元素：
+ 不指定，就不添加，只删除
+
+# 字符串对象
+
+对象才属性和方法
+简单 数据类型：
+
+基本包装类型：将简单数据类型 转换成复杂数据类型
+![20210906221207](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20210906221207.png)
+
+
+String, Number,Boolen三种特殊的引用类型
+
+## 字符串不可变
+相同的名字 不同的人
+
+```javascript
+let str = 'andy';
+str = 'red'
+
+```
+![20210906221505](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20210906221505.png)
+str只是指向了不同的内存地址
+
+字符串不可变，尽量不要大量拼接字符串
+拼接字符串，每次都产生新的字符串，内存变得很少
+
+## 字符串 方法
+
+所有的操作都不会 改变字符串，而是产生新的字符串
+
+### str.indexOf()
+
+`str.indexOf(searchValue [, fromIndex])`
+
+练习： 返回字符串中 o出现的位置及次数
+
+```JavaScript
+
+    <script>
+        let str = 'absndddnndnd';
+        let index = str.indexOf('n');
+        while (index !== -1) {
+            console.log(index);
+            index = str.indexOf('n',index+1);
+        }
+    </script>
+```
+
+### charAt(index)
+返回
+
+### charCodeAt(index)
+返回ASCII 值
+判断用户判断哪个键
+
+### str[index]
+和数组类似
+
+
+### concat()
+concat(str1,str2)
+
+### 字符串切片
+
+substr(start, num)
+开始位置， 截取几个字符
+### 替换字符串
+
+replace
+
+`str.replace(regexp|substr, newSubStr|function)`
+
+与正则化表达式 一起使用
+### split
+
+返回 Array
+`str.split([separator[, limit]])`
+
+
+## 简单数据类型和复杂数据类型
+
+### 内存分配
+
+简单数据类型： 基本数据类型  值类型
+
+复杂数据类型： 引用类型； 值类型
+
+`null` 返回 object
+
+如果 变量 将来 存储为对象，先定义成null  本身为空对象；
+
+### 堆和栈
+
+js中没有堆栈 概念 
+
+复杂数据类型： 首先再栈内存放 地址，在堆中存放值
+![20210908200039](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20210908200039.png)
+
+
+### 传参
+
+复杂数据类型 
+
+p 的地址给了x  两个指向内存中的同一个值，一个改变 另外一个跟着改变
