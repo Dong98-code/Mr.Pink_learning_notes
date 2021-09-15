@@ -28,12 +28,12 @@ console.log(array1);
 
 ## syntax
 
-```javascript
+```
 // Functionless
 sort()
 
 // Arrow function
-sort((firstEl, secondEl) => { ... } )
+sort((firstEl, secondEl) => {... } )
 
 // Compare function
 sort(compareFn)
@@ -109,7 +109,7 @@ a.localCompare(b): a在 b之前，则，也就是引用字符串在比较字符�
 
 ## 基础语法
 
-```javascript
+```
 (param1, param2, …, paramN) => { statements }
 (param1, param2, …, paramN) => expression
 //相当于：(param1, param2, …, paramN) =>{ return expression; }
@@ -241,3 +241,22 @@ dom同样可以通过其他的语言访问
 
 ### 2.1 根据id获得
 `getElementById`
+
+```javascript
+</head>
+<body>
+    <div id="timr">2021-9-15</div>
+    <script>
+        let timer = document.getElementById('timr')
+        console.log(timer);
+    </script>
+    
+</body>
+```
+
+![20210915201309](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20210915201309.png)
+
+### 2.3根据标签名获取
+
+`getElementByTagName`
+
