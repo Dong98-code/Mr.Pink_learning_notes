@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button>获取系统时间</button>
+    <div>时间</div>
+    <script>
+        let btn = document.querySelector('button');
+        let div = document.querySelector('div');
+        function getTime() {
+            let time = new Date();
+            h = time.getHours();
+            h < 10 ? '0' + h : h;
+            m = time.getMinutes();
+            m < 10 ? '0' + m : m;
+            s = time.getSeconds();
+            s < 10 ? '0' + s : s;
+            return h + ':' + m + ':' + s;
+        }
+        btn.onclick = function () {
+            div.innerText = getTime();
+        }
+    
+    </script>
+</body>
+</html>

@@ -260,3 +260,158 @@ dom同样可以通过其他的语言访问
 
 `getElementByTagName`
 
+```javascript
+<ul>
+        <li>1230</li>
+        <li>1230</li>
+        <li>1230</li>
+        <li>1230</li>
+        <li>1230</li>
+    </ul>
+    <script>
+        let lis = document.getElementsByTagName(li)
+        console.log(lis);
+    </script>
+```
+返回对象：
+元素集合
+以伪数组的形式存储
+
+
+依次打印 各个元素
+for循环
+
+得到的元素为动态的
+
+3. 当只有一个小li，返回的依然是伪数组的形式
+4. 页面中，没有元素，返回的是空的伪数组
+5. 只获取 ul中的指定标签名的元素
+指定父元素，获得子元素的标签
+
+父元素必须为一个对象
+
+
+### 根据类名 新增 方法
+
+根据类名获得元素
+
+`document.getElementsByClassName()`
+根据类名返回元素；
+返回伪数组形式
+
+
+querySelector  指定选择器的第一个元素对象
+`.box`类选择器
+
+`#nav`id选择器
+
+`document.querySelectorAll()`
+返回所有的对象；
+返回伪数组形式
+
+
+### 获取特殊标签
+body 标签
+
+`document.body`
+
+返回元素对象
+
+`document.html`
+返回 undefined
+
+`document.documentElement` 返回html对象
+
+## 事件
+
+JS检测到的行为
+
+触发响应机制
+
+网页中的每一个元素 都可以产生 可以触发 JavaScript 的事件， 可以在用户点击某一个按钮的时候产生一个事件，然后去执行这些操作
+
+点击之后，进行某些操作
+
+1. 事件由三部分组成
+
+事件源 事件类型 事件处理程序
+
+（1）事件源
+
+事件被触发的对象 例如 按钮
+
+(2) 事件类型
+
+如何触发 什么事件 鼠标点击还是经过
+
+（3） 事件处理程序 函数赋值的形式 完成
+
+
+### 事件执行步骤
+
+1. 获取事件源
+
+2. 注册 绑定事件
+
+3. 添加事件处理程序 ，函数赋值
+
+![20210915205053](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20210915205053.png)
+
+
+## 操作元素
+
+dom 改变网页的内容 结构和样式 
+改变元素的属性和内容
+
+
+## 4.1 改变元素内容
+![20210915205453](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20210915205453.png)
+
+保存 空格和换行
+innertext
+
+![20210915205915](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20210915205915.png)
+
+```javascript
+<body>
+    <button>获取系统时间</button>
+    <div>时间</div>
+    <script>
+        let btn = document.querySelector('button');
+        let div = document.querySelector('div');
+        btn.onclick = function () {
+            div.innerText = '2019-6-6';
+        }
+    </script>
+<body>
+```
+
+
+- 练习 更改时间
+
+ ![](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/>.png)
+
+ ```javascript
+<body>
+    <button>获取系统时间</button>
+    <div>时间</div>
+    <script>
+        let btn = document.querySelector('button');
+        let div = document.querySelector('div');
+        function getTime() {
+            let time = new Date();
+            h = time.getHours();
+            h < 10 ? '0' + h : h;
+            m = time.getMinutes();
+            m < 10 ? '0' + m : m;
+            s = time.getSeconds();
+            s < 10 ? '0' + s : s;
+            return h + ':' + m + ':' + s;
+        }
+        btn.onclick = function () {
+            div.innerText = getTime();
+        }
+    
+    </script>
+</body>
+ ```
