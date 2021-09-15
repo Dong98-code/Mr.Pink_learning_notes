@@ -157,3 +157,87 @@ elements.map(element => element.length); // [8, 6, 7, 9]
 elements.map(({ "length": lengthFooBArX }) => lengthFooBArX); // [8, 6, 7, 9]
 
 ```
+
+
+# Web APIS
+
+二者关联性
+![20210914162408](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20210914162408.png)
+
+前面es6 基础
+js 基础语法
+
+现在主要学习 DOM 和BOM
+
+实现页面的交互效果
+
+
+## API 
+
+应用程序变成接口
+
+Application Programming Interface
+
+## Web API 
+
+浏览器的功能和页面元素
+
+DOM
+
+总结：
+![20210914162931](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20210914162931.png)
+## dom 简介
+
+DOM 为xml 和html的 编程接口
+
+它提供了对文档的结构化的表述，并定义了一种方式可以使从程序中对该结构进行访问，从而改变文档的`结构，样式和内容`。DOM 将文档解析为一个由节点和对象（包含属性和方法的对象）组成的结构集合。简言之，它会将web页面和脚本或程序语言连接起来。
+档对象模型（DOM）提供了对同一份文档的另一种表现，存储和操作的方式。 DOM是web页面的完全的面向对象表述，它能够使用如 JavaScript等脚本语言进行修改。
+
+## 1.2 dom树
+
+一个页面就是一个文档
+![20210915163503](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20210915163503.png)
+
+dom 以上 看成对象
+
+## dom 和js
+
+
+开始的时候，JavaScript和DOM是交织在一起的，但它们最终演变成了两个独立的实体。JavaScript可以访问和操作存储在DOM中的内容，因此我们可以写成这个近似的等式：
+
+API (web 或 XML 页面) = DOM + JS (脚本语言)
+
+dom同样可以通过其他的语言访问
+
+
+当您在创建一个脚本时-无论是使用内嵌 `<script>`元素或者使用在web页面脚本加载的方法— 您都可以使用 `document`或 `window` 元素的API来操作文档本身或获取文档的子类（web页面中的各种元素）。
+
+您的DOM编程代码可能会像下面例子一样非常简单，如使用 window对象的alert()函数显示一个警告信息，或者使用比较复杂的方法来创建一个新的内容，如下面内容较长的实例所示
+
+```JAVASCRIPT
+<html>
+  <head>
+    <script>
+    // run this function when the document is loaded
+       window.onload = function() {
+    // create a couple of elements
+    // in an otherwise empty HTML page
+       heading = document.createElement("h1");
+       heading_text = document.createTextNode("Big Head!");
+       heading.appendChild(heading_text);
+       document.body.appendChild(heading);
+      }
+    </script>
+  </head>
+  <body>
+  </body>
+</html>
+
+```
+
+![20210915164521](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20210915164521.png)
+## 2 获取元素
+ 2.1 如何获取元素
+
+### 2.1 根据id获得
+`getElementById`
