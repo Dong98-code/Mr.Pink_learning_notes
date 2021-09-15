@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id='dj'>迪迦奥特曼</button>
+    <button id= 'gs'>小怪兽</button>
+    <img src="fig/迪迦.jpg" alt="" title="迪迦奥特曼">
+    <script>
+        let btn_dj = document.getElementById('dj');
+        let btn_gs = document.getElementById('gs');
+        let img = document.querySelector('img');
+        btn_dj.onclick = function () {
+            img.src = 'fig/迪迦.jpg';
+            img.title = '迪迦奥特曼';
+
+        }
+        btn_gs.onclick = function() {
+            img.src = 'fig/怪兽.jpg';
+            img.title = '怪兽';
+        }
+
+    </script>
+</body>
+</html>

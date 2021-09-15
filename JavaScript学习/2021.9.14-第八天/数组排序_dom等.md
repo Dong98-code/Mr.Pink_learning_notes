@@ -322,7 +322,7 @@ body 标签
 
 `document.documentElement` 返回html对象
 
-## 事件
+# 事件
 
 JS检测到的行为
 
@@ -347,7 +347,7 @@ JS检测到的行为
 （3） 事件处理程序 函数赋值的形式 完成
 
 
-### 事件执行步骤
+## 事件执行步骤
 
 1. 获取事件源
 
@@ -358,7 +358,7 @@ JS检测到的行为
 ![20210915205053](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20210915205053.png)
 
 
-## 操作元素
+# 操作元素
 
 dom 改变网页的内容 结构和样式 
 改变元素的属性和内容
@@ -415,3 +415,45 @@ innertext
     </script>
 </body>
  ```
+
+
+ ## innerText 和 innerHTML
+
+ innertext 不识别 html标签
+ 后者识别 html标签
+
+ `innerHTML`用途较广
+
+ 获取元素中的内容
+![20210915211339](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20210915211339.png)
+
+
+前者会去除空格和标签
+后者 保持空格和换行
+## 操作元素 属性
+
+![20210915213242](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20210915213242.png)
+![20210915213303](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20210915213303.png)
+
+```javascript
+<body>
+    <button id='dj'>迪迦奥特曼</button>
+    <button id= 'gs'>小怪兽</button>
+    <img src="fig/迪迦.jpg" alt="" title="迪迦奥特曼">
+    <script>
+        let btn_dj = document.getElementById('dj');
+        let btn_gs = document.getElementById('gs');
+        let img = document.querySelector('img');
+        btn_dj.onclick = function () {
+            img.src = 'fig/迪迦.jpg';
+            img.title = '迪迦奥特曼';
+
+        }
+        btn_gs.onclick = function() {
+            img.src = 'fig/怪兽.jpg';
+            img.title = '怪兽';
+        }
+
+    </script>
+</body>
+```
