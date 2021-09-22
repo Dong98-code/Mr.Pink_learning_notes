@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            position: relative;
+            width: 400px;
+            /* height: 100px; */
+            margin: 100px auto;
+            border-bottom: 1px solid #ccc;
+        
+        }
+        .box input {
+            width: 370px;
+            height: 30px;
+            outline: none;
+            border: 0;
+        }
+        .box img {
+            position: absolute;
+            width: 24px;
+            margin-top: 8px;
+
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <input type="password" id="pwd">
+        <img src="fig/闭眼.png" alt="" id="img">
+    </div>
+    <script>
+        let input = document.getElementById('pwd');
+        let img = document.getElementById('img');
+        let flag = 0;
+        img.onclick = function () {
+            // flag =  0 默认闭眼
+            if (flag == 0) {
+                input.type = 'password';
+                img.src = 'fig/闭眼.png';
+                flag = 1;
+            } else {
+                input.type = 'text';
+                img.src = 'fig/睁眼.png';
+                flag = 0;
+            }
+
+        }
+    </script>
+</body>
+</html>

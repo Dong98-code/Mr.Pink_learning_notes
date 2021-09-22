@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <img src="fig/上午好.jpg" alt="">
+    <div>
+        早上好，记得写代码
+    </div>
+    <script>
+        let img = document.querySelector("img");
+        let div = document.querySelector('div');
+        let date = new Date();
+        let hour = date.getHours();
+        if (hour < 12) {
+            div.innerHTML = "上午好， 好好写代码";
+            img.src = 'fig/上午好.jpg';
+        } else {
+            div.innerHTML = '下午好， 好好写代码';
+            img.src = 'fig/下午好.jpg';
+        }
+    </script>
+</body>
+</html>

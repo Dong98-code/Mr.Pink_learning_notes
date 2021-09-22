@@ -457,3 +457,134 @@ innertext
     </script>
 </body>
 ```
+
+练习： 分时问候
+
+![20210922200733](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20210922200733.png)
+
+```javascript
+
+    <img src="fig/上午好.jpg" alt="">
+    <div>
+        早上好，记得写代码
+    </div>
+    <script>
+        let img = document.querySelector("img");
+        let div = document.querySelector('div');
+        let date = new Date();
+        let hour = date.getHours();
+        if (hour < 12) {
+            div.innerHTML = "上午好， 好好写代码";
+            img.src = 'fig/上午好.jpg';
+        } else {
+            div.innerHTML = '下午好， 好好写代码';
+            img.src = 'fig/下午好.jpg';
+        }
+    </script>
+```
+
+## 4.3 表单元素的属性
+
+innerHTml 普通盒子
+
+表单里面的值 通过 修改value值修改
+
+- 练习： 点击按钮，显示内容改变
+  ![20210922201438](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20210922201438.png)
+  ```javascript
+    <button>按钮</button>
+    <input type="text" value="输入内容">;
+    <script>
+        let btn = document.querySelector('button');
+        let input = document.querySelector('input');
+        btn.onclick = function() {
+            input.value = '点击过了';
+
+        }
+    </script>
+  ```
+
+点击过被禁用 disableed
+
+btn.disabled = true;
+
+this 指向 事件函数的调用者; 在这里为btn
+![20210922201700](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20210922201700.png)
+
+
+## 仿京东密码案例
+
+![20210922201811](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20210922201811.png)
+
+flag 标识当前状态
+
+![20210922204706](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20210922204706.png)
+
+
+## 样式属性
+
+行内样式操作
+修改较少
+行内样式修改
+
+```JavaScript
+div.onclick = function (){
+  this.style.backgroundColor = '';
+  this.style.fontSize = '';
+}
+```
+行内样式，修改完的权重较高；
+- 练习： 关闭二维码的练习
+
+显示和隐藏元素
+
+
+display:none;
+display:block;
+![20210922205206](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20210922205206.png)
+
+
+### 循环精灵图
+获取所有小li
+querySeclctorAll
+
+![20210922205906](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20210922205906.png)
+
+
+### 显示隐藏文本框的内容
+
+onfocus 获得焦点
+
+失去焦点： onblur
+
+![20210922210328](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20210922210328.png)
+
+## className获得 修改样式属性
+
+![20210922210843](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20210922210843.png)
+
+当样式比较多的时候 
+行内样式 修改就比较麻烦
+
+.change {
+  // 样式
+}
+
+点击之后 元素的样式变成 实现设定好的样式
+
+this.classname = 'change'
+当前类 的类名 变成change
+
+可以修改 className更改元素的样式
+
+会覆盖到 原来的类名
+
+
+如果想要保存原来的类名
+![20210922211259](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20210922211259.png)
+
+多类名选择器
+
+
+## 作业
+![20210922211625](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20210922211625.png)
