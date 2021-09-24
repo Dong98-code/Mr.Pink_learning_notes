@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        li, ul {
+            list-style: none;
+        }
+        .conve-list {
+            width: 294px;
+            height: 154px;
+            /* background-color: tomato; */
+            margin: 100px auto;
+        }
+        .conve-list li {
+            float: left;
+            width: 71px;
+            height: 75px;
+            border: 1px solid #f4f4f4;
+        }
+        .conve-list li span {
+            display: block;
+            width: 24px;
+            height: 24px;
+            background-color: skyblue;
+            margin-top: 10px;
+            margin-left: 23px;
+            background: url(fig/淘宝精灵图.png) 0 0 no-repeat;
+        }
+    </style>
+</head>
+<body>
+    <ul class = "conve-list">
+        <li>
+            <span></span>
+        </li>
+        <li><span></span></li>
+        <li><span></span></li>
+        <li><span></span></li>
+        <li><span></span></li>
+        <li><span></span></li>
+        <li><span></span></li>
+        <li><span></span></li>
+    </ul>
+</body>
+    <script>
+        let spans = document.querySelectorAll('span');
+        for (let i = 0; i< spans.length;i++){
+            spans[i].style.backgroundPosition = `0 -${44*i}px`;
+        }
+
+
+    </script>
+</html>

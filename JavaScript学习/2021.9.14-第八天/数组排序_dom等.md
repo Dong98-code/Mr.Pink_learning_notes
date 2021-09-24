@@ -542,7 +542,9 @@ div.onclick = function (){
 display:none;
 display:block;
 ![20210922205206](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20210922205206.png)
+- 练习： 显示和隐藏二维码
 
+![20210923211527](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20210923211527.png)
 
 ### 循环精灵图
 获取所有小li
@@ -558,6 +560,14 @@ onfocus 获得焦点
 失去焦点： onblur
 
 ![20210922210328](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20210922210328.png)
+
+- 练习：显示隐藏文本框内容
+  如果获得焦点，判断表单里面的内容是否为默认文字，如果为默认文字，清空表单内容
+  获得 input。value=== 手机
+  获得焦点 需要把文本框中的文字颜色加深
+  失去焦点，文本框中的文字颜色复原
+  
+![20210923214246](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20210923214246.png)
 
 ## className获得 修改样式属性
 
@@ -588,3 +598,71 @@ this.classname = 'change'
 
 ## 作业
 ![20210922211625](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20210922211625.png)
+
+### 1.淘宝精灵图练习
+
+![20210923160848](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20210923160848.png)
+
+代码：
+```javascript
+    <style>
+        li, ul {
+            list-style: none;
+        }
+        .conve-list {
+            width: 294px;
+            height: 154px;
+            /* background-color: tomato; */
+            margin: 100px auto;
+        }
+        .conve-list li {
+            float: left;
+            width: 71px;
+            height: 75px;
+            border: 1px solid #f4f4f4;
+        }
+        .conve-list li span {
+            display: block;
+            width: 24px;
+            height: 24px;
+            background-color: skyblue;
+            margin-top: 10px;
+            margin-left: 23px;
+            background: url(fig/淘宝精灵图.png) 0 0 no-repeat;
+        }
+    </style>
+</head>
+<body>
+    <ul class = "conve-list">
+        <li>
+            <span></span>
+        </li>
+        <li><span></span></li>
+        <li><span></span></li>
+        <li><span></span></li>
+        <li><span></span></li>
+        <li><span></span></li>
+        <li><span></span></li>
+        <li><span></span></li>
+    </ul>
+</body>
+    <script>
+        let spans = document.querySelectorAll('span');
+        for (let i = 0; i< spans.length;i++){
+            spans[i].style.backgroundPosition = `0 -${44*i}px`;
+        }
+
+
+    </script>
+
+```
+
+### 2.世纪佳缘显示隐藏内容
+![20210923214601](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20210923214601.png)
+
+文本框 颜色发生变化
+点击之后：
+![20210924092532](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20210924092532.png)
+原本的样子：
+![20210924092603](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20210924092603.png)
+

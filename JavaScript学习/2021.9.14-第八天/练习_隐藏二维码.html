@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            background-color:pink;
+            margin: 100px auto;
+        }
+        div span {
+            display: block;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+        }
+        div .QR {
+            display: block;
+            width: 160px;
+            height: 160px;
+            margin-left: 20px;
+            background: url(fig/淘宝二维码.png) 0 0 no-repeat;
+
+        }
+        div .close-btn {
+            position: absolute;
+            top: -1px;
+            left: -16px;
+            width: 16px;
+            height: 16px;
+            border: 1px solid #ccc;
+            background: url(fig/叉号.png) 0 0 no-repeat;
+            background-size: 16px 16px;
+        }
+        
+    </style>
+</head>
+<body>
+    <div>
+            
+        <span>淘宝二维码</span>
+        <a href="#" class="QR"></a>
+        <i class="close-btn"></i>
+    </div>
+</body>
+<script>
+    let btn = document.querySelector('.close-btn');
+    let box = document.querySelector('div');
+    btn.onclick = function() {
+        box.style.display = 'none';
+    }
+</script>
+</html>
