@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            /* css3盒子模型 */
+            box-sizing: border-box;
+        }
+        body {
+            background: url(fig/壁纸2.jpg)  no-repeat ;
+            background-size: 100%;
+            
+        }
+
+        ul,
+        li {
+            list-style: none;
+        }
+
+        ul {
+            width: 800px;
+            height: 150px;
+            margin: 100px auto;
+            padding: 0;
+            background-color: white;
+        }
+
+        ul li {
+            float: left;
+            width: 200px;
+            height: 150px;
+            padding: 0 5px;
+            /* border: 1px solid transparent; */
+        }
+
+        ul li img {
+            width: 100%;
+            height: 100%;
+            
+            border: 3px solid transparent;
+        }
+    </style>
+</head>
+
+<body>
+    <ul>
+        <li><img src="fig/壁纸1.jpg" alt=""></li>
+        <li><img src="fig/壁纸2.jpg" alt=""></li>
+        <li><img src="fig/壁纸3.jpg" alt=""></li>
+        <li><img src="fig/壁纸4.jpg" alt=""></li>
+    </ul>
+</body>
+    <script>
+        let imgs = document.querySelectorAll('img');
+        for (let i = 0 ;i < imgs.length; i++){
+            imgs[i].onclick = function() {
+                // 点击图片，对应的边框颜色变红；首先把其他所有的边框变色变成transparent，然后对应的颜色变化
+                for (let i = 0;i<imgs.length;i++) {
+                    imgs[i].style.borderColor = 'transparent';
+                }
+                this.style.borderColor = 'tomato';               
+                document.body.style.backgroundImage = 'url('+this.src+')';
+            }
+        }
+    </script> 
+
+</html>
