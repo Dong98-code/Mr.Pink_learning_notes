@@ -96,12 +96,175 @@
 ```
 ## 设置自定义属性的值
 
-1. 获取元素的值
+### 1. 获取元素的值
 
 自定义属性操作
 
 `element.属性`
 
-`element.getAttribute()`
+`element.getAttribute('自定义属性')`
 
 ![20211002154248](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20211002154248.png)
+
+
+### 设置属性值
+
+
+`element.setAttribute('属性)` 
+
+### 移除属性
+
+`element.removeAttribute()`
+
+
+### 练习 tab 键切换
+
+```javascript
+<script>
+    let tab_list = document.querySelector('.tab_list').querySelectorAll('li');
+    let items = document.querySelector('.tab_con').querySelectorAll('.item');
+    for (let i=0;i<tab_list.length;i++) {
+        tab_list[i].setAttribute('index'， i);
+        tab_list[i].onclick = function (){
+            for (let i=0;i<tab_list.length;i++) {
+                tab_list[i].className = '';
+            }
+            this.className = 'current';
+            // 设置对应模块显示
+            for (let i=0;i<items.length;i++) {
+                items[i].style.display = 'none';
+            }
+            // 使用let控制作用域 并不用单独设置 index
+            
+            items[i].style.display = 'block';
+        }
+        
+        
+    }
+</script>
+```
+
+### h5自定义属性
+
+`data-` 开头
+依此开头的 为 自定义的属性
+
+h5新增属性值
+
+div.dataset.index
+
+`dataset` 存放以`data-` 开头的所有的自定义属性的内容
+
+ie11 开始兼容给
+
+`getAttribute` 得到自定义 属性值
+
+## 结点操作
+
+获取元素
+
+1.dom获取的方法
+
+![20211002164736](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20211002164736.png)
+
+2. 根据节点的关系获取结点
+
+父子， 兄弟 等
+
+![20211002164845](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20211002164845.png)
+
+
+### 结点描述
+![20211002165114](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20211002165114.png)
+nodeName
+nodeType
+nodeValue
+
+主要操作元素结点
+
+### 结点层级
+
+父子 
+
+html 根
+
+head body 子
+
+1. 父子结点
+
+`node.parentNode`
+
+![20211002165309](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20211002165309.png)
+
+
+得到 理他最近的父级结点；亲爹
+
+
+2. 子节点
+
+`childNodes`得到所有的子结点
+
+包含文本结点等
+主要希望得到元素结点
+
+根据 `nodeType`筛选节点
+
+
+`parentNode.children`
+
+####   子节点 第一个元素和最后一个元素
+
+`firstChild`
+和`lastChild`
+
+`firstElementChild`:IE9以上支持，子元素结点
+
+解决方案：
+使用`parentNode.children[0]`
+
+- 练习： 下拉菜单
+
+
+### 创建结点
+
+创建元素结点 
+
+`createElement`
+
+添加结点：
+node.appendChild(child)
+
+node为父节点， child为子节点
+
+![20211002180935](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20211002180935.png)
+
+`insertBefore()`
+
+结点前面插入结点
+
+1。创建元素；2. 插入元素
+
+
+- 练习：
+- ![20211002181222](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20211002181222.png)
+
+![20211002182414](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20211002182414.png)
+
+```javascript
+    <script>
+        let text= document.querySelector('textarea');
+        let ul = document.querySelector('ul');
+        let btn = document.querySelector('button');
+        btn.onclick = function () {
+            if (text.value == "") {
+                alert('发布内容为空，请重新出入内容');
+
+            }
+            let li = document.createElement('li');
+            li.innerHTML = text.value;
+            // ul.append(li);
+            ul.insertBefore(li, ul.children[0]);
+        }
+    </script>
+
+```

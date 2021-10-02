@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            /* css3盒子模型 */
+            box-sizing: border-box;
+        }
+        ul, 
+        li {
+            list-style: none;
+
+        }
+        .tab_list {
+            background-color: gainsboro;
+            width: 1000px;
+        }
+        .tab_list li {
+            display: inline-block;
+            height: 38px;
+            padding: 10px 25px;
+            font-size: 14px;
+        }
+        li.current {
+            background-color: tomato;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="tab">
+        <div class="tab_list">
+            <ul>
+                <li class="current">商品介绍</li>
+                <li>规格与包装</li>
+                <li>售后保障</li>
+                <li>商品评价(50万+)</li>
+                <li>手机社区</li>
+            </ul>
+        </div>
+        <div class="tab_con">
+            <div class="item">
+                商品介绍模块
+            </div>
+            <div class="item">
+                规格与包装模块介绍
+            </div>
+            <div class="item">
+                售后保障
+            </div>
+            <div class="item">
+                手机评价
+            </div>
+            <div class="item">
+                手机社区模块介绍
+            </div> 
+        </div>
+    </div>
+</body>
+<script>
+    let tab_list = document.querySelector('.tab_list').querySelectorAll('li');
+    let items = document.querySelector('.tab_con').querySelectorAll('.item');
+    for (let i=0;i<tab_list.length;i++) {
+        tab_list[i].setAttribute('index') = i;
+        tab_list[i].onclick = function (){
+            for (let i=0;i<tab_list.length;i++) {
+                tab_list[i].className = '';
+            }
+            this.className = 'current';
+            // 设置对应模块显示
+            for (let i=0;i<items.length;i++) {
+                items[i].style.display = 'none';
+            }
+            // 使用let控制作用域 并不用单独设置 index
+            
+            items[i].style.display = 'block';
+        }
+        
+        
+    }
+</script>
+
+</html>

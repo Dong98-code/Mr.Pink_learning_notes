@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            /* css3盒子模型 */
+            box-sizing: border-box;
+        }
+
+        ul,
+        li {
+            list-style: none;
+
+        }
+
+        a {
+            text-decoration: none;
+            color: #666;
+        }
+
+        .nav {
+            width: 300px;
+            height: 41px;
+            margin: 0 auto;
+            background-color: skyblue;
+        }
+
+        .nav li {
+            position: absolute;
+            width: 100px;
+            height: 41px;
+            float: left;
+
+        }
+
+        .nav li .tn-tab {
+            border: 1px solid #fcfcfc;
+            border-width: 0 1px;
+            color: #4c4c4c;
+            line-height: 16px;
+            cursor: pointer;
+            padding: 0 2px 0 0;
+        }
+
+        .nav li .tn-tab i {
+            display: inline-block;
+            height: 17px;
+            padding: 12px 15px 12px 18px;
+            vertical-align: bottom;
+            font-style: normal;
+        }
+
+        .nav li .tn-tab i span {
+            display: inline-block;
+            width: 8px;
+            height: 5px;
+            margin: 0 0 0 5px;
+            vertical-align: middle;
+            font-size: 12px;
+            line-height: 13px;
+            background: url(fig/icon.png) 0 -977px no-repeat;
+
+        }
+        .nav li .tn-topmenulist{
+            position: relative;
+            border: 1px solid #ebbe7a;
+            border-top:0 ;
+            top: 41px;
+            left: 0;
+        }
+        .nav li .tn-topmenulist li {
+            display: inline-block;
+            height: 31px;
+            width: 100px;
+            line-height: 31px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="nav">
+        <li >
+            <a href="#" class="tn-tab">
+                <i>
+                    微博
+                    <span class="tn-arrow"></span>
+                </i>
+
+            </a>
+            <ul class="tn-topmenulist">
+                <li><a href="#">私信</a></li>
+                <li><a href="#">评论</a></li>
+                <li><a href="#">@我</a></li>
+            </ul>
+        </li>
+    </div>
+</body>
+
+</html>
