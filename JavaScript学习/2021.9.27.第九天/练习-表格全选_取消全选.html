@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+            border: 1px solid #333;
+            text-align: center;
+        }
+
+        table thead {
+            background-color: tomato;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th><input type="checkbox" id="j_thAll"></th>
+                    <th>商品</th>
+                    <th>价钱</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input type="checkbox"></td>
+                    <td>iphone</td>
+                    <td>8000</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox"></td>
+                    <td>iphone</td>
+                    <td>8000</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox"></td>
+                    <td>iphone</td>
+                    <td>8000</td>
+                </tr>
+            </tbody>
+
+        </table>
+    </div>
+</body>
+<script>
+    let j_thAll = document.getElementById('j_thAll');
+    let checks = document.querySelector('tbody').querySelectorAll('input');
+    j_thAll.onclick = function () {
+        for (let i = 0; i < checks.length; i++) {
+            checks[i].checked = this.checked;
+        }
+    }
+    for (let i = 0; i < checks.length; i++) {
+
+        checks[i].onclick = function () {
+            let flag = true;
+            for (let i = 0; i < checks.length; i++) {
+                // 当复选框的按钮都被选中时，全选框才会被选中
+                flag = flag && checks[i].checked;
+            }
+            j_thAll.checked = flag;
+        }
+
+    }
+</script>
+
+</html>

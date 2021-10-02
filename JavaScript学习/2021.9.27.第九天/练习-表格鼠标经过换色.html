@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        td,
+        th {
+            border: 1px solid rgb(190, 190, 190);
+            padding: 10px;
+        }
+
+        td {
+            text-align: center;
+        }
+
+       thead tr th {
+           background-color: skyblue;
+       }
+       .bg {
+           background-color: tomato;
+       }
+    </style>
+</head>
+
+<body>
+    <table>
+        <caption>Alien football stars</caption>
+        <thead>
+            <tr>
+                <th scope="col">Player</th>
+                <th scope="col">Gloobles</th>
+                <th scope="col">Za'taak</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">TR-7</th>
+                <td>7</td>
+                <td>4,569</td>
+            </tr>
+            <tr>
+                <th scope="row">Khiresh Odo</th>
+                <td>7</td>
+                <td>7,223</td>
+            </tr>
+            <tr>
+                <th scope="row">Mia Oolong</th>
+                <td>9</td>
+                <td>6,219</td>
+            </tr>
+        </tbody>
+
+    </table>
+</body>
+    <script>
+        let trs = document.querySelector('tbody').querySelectorAll('tr');
+        for (let i=0;i<trs.length;i++) {
+            trs[i].onmouseover = function () {
+                this.className = 'bg';
+            }
+            trs[i].onmouseout = function() {
+                this.className = '';
+            }
+        }
+        
+    </script>
+</html>
