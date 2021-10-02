@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <textarea name="" id="" cols="30" rows="10">123</textarea>
+    <button>发布</button>
+    <ul></ul>
+    
+</body>
+    <script>
+        let text= document.querySelector('textarea');
+        let ul = document.querySelector('ul');
+        let btn = document.querySelector('button');
+        btn.onclick = function () {
+            if (text.value == "") {
+                alert('发布内容为空，请重新出入内容');
+
+            }
+            let li = document.createElement('li');
+            li.innerHTML = text.value+"<a href='javascript:void(0)''>删除</a>";
+            // ul.append(li);
+            ul.insertBefore(li, ul.children[0]);
+            // 删除父亲元素
+            let a = document.querySelector('a');
+            a.onclick = function() {
+                ul.removeChild(this.parentNode);
+            }
+        }
+    </script>
+</html>

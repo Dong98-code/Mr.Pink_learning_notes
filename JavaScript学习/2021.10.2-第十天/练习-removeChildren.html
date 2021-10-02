@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button>删除</button>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+    </ul>
+</body>
+<script>
+    let lis = document.querySelector('li');
+    let ul = document.querySelector('ul');
+    let btn = document.querySelector('button');
+    btn.onclick = function() {
+        ul.removeChild(ul.children[0]);
+        if (lis.length == 0) {
+            alert('已删除所有结点');
+        }
+    }
+</script>
+</html>
