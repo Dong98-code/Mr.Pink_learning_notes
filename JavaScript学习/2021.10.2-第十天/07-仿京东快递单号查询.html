@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .search {
+            position: relative;
+            margin: 100px auto;
+            width: 200px;
+            height: 100px;
+            /* background-color: skyblue; */
+        }
+        .con {
+            display: none;
+            position: absolute;
+            top: -40px;
+            width: 171px;
+            border: 1px solid rgba(0,0,0,.2);
+            padding: 5px 0;
+            font-size: 18px;
+            line-height: 20px;
+            color: #333;
+        }
+        .con::before {
+            content: '';
+            width: 0;
+            height: 0;
+            position: absolute;
+            top: 28px;
+            left: 18px;
+            border: 8px solid #000;
+            border-style: solid dashed dashed;
+            border-color: #fff transparent transparent;
+        }
+    </style>
+</head>
+<body>
+    <div class="search">
+        <div class="con">
+            1243
+        </div>
+        <input type="text" class="jd" placeholder="请输入你的快递单号">
+    </div>
+</body>
+<script>
+    let jd_input = document.querySelector('.jd');
+    let con = document.querySelector('.con');
+    jd_input.addEventListener('keyup', function(e){
+        if (this.value == '') {
+            con.style.display = 'none';
+
+        } else {
+            con.style.display = 'block';
+            con.innerText = this.value;
+        }
+        // 失去焦点 不显示
+        jd_input.addEventListener('blur', function(){
+            con.style.display = 'none';
+        })
+        jd_input.addEventListener('focus', function(){
+            if (this.value !== '') {
+                con.style.display = 'block';
+            }
+        })
+    })
+</script>
+</html>![20211004210925](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20211004210925.png)

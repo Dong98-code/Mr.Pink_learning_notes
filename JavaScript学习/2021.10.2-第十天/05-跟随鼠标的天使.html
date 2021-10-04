@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .img img {
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <div class="img">
+        <img src="fig/OIP-C.jpg" alt="">
+    </div>
+</body>
+<script>
+    document.addEventListener('mousemove', function(e){
+        let pos_x = e.clientX;
+        let pos_y = e.clientY;
+        let img = document.querySelector('img');
+        img.style.left = pos_x - 100 + 'px';
+        img.style.top = pos_y - 100 + 'px';        
+    })
+</script>
+</html>

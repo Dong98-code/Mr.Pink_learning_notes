@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+        <li>知否知否</li>
+        <li>知否知否</li>
+        <li>知否知否</li>
+        <li>知否知否</li>
+        <li>知否知否</li>
+    </ul>
+    
+</body>
+<script>
+    // 给父亲添加监听器
+    let ul = document.querySelector('ul');
+    ul.addEventListener('click', function(e){
+        alert('点我，弹窗');
+        e.target.style.backgroundColor = 'pink';
+    })
+</script>
+</html>
+
