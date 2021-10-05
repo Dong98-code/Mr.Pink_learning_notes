@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            width: 2000px;
+            height: 500px;
+            margin: 100px auto;
+        }
+        div span {
+            display: inline-block;
+            width: 100px;
+            height: 100px;
+            line-height: 100px;
+            text-align: center;
+            border: 10px solid tomato;
+            background-color: black;
+            font-size: 50px;
+            color: white;
+            font-weight: 700;
+            
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <button class="begin">开始倒计时</button>
+        <button class="stop">停止倒计时</button>
+        <span class="hour">01</span>
+        <span class="minute">01</span>
+        <span class="second">03</span>
+    </div>
+</body>
+<script>
+    var time = '2021-10-6 00:00:00';
+    let h = document.querySelector('.hour');
+    let m = document.querySelector('.minute');
+    let s = document.querySelector('.second');
+    countTime();
+    let begin = document.querySelector('.begin');
+    let stop  =document.querySelector('.stop');
+    // 定义全局便改良 timer
+    let timer = null;
+    begin.addEventListener('click', function () {
+        countTime();
+        timer = setInterval(countTime, 1000);
+    })
+    stop.addEventListener('click', function() {
+        clearInterval(timer);
+    })
+    
+    function countTime() {
+            let now_time = +new Date();
+            let input_time = +new Date(time);
+            let total_time = (input_time - now_time)/1000; // ms->s
+            let day = parseInt(total_time/60/60/24);
+            day < 10 ? '0'+day:day;
+            let hour = parseInt(total_time/60/60%24);
+            hour < 10 ? '0'+hour:hour;
+            h.innerText = hour;
+            let minute = parseInt(total_time/60%60); // 分钟数
+            minute < 10? '0'+minute:minute;
+            m.innerText = minute;
+            let second = parseInt(total_time%60);
+            second < 10?'0'+second:second;
+            s.innerText = second;
+            // return `${day}天${hour}时${minute}分${second}秒`
+        }
+</script>
+</html>

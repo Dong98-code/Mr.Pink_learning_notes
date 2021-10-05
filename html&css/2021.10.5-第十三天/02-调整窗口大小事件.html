@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            width: 1000px;
+            height: 200px;
+            background-color: tomato;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <script>
+        window.onresize = function () {
+            alert('窗口变化了');
+        }
+    </script> -->
+    <script>
+        window.onload = function () {
+            let div = document.querySelector('div');
+            // 输出window 的width
+            window.addEventListener('resize', function () {
+                console.log(window.innerWidth);
+                if (window.innerWidth <= 1000) {
+                    div.style.display = 'none';
+                }
+            })
+
+        }
+    </script>
+    <div></div>
+</body>
+
+</html>
