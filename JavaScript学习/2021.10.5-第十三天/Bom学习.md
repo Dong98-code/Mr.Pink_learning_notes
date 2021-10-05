@@ -326,3 +326,25 @@ uniform resource
 
 
 ![20211005172456](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20211005172456.png)
+
+
+
+#### location 中的方法
+
+跳转： `location.assign`
+
+跳转页面
+
+![20211005201607](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20211005201607.png)
+
+## 6.navigator 对象
+
+useragent:
+![20211005201839](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20211005201839.png)
+
+![20211005201922](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20211005201922.png)
+
+
+## 7.history对象
+
+![20211005202136](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20211005202136.png)
