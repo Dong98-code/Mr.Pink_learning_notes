@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        ul, 
+        li {
+            list-style: none;
+        }
+        .login-header {
+            width: 200px;
+            height: 100px;
+            margin: 0 auto;
+        }
+        .login-header a{
+            font-size: 20px;
+            font-weight: 700;
+            color: black;
+            text-decoration: none;
+
+        }
+        .login {
+            display: none;
+            width: 512px;
+            height: 280px;
+            position: fixed;
+            border: 1px solid #ebebeb;
+
+            left: 50%;
+            top: 50%;
+            background-color: #fff;
+            box-shadow: 0px 0px 20px #ddd;
+            z-index:9999;
+            transform: translate(-50%, -50%);
+        }
+        .login-title {
+            position: relative;
+            /* 相对定位为后面的点击关闭按钮做准备 */
+            width: 100%;
+            height: 40px;
+            text-align: center;
+            line-height: 40px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: move;
+        }
+        .close-login {
+            position: absolute;
+            display: block;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            right: -20px;
+            top: -20px;
+            box-shadow: 0px 0px 20px #ddd;
+            background-color:#fff;
+            border-radius: 50%;
+        }
+        .close-login a {
+            text-decoration: none;
+            font-size: 14px;
+            color: black;
+
+        }
+        .login-input-content {
+            width: 100%;
+            height: 100px;
+            margin-top: 20px;
+        }
+        .login-button {
+            width: 200px;
+            height: 40px;
+            margin:0 auto;
+            margin-top: 30px;
+            border: 1px solid #333;
+            text-align: center;
+            line-height: 40px;
+            
+
+        }
+        .login-button a{
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 700;
+            color: black;
+        }
+        .login-input {
+            overflow: hidden;
+            width: 100%;
+            height: 35px;
+            padding:0 10px;
+            margin: 0px 0px 25px 0px ;
+            
+        }
+
+        .login-input input {
+            /* float: left; */
+            line-height: 35px;
+            height: 35px;
+            width: 350px;
+            border: 2px solid #ebebeb;
+            text-indent: 5px;
+            /* text-align: right; */
+            
+        }
+        .login-input label {
+            /* float: left; */
+            display: inline-block;
+            width: 100px;
+            /* margin-left: 40px; */
+            padding-right:10px;
+            line-height: 35px;
+            font-weight: 700;
+            font-size: 16px;
+            text-align: right;
+
+        }
+        .login-bg {
+            display: none;
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            top: 0px;
+            left: 0px;
+            background: rgba(0, 0, 0, .3);
+        }
+    </style>
+</head>
+<body>
+    <div class="login-header">
+        <a id="link" href="javascipt:;">点击，弹出登录框</a>
+    </div>
+    <div class="login" id="login">
+        <diV class='login-title' id="title">
+            登录会员
+            <span class='close-login' id='close-btn'>
+                <a href="javascript:;">关闭</a>
+            </span>
+        </diV>
+        <div class='login-input-content'>
+            <div class="login-input">
+                <label>用户名:</label>
+                <input type="text" placeholder="请输入用户名" name="info[username]" class="input-content" id='username'>
+            </div>
+            <div class="login-input">
+                <label for="">登录密码:</label>
+                <input type="password" placeholder="请输入登录密码" name="info[password]">
+            </div>
+        </div>
+        <div class='login-button' id='loginBtn'><a href="javascript:void(0);" id='loginBtnSubmmit'>登录会员</a></div>
+    </div>
+    <div class="login-bg" id='bg'></div>
+
+</body>
+<script>
+    let login = document.querySelector('.login');
+    let mask = document.querySelector('.login-bg');
+    let close_btn = document.querySelector('#close-btn')
+    let login_header = document.querySelector('.login-header');
+    let title = document.querySelector("#title");
+    login_header.addEventListener('click', function() {
+        login.style.display = "block";
+        mask.style.display = "block";
+    })
+    close_btn.onclick = function() {
+        login.style.display = "none";
+        mask.style.display = "none";
+    }
+    // 盒子内坐标， 相对于边界距离，-盒子在页面的距离
+    title.addEventListener('mousedown', function(e) {
+        var x = e.pageX - login.offsetLeft;
+        var y = e.pageY - login.offsetTop;
+        // 
+        function move(e) {
+            login.style.left = -x + e.pageX + 'px';
+            login.style.top = -y + e.pageY + 'px';
+        }
+        document.addEventListener('mousemove', move)
+        document.addEventListener('mouseup', function() {
+            document.removeEventListener('mousemove', move)
+        })
+    })
+</script>
+</html>

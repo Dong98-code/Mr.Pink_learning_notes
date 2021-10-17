@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .w {
+            width: 1200px;
+            margin: 0 auto;
+            background-color: pink;
+        }
+        .header {
+            height: 100px;
+            margin-bottom: 10px;
+            background-color: tomato;
+        }
+        .banner {
+            height: 200px;
+            background-color: skyblue;
+            margin-bottom: 10px;
+        }
+        .main {
+            height: 800px;
+            background-color: thistle;
+        }
+        .side_bar {
+            position: absolute;
+            background-color: turquoise;
+            left: 50%;
+            top: 300px;
+            margin-left: 600px;
+            width: 45px;
+            height: 130px;
+        }
+        .side_bar .go_back {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="side_bar">
+        <div class="go_back">
+            返回顶部
+        </div>
+    </div>
+    <div class="header w">header</div>
+    <div class="banner w">header</div>
+    <div class="main w">main</div>
+    
+</body>
+<script>
+    let side_bar = document.querySelector('.side_bar');
+    let banner = document.querySelector('.banner');
+    let go_back = document.querySelector('.go_back');
+    let main = document.querySelector('.main');
+    let banner_top = banner.offsetTop; 
+    let main_top = main.offsetTop;
+    let side_bar_top = side_bar.offsetTop - banner_top;
+    document.addEventListener('scroll', function() {
+        if (window.pageYOffset >= banner_top) {
+            console.log(side_bar_top);
+            side_bar.style.position = 'fixed';
+            side_bar.style.top = side_bar_top + 'px';
+            
+
+        } else {
+            side_bar.style.position = 'absolute';
+            side_bar.style.top ='300px';
+
+        }
+        if (window.pageYOffset >= main_top) {
+            go_back.style.display = 'block';
+        } else {
+            go_back.style.display = 'none';
+
+        }
+    })
+</script>
+</html>

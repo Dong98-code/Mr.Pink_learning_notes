@@ -22,11 +22,39 @@ margin-right: 10px;
     /* background-color: skyblue; */
 }
 .preview_img {
+    position: relative;
     width: 400px;
     height: 400px;
     border: 1px solid #ccc;
     text-align: center;
     line-height: 400px;
+    cursor:move;
+}
+.mask {
+    position:absolute;
+    display: none;
+    left: 0px;
+    top: 0px;
+    width: 300px;
+    height: 300px;
+    border: 1px solid #ccc;
+    background-color: yellow;
+    opacity: 0.3;
+    
+}
+.big {
+    position: absolute;
+    display: none;
+    width: 500px;
+    height: 500px;
+    left: 410px;
+    top:0px;
+    background-color:white;
+    z-index: 999;
+
+}
+.big img {
+    height: 100%;
 }
 
 .preview_list{
