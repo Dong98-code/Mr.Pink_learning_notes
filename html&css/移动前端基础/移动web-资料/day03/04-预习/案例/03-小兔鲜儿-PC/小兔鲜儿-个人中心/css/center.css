@@ -1,0 +1,316 @@
+.center_body {
+    padding: 30px 0 85px;
+    background-color: #f6f6f6;
+}
+
+.center_body .wrapper {
+    display: flex;
+    min-height: 600px;
+}
+
+
+/* 侧边栏 */
+
+.aside {
+    width: 227px;
+    margin-right: 18px;
+    background-color: #fff;
+}
+
+
+/* 用户信息 */
+
+.user_meta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 47px 0 32px;
+}
+
+.user_meta img {
+    width: 85px;
+}
+
+.user_meta h4 {
+    margin: 10px 0;
+    font-size: 18px;
+    color: #333;
+    font-weight: 400;
+}
+
+.user_meta p {
+    position: relative;
+    width: 93px;
+    height: 26px;
+    background-image: linear-gradient(264deg, #e05e2f 0%, #ea745e 95%);
+    border-radius: 13px;
+    color: #f9f9f9;
+    padding-left: 30px;
+    font-size: 14px;
+    line-height: 26px;
+}
+
+.user_meta p::before {
+    position: absolute;
+    left: 11px;
+    top: 5px;
+    content: "";
+    width: 15px;
+    height: 16px;
+    background-image: url(./../images/vip_gold.png);
+    background-size: contain;
+}
+
+
+/* 侧导航 */
+
+.user_manage h4 {
+    padding: 33px 0 17px 53px;
+    line-height: 1;
+    border-top: 1px solid #f4f4f4;
+    font-size: 18px;
+    color: #333;
+    font-weight: 400;
+}
+
+.links {
+    padding-left: 53px;
+}
+
+.links a {
+    position: relative;
+    display: block;
+    font-size: 14px;
+    color: #666;
+    line-height: 42px;
+}
+
+.links a:hover,
+.links .active {
+    color: #5cb99e;
+}
+
+.links a::before {
+    position: absolute;
+    left: -15px;
+    top: 50%;
+    transform: translateY(-50%);
+    content: "";
+    width: 6px;
+    height: 6px;
+    background-color: #5eb69c;
+    border-radius: 50%;
+    display: none;
+}
+
+.links a:hover::before,
+.links .active::before {
+    display: block;
+}
+
+
+/* 主体内容 */
+
+.main {
+    flex: 1;
+    /* background-color: #888; */
+}
+
+
+/* 账户信息概览 */
+
+.overview {
+    display: flex;
+    height: 132px;
+    padding: 20px 0;
+    background-color: #fff;
+}
+
+.overview .item {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex: 1;
+}
+
+.overview .item:nth-child(1) {
+    border-right: 1px solid #f4f4f4;
+}
+
+.overview .item a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.overview .item img {
+    width: 25px;
+    margin-bottom: 15px;
+}
+
+.overview .item span {
+    font-size: 16px;
+    color: #333;
+}
+
+.overview .item i {
+    font-size: 25px;
+    color: #e05e30;
+}
+
+
+/* 公共面板样式 */
+
+.pannel {
+    margin-top: 20px;
+    padding: 28px 18px;
+    background-color: #fff;
+}
+
+.pannel_header {
+    display: flex;
+    justify-content: space-between;
+    height: 43px;
+    border-bottom: 1px solid #f4f4f4;
+    padding-left: 7px;
+}
+
+.pannel_header h4 {
+    font-size: 22px;
+    font-weight: 400;
+}
+
+.pannel_header a {
+    margin-top: 8px;
+    font-size: 16px;
+    color: #999;
+}
+
+
+/* 订单 */
+
+.orders li {
+    display: flex;
+    margin-top: 20px;
+    height: 137px;
+    border: 1px solid #f4f4f4;
+}
+
+.orders li:nth-child(1) {
+    border-top: none;
+    margin-top: 0;
+}
+
+.orders .goods {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    padding-left: 12px;
+}
+
+.orders .goods img {
+    width: 107px;
+}
+
+.orders .goods .info {
+    margin-left: 5px;
+    margin-right: 48px;
+    flex: 1;
+    width: 0;
+}
+
+.orders .goods .info h5 {
+    font-size: 16px;
+    font-weight: 400;
+    color: #333;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.orders .goods .info p {
+    font-size: 14px;
+    color: #999;
+}
+
+.orders .goods .status {
+    width: 200px;
+    font-size: 14px;
+    color: #e05e30;
+    text-align: center;
+}
+
+.common {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    line-height: 24px;
+}
+
+.orders .payment {
+    width: 198px;
+    border-left: 1px solid #f4f4f4;
+    border-right: 1px solid #f4f4f4;
+}
+
+.orders .payment p:first-child {
+    color: #9a2e1f;
+}
+
+.orders .action {
+    width: 180px;
+}
+
+.orders .action a:first-child {
+    width: 100px;
+    height: 30px;
+    background-color: #5eb69c;
+    border-radius: 2px;
+    text-align: center;
+    line-height: 30px;
+    margin-bottom: 10px;
+    color: #fff;
+    font-size: 14px;
+}
+
+
+/* 收藏商品 */
+
+.collect ul {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    padding-top: 30px;
+}
+
+.collect li {
+    width: 180px;
+    height: 260px;
+    margin-right: 15px;
+    /* background-color: pink; */
+}
+
+.collect .pic {
+    padding-left: 12px;
+}
+
+.collect .pic img {
+    width: 160px;
+}
+
+.collect li h5 {
+    margin: 15px 0 10px;
+    font-size: 16px;
+    font-weight: 400;
+    color: #333;
+}
+
+.collect li p {
+    font-size: 17px;
+    color: #9a2e1f;
+}
+
+.collect li p i {
+    font-size: 22px;
+}

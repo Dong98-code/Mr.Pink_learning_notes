@@ -1,0 +1,25 @@
+/* 视口宽度320px, 根字号为32px */
+/* @media (width: 320px) {
+  html {
+    font-size: 32px;
+  }
+} */
+/* 视口宽度375px, 根字号为37.5px */
+/* @media (width: 375px) {
+  html {
+    font-size: 37.5px;
+  }
+} */
+/* 视口宽度414px, 根字号为41.4px */
+/* @media (width: 414px) {
+  html {
+    font-size: 41.4px;
+  }
+} */
+
+
+.box {
+  width: 1.813rem;
+  height: 0.773rem;
+  background-color: pink;
+}

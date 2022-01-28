@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .box {
+            width: 1366px;
+            height: 600px;
+            margin: 0 auto;
+            background: url('./images/bg.jpg');
+            /* 超出盒子的部分隐藏 */
+            overflow: hidden;
+        }
+        
+        .box::before,
+        .box::after {
+            float: left;
+            /* 伪元素的必须的属性 content */
+            content: '';
+            width: 50%;
+            height: 600px;
+            background-image: url(./images/fm.jpg);
+            transition: all .5s;
+        }
+
+        .box::after {
+            /* 使用右半部分 直接使用 right */
+            background-position: right 0;
+        }
+
+        /* 鼠标移入的时候的位置改变的效果 */
+        .box:hover::before {
+            transform: translate(-100%);
+        }
+
+        .box:hover::after {
+            transform: translateX(100%);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+
+    </div>
+</body>
+
+</html>

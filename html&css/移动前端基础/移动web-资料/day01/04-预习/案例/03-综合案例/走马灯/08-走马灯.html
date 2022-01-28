@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      li {
+        list-style: none;
+      }
+
+      img {
+        width: 200px;
+      }
+      
+      .box {
+        width: 600px;
+        height: 112px;
+        border: 5px solid #000;
+        margin: 100px auto;
+        overflow: hidden;
+      }
+
+      .box ul {
+        width: 2000px;
+        /* 使用动画 */
+        animation: go 8s linear infinite;
+      }
+
+      .box li {
+        float: left;
+      }
+
+      /* 定义动画 */
+      @keyframes go {
+        100% {
+          transform: translateX(-1400px);
+        }
+      }
+
+      
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <ul>
+        <li><img src="./images/1.jpg" alt="" /></li>
+        <li><img src="./images/2.jpg" alt="" /></li>
+        <li><img src="./images/3.jpg" alt="" /></li>
+        <li><img src="./images/4.jpg" alt="" /></li>
+        <li><img src="./images/5.jpg" alt="" /></li>
+        <li><img src="./images/6.jpg" alt="" /></li>
+        <li><img src="./images/7.jpg" alt="" /></li>
+        <li><img src="./images/1.jpg" alt="" /></li>
+        <li><img src="./images/2.jpg" alt="" /></li>
+        <li><img src="./images/3.jpg" alt="" /></li>
+      </ul>
+    </div>
+  </body>
+</html>

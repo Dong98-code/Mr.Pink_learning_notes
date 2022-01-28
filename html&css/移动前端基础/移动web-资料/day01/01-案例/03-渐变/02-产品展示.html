@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>产品展示效果</title>
+    <style>
+        .box {
+            position: relative;
+        }
+        
+        .box img {
+            width: 300px;
+        }
+        
+        .box .title {
+            position: absolute;
+            left: 15px;
+            bottom: 20px;
+            z-index: 2;
+            width: 260px;
+            color: #fff;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .box .mask {
+            position: absolute;
+            left: 0;
+            top: 0;
+
+            /* display: none; */
+            /*  透明度为0 直接就看不见 */
+            opacity: 0;
+            width: 300px;
+            height: 212px;
+            background-image: linear-gradient(
+                transparent,
+                rgba(0,0,0,.6)
+            );
+            transition: all .5s;
+        }
+
+        .box:hover .mask {
+            opacity: 1;
+            /* display: block; */
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="box">
+        <img src="./images/product.jpeg" alt="">
+        <div class="title">OceanStor Pacific 海量存储斩获2021 Interop金奖</div>
+        <!-- 渐变背景 mask -->
+        <div class="mask"></div>
+    </div>
+</body>
+
+</html>

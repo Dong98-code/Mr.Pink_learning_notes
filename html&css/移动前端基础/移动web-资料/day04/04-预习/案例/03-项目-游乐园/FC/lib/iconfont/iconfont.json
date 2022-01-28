@@ -1,0 +1,86 @@
+{
+  "id": "2551981",
+  "name": "FC",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "693919",
+      "name": "收藏",
+      "font_class": "shoucang",
+      "unicode": "e61a",
+      "unicode_decimal": 58906
+    },
+    {
+      "icon_id": "924669",
+      "name": "地址",
+      "font_class": "dizhi",
+      "unicode": "e606",
+      "unicode_decimal": 58886
+    },
+    {
+      "icon_id": "1638356",
+      "name": "旗帜",
+      "font_class": "qizhi",
+      "unicode": "e615",
+      "unicode_decimal": 58901
+    },
+    {
+      "icon_id": "2158796",
+      "name": "收藏",
+      "font_class": "shoucang1",
+      "unicode": "e660",
+      "unicode_decimal": 58976
+    },
+    {
+      "icon_id": "8089717",
+      "name": "笑脸",
+      "font_class": "iconfront-",
+      "unicode": "e61b",
+      "unicode_decimal": 58907
+    },
+    {
+      "icon_id": "9512638",
+      "name": "客服",
+      "font_class": "service",
+      "unicode": "e636",
+      "unicode_decimal": 58934
+    },
+    {
+      "icon_id": "10937698",
+      "name": "日期",
+      "font_class": "date",
+      "unicode": "e62a",
+      "unicode_decimal": 58922
+    },
+    {
+      "icon_id": "11124958",
+      "name": "会员",
+      "font_class": "7",
+      "unicode": "e614",
+      "unicode_decimal": 58900
+    },
+    {
+      "icon_id": "16623287",
+      "name": "优惠券",
+      "font_class": "youhuiquan",
+      "unicode": "e607",
+      "unicode_decimal": 58887
+    },
+    {
+      "icon_id": "18968936",
+      "name": "时钟",
+      "font_class": "shizhong",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "19985212",
+      "name": "首页-选中",
+      "font_class": "index-copy",
+      "unicode": "e622",
+      "unicode_decimal": 58914
+    }
+  ]
+}

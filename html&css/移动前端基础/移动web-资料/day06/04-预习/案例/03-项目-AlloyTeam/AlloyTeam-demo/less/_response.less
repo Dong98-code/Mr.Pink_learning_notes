@@ -1,0 +1,118 @@
+
+@media (max-width: 992px) {
+  // 头部（导航）
+  .header {
+    height: 80px;
+
+    &.scrolled {
+      height: 60px;
+
+      .navbar-collapse {
+        top: 60px;
+      }
+    }
+
+    .navbar-collapse {
+      width: 100%;
+      border-top: 0;
+      box-shadow: none;
+      padding-top: 10px;
+      background-color: #26282c;
+      position: absolute;
+      top: 80px;
+      left: 0;
+    }
+
+    .nav {
+      width: 100%;
+      text-align: center;
+    }
+    
+    li {
+      margin-left: 0 !important;
+    }
+
+    .active a {
+      border: none !important;
+    }
+  }
+  
+  // 焦点图
+  .carousel {
+
+    .item {
+      height: 400px;
+    }
+
+    .hire-info p {
+      width: 100%;
+      left: 0 !important;
+      right: 0 !important;
+      text-align: center !important;
+    }
+
+    .item-info {
+      padding-top: 120px !important;
+    }
+  }
+
+  // 底部（版权、推广链接）
+  .footer {
+
+    .webmeta {
+      text-align: center;
+    }
+
+    .copyright {
+      margin-top: 10px;
+    }
+  }
+}
+
+@media (max-width: 767px) {
+
+  // 焦点图
+  .carousel {
+
+    .carousel-indicators li {
+      width: 30px !important;
+    }
+
+   .item {
+      height: 250px;
+    }
+
+    .hire-name {
+      font-size: 30px !important;
+      line-height: 40px !important;
+      bottom: 40px !important;
+    }
+
+    .hire-title {
+      display: none;
+    }
+
+    .item-info {
+      padding-top: 85px !important;
+
+      .title-name {
+        padding-bottom: 0 !important;
+        font-size: 35px !important;
+      }
+
+      .title-desc {
+        font-size: 20px !important;
+      }
+
+      &.special {
+        .title-name {
+          font-size: 50px;
+        }
+
+        .title-desc {
+          font-size: 25px;
+        }
+      }
+    }
+  }
+}

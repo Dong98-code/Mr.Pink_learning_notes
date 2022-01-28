@@ -1,0 +1,30 @@
+{
+  "id": "2567858",
+  "name": "小兔仙-移动",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "20284988",
+      "name": "x",
+      "font_class": "x",
+      "unicode": "e7ce",
+      "unicode_decimal": 59342
+    },
+    {
+      "icon_id": "9223614",
+      "name": "more",
+      "font_class": "more",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "10331134",
+      "name": "location",
+      "font_class": "location",
+      "unicode": "e686",
+      "unicode_decimal": 59014
+    }
+  ]
+}

@@ -1,0 +1,112 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+img {
+    width: 100%;
+    vertical-align: middle;
+}
+
+.box {
+    width: 1110px;
+    height: 247px;
+    margin: 20px auto;
+    /* background-color: pink; */
+}
+
+.box li {
+    position: relative;
+    float: left;
+    width: 350px;
+    height: 247px;
+    margin-right: 30px;
+    overflow: hidden;
+}
+
+.box li:last-child {
+    margin-right: 0;
+}
+
+.box .txt {
+    position: absolute;
+    left: 0;
+    bottom: -50px;
+    width: 350px;
+    height: auto;
+    padding: 20px 30px;
+    z-index: 1;
+    color: #fff;
+    transition: transform .5s;
+    /* transition: all .5s; */
+}
+
+.box .txt h4 {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 2em;
+    color: #fff;
+}
+
+.box .txt h5 {
+    margin-bottom: 40px;
+    font-size: 18px;
+    line-height: 1.5em;
+    color: #fff;
+}
+
+.box .txt p {
+    color: #fff;
+    font-size: 14px;
+}
+
+.box .txt p .iconfont {
+    color: #c7000b;
+    vertical-align: middle;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+/* 1. 渐变背景的盒子 */
+.box .mask {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 350px;
+    height: 247px;
+    background-image: linear-gradient(
+        transparent,
+        rgba(0,0,0,.6)
+    );
+    opacity: 0;
+    transition: all .5s;
+}
+
+/* 2. hover效果 */
+/* 2.1 图片缩放 */
+.box li .pic img {
+    transition: all .5s;
+}
+.box li:hover .pic img {
+    transform: scale(1.2);
+}
+
+
+/* 2.2 渐变背景显示 */
+.box li:hover .mask {
+    opacity: 1;
+}
+
+/* 2.3 文字向上移动 */
+.box li:hover .txt {
+    transform: translateY(-50px);
+}

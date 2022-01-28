@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D导航</title>
+    <style>
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        
+        .navs {
+            width: 300px;
+            height: 40px;
+            margin: 50px auto;
+        }
+        
+        .navs li {
+            position: relative;
+            float: left;
+            width: 100px;
+            height: 40px;
+            line-height: 40px;
+            transition: all .5s;
+            transform-style: preserve-3d;
+            /* 旋转目的为了观察效果，案例完成后需要删除 */
+            /* transform: rotateX(-20deg) rotateY(30deg); */
+        }
+
+        .navs li a {
+            position: absolute;
+            left: 0;
+            top: 0;
+            /* display: block; */
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            text-decoration: none;
+            color: #fff;
+        }
+        
+        .navs li a:first-child {
+            background-color: green;
+            transform: translateZ(20px);
+        }
+        
+        .navs li a:last-child {
+            background-color: orange;
+            transform: rotateX(90deg) translateZ(20px);
+        }
+
+        .navs li:hover {
+            transform: rotateX(-90deg);
+        }
+        
+    </style>
+</head>
+
+<body>
+    <div class="navs">
+        <ul>
+            <li>
+                <a href="#">首页</a>
+                <a href="#">Index</a>
+            </li>
+            <li>
+                <a href="#">登录</a>
+                <a href="#">Login</a>
+            </li>
+            <li>
+                <a href="#">注册</a>
+                <a href="#">Register</a>
+            </li>
+        </ul>
+    </div>
+</body>
+
+</html>

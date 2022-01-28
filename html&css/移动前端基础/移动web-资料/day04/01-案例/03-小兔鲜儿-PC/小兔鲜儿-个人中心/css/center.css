@@ -1,0 +1,167 @@
+.xtx_body {
+    padding: 30px 0 85px;
+    background-color: #f6f6f6;
+}
+
+.xtx_body .wrapper {
+    display: flex;
+}
+
+/* 侧边栏 */
+.xtx_body .aside {
+    width: 227px;
+    min-height: 500px;
+    margin-right: 18px;
+    background-color: pink;
+}
+
+/* 主体内容 */
+.xtx_body .main {
+    /* width: ; */
+    flex: 1;
+    min-height: 500px;
+    /* background-color: skyblue; */
+}
+
+/* 账户概览 */
+.overview {
+    display: flex;
+    height: 132px;
+    margin-bottom: 18px;
+    padding: 20px 0;
+    background-color: #fff;
+}
+
+.overview div {
+    /* a在一行显示 */
+    display: flex;
+
+    justify-content: space-evenly;
+    align-items: center;
+
+    flex: 1;
+
+    text-align: center;
+}
+
+.overview div:first-child {
+    border-right: 1px solid #f4f4f4;
+}
+
+.overview div a img {
+    width: 25px;
+    margin-bottom: 10px;
+}
+
+.overview div span {
+    font-size: 25px;
+    color: #e05e30;
+}
+
+.overview div p {
+    font-size: 16px;
+}
+
+/* 把概览区域最后一个图变宽度为18px */
+/* overview的div 里边的最后一个a里面的img */
+.overview div a:last-child img {
+    width: 18px;
+}
+
+/* 公共样式 */
+.pannel {
+    padding: 28px 20px;
+    margin-bottom: 20px;
+    background-color: #fff;
+}
+
+.pannel .pannel_title {
+    display: flex;
+    justify-content: space-between;
+    height: 45px;
+    border-bottom: 1px solid #f4f4f4;
+}
+
+.pannel .pannel_title h4 {
+    font-size: 22px;
+    color: #333;
+    font-weight: 400;
+}
+
+.pannel .pannel_title a {
+    margin-top: 8px;
+    font-size: 16px;
+    color: #999;
+}
+
+/* 订单 */
+.orders li {
+    display: flex;
+
+    height: 137px;
+    margin-top: -1px;
+    margin-bottom: 20px;
+    border: 1px solid #f4f4f4;
+}
+.orders li:last-child {
+    margin-bottom: 0;
+}
+
+.orders li .goods {
+    display:  flex;
+    align-items: center;
+    padding: 17px 0 14px 12px;
+
+    flex: 1;
+    margin-right: 120px;
+}
+
+.orders .goods .pic {
+    width: 107px;
+    height: 107px;
+}
+
+.orders .goods .txt {
+    flex: 1;
+    /* 溢出的时候显示省略号 */
+    /* 因为弹性盒子的尺寸可以被内容撑开, 不换行的文字可以撑开这个盒子的尺寸 */
+    width: 0;
+}
+.orders .goods .txt h5 {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+
+.orders li .status {
+    width: 120px;
+}
+
+.orders li .pay {
+    width: 200px;
+    border-left: 1px solid #e8e8e8;
+    border-right: 1px solid #e8e8e8;
+}
+
+.orders li .action {
+    width: 180px;
+}
+
+.orders li .common {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.orders li .action a:first-child {
+    width: 100px;
+    height: 30px;
+    margin-bottom: 10px;
+    background-color: #5eb69c;
+    text-align: center;
+    line-height: 30px;
+    font-size: 14px;
+    color: #fff;
+}

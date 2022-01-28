@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>透视效果</title>
+  <style>
+    body {
+      perspective: 1000px;
+    }
+
+    .box {
+      width: 200px;
+      height: 200px;
+      margin: 100px auto;
+      background-color: pink;
+      transition: all 0.5s;
+    }
+
+    .box:hover{
+
+      /* 视觉效果： 近大 */
+      /* transform: translateZ(200px); */
+
+      /* 视觉效果： 远小 */
+      transform: translateZ(-200px);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box"></div>
+</body>
+
+</html>

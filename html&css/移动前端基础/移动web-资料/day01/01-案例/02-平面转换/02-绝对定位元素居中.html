@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>绝对定位元素居中效果</title>
+    <style>
+        .father {
+            position: relative;
+            width: 500px;
+            height: 300px;
+            margin: 100px auto;
+            border: 1px solid #000;
+        }
+        
+        .son {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            /* 居中会有些许偏差 */
+            /* margin-left: -100px;
+            margin-top: -50px; */
+
+            transform: translate(-50%, -50%);
+            /* 使用百分比 */
+
+            width: 203px;
+            height: 100px;
+            background-color: pink;          
+        }
+    </style>
+</head>
+<body>
+    <div class="father">
+        <div class="son"></div>
+    </div>
+</body>
+</html>

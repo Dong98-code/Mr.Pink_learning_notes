@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>空间旋转-Y轴</title>
+    <style>
+        .box {
+            width: 300px;
+            margin: 100px auto;
+        }
+
+        img {
+            width: 300px;
+            transition: all 2s;
+        }
+
+        .box {
+            /* 透视效果：近大远小，近实远虚 */
+            perspective: 1000px;
+        }
+
+        .box img:hover {
+            /* transform: rotateY(360deg); */
+            transform: rotateY(-360deg);
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <img src="./images/hero.jpeg" alt="">
+    </div>
+</body>
+</html>

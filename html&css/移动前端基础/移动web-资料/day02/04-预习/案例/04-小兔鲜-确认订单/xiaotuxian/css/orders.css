@@ -1,0 +1,261 @@
+body {
+    background-color: #f7f7f8;
+}
+
+/* 主体内容 */
+.main {
+    padding: 12px 11px 80px;
+}
+
+/* 订单地址 */
+.main .order-address {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 10px 0 10px 10px;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+
+/* 地址图标 */
+.main .order-address .address-icon {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    background-color: #54b196;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 30px;
+    color: #fff;
+}
+
+
+/* 用户信息 */
+.main .order-address .user-info {
+    flex: 0px;
+    line-height: 28px;
+}
+
+.main .order-address .user-info .user {
+    display: flex;
+}
+
+.main .order-address .user-info .name {
+    width: 50px;
+    font-size: 14px;
+    color: #262626;
+}
+
+.main .order-address .user-info .tel {
+    font-size: 13px;
+    color: #333;
+}
+
+.main .order-address .user-info .address {
+    line-height: 18px;
+    font-size: 12px;
+    color: #333;
+}
+
+/* more */
+.main .order-address .more a {
+    display: block;
+    height: 44px;
+}
+
+.main .order-address .more {
+    width: 44px;
+    height: 44px;
+    /* background-color: pink; */
+    text-align: center;
+    line-height: 44px;
+}
+
+.main .order-address .more  span {
+    color: #808080;
+}
+
+/* 商品 */
+.main .goods {
+    display: flex;
+    margin-bottom: 10px;
+    padding: 10px 0 10px 10px;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+.main .goods .pic {
+    width: 88px;
+    height: 88px;
+    margin-right: 10px;
+    /* background-color: pink; */
+}
+
+.main .goods .goods-info {
+    flex: 1;
+}
+
+.main .goods .goods-info h4 {
+    font-size: 13px;
+    color: #262626;
+    line-height: 20px;
+    font-weight: 400;
+}
+
+.main .goods .goods-info p {
+    margin: 5px 0;
+    font-size: 12px;
+    color: #888;
+}
+
+.main .goods .price {
+    display: flex;
+    margin-top: 10px;
+    font-size: 12px;
+    line-height: 16px;
+    
+}
+
+.main .goods .price .current-price {
+    margin-right: 10px;
+}
+
+.main .goods .price .current-price i {
+    color: #cf4444;
+}
+
+.main .goods .price .current-price span {
+    font-size: 16px;
+    color: #cf4444;
+}
+.main .goods .price .cost-price {
+    color: #999;
+    text-decoration: line-through;
+}
+
+
+.main .goods .count {
+    width: 44px;
+    height: 44px;
+    /* background-color: pink; */
+    text-align: center;
+    line-height: 44px;
+}
+
+/* 商品 */
+
+/* 公共面板 */
+.pannel {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+/* 其他信息 */
+.rest .express {
+    display: flex;
+    margin-bottom: 30px;
+    justify-content: space-between;
+}
+
+.rest h5,
+.amount h5 {
+    font-size: 13px;
+    color: #262626;
+    font-weight: 400;
+}
+
+.rest p,
+.amount p {
+    font-size: 13px;
+    color: #262626;
+}
+
+.rest .remark {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.rest .remark p {
+    margin-left: 20px;
+    font-size: 12px;
+    color: #989898;
+}
+
+.rest .pay-mode {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.rest .pay-mode i {
+    vertical-align: middle;
+    font-size: 14px;
+    color: #808080;
+}
+
+/* 支付金额 */
+.amount>div {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.amount>div:last-child {
+    margin-bottom: 0;
+}
+/* 主体内容 */
+
+/* 底部支付 */
+.payment {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 80px;
+    padding: 10px;
+    background-color: #fff;
+    border-top: 1px solid #ededed;
+}
+
+.payment .pay-price {
+    display: flex;
+    line-height: 30px;
+}
+
+.payment .pay-price p {
+    margin-right: 10px;
+    font-size: 12px;
+    color: #1e1e1e;
+    
+}
+
+.payment .pay-price div {
+    font-size: 15px;
+    color: #cf4444;
+}
+
+.payment .pay-price span {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.payment .action a {
+    display: block;
+    width: 90px;
+    height: 35px;
+    background-color: #54b196;
+    font-size: 13px;
+    color: #fff;
+    text-align: center;
+    line-height: 35px;
+    border-radius: 3px;
+}
+
+/* 底部支付 */

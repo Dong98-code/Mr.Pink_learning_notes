@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        img {
+            width: 100%;
+        }
+
+        .box {
+            width: 249px;
+            height: 210px;
+            margin: 50px auto;
+            overflow: hidden;
+        }
+        
+        .box p {
+            color: #3b3b3b;
+            padding: 10px 10px 0 10px;
+        }
+
+        .box .pic {
+            position: relative;
+            /*  定位 */
+        }
+
+        .box .pic::after {
+            /* 播放按钮压在图片上面 - 居中 */
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            /* margin-left: -29px;
+            margin-top: -29px; */
+            /* transform: translate(-50%, -50%); */
+
+            content: '';
+            width: 58px;
+            height: 58px;
+            background-image: url(./images/play.png);
+
+            /* 大图 */
+            transform: translate(-50%, -50%) scale(5);
+
+            /* 透明,看不见 */
+            opacity: 0;
+            transition: all .5s;
+        }
+
+        /* lihover的时候,  谁变小pic::after */
+        /* 一个li一个hover */
+        .box li:hover .pic::after {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <ul>
+            <li>
+                <div class="pic"><img src="./images/party.jpeg" alt=""></div>
+                <p>【和平精英】“初火”音乐概念片：四圣觉醒......</p>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>

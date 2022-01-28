@@ -1,0 +1,220 @@
+body {
+    background-color: #f7f7f8;
+}
+
+/* 公共样式 */
+.red {
+    color: #cf4444;
+}
+
+.pannel {
+    margin-bottom: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+/* 主体内容 */
+.main {
+    /* 80px: 为了内容不被底部区域盖住 */
+    padding: 12px 11px 80px;
+}
+
+/* 用户信息 */
+.user_msg {
+    display: flex;
+    align-items: center;
+    padding: 15px 0 15px 11px;
+}
+
+.user_msg .location {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    background-image: linear-gradient(90deg, 
+		#6fc2aa 5%, 
+		#54b196 100%);
+    border-radius: 50%;
+    text-align: center;
+    line-height: 30px;
+    color: #fff;
+}
+
+.user_msg .user {
+    flex: 1;
+}
+
+.user_msg .user .top {
+    display: flex;
+}
+
+.user_msg .user .top h5 {
+    width: 55px;
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.user_msg .user .top p {
+    font-size: 13px;
+}
+
+.user_msg .user .bottom {
+    margin-top: 5px;
+    font-size: 12px;
+}
+
+.user_msg .more {
+    width: 44px;
+    height: 44px;
+    /* background-color: pink; */
+    text-align: center;
+    line-height: 44px;
+    color: #808080;
+}
+
+/* 商品 */
+.goods {
+    display: flex;
+    padding: 11px 0 11px 11px;
+}
+
+.goods .pic {
+    width: 85px;
+    height: 85px;
+    margin-right: 10px;
+}
+
+.goods .info {
+    flex: 1;
+}
+
+.goods .info h5 {
+    font-size: 13px;
+    color: #262626;
+    font-weight: 400;
+}
+
+.goods .info p {
+    width: 95px;
+    height: 20px;
+    margin: 5px 0;
+    background-color: #f7f7f8;
+    font-size: 12px;
+    color: #888;
+}
+
+.goods .info p span:first-child {
+    margin-right: 5px;
+}
+
+.goods .info .price {
+    font-size: 12px;
+}
+
+.goods .info .price i {
+    font-size: 16px;
+}
+
+.goods .info .price span:last-child {
+    margin-left: 5px;
+    color: #999;
+    text-decoration: line-through;
+}
+
+.goods .count {
+    width: 44px;
+    height: 44px;
+    /* background-color: pink; */
+    text-align: center;
+    line-height: 44px;
+}
+
+/* 其他信息 */
+.rest {
+    padding: 15px;
+}
+
+.rest div {
+    display: flex;
+    margin-bottom: 30px;
+}
+
+.rest div:last-child {
+    margin-bottom: 0;
+}
+
+/* 找到第一个和第三个div设置主轴对齐方式 */
+.rest div:nth-child(2n+1) {
+    justify-content: space-between;
+}
+
+/* 第二行标题和p之间的距离 */
+.rest div:nth-child(2) h5 {
+    margin-right: 20px;
+}
+
+.rest h5,
+ .rest p{
+    font-size: 13px;
+    color: #262626;
+    font-weight: 400;
+}
+
+/* .rest p {
+    font-size: 13px;
+    color: #262626;
+} */
+
+.rest div:nth-child(2) p {
+    font-size: 12px;
+    color: #989898;
+}
+
+
+
+
+
+/* 主体内容 */
+
+/* 底部支付 */
+.pay {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+
+    display: flex;
+    /* 主轴对齐方式 */
+    justify-content: space-between;
+    /* 侧轴对齐方式 */
+    align-items: center;
+
+    width: 100%;
+    height: 80px;
+
+    padding: 0 11px;
+    /* background-color: pink; */
+    border-top: 1px solid #ededed;
+}
+
+.pay .left {
+    font-size: 12px;
+}
+
+.pay .left i {
+    font-size: 20px;
+}
+
+.pay .right a {
+    display: block;
+    width: 90px;
+    height: 35px;
+    background-image: linear-gradient(90deg, 
+		#6fc2aa 5%, 
+		#54b196 100%);
+    border-radius: 3px;
+    text-align: center;
+    line-height: 35px;
+    font-size: 13px;
+    color: #fff;
+    
+}
+/* 底部支付 */

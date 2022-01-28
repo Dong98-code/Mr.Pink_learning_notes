@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>空间位移</title>
+  <style>
+    .box {
+      width: 200px;
+      height: 200px;
+      margin: 100px auto;
+      background-color: pink;
+      transition: all 0.5s;
+    }
+
+    .box:hover {
+      /* x:50px,y:100px,z:150px */
+      /* transform: translate3d(50px, 100px, 150px); */
+
+      /* 只改变某个坐标轴的位置：x：100px */
+      /* transform: translateX(100px); */
+
+      transform: translateY(100px);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box"></div>
+</body>
+
+</html>

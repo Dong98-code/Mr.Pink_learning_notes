@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style type="text/css">
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+      }
+
+      .box {
+        width: 100%;
+        height: 100%;
+        background: url('images/f1_1.jpg') no-repeat top center;
+        background-size: cover;
+        position: relative;
+      }
+
+      .cloud img {
+        position: absolute;
+        left: 50%;
+      }
+
+      .cloud img:nth-child(1) {
+        top: 20px;
+        margin-left: -260px;
+        animation: cloud 2s linear infinite alternate;
+      }
+
+      .cloud img:nth-child(2) {
+        top: 100px;
+        margin-left: 380px;
+        animation: cloud 2.5s linear infinite alternate;
+      }
+
+      .cloud img:nth-child(3) {
+        top: 200px;
+        margin-left: -560px;
+        animation: cloud 3s linear infinite alternate;
+      }
+
+      .balloon {
+        position: absolute;
+        left: 50%;
+        top: 20%;
+        margin-left: -390px;
+        animation: balloon 1.5s linear alternate infinite;
+      }
+
+      .giraffe {
+        position: absolute;
+        left: 50%;
+        margin-left: 160px;
+        top: 15%;
+      }
+
+      .text {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        animation: text 1s ease forwards;
+      }
+
+      .jump_text img {
+        position: absolute;
+        left: 50%;
+        bottom: 42px;
+        width: 100px;
+      }
+
+      .jump_text img:nth-child(1) {
+        margin-left: -390px;
+        animation: jump_text 0.8s infinite alternate;
+      }
+
+      .jump_text img:nth-child(2) {
+        margin-left: -180px;
+        animation: jump_text 0.8s 0.2s infinite alternate;
+      }
+
+      .jump_text img:nth-child(3) {
+        margin-left: 35px;
+        animation: jump_text 0.8s 0.4s infinite alternate;
+      }
+
+      .jump_text img:nth-child(4) {
+        margin-left: 240px;
+        animation: jump_text 0.8s 0.6s infinite alternate;
+      }
+
+      /* 白云动画 */
+      @keyframes cloud {
+        0% {
+          transform: translateX(0px);
+        }
+
+        100% {
+          transform: translateX(40px);
+        }
+      }
+
+      /* 热气球动画 */
+      @keyframes balloon {
+        0% {
+          transform: translateY(0px);
+        }
+
+        100% {
+          transform: translateY(-30px);
+        }
+      }
+
+      /* 跳动文字 */
+      @keyframes jump_text {
+        0% {
+          transform: translateY(0px);
+        }
+
+        100% {
+          transform: translateY(-30px);
+        }
+      }
+
+      /* 文字 */
+      /* 注意：因为transform是复合属性，所以我们要重新申明一遍translate */
+      @keyframes text {
+        0% {
+          transform: translate(-50%, -50%) scale(1);
+        }
+        20% {
+          transform: translate(-50%, -50%) scale(0);
+        }
+
+        40% {
+          transform: translate(-50%, -50%) scale(1.4);
+        }
+
+        70% {
+          transform: translate(-50%, -50%) scale(0.8);
+        }
+
+        100% {
+          transform: translate(-50%, -50%) scale(1);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="box">
+      <!-- 白云 -->
+      <div class="cloud">
+        <img src="images/yun1.png" />
+        <img src="images/yun2.png" />
+        <img src="images/yun3.png" />
+      </div>
+
+      <!-- 热气球 -->
+      <div class="balloon">
+        <img src="images/san.png" />
+      </div>
+
+      <!-- 长颈鹿 -->
+      <div class="giraffe">
+        <img src="images/lu.png" />
+      </div>
+
+      <!-- 文字 -->
+      <div class="text">
+        <img src="images/font1.png" />
+      </div>
+
+      <!-- 跳动文字 -->
+      <div class="jump_text">
+        <img src="images/1.png" />
+        <img src="images/2.png" />
+        <img src="images/3.png" />
+        <img src="images/4.png" />
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,167 @@
+@font-face {
+    font-family: "iconfont"; /* Project id 2577419 */
+    src: url('iconfont.woff2?t=1622184279478') format('woff2'),
+         url('iconfont.woff?t=1622184279478') format('woff'),
+         url('iconfont.ttf?t=1622184279478') format('truetype');
+  }
+  .iconfont {
+    font-family: "iconfont" !important;
+    font-size: 16px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  .icon-auto:before {
+    content: "\e6eb";
+  }
+  
+  .icon-QRcode:before {
+    content: "\e704";
+  }
+  
+  .icon-favorites-fill:before {
+    content: "\e721";
+  }
+  
+  .icon-arrow-right:before {
+    content: "\e743";
+  }
+  
+  .icon-arrow-left:before {
+    content: "\e744";
+  }
+  
+  .icon-arrow-up:before {
+    content: "\e745";
+  }
+  
+  .icon-cart-Empty-fill:before {
+    content: "\e77a";
+  }
+  
+  .icon-arrow-down:before {
+    content: "\e7b2";
+  }
+  
+* {
+    margin: 0;
+    padding: 0;
+    /* css3的盒子盒子模型 */
+    box-sizing: border-box;
+}
+
+li {
+    /* 去除li前面的标点 */
+    list-style: none;
+}
+
+a {
+    /* 去除 a标签的下划线 */
+    text-decoration: none;
+}
+
+img {
+    width: 100%;
+    /* 垂直居中 */
+    vertical-align: middle;
+}
+
+/* 大盒子的大小 */
+.box {
+    width: 1110px;
+    height: 247px;
+    margin: 20px auto;
+    /* background-color: pink; */
+}
+
+.box li {
+    position: relative;
+    float: left;
+    margin-right: 30px;
+    width: 350px;
+    height: 247px;
+    overflow: hidden;
+}
+
+.box li:last-child {
+    /* 使用 last-child 选择器 选出最后一个盒子 */
+    margin-right: 0;
+}
+
+/* 接下来设置文字内容 */
+.box .txt {
+    position: absolute;
+    left: 0;
+
+    bottom: -50px;
+    width: 350px;
+    height: auto;
+    padding: 20px 30px;
+    z-index: 1;
+    color: #fff;
+    transition: transform .5s;
+    /* transition: all .5s; */
+}
+
+.box .txt h4 {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 2em;
+    color: #fff;
+}
+
+.box .txt h5 {
+    margin-bottom: 40px;
+    font-size: 18px;
+    line-height: 1.5em;
+    color: #fff;
+}
+
+.box .txt p {
+    color: #fff;
+    font-size: 14px;
+}
+
+.box .txt p .iconfont {
+    color: #c7000b;
+    vertical-align: middle;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.box .mask {
+    position: absolute;
+    /* 宽高 */
+    width: 350px;
+    height: 247px;
+    left: 0;
+    top: 0;
+    background-image: linear-gradient(
+        transparent,
+        rgba(0,0,0,.6)
+    );
+    opacity: 0;
+    transition: all .5s;
+}
+
+/* hover */
+
+.box li .pic img {
+    /* transition 放在 变换的实体上 */
+    transition: all .5s;
+}
+
+.box li:hover .pic img {
+    transform: scale(1.2);
+}
+/* 字体 */
+
+.box li:hover .txt {
+    /* 整体向y轴方向反方向移动 50px */
+    transform: translateY(-50px);
+}
+
+.box li:hover .mask {
+    opacity: 1;
+}

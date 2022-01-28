@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>主轴方向</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        .box li {
+            display: flex;
+            /* 1. 先确定主轴方向; 2. 再选择对应的属性实现主轴或侧轴的对齐方式 */
+            /* 修改主轴方向: 列 */
+            flex-direction: column;
+
+            /* 视觉效果: 实现盒子水平居中 */
+            align-items: center;
+
+            /* 视觉效果: 垂直居中 */
+            justify-content: center;
+            
+
+            width: 80px;
+            height: 80px;
+            border: 1px solid #ccc;
+        }
+        
+        .box img {
+            width: 32px;
+            height: 32px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <ul>
+            <li>
+                <img src="./images/media.png" alt="">
+                <span>媒体</span>
+            </li>
+        </ul>
+    </div>
+</body>
+
+</html>

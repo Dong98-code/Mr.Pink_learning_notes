@@ -1,0 +1,146 @@
+@import './base';
+@import './normalize';
+
+// 变量: 存储37.5
+@rootSize: 37.5rem;
+
+body {
+    background-color: #F0F0F0;
+}
+
+// 主体内容
+.main {
+    // padding-bottom: (50 / 37.5rem);
+    padding-bottom: (50 / @rootSize);
+    
+    // banner
+    .banner {
+        height: (160 / @rootSize);
+    }
+
+    // 活动标题
+    .title {
+        height: (40 / @rootSize);
+        line-height: (40 / @rootSize);
+        padding-left: (15 / @rootSize);
+        h4 {
+            font-size: (14 / @rootSize);
+            color: #3C3C3C;
+        }
+    }
+
+    // 活动
+    .item {
+        margin-bottom: (10 / @rootSize);
+
+        // 图
+        .pic {
+            position: relative;
+            height: (160 / @rootSize);
+
+            // 收藏图标
+            i {
+                position: absolute;
+                top: (15 / @rootSize);
+                right: (18 / @rootSize);
+                font-size: (24 / @rootSize);
+                color: #fff;
+            }
+
+            // 活动状态
+            .active {
+                position: absolute;
+                left: (15 / @rootSize);
+                top: (-4 / @rootSize);
+                width: (68 / @rootSize);
+                height: (29 / @rootSize);
+                background-image: url(./../images/status_active.png);
+                background-size: contain;
+                font-size: (12 / @rootSize);
+                color: #fff;
+                text-align: center;
+                line-height: (25 / @rootSize);
+
+                // 灰色图片样式
+                // .active.off {}  必须是active类同时应用了off类
+                // div.off {}  交集选择器
+                &.off {
+                    background-image: url(../images/status_default.png);
+                }
+            }
+
+            // .off {
+            //     // 灰色图片
+            // }
+        }
+
+        // 文字
+        .txt {
+            padding: (10 / @rootSize) (15 / @rootSize);
+            background-color: #fff;
+
+            .top {
+                display: flex;
+                justify-content: space-between;
+
+                h5 {
+                    width: (290 / @rootSize);
+                    font-size: (15 / @rootSize);
+                    color: #3C3C3C;
+                    font-weight: 400;
+                }
+
+                p {
+                    font-size: (15 / @rootSize);
+                    color: #FE6249;
+                }
+            }
+
+            .bottom {
+                display: flex;
+                margin-top: (10 / @rootSize);
+
+                p {
+                    margin-right: (15 / @rootSize);
+                    font-size: (11 / @rootSize);
+                    i {
+                        font-size: (11 / @rootSize);
+                    }
+                    color: #B4B4B4;
+                }
+            }
+        }
+    }
+}
+
+
+// 底部工具栏
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    width: 100%;
+    // height: (50 / 37.5rem);
+    height: (50 / @rootSize);
+    background-color: #FECA49;
+
+    text-align: center;
+    a {
+        font-size: (11 / @rootSize);
+        color: #D78B09 ;
+
+        .iconfont {
+            font-size: (24 / @rootSize);
+        }
+
+        // a.current {}
+        &.current {
+            color: #fff;
+        }
+    }
+}

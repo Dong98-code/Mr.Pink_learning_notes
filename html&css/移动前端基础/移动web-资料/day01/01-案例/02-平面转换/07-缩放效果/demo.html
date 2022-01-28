@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>缩放效果</title>
+    <style>
+        .box {
+            width: 300px;
+            height: 210px;
+            margin: 100px auto;
+            background-color: pink;
+            
+        }
+
+        .box img {
+            width: 100%;
+            transition: all 0.5s;
+        }
+        
+        .box:hover img {
+            /* width: 150%; */
+
+            transform: scale(1.2);
+            transform: scale(0.8);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <img src="./images/product.jpeg" alt="">
+    </div>
+</body>
+
+</html>

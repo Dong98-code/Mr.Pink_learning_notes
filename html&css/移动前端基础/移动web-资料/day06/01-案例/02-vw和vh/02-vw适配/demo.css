@@ -1,0 +1,14 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.box {
+  width: 18.13333333vw;
+  height: 7.73333333vw;
+  background-color: pink;
+}
+.box2 {
+  width: 10.19490255vh;
+  height: 4.34782609vh;
+  background-color: green;
+}
