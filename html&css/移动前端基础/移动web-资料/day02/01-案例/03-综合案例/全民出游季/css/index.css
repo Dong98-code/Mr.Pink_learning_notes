@@ -4,6 +4,7 @@
 }
 
 html {
+    /* 设置 跟浏览器通高*/
     height: 100%;
 }
 
@@ -52,4 +53,16 @@ body {
     to {
         transform: translateX(20px);
     }
+}
+
+@keyframes tags {
+    to {
+        transform: translateY(20px);
+    }
+}
+
+.tags img:nth-child(1) {
+    margin-left: 400px;
+    top: 500px;
+    /* animation: tags .5s infinite alternate; */
 }
