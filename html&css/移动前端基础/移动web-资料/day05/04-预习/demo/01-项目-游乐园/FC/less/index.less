@@ -1,0 +1,138 @@
+// out: ../css/
+@import url(./base.less);
+@import url(./normalize.less);
+
+@rootFontSize: 37.5 * 1rem;
+
+body {
+    background-color: #F0F0F0;
+}
+// 主体内容
+.main {
+    margin-bottom: (49 / @rootFontSize);
+
+    // banner
+    .banner {
+        height: (160 / @rootFontSize);
+    }
+
+    // 活动标题
+    .title {
+        height: (40 / @rootFontSize);
+        line-height: (40 / @rootFontSize);
+        padding-left: (15 / @rootFontSize);
+        h4 {
+            font-size: (14 / @rootFontSize);
+            color: #3C3C3C;
+        }
+    }
+
+    // 活动
+    .item {
+        padding-bottom: (10 / @rootFontSize);
+        margin-bottom: (10 / @rootFontSize);
+        background-color: #fff;
+
+        // 活动图
+        .pic {
+            position: relative;
+            height: (160 / @rootFontSize);
+
+            // 活动状态
+            .status {
+                position: absolute;
+                left: (15 / @rootFontSize);
+                top: (-4 /@rootFontSize);
+                width: (68 / @rootFontSize);
+                height: (29 / @rootFontSize);
+                background-image: url(./../images/status_active.png);
+                background-size: contain;
+                font-size: (12 / @rootFontSize);
+                color: #fff;
+                text-align: center;
+                line-height: (25 / @rootFontSize);
+
+                &.off {
+                    background-image: url(./../images/status_default.png);
+                }
+            }
+
+            // 收藏
+            .collect {
+                position: absolute;
+                right: (18 / @rootFontSize);
+                top: (15 / @rootFontSize);
+                color: #FECA49;
+                i {
+                    font-size: (24 / @rootFontSize);
+                }
+            }
+        }
+
+        // 活动介绍
+        .info {
+            position: relative;
+            padding: (8 / @rootFontSize) (15 / @rootFontSize) 0;
+            h5 {
+                width: (290 / @rootFontSize);
+                line-height: (22 / @rootFontSize);
+                font-size: (15 / @rootFontSize);
+                color: #3C3C3C;
+                font-weight: 400;
+            }
+
+            .rest{
+                display: flex;
+                margin-top: (15 / @rootFontSize);
+                color: #B4B4B4;
+                font-size: (11 / @rootFontSize);
+
+                p {
+                    margin-right: (15 / @rootFontSize);
+
+                    i {
+                        font-size: (8 / @rootFontSize);
+                        margin-right: (3/@rootFontSize);
+                    }
+                }
+            }
+
+            .type {
+                position: absolute;
+                top: (10 / @rootFontSize);
+                right: (15 / @rootFontSize);
+                font-size: (15 / @rootFontSize);
+                color: #FE6249;
+            }
+        }
+    }
+}
+
+// 底部工具条
+.toolbar {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    height: (49 / @rootFontSize);
+    background-color: #FECA49;
+    text-align: center;
+    a {
+        color: #D78B09;
+        i {
+            
+            font-size: (20 / @rootFontSize);
+        }
+    
+        span {
+            display: block;
+            margin-top: (5 / @rootFontSize);
+            font-size: (11 / @rootFontSize);
+        }
+        &.current {
+            color: #fff;
+        }
+    }
+}

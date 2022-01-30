@@ -1,0 +1,26 @@
+/* 移动适配 */
+/* 1. HTML标签加字号 1/10; 2. 写rem单位的尺寸 */
+/* @media (width: 320px) {
+    html {
+        font-size: 32px;
+    }
+}
+@media (width:375px) {
+    html {
+        font-size: 37.5px;
+    }
+}
+@media (width: 414px) {
+    html {
+        font-size: 41.4px;
+    }
+} */
+
+.box {
+    /* 68 * 29 */
+    /* width: 68px; */
+    /* 设计稿375, HTML 37.5   68/37.5 */
+    width: 1.813rem;
+    height: 0.773rem;
+    background-color: pink;
+}

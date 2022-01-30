@@ -1,0 +1,157 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+body {
+  font-family: Helvetica Neue, Tahoma, Arial, PingFangSC-Regular, Hiragino Sans GB, Microsoft Yahei, sans-serif;
+}
+a {
+  color: #333;
+  text-decoration: none;
+}
+img {
+  vertical-align: middle;
+  width: 100%;
+  height: 100%;
+}
+ul {
+  list-style: none;
+}
+.ellipsis-2 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.header {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 10;
+  width: 100%;
+  height: 22.4vw;
+  background-color: #fff;
+}
+.header .navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 11.73333333vw;
+  padding: 0 3.2vw 0 4.8vw;
+}
+.header .navbar .left .Navbar_logo {
+  font-size: 7.46666667vw;
+  color: #fb7299;
+}
+.header .navbar .right {
+  display: flex;
+  align-items: center;
+}
+.header .navbar .right .ic_search_tab {
+  font-size: 5.86666667vw;
+  color: #ccc;
+}
+.header .navbar .right .login {
+  width: 6.4vw;
+  height: 6.4vw;
+  margin-left: 6.4vw;
+}
+.header .navbar .right .download {
+  width: 19.2vw;
+  height: 6.4vw;
+  margin-left: 6.4vw;
+}
+.header .menu {
+  position: relative;
+  height: 10.4vw;
+  padding-right: 10.66666667vw;
+  border-bottom: 1px solid #eee;
+  overflow: hidden;
+}
+.header .menu .tab ul {
+  display: flex;
+}
+.header .menu .tab ul li {
+  padding: 0 4.26666667vw;
+}
+.header .menu .tab ul li a {
+  display: block;
+  height: 10.13333333vw;
+  line-height: 10.13333333vw;
+  font-size: 3.73333333vw;
+  border-bottom: 2px solid transparent;
+}
+.header .menu .tab ul li.active a {
+  color: #fb7299;
+  border-bottom-color: #fb7299;
+}
+.header .menu .more {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 10.66666667vw;
+  height: 10.66666667vw;
+  text-align: center;
+  line-height: 10.66666667vw;
+  color: #ccc;
+}
+.header .menu .more i {
+  font-size: 5.33333333vw;
+}
+.main {
+  padding: 22.4vw 1.33333333vw 0;
+}
+.main .video-list {
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 3.2vw;
+}
+.main .video-list .video-item {
+  width: 50%;
+  padding: 2.13333333vw 1.33333333vw;
+}
+.main .video-list .video-item .card {
+  position: relative;
+}
+.main .video-list .video-item .card .count {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 2.13333333vw;
+  background-image: linear-gradient(to top, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0));
+  color: #fff;
+}
+.main .video-list .video-item .card .count i {
+  vertical-align: middle;
+}
+.main .video-list .video-item .title {
+  margin-top: 1.6vw;
+}
+.btn {
+  position: fixed;
+  left: 0;
+  bottom: 8vw;
+  width: 100%;
+  height: 9.6vw;
+  padding: 3.2vw;
+}
+.btn a {
+  display: block;
+  height: 9.6vw;
+  background-color: #fb7299;
+  border-radius: 4.8vw;
+  text-align: center;
+  line-height: 9.6vw;
+  color: #fff;
+  box-shadow: 0 0 3.2vw rgba(0, 0, 0, 0.2);
+}
+.btn a span {
+  font-size: 3.73333333vw;
+}
