@@ -1,0 +1,138 @@
+// out: ../css/
+@import './base.less';
+@import './normalize.less';
+
+// 存储变量 37.5, 视口宽度
+
+@rootSize: 37.5rem;
+
+body {
+    background-color: #f0f0f0;
+}
+
+.main {
+    padding-bottom: (50 / @rootSize);
+    // banner选择器
+    .banner {
+        height: (160 / @rootSize);
+    }
+    
+    .title {
+        height: (40 / @rootSize);
+        line-height: (40 / @rootSize);
+        padding-left: (15 / @rootSize);
+        h4 {
+            font-size: (14 / @rootSize);
+            color: #3c3c3c;
+        }
+        
+    }
+
+    .item {
+        margin-bottom: (10 / @rootSize);
+
+        .pic {
+            height: (160 / @rootSize);
+            position: relative;
+
+            i {
+                position: absolute;
+                top: (15 / @rootSize);
+                right: (18 / @rootSize);
+                font-size: (24 / @rootSize);
+                color: #fff;
+            }
+
+            // 活动状态
+
+            .active {
+                position: absolute;
+                top: (-4 / @rootSize);
+                left:(15 / @rootSize);
+                width: (68 / @rootSize);
+                height: (29 / @rootSize);
+                background-image: url(./../images/status_active.png) ;
+                background-size: contain;
+                text-align: center;
+                line-height: (25 / @rootSize);
+                font-size: (12 / @rootSize);
+                color: #fff;
+
+                // 交集选择器 必须是active 和 off两个类
+                &.off {
+                    background-image: url(./../images/status_active.png) ;
+                }
+            }
+
+
+        }
+    }
+
+
+    .txt {
+        background-color: #fff;
+        padding: (10 / @rootSize) (15 / @rootSize);
+
+        .top {
+            display: flex;
+            justify-content: space-between;
+
+            h5 {
+                width: (290 / @rootSize);
+                font-size: (15 / @rootSize);
+                color: #3c3c3c;
+                font-weight: 400;
+            }
+
+            p {
+                font-size: (15 / @rootSize);
+                color:#FE6249 ;
+            }
+        }
+
+        // dibu
+
+        .bottom {
+            display: flex;
+
+            p {
+                font-size: (11 / @rootSize);
+                color: #b4b4b4;
+                i {
+                    font-size: (11 / @rootSize);
+                }
+                margin-top: (10 / @rootSize);
+                margin-right: (15 / @rootSize);
+            }
+        
+        }
+    }
+}
+
+footer {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: (50 / @rootSize);
+    background-color: #FECA49;
+
+    text-align: center;
+
+    a {
+        font-size: (11 / @rootSize);
+        .iconfont {
+            font-size: (28 / @rootSize);
+        }
+
+        color: #D78B09;
+
+        &.current {
+        color: #fff;
+
+        }
+    }
+}
