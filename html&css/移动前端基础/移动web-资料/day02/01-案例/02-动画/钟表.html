@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>clock</title>
+    <style>
+        .clock {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin: 100px auto;
+            border: 8px solid black;
+            border-radius: 50%;
+        }
+
+        .line {
+            position: absolute;
+            height: 200px;
+            width: 5px;
+            background-color: #ccc;
+            /* 盒子自身移动 */
+            left: 50%;
+            /* 平移自身的一半 */
+            transform: translate(-50%);
+        }
+
+        /* :nth-child() */
+        .line:nth-child(2) {
+            transform: translate(-50%) rotate(30deg);
+        }
+
+        .line:nth-child(3) {
+            transform: translate(-50%) rotate(60deg);
+        }
+
+        .line:nth-child(4) {
+            transform: translate(-50%) rotate(90deg);
+        }
+        .line:nth-child(5) {
+            transform: translate(-50%) rotate(120deg);
+        }
+        .line:nth-child(6) {
+            transform: translate(-50%) rotate(150deg);
+        }
+
+        .mask {
+            position: absolute;
+            width: 175px;
+            height: 175px;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            top: 50%;
+            
+            background-color: #fff;
+            border-radius: 50%;
+        }
+
+        .maoding {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            top: 50%;
+            
+            background-color: black;
+            border-radius: 50%;
+        }
+        .hour, .min, .sec {
+            position: absolute;
+            left: 50%;
+            bottom: 50%;
+            /* transform: translate(-50%); */
+            transform-origin: center bottom;
+        }
+
+        .hour {
+            width: 6px;
+            height: 40px;
+            background-color: #000;
+            transform: translate(-50%) rotate(45deg);
+        }
+
+        .min {
+            width: 4px;
+            height: 50px;
+            background-color: #000;
+            transform: translate(-50%) rotate(90deg);
+        }
+
+        .sec {
+            width: 2px;
+            height: 60px;
+            background-color: red;
+            transform: translate(-50%) rotate(225deg);
+            animation: rotate 60s steps(60) infinite;
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotate(0);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="clock">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+
+        <!-- mask -->
+        <div class="mask"></div>
+
+        <!-- 时分秒 针 -->
+        <div class="hour"></div>
+        <div class="min"></div>
+        <div class="sec"></div>
+
+        <div class="maoding"></div>
+    </div>
+</body>
+</html>
