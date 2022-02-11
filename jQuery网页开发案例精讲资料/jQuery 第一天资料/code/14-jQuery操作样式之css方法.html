@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="jquery.min.js"></script>
+    <style>
+        div {
+            width: 200px;
+            height: 200px;
+            background-color: pink;
+        }
+    </style>
+</head>
+
+<body>
+    <div></div>
+    <script>
+        // 操作样式之css方法
+        $(function() {
+            console.log($("div").css("width"));
+            // $("div").css("width", "300px");
+            // $("div").css("width", 300);
+            // $("div").css(height, "300px"); 属性名一定要加引号
+            $("div").css({
+                width: 400,
+                height: 400,
+                backgroundColor: "red"
+                    // 如果是复合属性则必须采取驼峰命名法，如果值不是数字，则需要加引号
+            })
+        })
+    </script>
+</body>
+
+</html>

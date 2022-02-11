@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="zy.media.min.css">
+    <script src="zy.media.min.js"></script>
+    <style type="text/css">
+        #modelView {
+            background-color: #DDDDDD;
+            z-index: 0;
+            opacity: 0.7;
+            height: 100%;
+            width: 100%;
+            position: relative;
+        }
+        
+        .playvideo {
+            padding-top: auto;
+            z-index: 9999;
+            position: relative;
+            width: 300px;
+            height: 200px;
+        }
+        
+        .zy_media {
+            z-index: 999999999
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="playvideo">
+        <div class="zy_media">
+            <video data-config='{"mediaTitle": "小蝴蝶"}'>
+                    <source src="mov.mp4" type="video/mp4">
+                    您的浏览器不支持HTML5视频
+                </video>
+
+        </div>
+        <div id="modelView">&nbsp;</div>
+    </div>
+    <script>
+        zymedia('video', {
+            autoplay: false
+        });
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="jquery.min.js"></script>
+</head>
+
+<body>
+    <button>快速</button>
+    <button>快速</button>
+    <button>快速</button>
+    <button>快速</button>
+    <button>快速</button>
+    <button>快速</button>
+    <button>快速</button>
+    <script>
+        $(function() {
+            // 1. 隐式迭代 给所有的按钮都绑定了点击事件
+            $("button").click(function() {
+                // 2. 当前的元素变化背景颜色
+                $(this).css("background", "pink");
+                // 3. 其余的兄弟去掉背景颜色 隐式迭代
+                $(this).siblings("button").css("background", "");
+            });
+        })
+    </script>
+</body>
+
+</html>

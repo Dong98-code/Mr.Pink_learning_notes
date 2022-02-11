@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+
+    </style>
+    <script src="jquery.min.js"></script>
+</head>
+
+<body>
+    <div>1</div>
+    <div>2</div>
+    <div>3</div>
+    <script>
+        $(function() {
+            // $("div").css("color", "red");
+            // 如果针对于同一类元素做不同操作，需要用到遍历元素（类似for，但是比for强大）
+            var sum = 0;
+            // 1. each() 方法遍历元素 
+            var arr = ["red", "green", "blue"];
+            $("div").each(function(i, domEle) {
+                // 回调函数第一个参数一定是索引号  可以自己指定索引号号名称
+                // console.log(index);
+                // console.log(i);
+                // 回调函数第二个参数一定是 dom元素对象 也是自己命名
+                // console.log(domEle);
+                // domEle.css("color"); dom对象没有css方法
+                $(domEle).css("color", arr[i]);
+                sum += parseInt($(domEle).text());
+            })
+            console.log(sum);
+            // 2. $.each() 方法遍历元素 主要用于遍历数据，处理数据
+            // $.each($("div"), function(i, ele) {
+            //     console.log(i);
+            //     console.log(ele);
+
+            // });
+            // $.each(arr, function(i, ele) {
+            //     console.log(i);
+            //     console.log(ele);
+
+
+            // })
+            $.each({
+                name: "andy",
+                age: 18
+            }, function(i, ele) {
+                console.log(i); // 输出的是 name age 属性名
+                console.log(ele); // 输出的是 andy  18 属性值
+
+
+            })
+        })
+    </script>
+</body>
+
+</html>

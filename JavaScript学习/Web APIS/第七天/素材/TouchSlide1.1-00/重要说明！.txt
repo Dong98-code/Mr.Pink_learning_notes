@@ -1,0 +1,19 @@
+/*!
+ * TouchSlide v1.1
+ * javascript触屏滑动特效插件，移动端滑动特效，触屏焦点图，触屏Tab切换，触屏多图切换等
+ * 详尽信息请看官网：http://www.SuperSlide2.com/TouchSlide/
+ *
+ * Copyright 2013 大话主席
+ *
+ * 请尊重原创，保留头部版权
+ * 在保留版权的前提下可应用于个人或商业用途
+
+ * 1.1 宽度自适应（修复安卓横屏时滑动范围不变的bug）
+ */
+
+1、TouchSlide.1.1.js 为压缩后的文件
+2、TouchSlide.1.1.source.js 为源代码文件
+3、demo文件内为所有案例演示
+4、若要在线查看demo，手机输入http://www.SuperSlide2.com/TouchSlide/demo.html
+
+感谢您的支持！

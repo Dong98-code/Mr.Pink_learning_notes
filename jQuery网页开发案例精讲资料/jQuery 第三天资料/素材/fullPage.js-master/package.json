@@ -1,0 +1,54 @@
+{
+  "name": "fullpage.js",
+  "version": "3.0.4",
+  "description": "Create beautiful fullscreen scrolling websites",
+  "main": "dist/fullpage.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:alvarotrigo/fullPage.js.git"
+  },
+  "keywords": [
+    "jquery",
+    "javacript",
+    "scrolling",
+    "single_page",
+    "onepage",
+    "fullpage",
+    "fullpagejs",
+    "one_page",
+    "sliding",
+    "snap",
+    "scroll",
+    "swipe",
+    "mousewheel",
+    "sections",
+    "slides",
+    "slidehow"
+  ],
+  "files": [
+    "vendors",
+    "dist",
+    "package.json",
+    "README.md"
+  ],
+  "authors": [
+    "Alvaro Trigo https://github.com/alvarotrigo"
+  ],
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/alvarotrigo/fullPage.js/issues"
+  },
+  "homepage": "https://github.com/alvarotrigo/fullPage.js",
+  "namespace": "fullpage_api",
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-clean-css": "^2.0.8",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^2.0.4",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-uglify": "^3.0.0"
+  }
+}

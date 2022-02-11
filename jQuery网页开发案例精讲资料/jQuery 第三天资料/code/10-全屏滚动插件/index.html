@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/fullpage.min.css">
+    <style>
+        #fp-nav ul li a.active span,
+        #fp-nav ul li a span {
+            background-color: red!important;
+        }
+        
+        .section1 {
+            background: url(http://idowebok.u.qiniudn.com/77/1.jpg) 50%;
+        }
+        
+        .section2 {
+            background: url(http://idowebok.u.qiniudn.com/77/2.jpg) 50%;
+        }
+        
+        .section3 {
+            background: url(http://idowebok.u.qiniudn.com/77/3.jpg) 50%;
+        }
+        
+        .section4 {
+            background: url(http://idowebok.u.qiniudn.com/77/4.jpg) 50%;
+        }
+    </style>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/fullpage.min.js"></script>
+    <script>
+        $(function() {
+            $('#dowebok').fullpage({
+                sectionsColor: ['pink', '#4BBFC3', '#7BAABE', '#f90'],
+                navigation: true
+
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div id="dowebok">
+        <div class="section section1">
+            <h3>第一屏里面的内容</h3>
+        </div>
+        <div class="section section2">
+            <h3>第二屏</h3>
+        </div>
+        <div class="section section3">
+            <h3>第三屏</h3>
+        </div>
+        <div class="section section4">
+            <h3>第四屏</h3>
+        </div>
+    </div>
+</body>
+
+</html>

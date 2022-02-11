@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>拖动模态框</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        a {
+            text-decoration: none;
+            color: #000000;
+        }
+
+        .header {
+            width: 100%;
+            height: 30px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 24px;
+            line-height: 30px;
+        }
+
+        /* 登录框的样式 */
+
+        .login {
+            /* 刚开始不显示 */
+            display: none;
+            width: 512px;
+            height: 280px;
+            position: fixed;
+            border: 1px solid #ebebeb;
+            left: 50%;
+            top: 50%;
+            background-color: #fff;
+            box-shadow: 0px 0px 20px #ddd;
+            z-index: 99;
+            transform: translate(-50%, -50%);
+        }
+
+        /* 登录框的etitle */
+
+        .login-title {
+            position: relative;
+            width: 100%;
+            height: 40px;
+            margin-top: 10px;
+            text-align: center;
+            line-height: 40px;
+            cursor: move;
+            font-size: 18px;
+        }
+
+        .close-btn {
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 40px;
+            height: 40px;
+            text-align: center;
+            line-height: 40px;
+            border-radius: 50%;
+            background-color: #fff;
+            box-shadow: 0px 0px 10px #ddd;
+            transform: translate(50%, -50%);
+            font-size: 12px;
+        }
+
+        .login-content {
+            margin-top: 20px;
+        }
+
+        .login-content-input {
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .login-content-input label {
+            float: left;
+            width: 90px;
+            height: 35px;
+            padding-right: 10px;
+            text-align: right;
+            line-height: 35px;
+
+            font-size: 14px;
+        }
+
+        .login-content-input input.list-input {
+            float: left;
+            line-height: 35px;
+            height: 35px;
+            width: 350px;
+            text-indent: 5px;
+            border: 1px solid #ebebeb;
+        }
+        
+        .login-btn {
+            /* position: fixed; */
+
+            height: 35px;
+            width: 100px;
+            /* left: 50%;
+            top:50%;
+            transform: translate(-50%, -50%); */
+            margin: 30px auto;
+            font-size: 18px;
+            border: 1px solid #ededed;
+            line-height: 30px;
+            text-align: center;
+
+        }
+
+        .login-btn a {
+            display: block;
+        }
+
+        .mask {
+            display: none;
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            top: 0px;
+            left: 0px;
+            background: rgba(0, 0, 0, .3);
+        }
+    </style>
+</head>
+<body>
+    <div class="header"><a href="javascript:void(0);" id="link">点击，弹出登录框</a></div>
+
+    <!-- 登录框 -->
+    <div class="login" id="login">
+        <div class="login-title" id="login-title">
+            登陆会员
+            <span class="close-btn" id="close-btn">关闭</span>
+        </div>
+        <div class="login-content">
+            <div class="login-content-input">
+                <label for="">用户名</label>
+                <input type="text" placeholder="请输入用户名" name="info[password]" id="username" class="list-input">
+            </div>
+
+            <div class="login-content-input">
+                <label for="">登录密码</label>
+                <input type="password" placeholder="请输入登录密码" name="info[password]" id="password" class="list-input">
+            </div>
+        </div>
+
+        <!-- 登录按钮 -->
+        <div class="login-btn" id="login-btn"><a href="javascript:;" id="login-btn-submit">登录会员</a></div>
+
+        
+        
+
+        
+    </div>
+    <!-- mask -->
+    <div class="mask" id="mask">
+    </div>
+
+    <script>
+        let mask = document.querySelector('.mask');
+        let login = document.querySelector('.login');
+        let header = document.querySelector('#link');
+        let close_btn = document.querySelector('.close-btn');
+        let login_title = document.querySelector('.login-title'); 
+
+        header.addEventListener('click', function() {
+            mask.style.display = 'block';
+            login.style.display = 'block';
+        })
+
+        close_btn.addEventListener('click', function() {
+            mask.style.display = 'none';
+            login.style.display = 'none';
+        })
+
+        // 移动框框
+
+        login_title.addEventListener('mousedown', function(event) {
+            let x = event.pageX - login.offsetLeft;
+            let y = event.pageY - login.offsetTop;
+
+            // 鼠标移动， 改变login的位置
+            document.addEventListener('mousemove', move)
+
+            function move(e) {
+                login.style.left = e.pageX - x + 'px';
+                login.style.top = e.pageY - y + 'px';
+
+            }
+
+            document.addEventListener('mouseup', function() {
+                document.removeEventListener('mousemove', move);
+            })
+        })
+
+
+    </script>
+</body>
+</html>
