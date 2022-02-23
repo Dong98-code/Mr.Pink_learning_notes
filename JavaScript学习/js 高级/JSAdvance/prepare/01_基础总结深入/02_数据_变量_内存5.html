@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>02_内存管理</title>
+</head>
+<body>
+<!--
+问题: JS引擎如何管理内存?
+  1. 内存生命周期
+    1). 分配需要的内存
+    2). 使用分配到的内存
+    3). 不需要时将其释放/归还
+  2. 释放内存
+    * 为执行函数分配的栈空间内存: 函数执行完自动释放
+    * 存储对象的堆空间内存: 当内存没有引用指向时, 对象成为垃圾对象, 垃圾回收器后面就会回收释放此内存
+-->
+<script type="text/javascript">
+  var obj = {}
+  obj = null // ?
+
+  function fn () {
+    var a = 3
+    var b = {}
+  }
+  fn() // ?
+</script>
+</body>
+</html>

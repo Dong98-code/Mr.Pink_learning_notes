@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>06_IIEF</title>
+</head>
+
+<body>
+  <!--
+1. 理解
+  * 全称: Immediately-Invoked Function Expression
+2. 作用
+-->
+  <script type="text/javascript">
+    (function (i) {
+      var a = 4
+
+      function fn() {
+        console.log('fn ', i + a)
+      }
+      fn()
+    })(3)
+  </script>
+
+</body>
+
+</html>

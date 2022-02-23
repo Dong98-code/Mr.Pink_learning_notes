@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>02_内存溢出与内存泄露</title>
+</head>
+<body>
+
+<!--
+1. 内存溢出
+  * 一种程序运行出现的错误
+  * 当程序运行需要的内存超过了剩余的内存时, 就出抛出内存溢出的错误
+2. 内存泄露
+  * 占用的内存没有及时释放
+  * 内存泄露积累多了就容易导致内存溢出
+  * 常见的内存泄露:
+    * 意外的全局变量
+    * 没有及时清理的计时器或回调函数
+    * 闭包
+-->
+
+<script type="text/javascript">
+
+  // 1. 内存溢出
+  /*var obj = {}
+  for (var i = 0; i < 100000; i++) {
+    obj[i] = new Array(10000000)
+  }
+  console.log('------')*/
+
+  // 2. 内存泄露
+    // 意外的全局变量
+  function fn () {
+    a = [] //不小心没有var定义
+  }
+  fn()
+    // 没有及时清理的计时器
+  setInterval(function  () {
+    console.log('----')
+  }, 1000)
+
+</script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>关于赋值和内存的问题</title>
+</head>
+<body>
+<!--
+  问题: var a = xxx, a内存中到底保存的是什么?
+  * xxx是一个基本数据
+  * xxx是一个对象
+  * xxx是一个变量
+-->
+<script type="text/javascript">
+  var a = 3
+  a = function () {
+
+  }
+
+  var b = 'abc'
+  a = b
+  b = []
+  a = b
+</script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>05_面试题</title>
+</head>
+<body>
+<script type="text/javascript">
+  /*
+  测试题1: 先预处理变量, 后预处理函数
+  */
+  function a() {}
+  var a;
+  console.log(typeof a)
+
+
+  /*
+  测试题2: 变量预处理, in操作符
+   */
+  if (!(b in window)) {
+    var b = 1;
+  }
+  console.log(b)
+
+  /*
+  测试题3: 预处理, 顺序执行
+   */
+  var c = 1
+  function c(c) {
+    console.log(c)
+    var c = 3
+  }
+  c(2)
+
+</script>
+</body>
+</html>

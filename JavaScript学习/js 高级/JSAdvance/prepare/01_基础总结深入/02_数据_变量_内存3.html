@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>02_关于引用变量赋值问题</title>
+</head>
+<body>
+<!--
+关于引用变量赋值问题
+  * 2个引用变量指向同一个对象, 通过一个引用变量修改对象内部数据, 另一个引用变量也看得见
+  * 2个引用变量指向同一个对象,让一个引用变量指向另一个对象, 另一个引用变量还是指向原来的对象
+-->
+<script type="text/javascript">
+
+  //1. 2个引用变量指向同一个对象, 通过一个引用变量修改对象内部数据, 另一个引用变量也看得见
+  var obj1 = {}
+  var obj2 = obj1
+  obj2.name = 'Tom'
+  console.log(obj1.name)
+  function f1(obj) {
+    obj.age = 12
+  }
+  f1(obj2)
+  console.log(obj1.age)
+
+  //2. 2个引用变量指向同一个对象,让一个引用变量指向另一个对象, 另一个引用变量还是指向原来的对象
+  var obj3 = {name: 'Tom'}
+  var obj4 = obj3
+  obj3 = {name: 'JACK'}
+  console.log(obj4.name)
+  function f2(obj) {
+    obj = {name: 'Bob'}
+  }
+  f2(obj4)
+  console.log(obj4.name)
+
+</script>
+</body>
+</html>

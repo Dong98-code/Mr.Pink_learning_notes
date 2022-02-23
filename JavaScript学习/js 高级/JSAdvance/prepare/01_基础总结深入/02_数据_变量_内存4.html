@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>02_关于数据传递问题</title>
+</head>
+<body>
+<!--
+问题: 在js调用函数时传递变量参数时, 是值传递还是引用传递
+  * 只有值传递, 没有引用传递, 传递的都是变量的值, 只是这个值可能是基本数据, 也可能是地址(引用)数据
+  * 如果后一种看成是引用传递, 那就值传递和引用传递都可以有
+-->
+<script type="text/javascript">
+  function f(a) {
+    console.log(a)
+  }
+  var n = 4
+  f(n) //传递的是n的值 --->值传递
+
+  function f2(a) {
+    a.name = 'atguigu'
+  }
+  n = {}
+  f2(n) // 传递的是n指向的对象 ---> 引用传递   ???
+  console.log(n.name)
+</script>
+</body>
+</html>

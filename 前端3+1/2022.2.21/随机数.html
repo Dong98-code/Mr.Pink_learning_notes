@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function insertArr(arr, length, min = 2, max = 32) {
+            //  包括断点值得数
+            const num = Math.floor(Math.random() * 31) + 2;
+            if (!arr.includes(num)) {
+                arr.push(num);
+            }
+            return arr.length === length ? arr: insertArr(arr, length, min, max);
+
+        }
+
+        console.table(insertArr([], 5, 2, 32));
+    </script>
+</body>
+
+</html>

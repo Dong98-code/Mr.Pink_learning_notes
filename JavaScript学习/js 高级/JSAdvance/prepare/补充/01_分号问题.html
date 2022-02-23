@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>01_分号问题</title>
+</head>
+<body>
+
+<!--
+1. js一条语句的后面可以不加分号
+2. 是否加分号是编码风格问题, 没有应该不应该，只有你自己喜欢不喜欢
+3. 在下面2种情况下不加分号会有问题
+  * 小括号开头的前一条语句
+  * 中方括号开头的前一条语句
+4. 解决办法: 在行首加分号
+5. 强有力的例子: vue.js库
+6. 知乎热议: https://www.zhihu.com/question/20298345
+-->
+<script type="text/javascript">
+
+  // 情形一: 小括号开头的前一条语句
+  var a = 3
+  ;(function () {
+
+  })
+  /*
+  错误理解: 将3看成是函数调用
+   var a = 3(function () {
+
+   })
+   */
+
+  // 情形二: 中方括号开头的前一条语句
+  var b = a
+  ;[1, 3, 5].forEach(function (item) {
+    console.log(item)
+  })
+  /*
+   错误理解:
+   a = b[5].forEach(function(e){
+   console.log(e)
+   })
+</script>
+</body>
+</html>

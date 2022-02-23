@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>04_作用域_面试题2</title>
+</head>
+<body>
+<script type="text/javascript">
+  /*
+   说说它们的输出情况
+   */
+
+  var fn = function () {
+    console.log(fn)
+  }
+  fn()
+
+  var obj = {
+    fn2: function () {
+      console.log(fn2)
+    }
+  }
+  obj.fn2()
+</script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>04_执行上下文栈2</title>
+</head>
+<body>
+<!--
+1. 依次输出什么?
+2. 整个过程中产生了几个执行上下文?
+-->
+<script type="text/javascript">
+  console.log('global begin: '+ i)
+  var i = 1
+  foo(1);
+  function foo(i) {
+    if (i == 4) {
+      return;
+    }
+    console.log('foo() begin:' + i);
+    foo(i + 1);
+    console.log('foo() end:' + i);
+  }
+  console.log('global end: ' + i)
+</script>
+
+</body>
+</html>
