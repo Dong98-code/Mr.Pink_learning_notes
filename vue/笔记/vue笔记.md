@@ -110,4 +110,45 @@ data中 所有的属性都会出现在 VM身上； vm身上 所有的属性 及 
 ### `Object.defineProperty`
 
 给对象添加属性；
+```js
+let obj = {x:10};
+let obj_2 = {y:100};
+Object.defineProperty(obj2, 'x', {
+    get(){
+        return obj.x;
+    },
+    set(value) {
+        obj.x = value;
+    }
+})
+```
+
+Vue中的数据代理：
+
+1.Vue中的数据代理：
+    通过vm对象来代理data对象中属性的操作（读/写）
+2.Vue中数据代理的好处：
+    更加方便的操作data中的数据
+3.基本原理：
+    通过Object.defineProperty()把data对象中所有属性添加到vm上。
+    为每一个添加到vm上的属性，都指定一个getter/setter。
+    在getter/setter内部去操作（读/写）data中对应的属性。
+
+![20220228230902](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220228230902.png)
+
+
+Vue充当了读取数据和改写数据的功能；
+
+`vm._data = options.data = data`
+
+![20220228231713](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220228231713.png)
+
+现在可以访问到 name 和 address  但是现在并没有 绑定到 vm身上；
+
+![20220228231835](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220228231835.png)
+
+把 data中的数据， 绑定到 vM身上’
+
+
+## 事件处理
 

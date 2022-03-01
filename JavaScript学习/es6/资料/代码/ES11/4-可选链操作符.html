@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>可选链操作符</title>
+</head>
+<body>
+    <script>
+        // ?.
+        function main(config){
+            // const dbHost = config && config.db && config.db.host;
+            const dbHost = config?.db?.host;
+
+            console.log(dbHost);
+        }
+
+        main({
+            db: {
+                host:'192.168.1.100',
+                username: 'root'
+            },
+            cache: {
+                host: '192.168.1.200',
+                username:'admin'
+            }
+        })
+    </script>
+</body>
+</html>

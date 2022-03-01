@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>点击2s变色</title>
+    <style>
+        #box {
+            width: 100px;
+            height: 100px;
+            background-color: skyblue;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        
+    </div>
+    <script>
+        let box = document.getElementById('box');
+        box.addEventListener('click', function() {
+            let _this = this;
+            setTimeout(()=>{
+                // 箭头函数中的this为声明函数所在作用域下的this
+                this.style.background = 'pink';
+                // _this.style.background = 'pink';
+            }, 2000)
+        })
+    </script>
+</body>
+</html>

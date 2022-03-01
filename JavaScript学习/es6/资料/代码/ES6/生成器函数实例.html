@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生成器函数实例</title>
+</head>
+
+<body>
+    <script>
+        // 异步编程  文件操作 网络操作(ajax, request) 数据库操作
+        // 1s 后控制台输出 111  2s后输出 222  3s后输出 333 
+        // 回调地狱
+        function one() {
+            setTimeout(()=>{
+                console.log('111');
+                interator.next();
+            },1000)
+        }
+        function two() {
+            setTimeout(()=>{
+                console.log('111');
+                interator.next();
+            },1000)
+        }
+        function three() {
+            setTimeout(()=>{
+                console.log('111');
+                interator.next();
+            },1000)
+        }
+        function * gen() {
+            yield one();
+            yield two();
+            yield three();
+        }
+        let interator = gen();
+        interator.next()
+        
+    </script>
+</body>
+
+</html>

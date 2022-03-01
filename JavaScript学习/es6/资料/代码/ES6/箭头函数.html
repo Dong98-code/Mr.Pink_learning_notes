@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>箭头函数</title>
+</head>
+
+<body>
+    <script>
+        // ES6 允许使用「箭头」（=>）定义函数。
+        //声明一个函数
+        // let fn = function(){
+
+        // }
+        // let fn = (a,b) => {
+        //     return a + b;
+        // }
+        //调用函数
+        // let result = fn(1, 2);
+        // console.log(result);
+
+
+        //1. this 是静态的. this 始终指向函数声明时所在作用域下的 this 的值
+        function getName(){
+            console.log(this.name);
+        }
+        let getName2 = () => {
+            console.log(this.name);
+        }
+
+        //设置 window 对象的 name 属性
+        window.name = '尚硅谷';
+        const school = {
+            name: "ATGUIGU"
+        }
+
+        //直接调用
+        // getName();
+        // getName2();
+
+        //call 方法调用
+        // getName.call(school);
+        // getName2.call(school);
+
+        //2. 不能作为构造实例化对象
+        // let Person = (name, age) => {
+        //     this.name = name;
+        //     this.age = age;
+        // }
+        // let me = new Person('xiao',30);
+        // console.log(me);
+
+        //3. 不能使用 arguments 变量
+        // let fn = () => {
+        //     console.log(arguments);
+        // }
+        // fn(1,2,3);
+
+        //4. 箭头函数的简写
+            //1) 省略小括号, 当形参有且只有一个的时候
+            // let add = n => {
+            //     return n + n;
+            // }
+            // console.log(add(9));
+            //2) 省略花括号, 当代码体只有一条语句的时候, 此时 return 必须省略
+            // 而且语句的执行结果就是函数的返回值
+            let pow = n => n * n;
+                
+            console.log(pow(8));
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BigInt</title>
+</head>
+<body>
+    <script>
+        //大整形
+        // let n = 521n;
+        // console.log(n, typeof(n));
+
+        //函数
+        // let n = 123;
+        // console.log(BigInt(n));
+        // console.log(BigInt(1.2));
+
+        //大数值运算
+        let max = Number.MAX_SAFE_INTEGER;
+        console.log(max);
+        console.log(max + 1);
+        console.log(max + 2);
+
+        console.log(BigInt(max))
+        console.log(BigInt(max) + BigInt(1))
+        console.log(BigInt(max) + BigInt(2))
+    </script>
+</body>
+</html>

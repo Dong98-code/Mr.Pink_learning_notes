@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Object.fromEntries</title>
+</head>
+<body>
+    <script>
+        //二维数组
+        // const result = Object.fromEntries([
+        //     ['name','尚硅谷'],
+        //     ['xueke', 'Java,大数据,前端,云计算']
+        // ]);
+
+        //Map
+        // const m = new Map();
+        // m.set('name','ATGUIGU');
+        // const result = Object.fromEntries(m);
+
+        //Object.entries ES8
+        const arr = Object.entries({
+            name: "尚硅谷"
+        })
+        console.log(arr);
+    </script>
+</body>
+</html>

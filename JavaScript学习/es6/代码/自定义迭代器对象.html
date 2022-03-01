@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const banji = {
+        name:'终极',
+        stus: [
+                'xiaoming',
+                'xiaoning',
+                'xiaotian',
+                'knight'
+            ],
+        // 创建一个对象
+        [Symbol.iterator]() {
+            // 里面有next方法
+            let _this = this;
+            let idx = 0;
+            return {
+                next: function() {
+                    // 返回一个对象
+                    if (idx < _this.stus.length) {
+                        const result = {
+                            // next对象也应该返回一个对象， 包含 value和done两个属性
+                            value: _this.stus[idx],
+                            done:false
+                        }
+                        idx++;
+                        return result;
+                    } else {
+                        return {
+                            value:undefined,
+                            done:true
+                        }
+                    }
+                }
+            }
+        }
+    }
+        //遍历这个对象 
+        for (let v of banji) {
+            console.log(v);
+        }
+    </script>
+    
+</body>
+</html>
+
+

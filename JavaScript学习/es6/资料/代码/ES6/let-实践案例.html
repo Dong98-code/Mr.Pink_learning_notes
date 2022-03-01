@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>点击 DIV 换色</title>
+    <link crossorigin="anonymous" href="https://cdn.bootcss.com/twitter-bootstrap/3.3.7/css/bootstrap.min.css"
+        rel="stylesheet">
+    <style>
+        .item {
+            width: 100px;
+            height: 50px;
+            border: solid 1px rgb(42, 156, 156);
+            float: left;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2 class="page-header">点击切换颜色</h2>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+    </div>
+    <script>
+        //获取div元素对象
+        let items = document.getElementsByClassName('item');
+
+        //遍历并绑定事件
+        for(let i = 0;i<items.length;i++){
+            items[i].onclick = function(){
+                //修改当前元素的背景颜色
+                // this.style.background = 'pink';
+                items[i].style.background = 'pink';
+            }
+        }
+        
+    </script>
+</body>
+
+</html>

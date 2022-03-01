@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>类声明</title>
+</head>
+<body>
+    <script>
+        //手机
+        function Phone(brand, price){
+            this.brand = brand;
+            this.price = price;
+        }
+
+        //添加方法
+        Phone.prototype.call = function(){
+            console.log("我可以打电话!!");
+        }
+
+        //实例化对象
+        let Huawei = new Phone('华为', 5999);
+        Huawei.call();
+        console.log(Huawei);
+
+        //class
+        class Shouji{
+            //构造方法 名字不能修改
+            constructor(brand, price){
+                this.brand = brand;
+                this.price = price;
+            }
+
+            //方法必须使用该语法, 不能使用 ES5 的对象完整形式
+            call(){
+                console.log("我可以打电话!!");
+            }
+        }
+
+        let onePlus = new Shouji("1+", 1999);
+
+        console.log(onePlus);
+    </script>
+</body>
+</html>
