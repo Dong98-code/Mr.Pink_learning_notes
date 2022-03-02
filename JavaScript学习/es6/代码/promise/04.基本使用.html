@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const p = new Promise((resolve, reject) => {
+            // 该箭头函数称为执行器函数
+            // 执行异步函数
+            // 成功 调用 resolve(value) value为传入的数据
+            // 失败 reject(reason)
+            console.log('222');
+            setTimeout(() => {
+                console.log('333');
+                let time = Date.now()
+                if (time % 2 == 0) {
+                    resolve('成功的数据,time:' + time);
+                } else {
+                    reject('失败的数据,time:' + time);
+                }
+            }, 1000);
+        })
+        console.log('111');
+        p.then(
+            value => {
+                // 接受得到成功的value数据
+                console.log(value);
+            },
+            reason => {
+                // 接收失败的reason数据
+                console.log(reason);
+            }
+        )
+    </script>
+</body>
+</html>

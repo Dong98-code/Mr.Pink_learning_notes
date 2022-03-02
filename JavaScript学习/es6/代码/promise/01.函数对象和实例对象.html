@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        function Fn() {
+
+        }
+        const Fn = new Fn()// Fn 为构造函数， fn为实例对象，简称为对象
+
+        // function Person(name) {
+        //     //
+        // }
+        // let p = new Person() ; // 实例
+        
+        console.log(Fn.prototype); // Fn为函数对象， 此时Fn作为对象使用；
+        Fn.bind({}) // 函数对象的bind方法，函数对象才有的方法；
+
+        Fn.call({}) // Fn 函数对象； 
+    </script>
+</body>
+</html>

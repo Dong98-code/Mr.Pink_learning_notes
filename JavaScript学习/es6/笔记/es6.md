@@ -449,5 +449,203 @@ BBB 为第二次调用next(), 第一次调用的结果为 one 所以现在 one =
 
 ## promise
 
+解决异步编程的新的解决方案；
+
+语法上 为一个构造函数， 用来封装异步函操作 并可以获得失败和成功的结果；
+
+### 准备
+#### 1.1 实例对象和函数对象
+![20220302153609](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220302153609.png)
+
+相关代码：
+
+```html
+<script>
+        function Fn() {
+
+        }
+        const Fn = new Fn()// Fn 为构造函数， fn为实例对象，简称为对象
+
+        // function Person(name) {
+        //     //
+        // }
+        // let p = new Person() ; // 实例
+        
+        console.log(Fn.prototype); // Fn为函数对象， 此时Fn作为对象使用；
+        Fn.bind({}) // 函数对象的bind方法，函数对象才有的方法；
+
+        Fn.call({}) // Fn 函数对象； 
+    </script>
+```
+#### 1.2 同步回调 和异步回调
+
+同步回调：
+```html
+<script>
+        const arr = [0, 1, 3];
+        arr.forEach(item => {
+            console.log(item);
+        })
+        console.log('foreach之后'); //
+    </script>
+```
+
+![20220302154043](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220302154043.png)
+
+遍历回调。 同步回调；
+
+立即执行， 完全执行完之后 
+
+异步回调：
+
+放在队列之中， 将来执行；
+异步队列 同步队列 执行完之后才执行 异步队列；
+
+例子： 定时器， ajax回调； Promise的成功失败案例；
+
+![20220302154145](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220302154145.png)
+
+#### 1.3 error 处理
+
+- 错误的类型
+  1). referenceError  引用错误； 
+  a is not defined ， 引用了一个不存在的变量；
+  2) TypeError: 数据类型错误
+  3) RangeError : 数据值不在其 范围内；
+  4) 
+- 错误处理
+  捕获错误和抛出错误
+  1) try...catch捕获
+   ![20220302155750](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220302155750.png)
+
+   error对象里面有两个属性： message，stack
+  2) throw error
+
+    示例：
+    ```js
+     function sth() {
+            if (Date.now() % 2 === 1) {
+                console.log('can');
+            } else {// 抛出异常
+                throw new Error("can't");
+            }
+        }
+        try {
+            sth();
+        } catch (error){
+            alert(error.message);
+        }
+    ```
+- 错误对象
+### promise 的理解和使用
+#### 2.1 pormise 是什么？
+从语法上说： promise 是一个 构造函数
+从功能上来说： promise 对象用来封装一个异步操作 并可以获取其结果
+
+- 状态改变
+  resolved / rejected
+  pending： 未确定的
+  ![20220302163138](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220302163138.png)
+- 基本流程
+  1. 创建 新的 promise 对象
+   传入一个参数， 函数； 执行异步操作
+   2. 执行异步操作
+   3. 调用成功或者失败的回调函数
+   4. 返回一个新的promise对象
+   ![20220302163545](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220302163545.png)
+#### 2.2 为什么？
+
+基本使用：
+```html
+<script>
+        const p = new Promise((resolve, reject) => {
+            // 该箭头函数称为执行器函数
+            // 执行异步函数
+            // 成功 调用 resolve(value) value为传入的数据
+            // 失败 reject(reason)
+            // 执行器函数为同步回调
+            setTimeout(() => {
+                let time = Date.now()
+                if (time % 2 == 0) {
+                    resolve('成功的数据,time:' + time);
+                } else {
+                    reject('失败的数据,time:' + time);
+                }
+            }, 1000);
+        })
+        
+        p.then(
+            value => {
+                // 接受得到成功的value数据
+                console.log(value);
+            },
+            reason => {
+                // 接收失败的reason数据
+                console.log(reason);
+            }
+        )
+    </script>
+```
+
+为社么使用 promise:
+
+之前的方式：
+
+纯的回调函数： 回调地狱问题；
+
+1. 在执行异步函数之前， 就必须定义好需要执行的异步函数；
+   先指定回调函数， 再 启动异步任务；
+2. 回调地狱 
+   回调函数嵌套， 外部回调函数异步执行的结果吗是嵌套的回调函数执行的条件；
+
+promise 启动 异步任务 =》 返回promise对象=》 给promise对象绑定回调函数
+
+
+回调地狱：
+
+![20220302204028](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220302204028.png)
+
+
+![20220302204246](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220302204246.png)
+
+异常传透  执行错误的回调函数 
+#### 2.3 如何使用 promise
+
+mdn 看吧
+
+关键问题：
+
+- 1.如何改变promise状态：
+   ![20220302211702](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220302211702.png)
+
+    抛出异常， 没有处理‘
+    pending 变为rejected，reason 为 抛出的对象： error 或者其他
+   ![20220302211912](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220302211912.png)
+
+   ![20220302212116](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220302212116.png)
+
+- 2. 一个promise指定了多个成功或者失败的回调， 都会调用吗？
+  都会
+
+- 3. 改变 promise状态 和指定 回调函数谁先谁后？
+  ![20220302220250](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220302220250.png)
+
+  一般为： 先指定回调函数，再改变状态；
+- 4. promise.then() 返回的新的promise的结果 状态由什么决定？
+  由then()指定的回调函数的结果 决定；
+    - 如果抛出异常， 新的promise变成 rejected ， reason 为抛出的异常；
+    - 如果返回的是 非 promise 的任意值， 新的promise会变成resolved ， value为返回的值；
+    - 如果返回的是另一个promise 此promise 的结果为新的 promise的结果
+- 5. promise 如何串联 多个操作任务？
+    ![20220302222448](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220302222448.png)
+
+    
+### 自定义 promise
+
+### async 和 await
+
+### js 异步宏队列 和 微队列
+
+### 面试题
 
 
