@@ -641,12 +641,20 @@ mdn 看吧
 
     
 ### 自定义 promise
-#### 1. 自定义 整体结构
+详细见 promise文件夹
 
 ### async 和 await
 
-### js 异步宏队列 和 微队列
+#### async 函数
 
-### 面试题
+返回结果为promise对象， 结果为async的返回值决定
+
+![20220304203103](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220304203103.png)
+
+#### await
+![20220304203216](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220304203216.png)
+
+
+![20220304204330](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220304204330.png)
 
 

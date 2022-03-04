@@ -52,10 +52,12 @@
         let p = Promise.resolve('ok');
         let p2 = Promise.resolve('jjj');
         let p3 = Promise.resolve('ok');
-        let res = Promise.all(['000', p2, p3]);
+        let res = Promise.race(['000', p2, p3]);
         // 空对象
         // let res = Promise.all(new Map());
         console.log(res);
+
+        
     </script>
 </body>
 </html>

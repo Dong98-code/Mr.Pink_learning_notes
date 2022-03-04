@@ -244,3 +244,19 @@ Promise.all = function (promises) {
         }
     })
 }
+
+Promise.race = function (promises) {
+    // 谁先改变状态 返回谁的结果
+    return new Promise((resolve, reject) => {
+        for (let i = 0; i < promises.length; i++) {
+            // 官方的api输入的并不一定都是 promise对象
+            Promise.resolve(promises[i]).then(v => {
+                resolve(v);
+            }, r => {
+                reject(r);
+            })
+        }
+    })
+}
+
+// then指定的回调函数 异步执行

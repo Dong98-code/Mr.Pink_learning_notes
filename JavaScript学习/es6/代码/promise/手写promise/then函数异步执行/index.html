@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <script src="./promise.js"></script> -->
+</head>
+<body>
+    <script>
+        let p = new Promise((resolve, reject)=>{
+            resolve('ok');
+            // reject('error');
+            // throw "error";
+            // setTimeout(()=>{
+            //     resolve('ok');
+            //     // reject('error');
+            // },1000)
+        });
+        // console.log(p);
+        p.then(value=>{
+            console.log(111);
+        })
+
+        console.log(222);
+
+        // then函数的执行 异步执行；
+
+        // 使用定时器
+       
+    </script>
+</body>
+</html>
