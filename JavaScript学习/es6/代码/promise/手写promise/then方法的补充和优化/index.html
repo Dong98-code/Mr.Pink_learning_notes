@@ -14,8 +14,8 @@
             // reject('error');
             // throw "error";
             setTimeout(()=>{
-                // resolve('ok');
-                reject('error');
+                resolve('ok');
+                // reject('error');
             },1000)
         });
         // console.log(p);
@@ -23,13 +23,13 @@
 
         const res = p.then(value => {
             // console.log(value);
-            // return 'ok';
+            return 'ok';
             // return "hello";
-            return new Promise((resolve, reject)=>{
-                reject('oh no');
-            })
+            // return new Promise((resolve, reject)=>{
+            //     reject('oh no');
+            // })
         }, reason=>{
-            // console.warn(reason);
+            console.warn(reason);
             throw 'error'
         });
 

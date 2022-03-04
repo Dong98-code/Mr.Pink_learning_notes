@@ -5,7 +5,7 @@ function Promise(executor) {
     // 保存示例对象的this值
     const self = this;
 
-    this.callback = []; // 用于then() 保存回调函数
+    this.callbacks = []; // 用于then() 保存回调函数
 
 
     // 执行器函数 executor 在内部同步调用
@@ -26,7 +26,7 @@ function Promise(executor) {
         //     // 如果此时callback中保存着 成功回调函数 则执行
         //     self.callback.onResolved(self.PromiseResult); // data
         // }
-        self.callback.forEach(item => {
+        self.callbacks.forEach(item => {
             item.onResolved(data);
         })
     }
@@ -43,7 +43,7 @@ function Promise(executor) {
         //     // 如果此时callback中保存着 成功回调函数 则执行
         //     self.callback.onRejected(self.PromiseResult); // data
         // }
-        self.callback.forEach(item => {
+        self.callbacks.forEach(item => {
             item.onRejected(data);
         })
     }
@@ -65,12 +65,11 @@ Promise.prototype.then = function (onResolved, onRejected) {
     // this为函数调用者 为 p
     const self = this;
     return new Promise((resolve, reject) => {
-
-        if (this.PromiseState === 'fullfilled') {
+        function callback(type) {
             try {
                 // 指向onResolved回调函数, 
                 // 使用箭头函数 不会改变this的指向， 此时还是指向then这个函数的调用者 p
-                let result = onResolved(this.PromiseResult); // 需要传入实参value即 成功的时候 的promise的结果值 this.PromiseResult
+                let result = type(self.PromiseResult); // 需要传入实参value即 成功的时候 的promise的结果值 this.PromiseResult
 
                 // result变为 调用的回调函数返回的结果
                 if (result instanceof Promise) {
@@ -88,74 +87,81 @@ Promise.prototype.then = function (onResolved, onRejected) {
             } catch (e) {
                 reject(e);
             }
+        }
+        if (this.PromiseState === 'fullfilled') {
+            callback(onResolved);
 
         }
 
         // 失败
         if (this.PromiseState === 'rejected') {
-            // onRejected(this.PromiseResult);
-            try {
-                // 指向onResolved回调函数, 
-                // 使用箭头函数 不会改变this的指向， 此时还是指向then这个函数的调用者 p
-                let result = onRejected(this.PromiseResult); // 需要传入实参value即 成功的时候 的promise的结果值 this.PromiseResult
+            // // onRejected(this.PromiseResult);
+            // try {
+            //     // 指向onResolved回调函数, 
+            //     // 使用箭头函数 不会改变this的指向， 此时还是指向then这个函数的调用者 p
+            //     let result = onRejected(this.PromiseResult); // 需要传入实参value即 成功的时候 的promise的结果值 this.PromiseResult
 
-                // result变为 调用的回调函数返回的结果
-                if (result instanceof Promise) {
-                    // 如果是Promise对象， 根绝result的值 来确定then()返回的promise的状态和值
-                    // 如果result成功， 返回的也是成功的promise, 即执行了result的then()函数
-                    result.then(v => {
-                        resolve(v)
-                    }, r => {
-                        reject(r);
-                    })
+            //     // result变为 调用的回调函数返回的结果
+            //     if (result instanceof Promise) {
+            //         // 如果是Promise对象， 根绝result的值 来确定then()返回的promise的状态和值
+            //         // 如果result成功， 返回的也是成功的promise, 即执行了result的then()函数
+            //         result.then(v => {
+            //             resolve(v)
+            //         }, r => {
+            //             reject(r);
+            //         })
 
-                } else {
-                    resolve(result);
-                }
-            } catch (e) {
-                reject(e);
-            }
+            //     } else {
+            //         resolve(result);
+            //     }
+            // } catch (e) {
+            //     reject(e);
+            // }
+            callback(onRejected);
         }
 
         if (this.PromiseState === 'pending') {
             // 保存回调函数
-            this.callback.push({
+            this.callbacks.push({
                 onResolved: function () {
                     // 执行成功的回调函数
-                    try {
-                        let result = onResolved(self.PromiseResult);
-                        if (result instanceof Promise) {
-                            // 返回的新的promise是
-                            result.then(v => {
-                                resolve(v);
-                            }, r => {
-                                reject(r);
-                            })
-                        } else {
-                            resolve(result); // 此时result为一个对象
-                        }
-                    } catch (e) {
-                        reject(e);
-                    }
+                    // try {
+                    //     let result = onResolved(self.PromiseResult);
+                    //     if (result instanceof Promise) {
+                    //         // 返回的新的promise是
+                    //         result.then(v => {
+                    //             resolve(v);
+                    //         }, r => {
+                    //             reject(r);
+                    //         })
+                    //     } else {
+                    //         resolve(result); // 此时result为一个对象
+                    //     }
+                    // } catch (e) {
+                    //     reject(e);
+                    // }
+                    callback(onResolved);
 
                 },
                 onRejected: function () {
-                    try {
-                        let result = onRejected(self.PromiseResult);
-                        if (result instanceof Promise) {
-                            // 返回的新的promise是
-                            result.then(v => {
-                                resolve(v);
-                            }, r => {
-                                reject(r);
-                            })
-                        } else {
-                            resolve(result); // 此时result为一个对象
-                        }
-                    } catch (e) {
-                        reject(e);
-                    }
+                //     try {
+                //         let result = onRejected(self.PromiseResult);
+                //         if (result instanceof Promise) {
+                //             // 返回的新的promise是
+                //             result.then(v => {
+                //                 resolve(v);
+                //             }, r => {
+                //                 reject(r);
+                //             })
+                //         } else {
+                //             resolve(result); // 此时result为一个对象
+                //         }
+                //     } catch (e) {
+                //         reject(e);
+                //     }
+                    callback(onRejected);
                 }
+                    
             })
         }
 
