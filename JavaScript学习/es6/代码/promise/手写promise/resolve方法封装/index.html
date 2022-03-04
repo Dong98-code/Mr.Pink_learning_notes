@@ -50,9 +50,12 @@
         //     console.warn(reason);
         // })
         let p = Promise.resolve('ok');
-        let p2 = Promise.resolve(Promise.resolve('OK'));
-        let p3 = Promise.reject('ok');
-        console.log(p3);
+        let p2 = Promise.resolve('jjj');
+        let p3 = Promise.resolve('ok');
+        let res = Promise.all(['000', p2, p3]);
+        // 空对象
+        // let res = Promise.all(new Map());
+        console.log(res);
     </script>
 </body>
 </html>

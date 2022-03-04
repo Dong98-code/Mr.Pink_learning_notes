@@ -210,3 +210,37 @@ Promise.reject = function (reason) {
         reject(reason);
     })
 }
+
+Promise.all = function (promises) {
+    return new Promise((resolve, reject) => {
+        // promises是一个 可迭代的对象 数组 map等；里面的值 均为 promise
+        // 注意， 有可能promises[i]可能不为promise对象
+        // 返回值： 如果传入的为空的可迭代对象； 返回一个已完成的promise
+        // 2. 如果不包含任何 promise对象， 返回一个已完成状态的promise'
+        // 3. 返回一个pending 状态下的Promise;
+        // 返回 promise执行结果组成的数组
+        let count = 0;
+        let result = [];
+        // 可对象为空, 还是有一个小瑕疵 如果输入 不是可迭代对象怎么半？
+
+        if (Object.keys(promises).length === 0) {
+            // 直接返回新数组
+            resolve(result);
+        }
+        for (let i = 0; i < promises.length; i++) {
+            // 还有就是 不一定都是 promise对象；
+            // 先使用 Promis.resolve()
+            Promise.resolve(promises[i]).then(v => {
+                // 每一个promise对象都成功
+                count += 1;
+
+                result[i] = v;
+                if (count == promises.length) {
+                    resolve(result);
+                }
+            }, r => {
+                reject(r);
+            })
+        }
+    })
+}
