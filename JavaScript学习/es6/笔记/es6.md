@@ -658,3 +658,49 @@ mdn 看吧
 ![20220304204330](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220304204330.png)
 
 
+
+## class类
+
+es5原型链 继承
+
+
+```html
+<script>
+        function Phone(brand, price) {
+            this.brand = brand;
+            this.price = price;
+        }
+
+        Phone.prototype.call = function () {
+            console.log('打电话');
+        }
+
+        // 智能手机
+        function SmartPhone(brand, color, size, price) {
+            // 通过call改变this的指向
+            Phone.call(this, brand, price)
+            this.color = color;
+            this.size = size;
+        }
+        // 将子类的原型指向父类的实例
+        SmartPhone.prototype = new Phone;
+        // constructor指向
+        SmartPhone.prototype.constructor = SmartPhone;
+
+        // 声明子类的方法
+        SmartPhone.prototype.playgame  = function () {
+            console.log('打游戏');
+        }
+
+        const onePlus = new SmartPhone(brand='一加', price=4399, color='pink', size='3.36');
+        console.log(onePlus);
+
+        // class类继承
+
+    
+    </script>
+```
+
+### get 和 set 方法
+
+![20220306212619](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220306212619.png)

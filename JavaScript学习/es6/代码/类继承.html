@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function Phone(brand, price) {
+            this.brand = brand;
+            this.price = price;
+        }
+
+        Phone.prototype.call = function () {
+            console.log('打电话');
+        }
+
+        // 智能手机
+        function SmartPhone(brand, color, size, price) {
+            // 通过call改变this的指向
+            Phone.call(this, brand, price)
+            this.color = color;
+            this.size = size;
+        }
+        // 将子类的原型指向父类的实例
+        SmartPhone.prototype = new Phone;
+        // constructor指向
+        SmartPhone.prototype.constructor = SmartPhone;
+
+        // 声明子类的方法
+        SmartPhone.prototype.playgame  = function () {
+            console.log('打游戏');
+        }
+
+        const onePlus = new SmartPhone(brand='一加', price=4399, color='pink', size='3.36');
+        console.log(onePlus);
+
+        // class类继承
+
+    
+    </script>
+</body>
+</html>
