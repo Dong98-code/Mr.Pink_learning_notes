@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../../资料/03_依赖包/vue.js"></script>
+
+</head>
+<body>
+    <!-- 准备好一个容器-->
+    <div id="root">
+        <!-- 遍历数组 -->
+        <h2>人员列表（遍历数组）</h2>
+        <button @click="sortType = 1">年龄升序</button>
+        <button @click="sortType = 2">年龄降序</button>
+        <button @click="sortType = 0">原顺序</button>
+       <input type="text" placeholder="请输入名字" v-model="keyWord">
+        <ul>
+            <li v-for="(p,index) of fillPersons" :key="p.id">
+                {{p.name}}-{{p.age}}-{{p.sex}}
+            </li>
+        </ul>
+    </div>
+</body>
+<script>
+    const vm = new Vue({
+        el:'#root',
+        data:{
+            keyWord:'',
+            persons:[
+                {id:'001',name:'马冬梅',age:18, sex:'女'},
+                {id:'002',name:'周冬雨',age:19, sex:'女'},
+                {id:'003',name:'周杰伦',age:20, sex:'男'},
+                {id:'004',name:'温兆伦',age:56, sex:'男'}
+            ],
+            sortType: 0, // 0 原顺序， 1 升序 2 降序 
+        },
+        computed: {
+            fillPersons() {
+                // 返回由属性计算处理啊的属性
+                let arr =  this.persons.filter((p)=>{
+                    return p.name.includes(this.keyWord);})
+                    // 返回一个 过滤过后的 array
+                
+                // 判断是否需要排序
+                if (this.sortType !== 0) {
+                    // 需要排序
+                    
+                    arr.sort((a,b)=>{
+                        return this.sortType === 1 ? a.age - b.age : b.age - a.age;
+                    });
+                }
+                return arr;
+                
+            }
+        }
+    })
+</script>
+</html>

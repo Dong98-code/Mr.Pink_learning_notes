@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../../资料/03_依赖包/vue.js"></script>
+</head>
+
+<body>
+    <!-- 准备好一个容器-->
+    <div id="root">
+        <!-- 遍历数组 -->
+        <h2>人员列表（遍历数组）</h2>
+       <input type="text" placeholder="请输入名字" v-model="keyWord">
+        <ul>
+            <li v-for="(p,index) of fillPersons" :key="p.id">
+                {{p.name}}-{{p.age}}-{{p.sex}}
+            </li>
+        </ul>
+    </div>
+</body>
+<script type="text/javascript">
+    Vue.config.productionTip = false
+    
+    new Vue({
+        el:'#root',
+        data:{
+            keyWord:'',
+            persons:[
+                {id:'001',name:'马冬梅',age:18, sex:'女'},
+                {id:'002',name:'周冬雨',age:19, sex:'女'},
+                {id:'003',name:'周杰伦',age:20, sex:'男'},
+                {id:'004',name:'温兆伦',age:56, sex:'男'}
+            ]
+            // fillPersons:[]
+        },
+        // #region
+        // methods: {
+        //     add(){
+        //         const p = {id:'004',name:'老刘',age:40}
+        //         this.persons.unshift(p)
+        //     }
+        // },
+        // watch: {
+        //     keyWord: {
+        //         // 加入 immediate 会立即触发一次 handler
+        //         immediate:true,
+        //         handler(val) {
+        //             this.fillPersons = this.persons.filter((p)=>{
+        //                 return p.name.includes(val);
+        //             })
+        //         }
+        //     }
+        // }
+        // #endregion
+        // computed实现
+
+        computed: {
+            fillPersons() {
+                // 返回由属性计算处理啊的属性
+                return this.persons.filter((p)=>{
+                    return p.name.indexOf(this.keyWord) !== -1;
+                    // 返回一个 过滤过后的 array
+                })
+            }
+        }
+    })
+</script>
+</html>

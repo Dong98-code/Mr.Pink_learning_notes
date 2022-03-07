@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../../资料/03_依赖包/vue.js"></script>
+</head>
+
+<body>
+    <!-- 准备好一个容器-->
+    <div id="root">
+        <h2>今天天气很{{info}}</h2>
+        <!-- 绑定事件的时候：@xxx="yyy" yyy可以写一些简单的语句 -->
+        <!-- <button @click="isHot = !isHot">切换天气</button> -->
+        <button @click="changeWeather">切换天气</button>
+    </div>
+</body>
+<script>
+    Vue.config.productionTip = false;
+    const vm = new Vue({
+        el: "#root",
+        data: {
+            isHot: true,
+            
+        },
+        computed: {
+            info() {
+                return this.isHot ? '炎热' : '凉爽';
+            }
+        },
+        methods: {
+            changeWeather() {
+                this.isHot = !this.isHot;
+            }
+        },
+        watch: {
+            isHot: {
+                immediate: true, //初始化时让handler调用一下
+                //handler什么时候调用？当isHot发生改变时。
+                handler(newValue, oldValue) {
+                    console.log('isHot被修改了', newValue, oldValue)
+                }
+            }
+        }
+    })
+</script>
+
+</html>

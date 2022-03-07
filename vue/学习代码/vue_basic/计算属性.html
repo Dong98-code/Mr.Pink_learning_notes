@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../../资料/03_依赖包/vue.js"></script>
+</head>
+
+<body>
+
+    <!-- 容器 -->
+    <div id="root">
+        <!-- 双向绑定 v-model -->
+        姓：<input type="text" v-model:value="firstName"><br /><br />
+        名：<input type="text" v-model="lastName"> <br /><br />
+        全名：<span>{{fullName}}</span>
+    </div>
+</body>
+<script>
+    Vue.config.productionTip = false //阻止 vue 在启动时生成生产提示。
+    const vm = new Vue({
+        el: "#root",
+        data: {
+            firstName: 'x',
+            lastName: 'd'
+        },
+        // methods:{
+        //     fullName() {
+        //         return this.firstName + '-' +this.lastName;
+        //     }
+        // }
+        computed: {
+            fullName: {
+                // 读取fullname 调用get
+                get() {
+                    // this此时为VM
+                    return this.firstName + '-' + this.lastName;
+                },
+                set(value) {
+                    // fullName修改的时候  调用set
+                    console.log('set', value)
+                    const arr = value.split('-')
+                    this.firstName = arr[0]
+                    this.lastName = arr[1]
+                }
+            }
+        }
+    })
+    console.log(vm);
+</script>
+
+</html>
