@@ -345,3 +345,293 @@ v-for
         1.最好使用每条数据的唯一标识作为key, 比号、身份证号、学号等唯一值。
     	2.如果不存在对数据的逆序添加、逆序删除作，仅用于渲染列表用于展示，使用index作为key是没有问题的。
     
+## Vue检测数据的原理——对象
+
+![20220312212316](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220312212316.png)
+
+![20220312212339](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220312212339.png)
+
+![20220312212539](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220312212539.png)
+
+加工数据： get 和set的 步骤；对对象属性的监视；
+
+改变 name的值， 调用 set name
+
+
+observer: 监视data中的属性的变化；
+
+```js
+function Observer(obj){
+	//汇总对象中所有的属性形成一个数组
+	const keys = Object.keys(obj)
+	//遍历
+	keys.forEach((k)=>{
+		Object.defineProperty(this,k,{ // this为实例对象
+			get(){
+				return obj[k]
+			},
+			set(val){
+				console.log(`${k}被改了，我要去解板，生成虚拟DOM.....我要开始忙了`)
+				obj[k] = val
+			}
+		})
+	})
+	
+
+```
+
+递归判断： 
+对象中的元素也为对象；
+
+## Vue.set()
+
+后添加的数据也能有 响应式 特点
+：
+
+![20220312215423](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220312215423.png)
+
+![20220312220954](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220312220954.png)
+
+
+### 总结
+
+检测数据原理：
+
+Vue监视数据的原理：
+1. vue会监视data中所有层次的数据。
+2. 如何监测对象中的数据？
+   	通过setter实现监视，且要在new Vue时就传入要监测的数据。
+           (1).对象中后追加的属性，Vue默认不做响应式处理	
+           (2).如需给后添加的属性做响应式，请使用如下API：	`Vue.set(target，propertyName/index，value)` 或 `vm.$set(target，propertyName/index，value)`
+
+3. 如何监测数组中的数据？
+    通过包裹数组更新元素的方法实现，本质就是做了两件事：
+    	(1).调用原生对应的方法对数组进行更新。
+    	(2).重新解析模板，进而更新页面。
+
+4. 在Vue修改数组中的某个元素一定要用如下方法：
+    1. 使用这些API:`push()、pop()、shift()、unshift()、splice()、sort()、reverse()`
+    2. `Vue.set() `或 `vm.$set()`
+    特别注意：Vue.set() 和 vm.$set() 不能给vm 或 vm的根数据对象 添加属性！！！
+
+
+数据劫持：
+如果有人修改 数据， setter 立刻劫持：
+1. 该数据 2. 解析模板
+
+## 收集表单数据
+
+v-model:
+
+收集表单数据：
+    若：`<input type="text"/>`，则v-model收集的是value值，用户输入的就是value值。
+    若：`<input type="radio"/>`，则v-model收集的是value值，且要给标签配置value值。
+    若：`<input type="checkbox"/>`
+            1.没有配置input的value属性，那么收集的就是checked（勾选 or 未勾选，是布尔值）
+            2.配置input的value属性:
+                    (1)v-model的初始值是非数组，那么收集的就是checked（勾选 or 未勾选，是布尔值）
+                    (2)v-model的初始值是数组，那么收集的的就是value组成的数
+                    
+备注：v-model的三个修饰符：
+          lazy：失去焦点再收集数据
+          number：输入字符串转为有效的数字
+          trim：输入首尾空格过滤
+
+
+## 过滤器
+
+过滤器：
+- 定义：对要显示的数据进行特定格式化后示（适用于一些简单逻辑的处理）。
+- 语法：
+    - 1.注册过滤器：Vue.filter(namcallback) 或 new Vue{filters:}
+	- 2.使用过滤器：{{ xxx | 过滤器}  或  v-bind:属性 = "xxx |滤器名"
+	- 备注：
+		- 1.过滤器也可以接收额外参数、过滤器也可以串联
+		- 2.并没有改变原本的数据, 是产的对应的数据
+
+
+![20220314164227](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220314164227.png)
+
+```js
+Vue.filter('mySlice', function (value) {
+            return value.slice(0, 4)
+        })
+```
+
+## 内置zhiling
+
+### v-text
+
+![20220314164623](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220314164623.png)
+
+
+### v-html
+
+![20220314164844](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220314164844.png)
+
+v-html指令：
+- 1.作用：向指定节点中渲染包含html结构的内容。
+- 2.与插值语法的区别：
+	- (1).v-html会替换掉节点中所有的内容，{{xx}}则不会。
+    - (2).v-html可以识别html结构。
+- 3.严重注意：v-html有安全性问题！！！！
+	- (1).在网站上动态渲染任意HTML是非常危险的，容易导致XSS攻击。
+	- (2).一定要在可信的内容上使用v-html，永不要用在用户提交的内容上！
+
+
+### v-cloak
+
+![20220314170638](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220314170638.png)
+
+
+
+v-cloak指令（没有值）：
+- 1. 本质是一个特殊属性，Vue实例创建完毕并接管容器后，会删掉v-cloak属性。
+- 2. 使用css配合v-cloak可以解决网速慢时页面展示出{{xxx}}的问题。
+
+## 自定义指令
+
+原生dom操作 封装
+
+1. 定义一个v-big指令，功能类似于 v-text 将绑定的数值放大10倍
+
+![20220314204142](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220314204142.png)
+
+
+// 1. 指令与元素绑定时会被调用；
+// 2. 指令所在的模板 被重新解析时
+
+2. 需求2 ： v-fbind： 与v-bind功能类似； 可以使得input元素默认获得焦点；
+
+![20220323164559](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220323164559.png)
+
+## 生命周期
+
+1.  初始化
+
+![20220324155955](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220324155955.png)
+
+还没有 开始数据代理
+
+2. creared 
+
+数据代理和初始化
+
+![20220324160611](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220324160611.png)
+
+3. 产生虚拟dom
+
+![20220324160748](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220324160748.png)
+
+4. beforeMount
+
+![20220324161006](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220324161006.png)
+
+看到是 未经vm解析的dom元素
+
+5. ![20220324161055](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220324161055.png)
+
+6. mounted
+
+![20220324161357](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220324161357.png)
+
+此时 dom已经经过编译；
+
+尽可能减少对dom的操作；
+
+7. beforeDestroy 
+
+关闭定时器 取消订阅消息
+
+
+# Vue组件化编程
+
+
+## 组件定义
+
+组件定义是 不需要写el对象；
+
+Vue中使用组件的三大步骤：
+	一、定义组件(创建组件)
+	二、注册组件
+	三、使用组件(写组件标签)
+
+一、如何定义一个组件？
+使用Vue.extend(options)创建，其中options和new Vue(options)时传入那个options几乎一样，但也有点区别；
+区别如下：
+ 1. el不要写，为什么？ ——— 最终所有的组件都要经过一个vm的 由vm中的el决定服务哪个容器。
+ 2. data必须写成函数，为什么？ ———— 避免组件被复用时，数 引用关系。
+	备注：使用template可以配置组件结构。
+
+二、如何注册组件？
+	1.局部注册：靠new Vue的时候传入components选项
+	2.全局注册：靠Vue.component('组件名',组件)
+三、编写组件标签：
+	`<school></school`
+
+## 组件使用
+
+![20220329194029](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220329194029.png)
+
+```html
+<body>
+<!-- 
+几个注意点：
+1.关于组件名:
+	一个单词组成：
+				第一种写法(首字母小写)：school
+				第二种写法(首字母大写)：School
+	多个单词组成：
+				第一种写法(kebab-case命名)：my-school
+				第二种写法(CamelCase命名)：MySchool (需要Vue脚手架支持)
+	备注：
+			(1).组件名尽可能回避HTML中已有的元素名称，例如：h2、H2都不行。
+			(2).可以使用name配置项指定组件在开发者工具中呈现的
+2.关于组件标签:
+	第一种写法：<school></school>
+	第二种写法：<school/>
+	备注：不用使用脚手架时，<school/>会导致后续组件不能
+3.一个简写方式：
+				const school = Vue.extend(options) 可简写为：const school = options
+-->
+		<!-- 准备好一个容器-->
+		<div id="root">
+			<h1>{{msg}}</h1>
+			<school></school>
+		</div>
+	</body>
+
+	<script type="text/javascript">
+		Vue.config.productionTip = false
+		
+		//定义组件
+		const s = Vue.extend({
+			name:'atguigu',
+			template:`
+				<div>
+					<h2>学校名称：{{name}}</h2>	
+					<h2>学校地址：{{address}}</h2>	
+				</div>
+			`,
+			data(){
+				return {
+					name:'尚硅谷',
+					address:'北京'
+				}
+			}
+		})
+
+		new Vue({
+			el:'#root',
+			data:{
+				msg:'欢迎学习Vue!'
+			},
+			components:{
+				school:s
+			}
+		})
+	</script>
+```
+
+## 组件嵌套
+

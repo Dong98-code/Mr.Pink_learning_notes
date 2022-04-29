@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let res = [];
+        let n = 4,
+            k = 6,
+            x = 15;
+        const getMin = function (l) {
+            //返回l个数的最小值
+            return parseInt((1 + l) * l / 2);
+        }
+        // 此时肯定存在这样地数组；
+        // 贪心
+        let tmp_sum = 0;
+        let tmp_num = k;
+        while (n > 0 || x > 0) {
+            let min_sum = getMin(n);
+            if (min_sum === x) {
+                // 1-l加入
+                for (let i = 1; i <= n; i++) {
+                    res.push(i)
+                }
+            } else if (min_sum < x) {
+                res.push(tmp_num);
+                x -= tmp_num;
+                tmp_num -= 1;
+                n -= 1;
+
+            } else if (min_sum > x) {
+                res.pop();
+                res.push(tmp_num);
+                x += 1;
+                tmp_num -=1;
+            }
+        }
+        console.log(res);
+    </script>
+</body>
+</html>

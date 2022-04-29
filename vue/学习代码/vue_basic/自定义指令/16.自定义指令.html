@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../../../资料/03_依赖包/vue.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <span v-text="n"></span><br>
+        <span v-big="n"></span><br>
+        <button @click="n++">点我n++</button>
+        <input type="text" v-fbind:value="n">
+    </div>
+</body>
+<script>
+    Vue.config.productionTip = false;
+    const vm = new Vue({
+        el: "#root",
+        data: {
+            n: 1
+        },
+        directives: {
+            // 配置对象
+            // 1. 指令与元素绑定时会被调用；
+            // 2. 指令所在的模板 被重新解析时
+            big: function (element, obj) {
+                element.innerText = obj.value * 10;
+
+            },
+            // fbind: function(element, bingding) {
+            //     element.value = bingding.value;
+            //     element.focus();
+            // }
+            fbind: {
+                // 指令所在元素 成功绑定的时候
+                bind(element, bingding) {
+                    element.value = bingding.value;
+                },
+                // 指令所在元素被插入页面是调用
+                inserted(element, bingding) {
+                    element.focus();
+                },
+                // 模板被重新解析时
+                update(element, bingding) {
+                    element.value = bingding.value;
+                    element.focus();
+                },
+            }
+
+        }
+    })
+</script>
+
+</html>

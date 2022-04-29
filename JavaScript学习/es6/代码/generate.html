@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function *gen(arg) {
+            console.log(arg);
+            let one = yield 111;
+            console.log(one);
+            let two = yield 222;
+
+        }
+        let inter = gen('AAA');
+        console.log(inter.next());
+    </script>
+</body>
+</html>
