@@ -633,5 +633,50 @@ Vue中使用组件的三大步骤：
 	</script>
 ```
 
-## 组件嵌套
+## Vue和 VueComponent 的关系
 
+![20220522161131](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220522161131.png)
+
+1. 引入 vue.js
+
+Vue构造函数
+
+![20220522161246](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220522161246.png)
+
+2. Vue的原型对象
+
+![20220522161400](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220522161400.png)
+
+3. 创建 Vue实例对象
+vm
+![20220522161518](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220522161518.png)
+
+实例对象 隐式原型对象 指向自己缔造者的原型对象
+
+
+![20220522161552](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220522161552.png)
+
+
+![20220522192831](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220522192831.png)
+
+![20220522193038](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220522193038.png)
+
+![20220522193245](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220522193245.png)
+
+让 vc 可以访问到 Vue原型上的属性和方法
+
+
+## 单组件文件
+![20220522194517](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220522194517.png)
+1. 结构 
+   ```Vue
+   <template>
+	<div class="demo">
+		<h2>学校名称：{{name}}</h2>
+		<h2>学校地址：{{address}}</h2>
+		<button @click="showName">点我提示学校名</button>	
+	</div>
+	</template>
+	```
+2. 样式 
+3. 
