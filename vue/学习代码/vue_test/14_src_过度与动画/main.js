@@ -9,11 +9,14 @@ Vue.config.productionTip = false
 Vue.use(plugins)
 // 创建实例对象
 new Vue({
-  // el:"#app",
+  el:"#app",
   // 将App组件 放入容器中
   // render 为箭头函数的缩写
   render: h => h(App),
-}).$mount('#app')
+  beforeCreate() {
+    Vue.prototype.$bus = this;
+  }
+})
 
 // new Vue({
 //   el: "#app",

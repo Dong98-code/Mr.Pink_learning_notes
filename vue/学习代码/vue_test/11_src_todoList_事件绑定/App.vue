@@ -2,7 +2,7 @@
 	<div id="root">
 		<div class="todo-container">
 		<div class="todo-wrap">
-			<MyHeader :receive="receive"/>
+			<MyHeader @receive="receive"/>
 			<MyList :todos="todos" :checkTodo="checkTodo" :deleteTodo="deleteTodo"/>
 			<MyFooter :todos="todos" :checkAllTodo="checkAllTodo" :clearAllTodo="clearAllTodo"/>
 		</div>

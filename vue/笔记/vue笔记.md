@@ -679,4 +679,264 @@ vm
 	</template>
 	```
 2. 样式 
-3. 
+
+
+# Vue CLI脚手架
+
+## render 配置项
+
+![20220523213352](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220523213352.png)
+
+## 修改默认配置
+
+脚手架创建的文件夹的名称 建议不要更改
+
+![20220523213850](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220523213850.png)
+
+配置参考项可以更改
+
+## ref
+
+### mian.js
+
+## props
+
+![20220529172630](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220529172630.png)
+
+接收的同 对数据类型进行限制；
+
+![20220529172721](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220529172721.png)
+
+
+## 插件
+
+增加操作
+
+本质为对象， 里面必须包含着 install 方法；
+
+
+![20220530143154](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220530143154.png)
+
+![20220530143254](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220530143254.png)
+
+
+引用 造好的轮子
+
+
+## scoped
+
+![20220530145222](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220530145222.png)
+
+## Todo list
+
+组件化编码流程
+
+![20220530145434](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220530145434.png)
+
+### 静态组件
+
+![20220530150330](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220530150330.png)
+
+
+### 数据
+
+数据类型 和 名称
+
+props子传父
+
+父亲先给儿子传一个函数， 函数定义在父亲身上， 然后儿子调用这个函数
+
+### 删除
+
+找到按钮 绑定事件
+
+### 底部计数
+
+![20220530202159](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220530202159.png)
+
+找到todos
+
+![20220530215622](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220530215622.png)
+
+### 底部交互
+
+### 总结
+
+1. 组件化编码流程
+
+![20220530222012](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220530222012.png)
+
+2. props 适用于：
+
+（1）父组件 ===》 子组件 通信
+
+（2） 子组件 ===》 父组件：献给父组件声明一个函数， 然后
+
+
+![20220530222132](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220530222132.png)
+
+
+## 浏览器本地存储
+
+js中存储
+
+sessionStorage
+
+localStorage：
+
+window.localStorage:
+
+`setItem(key, value)`:字符串
+
+![20220531134832](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220531134832.png)
+
+存储对象的时候， 默认调用toString()
+
+JSON.stringify: 将对象转换为字符串；
+
+读；
+`getItem()`
+
+![20220531135051](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220531135051.png)
+
+JSON.parse 解析为对象；
+
+如果为空， 返回null;
+
+JSON.parse(null)
+删除：
+
+`removeItem`
+
+
+清空：
+
+`clear`:localStorage.clear();
+
+关闭浏览器， locaStorage仍然存在；
+
+
+### sessionStorage
+
+会话；
+
+浏览器关闭， 存储消失；
+
+用户清空缓存 ， sessionStorage消失；
+
+![20220531135653](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220531135653.png)
+
+
+![20220531135712](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220531135712.png)
+
+![20220531151945](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220531151945.png)
+
+
+### 自定义事件绑定
+
+![20220531155112](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220531155112.png)
+
+触发
+
+
+第二种绑定：
+![20220531155558](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220531155558.png)
+
+
+### 解绑
+
+![20220531160219](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220531160219.png)
+
+解绑多个， 传入参数为数组， 里面为事件的名称
+
+![20220531160837](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220531160837.png)
+
+
+### 总结
+
+![20220531162314](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220531162314.png)
+
+## 全局事件总线
+
+任意组件间的通信
+
+![20220531164149](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220531164149.png)
+
+![20220531191001](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220531191001.png)
+
+组件间通信的流程：
+![20220531191646](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220531191646.png)
+
+![20220531191704](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220531191704.png)
+
+组件销毁之前， 解绑身上的事件
+
+
+父子通信： props
+
+子->父亲传： 函数+props
+
+爷孙组件传递 比较适合 数组总线之间传递数据；
+
+## 消息订阅与发布
+
+![20220531192631](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220531192631.png)
+
+
+pubsub-js:
+
+![20220531193327](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220531193327.png)
+
+![20220531193337](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220531193337.png)
+回调函数：
+`function(消息名， 数据)`
+
+解绑：
+
+![20220531193547](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220531193547.png)
+
+根据id 取消订阅
+`pubsub.unsubscribe(pubid)`
+
+箭头函数， this的指向
+
+![20220531193819](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220531193819.png)
+
+
+### nextTick
+
+![20220531205728](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220531205728.png)
+
+
+## 动画
+enter, leave
+active
+
+![20220601152832](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220601152832.png)
+
+
+### 多个元素过度
+
+![20220601152942](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220601152942.png)
+
+transition-group: 配置key值
+
+![20220601153112](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220601153112.png)
+
+![20220601153127](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220601153127.png)
+
+
+### animate.css
+
+库
+第三方库
+
+### 总结
+
+添加固定样式的类名，类名提前写好， 可以第三方引入， 也可以 自己书写完成
+![20220601153605](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220601153605.png)
+
+![20220601153649](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220601153649.png)
+
+
+![20220601153710](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220601153710.png)

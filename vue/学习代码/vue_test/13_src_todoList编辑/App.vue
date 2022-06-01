@@ -2,7 +2,7 @@
 	<div id="root">
 		<div class="todo-container">
 		<div class="todo-wrap">
-			<MyHeader :receive="receive"/>
+			<MyHeader @receive="receive"/>
 			<MyList :todos="todos" :checkTodo="checkTodo" :deleteTodo="deleteTodo"/>
 			<MyFooter :todos="todos" :checkAllTodo="checkAllTodo" :clearAllTodo="clearAllTodo"/>
 		</div>
@@ -41,6 +41,13 @@ export default {
 				}
 			});
 		},
+		UpdateTodo(id, title) {
+			this.todos.forEach(element => {
+				if (element.id === id) {
+					element.title = title;
+				}
+			});
+		},
 		deleteTodo(id) {
 			this.todos = this.todos.filter((todo)=>{
 				return todo.id !== id;
@@ -70,7 +77,13 @@ export default {
 
 			}
 		}
-	}
+	},
+	mounted() {
+		this.$bus.$on('UpdateTodo', this.UpdateTodo)
+	},
+	beforeDestroy() {
+		this.$bus.$off('UpdateTodo');
+	},
 }
 
 </script>
@@ -98,6 +111,14 @@ body {
 	color: #fff;
 	background-color: #da4f49;
 	border: 1px solid #bd362f;
+}
+
+.btn-edit {
+	color: #fff;
+	background-color: pink;
+	border: 1px solid #bd362f;
+	margin-right:5px ;
+
 }
 
 .btn-danger:hover {
