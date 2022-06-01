@@ -16,6 +16,7 @@ router.get('/get', (req, res) => {
 // 定义 POST 接口
 router.post('/post', (req, res) => {
   // 通过 req.body 获取请求体中包含的 url-encoded 格式的数据
+  //响应
   const body = req.body
   // 调用 res.send() 方法，向客户端响应结果
   res.send({
@@ -25,12 +26,12 @@ router.post('/post', (req, res) => {
   })
 })
 
-// 定义 DELETE 接口
-router.delete('/delete', (req, res) => {
-  res.send({
-    status: 0,
-    msg: 'DELETE请求成功',
-  })
-})
+// // 定义 DELETE 接口
+// router.delete('/delete', (req, res) => {
+//   res.send({
+//     status: 0,
+//     msg: 'DELETE请求成功',
+//   })
+// })
 
 module.exports = router

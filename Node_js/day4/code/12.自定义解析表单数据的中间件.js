@@ -20,6 +20,7 @@ app.use((req, res, next) => {
     // console.log(str)
     // TODO: 把字符串格式的请求体数据，解析成对象格式
     const body = qs.parse(str)
+    // 挂载为 req.body
     req.body = body
     next()
   })

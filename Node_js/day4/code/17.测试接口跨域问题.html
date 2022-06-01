@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <!-- 在线版jquery -->
     <script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js"></script>
   </head>
   <body>
@@ -15,6 +16,7 @@
     <script>
       $(function () {
         // 1. 测试GET接口
+        // on 绑定一个 click函数
         $('#btnGET').on('click', function () {
           $.ajax({
             type: 'GET',
