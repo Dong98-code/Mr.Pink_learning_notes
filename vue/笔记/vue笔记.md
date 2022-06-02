@@ -940,3 +940,92 @@ transition-group: 配置key值
 
 
 ![20220601153710](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220601153710.png)
+
+## vue ajax
+
+![20220602204131](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220602204131.png)
+
+跨域时：
+
+服务器收到 了并相应了请求， 但是 客户端得不到 响应的内容
+
+配置代理服务器：
+
+![20220602211855](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220602211855.png)
+
+端口号 和 自身一致 ， 如都是 8080端口；
+
+服务器和服务器之间传输 数据 不存在 跨域问题
+
+使用http 协议请求；
+
+1. nginx: 代理服务器；
+
+2. vue 代理服务器
+
+![20220602212314](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220602212314.png)
+
+![20220602212413](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220602212413.png)
+
+![20220602212852](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220602212852.png)
+
+设置代理服务器：
+
+在vue.config.js中配置：
+
+```js
+module.exports = {
+  pages: {
+    index: {
+      entry:'src/main.js'
+    }
+  },
+  lintOnSave: false,
+  devServer: {
+    proxy: 'http://localhost:5000'
+  }
+  
+}
+```
+
+端口号为服务其的端口号， 例如为5000， 自身的端口号为8080， 配置完之后 会自动生成一个代理服务器， 然后代理服务器8080 端口和目标服务器 5000之间通信；
+
+
+修改请求的端口号：
+![20220602213053](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220602213053.png)
+
+更细致的配置对象：
+
+走代理 ＋前缀； 
+```js
+module.exports = {
+  devServer: {
+    proxy: {
+      '/api': {
+        target: '<url>',// 请求前缀
+        ws: true,
+        changeOrigin: true  // 用于配置 请求头中的host值
+      },
+    //   '/foo': {
+    //     target: '<other_url>'
+    //   }
+    }
+  }
+}
+```
+
+- 请求前缀： url 
+
+走代理 前缀+ api
+
+![20220602213844](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220602213844.png)
+
+前缀： 代理服务器根据url的
+![20220602214022](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220602214022.png)
+
+![20220602214138](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220602214138.png)
+
+此时 需要重写 代理中的target地址；
+
+记得配置 重写地址
+`pathRewrite:{'^/api':''},`
