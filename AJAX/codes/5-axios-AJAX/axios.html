@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>axios 发送 AJAX请求</title>
+    <!-- 引入在线版本的链接 -->
+    <script crossorigin="anonymous" src="https://cdn.bootcdn.net/ajax/libs/axios/0.19.2/axios.js"></script>
+</head>
+
+<body>
+    <button>GET</button>
+    <button>POST</button>
+    <button>AJAX</button>
+
+    <script>
+        // https://github.com/axios/axios
+        const btns = document.querySelectorAll('button');
+
+        //配置 baseURL
+        axios.defaults.baseURL = 'http://127.0.0.1:8000';
+
+        btns[0].onclick = function () {
+            //GET 请求
+            axios.get('/axios-server', {
+                //url 参数
+                params: {
+                    id: 100,
+                    vip: 7
+                },
+                //请求头信息
+                headers: {
+                    name: 'atguigu',
+                    age: 20
+                }
+            }).then(value => {
+                // promise 
+                console.log(value);
+            });
+        }
+
+        btns[1].onclick = function () {
+            axios.post('/axios-server', {
+                username: 'admin',
+                password: 'admin'
+            }, {
+                //url 
+                params: {
+                    id: 200,
+                    vip: 9
+                },
+                //请求头参数
+                headers: {
+                    height: 180,
+                    weight: 180,
+                }
+            });
+        }
+    
+        btns[2].onclick = function(){
+            axios({
+                //请求方法
+                method : 'POST',
+                //url
+                url: '/axios-server',
+                //url参数
+                params: {
+                    vip:10,
+                    level:30
+                },
+                //头信息
+                headers: {
+                    a:100,
+                    b:200
+                },
+                //请求体参数
+                data: {
+                    username: 'admin',
+                    password: 'admin'
+                }
+            }).then(response=>{
+                //响应状态码
+                console.log(response.status);
+                //响应状态字符串
+                console.log(response.statusText);
+                //响应头信息
+                console.log(response.headers);
+                //响应体
+                console.log(response.data);
+            })
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>原理演示</title>
+    <style>
+        #result {
+            width: 300px;
+            height: 100px;
+            border: solid 1px #78a;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="result"></div>
+    <script>
+        //处理数据
+        //定义一个函数
+        function handle(data) {
+            //获取 result 元素
+            const result = document.getElementById('result');
+            result.innerHTML = data.name;
+        }
+    </script>
+    <!-- <script src="http://127.0.0.1:5500/%E8%AF%BE%E5%A0%82/%E4%BB%A3%E7%A0%81/7-%E8%B7%A8%E5%9F%9F/2-JSONP/js/app.js"></script> -->
+    <!-- 使用 script函数发送一个特殊的GET请求， 返回的结果为'hanndel(data)'，之后解析这个str为js文件， 然后就执行这个 函数handle' -->
+    <script src="http://127.0.0.1:8000/jsonp-server"></script>
+</body>
+
+</html>

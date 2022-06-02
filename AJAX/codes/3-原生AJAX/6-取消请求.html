@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>取消请求</title>
+</head>
+<body>
+    <button>点击发送</button>
+    <button>点击取消</button>
+    <script>
+        //获取元素对象
+        const btns = document.querySelectorAll('button');
+        let x = null;
+
+        btns[0].onclick = function(){
+            x = new XMLHttpRequest();
+            x.open("GET",'http://127.0.0.1:8000/IE-delay');
+            x.send();
+        }
+
+        // abort
+        btns[1].onclick = function(){
+            // 定义一个全局变量
+            x.abort();
+        }
+    </script>
+</body>
+</html>
