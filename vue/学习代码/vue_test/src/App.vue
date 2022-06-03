@@ -1,24 +1,19 @@
 <template>
-	<div>
-		<button @click="getStudents">点击获取学生信息</button>
-	</div>
+  <div class="container">
+    <MySearch />
+    <MyList />
+  </div>
 </template>
 
 <script>
-	import axios from "axios"
-	export default {
-		name:"App",
-		methods: {
-			getStudents() {
-				axios.get('http://localhost:8080/api/students').then(response =>{
-					console.log(response.data);
-				}, err => {
-					console.log(err.message);
-				}
-				)
-			}
-		},
-	}
+import MyList from "./components/MyList.vue";
+import MySearch from "./components/MySearch.vue";
+export default {
+  name: "App",
+  components: {
+    MyList,
+    MySearch,
+  },
+};
 </script>
-
 

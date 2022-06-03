@@ -1,15 +1,17 @@
-import Vue from 'vue'
-// 所有组件的父组件
+import Vue from "vue";
+// 引入app
 import App from './App.vue'
 
-// import plugins from './plugins'
+// 生产环境
 Vue.config.productionTip = false
 
-
 // 创建实例对象
+
 new Vue({
-  el:"#app",
-  // 将App组件 放入容器中
-  // render 为箭头函数的缩写
-  render: h => h(App),
+    el: "#app",
+    render: h => h(App),
+    // 安装全局事件总线
+    beforeCreate() {
+        Vue.prototype.$bus = this
+    },
 })

@@ -1029,3 +1029,28 @@ module.exports = {
 
 记得配置 重写地址
 `pathRewrite:{'^/api':''},`
+
+## GitHub案例
+
+![20220603164843](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220603164843.png)
+
+向该接口请求数据
+
+我看到了我自己
+![20220603173200](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220603173200.png)
+
+要点：
+
+使用 数据总线 `$bus` 绑定事件和 触发事件
+
+![20220603173305](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220603173305.png)
+
+然后 点击搜索之后， 使用emit触发事件， 然后返回数据
+
+![20220603173345](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220603173345.png)
+之后根据其地址 头像等 填充准备好的 html格式
+
+
+![20220603181611](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220603181611.png)
+
+失败了
