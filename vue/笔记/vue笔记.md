@@ -1054,3 +1054,49 @@ module.exports = {
 ![20220603181611](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220603181611.png)
 
 失败了
+
+
+## slot插槽
+
+传入动态结构 ， slot插槽占位
+![20220604170042](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220604170042.png) 
+
+结构先解析 再 传入到对应的徐建中
+结果：
+
+![20220604171222](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220604171222.png)
+
+### 具名插槽：
+
+使用 slot属性名 放入到 对应的插槽中； name属性为对应的插槽取名
+
+使用 template 包裹 插槽名一样的标签， 减少命名次数， 同时不产生新的dom结构
+
+![20220604172220](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220604172220.png)
+
+### 作用域插槽
+
+
+![20220604173214](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220604173214.png)
+
+把数据传给插槽的使用者
+
+使用者使用 `template`标签及 scope属性
+![20220604173322](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220604173322.png)
+
+把数据传给了 一个作用域中， 此时作用域scope就可以看到传进来的数据；
+![20220604173424](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220604173424.png)
+
+slot-scope,支持解构 赋值
+组件通信的一种方式
+
+![20220604173731](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220604173731.png)
+
+![20220604173745](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220604173745.png)
+
+![20220604173812](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220604173812.png)
+
+![20220604173820](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220604173820.png)
+
+
+## vuex
