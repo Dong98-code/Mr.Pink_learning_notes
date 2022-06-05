@@ -1100,3 +1100,436 @@ slot-scope,支持解构 赋值
 
 
 ## vuex
+
+
+![20220604205724](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220604205724.png)
+
+任意组件间通信
+
+
+全局事件总线：
+兄弟组件间的 数据通信
+![20220604205956](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220604205956.png)
+
+vuex 不属于任意一个组件：
+
+![20220604210152](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220604210152.png)
+
+![20220604210348](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220604210348.png)
+
+![20220604210410](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220604210410.png)
+
+共享状态
+
+### 求和案例
+
+![20220604212303](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220604212303.png)
+
+![20220604212313](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220604212313.png)
+### 原理图
+
+![20220604212254](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220604212254.png)
+
+VC 调用 api: dispatch, 
+
+`dispatch(动作类型： str, data:2,)`
+
+-> actions: Obj， 对象类型；
+
+
+![20220604212737](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220604212737.png)
+
+调用函数， 数据为dispatch传入的数据data'
+
+-> 函数 "jia"调用commit：func
+
+![20220604212856](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220604212856.png)
+
+函数 类型：
+
+commit -> mutations中寻找对应的函数并调用：
+
+![20220604213027](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220604213027.png)
+
+![20220604213111](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220604213111.png)
+
+之后 vue
+
+render重新解析；
+
+- actions用来处理异步请求；
+
+- 允许组件内部调用 commit
+
+- store 对象
+
+![20220604214235](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220604214235.png)
+
+使用：
+
+![20220604214443](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220604214443.png)
+
+![20220604221448](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220604221448.png)
+
+### 求和——vuex
+
+### getters 
+
+用于将state中的数据进行加工
+```js
+const getters = {
+    bigData:function (state) {
+        return state.sum * 10;
+    }
+}
+///...
+/// 配置getters
+const store = new Vuex.Store({
+    actions: actions,
+    mutations: mutations,
+    state: state,
+    getters:getters
+})
+// 使用 该值
+// 再 $store.getters.bigData
+
+<h3>当前求和放大10倍：{{$store.getters.bigData}}</h3>
+```
+
+类似于`computed`根据数据 计算得到新的值
+
+### mapState 复用代码
+
+计算属性的名称和数据名称；
+
+`{key: value}`形式；
+
+![20220605151713](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220605151713.png)
+
+利用mapState生成计算属性， 从state中读取数据
+
+```js
+//在 index.js state中配置数据
+const state = {
+    // 存储数据
+    sum: 0,
+    schoolName:"shangguigu",
+    className:"Vue",
+}
+// 使用mapState生成计算属性的代码， ...运算符
+
+computed: {
+        ...mapState({xuexiao:"schoolName", xueke:"className"}),
+    },
+
+// 当属性名称和变量名称一致时
+
+computed: {
+        ...mapState(['schoolName', 'className']),
+    },
+```
+从getters中读取数据
+```js
+ ...mapGetters({})
+computed: {
+    //借助mapGetters生成计算属性：bigSum（对象写法一）
+    ...mapGetters({bigSum:'bigSum'}),
+
+    //借助mapGetters生成计算属性：bigSum（数组写法二）
+    ...mapGetters(['bigSum'])
+},
+```
+3. mapActions: 
+
+用于帮助生成actions 对话的方法， 包含`$store.dispatch()`函数，
+注意传参： 
+
+```js
+methods:{
+    //靠mapActions生成：incrementOdd、incrementWait（对象形式）
+    ...mapActions({incrementOdd:'jiaOdd',incrementWait:'jiaWait'})
+
+    //靠mapActions生成：incrementOdd、incrementWait（数组形式）
+    ...mapActions(['jiaOdd','jiaWait'])
+}
+```
+
+
+1. mapMutations
+
+帮助生成与 mutations对话的方法， 即包含`$store.commit(xxx)`函数
+
+```js
+methods:{
+    //靠mapActions生成：increment、decrement（对象形式）
+    ...mapMutations({increment:'JIA',decrement:'JIAN'}),
+    
+    //靠mapMutations生成：JIA、JIAN（对象形式）
+    ...mapMutations(['JIA','JIAN']),
+}
+```
+
+![20220605160258](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220605160258.png)
+
+
+
+### 多组件共享数据
+
+![20220605160359](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220605160359.png)
+
+数据 组件共享；
+
+![20220605164055](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220605164055.png)
+
+创建store:
+```js
+// 创建store , 管理 action mutations和。。
+//引入Vuex
+// import babelConfig from "babel.config";
+import Vue from "vue"
+import Vuex from "vuex"
+// 引入Vuex
+
+
+Vue.use(Vuex)
+
+const actions = {
+    // 响应组件动作
+    //func， 传入的为
+    a_add: function (context, value) {
+        // 上下文， 调用commit
+        context.commit('m_add', value);
+        // mutaions中的add
+    },
+    a_dec(context, value) {
+        context.commit('m_dec', value);
+    },
+    a_addOdd(context, value) {
+        if (context.state.sum % 2 == 1) {
+            //sumde 值判断
+            context.commit('m_addOdd', value);
+
+        }
+    },
+    a_addWait(context, value) {
+        setTimeout(() => {
+            context.commit('m_add', value)
+        },500)
+    }
+    
+}
+
+const mutations = {
+    // 操作数据吗state
+    m_add: function (state, value) {
+        state.sum += value;
+    },
+    m_dec(state, value) {
+        state.sum -= value;
+    },
+    m_addOdd(state, value) {
+        state.sum += value;
+    },
+    m_addPerson(state, value) {
+        state.personsList.unshift(value);
+    }
+}
+
+const state = {
+    // 存储数据
+    sum: 0,
+    schoolName:"shangguigu",
+    className: "Vue",
+    personsList: [{id:1, name:"张三"}],
+}
+
+const getters = {
+    bigData:function (state) {
+        return state.sum * 10;
+    }
+}
+// new Store, 创建store
+//传入配置对象
+const store = new Vuex.Store({
+    actions: actions,
+    mutations: mutations,
+    state: state,
+    getters:getters
+})
+// 导出/暴露 store 
+export default store
+```
+
+store中的 state可以在不同的组件中看到， 
+
+所以在 上方的组件中， 可与拿到 下面的数据的 `personsList`
+
+```vue
+// myCount
+<template>
+<div>
+    <h1>当前的和为：{{$store.state.sum}}</h1>
+    <h3>当前求和放大10倍：{{$store.getters.bigData}}</h3>
+    <h3>我在{{xuexiao}}, 学习{{xueke}}</h3>
+    <h3>人员列表的总人数为{{personsList.length}}</h3>
+
+    <select name="" id="" v-model.number="n">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+
+    </select>
+    <button @click="add">+</button>
+    <button @click="dec">-</button>
+    <button @click="addOdd">奇数相加</button>
+    <button @click="addWait">等会再加</button>
+</div>
+</template>
+
+<script>
+import {mapState, mapGetters} from 'vuex'
+export default {
+    name:"MyCount",
+    data() {
+        return {
+            n:1, // 当前选择
+            // sum:0 // cur_sum, 再state中 修改
+            
+        }
+    },
+    computed: {
+        ...mapState({xuexiao:"schoolName", xueke:"className"}),
+        ...mapGetters({}),
+		// 利用计算属性， 监视得到下方组件的数据
+        personsList() {
+            return this.$store.state.personsList;
+        }
+    },
+    methods: {
+        add() {
+            // dispatch
+            this.$store.dispatch('a_add', this.n);
+        },
+        dec () {
+            // this.sum -= this.n;
+            this.$store.dispatch('a_dec', this.n);
+
+        },
+        addOdd() {
+            // if (this.sum % 2 === 1) {
+            //     this.sum += this.n;
+            // }
+            this.$store.dispatch('a_addOdd', this.n);
+
+        },
+        addWait() {
+            // setTimeout(()=>{
+            //     this.sum += this.n;
+            // },500)
+            this.$store.dispatch('a_addWait', this.n)
+        }
+    },
+}
+</script>
+
+<style lang="css">
+    button {
+        margin-left: 15px;
+    }
+</style>
+
+```
+
+### 模块化 + 命名空间
+
+namespace
+
+![20220605164717](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220605164717.png)
+
+
+1. 数据分类更加明确
+
+2. 修改 store中的index.js
+   对于不同的功能模块， 分别配置 `actions` `mutations` `state` `getters`
+
+   ![20220605165213](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220605165213.png)
+`
+   ```js
+	const countAbout = {
+	  namespaced: true,	// 开启命名空间
+	  state: {x:1},
+	  mutations: { ... },
+	  actions: { ... },
+	  getters: {
+	    bigSum(state){ return state.sum * 10 }
+	  }
+	}
+
+	const personAbout = {
+	  namespaced: true,	// 开启命名空间
+	  state: { ... },
+	  mutations: { ... },
+	  actions: { ... }
+	}
+
+	const store = new Vuex.Store({
+	  modules: {
+	    // countAbout,
+		countAbout: countAbout,
+	    personAbout
+	  }
+	})
+   ```
+3. `modules`
+
+![20220605165348](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220605165348.png)
+![20220605165418](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220605165418.png)
+分别存储 不同功能模块的 配置，
+
+4. 开启命名空间
+
+`namespace:true`
+
+![20220605170352](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220605170352.png)
+```js
+// 方式一：自己直接读取
+this.$store.state.personAbout.list
+// 方式二：借助mapState读取：分类名
+...mapState('countAbout',['sum','school','subject']),
+```
+
+读取 `getters`数据
+
+```js
+//方式一：自己直接读取
+this.$store.getters['personAbout/firstPersonName']
+//方式二：借助mapGetters读取：
+...mapGetters('countAbout',['bigSum'])
+```
+
+调用 `dispatch`:
+
+```js
+//方式一：自己直接dispatch
+this.$store.dispatch('personAbout/addPersonWang',person)
+//方式二：借助mapActions：
+...mapActions('countAbout',{incrementOdd:'jiaOdd',incrementWait:'jiaWait'})
+```
+
+调用 `commit`:
+
+```js
+//方式一：自己直接commit
+this.$store.commit('personAbout/ADD_PERSON',person)
+//方式二：借助mapMutations：
+...mapMutations('countAbout',{increment:'JIA',decrement:'JIAN'}),
+```
+
+在store文件中， 分别书写对应的配置：
+
+![20220605170848](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220605170848.png)
+
+然后再index.js中去引用
+
+
+## 路由
