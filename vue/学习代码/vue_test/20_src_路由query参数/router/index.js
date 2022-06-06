@@ -30,20 +30,9 @@ const router = new VueRouter ({
                     path: 'message',
                     component: MyMessage,
                     children: [
-                        {   
-                            name:'xiangqing',
-                            path: 'detail/:id/:title',
-                            component: MyDetails,
-                            // 1.props第一中， 对象， 该对象中的所有 key-value会以props传 给detail组件
-                            // props: {a:1, b:'hello'}
-                            // 第二种, 若为真，则将该路由组件收到的oarams以props形式传给details组件
-                            props:true
-
-                            // // 第三种， 函数式， vue.router帮忙调取i函数
-
-                            // props($route) {
-                            //     return {id:$route.query.id, title:$route.query.title}
-                            // }
+                        {
+                            path: 'detail',
+                            component: MyDetails
                         }
                     ]
                 },
