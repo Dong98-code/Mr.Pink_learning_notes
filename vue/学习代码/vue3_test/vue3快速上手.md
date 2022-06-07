@@ -561,10 +561,25 @@ export default {
 ### 2.watch函数
 
 - 与Vue2.x中watch配置功能一致
+引入：
+
+`import { ref, watch } from "vue";`
+语法：
+
+`watch(监视对象，function(newV, oldV), 监视配置)`
+
+示例：
+```js
+watch(sum, (newValue, oldValue) => {
+      console.log('sum变化',newValue, oldValue);
+    },{immediate:true})//立即监视
+```
 
 - 两个小“坑”：
 
   - 监视reactive定义的响应式数据时：oldValue无法正确获取、强制开启了深度监视（deep配置失效）。
+
+  ![20220607215252](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220607215252.png)
   - 监视reactive定义的响应式数据中某个属性时：deep配置有效。
   
   ```js
@@ -576,7 +591,7 @@ export default {
   //情况二：监视多个ref定义的响应式数据
   watch([sum,msg],(newValue,oldValue)=>{
   	console.log('sum或msg变化了',newValue,oldValue)
-  }) 
+  }, {deep:true}) 
   
   /* 情况三：监视reactive定义的响应式数据
   			若watch监视的是reactive定义的响应式数据，则无法正确获得oldValue！！
