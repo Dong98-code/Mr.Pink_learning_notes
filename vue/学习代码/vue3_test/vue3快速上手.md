@@ -378,8 +378,97 @@ proxy.name = 'tom'
     - attrs: 值为对象，包含：组件外部传递过来，但没有在props配置中声明的属性, 相当于 ```this.$attrs```。
     - slots: 收到的插槽内容, 相当于 ```this.$slots```。
 
-    
+
     - emit: 分发自定义事件的函数, 相当于 ```this.$emit```。
+- 代码：
+`app.vue`
+```js
+<template>
+  <MyDemo @hello="showHelloMsg" msg="你好啊" school="shangguigu">
+    <template v-slot:qwe>
+      <span>XDD</span>
+    </template>
+  </MyDemo>
+</template>
+
+<script>
+// import HelloWorld from './components/HelloWorld.vue'
+
+import MyDemo from './components/Demo.vue'
+export default {
+  name: 'App',
+  // 暂时不考虑 响应式
+  components:{MyDemo},
+  setup() {
+    function showHelloMsg(data) {
+      
+      console.log('触发了事件',data);
+
+    }
+    return {
+      showHelloMsg
+    }
+  }
+}
+</script>
+```
+
+`Demo.vue`:
+
+```js
+<template>
+  
+  <h2>年龄：{{person.age }}</h2>
+  <h2>姓名:{{person.name}}</h2>
+  <slot name="qwe"></slot>
+  <button @click="sayHello">点击触发hello</button>
+
+</template>
+
+<script>
+// import HelloWorld from './components/HelloWorld.vue'
+import {reactive} from 'vue'
+export default {
+  name: 'MyDemo',
+  // 暂时不考虑 响应式
+  // beforeCreate() {
+  //   console.log('---beforeC');
+  // },
+  props:['msg', 'school'],
+  emits:['hello'], // 自定义事件传递
+  setup(props, context) {
+    console.log('----setup---', this);
+
+    console.log(context.slots);
+
+    let person = reactive({
+      name: '张三',
+      age: 10,
+      job: {
+      type:'前端',
+      salary:'20k',
+      a:{
+        c:10
+      }
+    },
+    hobby:['吸烟', '喝酒']
+
+    })
+
+    // sayH
+    function sayHello() {
+      context.emit('hello', 666)
+    }
+    // 返回对象
+    return {
+      person,
+      sayHello
+    }
+  }
+}
+</script>
+
+```
 
 
 ## 7.计算属性与监视
@@ -396,11 +485,60 @@ proxy.name = 'tom'
   setup(){
       ...
   	//计算属性——简写
+    //计算属性修改的形式
       let fullName = computed(()=>{
           return person.firstName + '-' + person.lastName
       })
       //计算属性——完整
+      // 考虑读写
       let fullName = computed({
+          get(){
+              return person.firstName + '-' + person.lastName
+          },
+          set(value){
+              const nameArr = value.split('_')
+              person.firstName = nameArr[0]
+              person.lastName = nameArr[1]
+          }
+      })
+  }
+  ```
+- 代码：
+  ![20220607211914](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220607211914.png)
+
+
+```js
+
+<template>
+  <h1>信息</h1>
+  姓：<input type="text" name="" id="" v-model="person.firstName"/>
+  <br>
+  <br>
+  名：<input type="text" name="" id="" v-model="person.lastName" />
+
+  <br>
+  全名：<span>{{fullName}}</span>
+  <br>
+  全名：<input type="text" v-model="fullName">
+</template>
+
+<script>
+// import HelloWorld from './components/HelloWorld.vue'
+import { reactive, computed} from "vue";
+export default {
+  name: "MyDemo",
+  // computed:{
+  //   fullName() {
+  //     return this.person.firstName + this.person.lastName;
+  //   }
+  // },
+  setup(props, context) {
+    let person = reactive({
+      firstName: "张",
+      lastName: "3",
+    });
+    // 计算属性， 函数
+    let fullName = computed({
           get(){
               return person.firstName + '-' + person.lastName
           },
@@ -410,8 +548,15 @@ proxy.name = 'tom'
               person.lastName = nameArr[1]
           }
       })
-  }
-  ```
+    // 返回对象
+    return {
+      person,
+      fullName
+    };
+  },
+};
+</script>
+```
 
 ### 2.watch函数
 
