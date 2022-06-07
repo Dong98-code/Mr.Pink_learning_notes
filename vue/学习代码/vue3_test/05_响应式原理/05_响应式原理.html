@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script type="text/javascript">
+        //vue3 的响应式
+        let person = {
+            name:"xdd",
+            age:10
+        }
+
+        // window.Proxy, 代理， p映射 对 person的操作， 变化还可以检测的到
+        //捕获这些增删改查的操作
+        let p = new Proxy(person, {
+            get:function(target, property,  receiver) {
+                //元对象， target,, person ; 读取的属性名称
+                // return target[property]
+                return Reflect.get(target, property)
+            },
+            set:function(target, property, value) {
+                //更新界面
+                // target[property] = value; //更新 property属性
+                return Reflect.set(target, property, value)
+            },
+            // 删除 p的属性
+            deleteProperty:function(target, property) {
+                // return delete target[property] // 删除并返回 是否删除成功
+
+                return Reflect.deleteProperty(target, property)
+
+            },
+            // 
+            // defineProperty:function(target, property) {
+
+            // }
+        }); // handler 函数
+
+
+    </script>
+</body>
+</html>

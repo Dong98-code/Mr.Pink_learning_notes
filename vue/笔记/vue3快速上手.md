@@ -97,21 +97,10 @@ npm install
 ## 运行
 npm run dev
 ```
-#  工程安装
 
-![20220607113908](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220607113908.png)
-`main.js`改变
-
-使用工厂函数`creatAPP` 创建应用实例 app
-
-app 身上挂载的属性和方法 更少
-
-安装 开发者工具
 # 二、常用 Composition API
 
 官方文档: https://v3.cn.vuejs.org/guide/composition-api-introduction.html
-
-组合式API
 
 ## 1.拉开序幕的setup
 

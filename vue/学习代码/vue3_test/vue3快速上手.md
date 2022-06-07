@@ -97,21 +97,10 @@ npm install
 ## 运行
 npm run dev
 ```
-#  工程安装
 
-![20220607113908](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220607113908.png)
-`main.js`改变
-
-使用工厂函数`creatAPP` 创建应用实例 app
-
-app 身上挂载的属性和方法 更少
-
-安装 开发者工具
 # 二、常用 Composition API
 
 官方文档: https://v3.cn.vuejs.org/guide/composition-api-introduction.html
-
-组合式API
 
 ## 1.拉开序幕的setup
 
@@ -125,27 +114,166 @@ app 身上挂载的属性和方法 更少
    1. 尽量不要与Vue2.x配置混用
       - Vue2.x配置（data、methos、computed...）中<strong style="color:#DD5145">可以访问到</strong>setup中的属性、方法。
       - 但在setup中<strong style="color:#DD5145">不能访问到</strong>Vue2.x配置（data、methos、computed...）。
+
+      ![20220607145640](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220607145640.png)
+      二者混用， 数据调用无法通用
       - 如果有重名, setup优先。
+  
+
    2. setup不能是一个async函数，因为返回值不再是return的对象, 而是promise, 模板看不到return对象中的属性。（后期也可以返回一个Promise实例，但需要Suspense和异步组件的配合）
+   
+   结果为promise对象，
 
 ##  2.ref函数
 
 - 作用: 定义一个响应式的数据
 - 语法: ```const xxx = ref(initValue)``` 
+  ```js
+  let name = ref('张三')
+  let age = ref(18)
+  ```
   - 创建一个包含响应式数据的<strong style="color:#DD5145">引用对象（reference对象，简称ref对象）</strong>。
+  ![20220607150812](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220607150812.png)
+  ref返回一个对象 `RefImpl`:reference implement
+  称呼： `引用实现对象/引用对象`
+  对象的结构：
+  ![20220607151230](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220607151230.png)
   - JS中操作数据： ```xxx.value```
+
+  ```JS
+    function changeInfo() {
+      name.value = "xdd",
+      age.value = 30
+    }
+  ```
   - 模板中读取数据: 不需要.value，直接：```<div>{{xxx}}</div>```
 - 备注：
   - 接收的数据可以是：基本类型、也可以是对象类型。
   - 基本类型的数据：响应式依然是靠``Object.defineProperty()``的```get```与```set```完成的。
   - 对象类型的数据：内部 <i style="color:gray;font-weight:bold">“ 求助 ”</i> 了Vue3.0中的一个新函数—— ```reactive```函数。
 
+  数据劫持的形式：对象 `proxy代理对象`
+  ![20220607152354](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220607152354.png)
+- 代码
+  `App.vue`
+  ```js
+  <template>
+    <h1>我是组件App</h1>
+    <h2>年龄：{{age}}</h2>
+    <h2>name:{{name}}</h2>
+    <h3>工作种类：{{job.salary}}</h3>
+    <h3>工作薪水：{{job.type}}</h3>
+    <button @click="changeInfo">改变信息</button>
+    </template>
+
+    <script>
+    // import HelloWorld from './components/  HelloWorld. vue'
+    import {ref} from 'vue'
+    export default {
+      name: 'App',
+      // 暂时不考虑 响应式
+      setup() {
+        //数据 methods computed 等 都在里面
+        //中间不能有逗号
+        // 此处定义的数据不为响应式数据 
+        let name = ref('张三') // ref函数 返回为一个对  象
+        let age = ref(18)
+        let job = ref({
+          type:'前端',
+          salary:'20k'
+        })
+
+        function changeInfo() {
+          name.value = "xdd",
+          age.value = 30,
+          job.value.type = '后端'
+        }
+
+        // 返回对象
+        return {
+          name,
+          age, 
+          // 记得返回 所需要的数据及methods
+          changeInfo,
+          job
+        }
+      }
+    }
+    </script>
+  ```
+
 ## 3.reactive函数
 
 - 作用: 定义一个<strong style="color:#DD5145">对象类型</strong>的响应式数据（基本类型不要用它，要用```ref```函数）
+  不能定义基本类型的响应式数据；
 - 语法：```const 代理对象= reactive(源对象)```接收一个对象（或数组），返回一个<strong style="color:#DD5145">代理对象（Proxy的实例对象，简称proxy对象）</strong>
+
+  ![20220607153100](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220607153100.png)
 - reactive定义的响应式数据是“深层次的”。
 - 内部基于 ES6 的 Proxy 实现，通过代理对象操作源对象内部数据进行操作。
+
+可以都写成 `reactive`
+
+- 代码
+  
+```js
+<template>
+  <h1>我是组件App</h1>
+  <h2>年龄：{{age}}</h2>
+  <h2>name:{{name}}</h2>
+  <h3>工作种类：{{job.salary}}</h3>
+  <h3>工作薪水：{{job.type}}</h3>
+  <h3>testc:{{job.a.c}}</h3>
+  <h3>爱好：{{hobby[0]}}</h3>
+  <button @click="changeInfo">改变信息</button>
+</template>
+
+<script>
+// import HelloWorld from './components/HelloWorld.vue'
+import {ref,reactive} from 'vue'
+export default {
+  name: 'App',
+  // 暂时不考虑 响应式
+  setup() {
+    //数据 methods computed 等 都在里面
+    //中间不能有逗号
+    // 此处定义的数据不为响应式数据 
+    let name = ref('张三') // ref函数 返回为一个对象
+    let age = ref(18)
+    let job = reactive({
+      type:'前端',
+      salary:'20k',
+      a:{
+        c:10
+      }
+    })
+
+    let hobby = ['吸烟', '喝酒']
+
+    function changeInfo() {
+      name.value = "xdd",
+      age.value = 30
+      // job.value.type = '后端'
+      console.log(job);
+      job.a.c = 11,
+      hobby[0] = 'xuexi'
+    }
+
+    // 返回对象
+    return {
+      name,
+      age, 
+      // 记得返回 所需要的数据及methods
+      changeInfo,
+      job,
+      hobby
+    }
+  }
+}
+</script>
+
+
+```
 
 ## 4.Vue3.0中的响应式原理
 
@@ -171,30 +299,50 @@ app 身上挂载的属性和方法 更少
 
 - 实现原理: 
   - 通过Proxy（代理）:  拦截对象中任意属性的变化, 包括：属性值的读写、属性的添加、属性的删除等。
+  `Proxy` 用于创建一个对象的代理， 从而实现基本的操作和自定义
+  ![20220607161403](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220607161403.png)
+
+  语法：`const p = new Proxy(target, handler)`
+
+  ![20220607161535](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220607161535.png)
+  `handler.get`：
+  ```js
+    var p = new Proxy(target, {
+    get: function(target, property, receiver) {
+    }
+    });
+
+  ```
   - 通过Reflect（反射）:  对源对象的属性进行操作。
   - MDN文档中描述的Proxy与Reflect：
     - Proxy：https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Proxy
     
     - Reflect：https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Reflect
-    
-      ```js
-      new Proxy(data, {
-      	// 拦截读取属性值
-          get (target, prop) {
-          	return Reflect.get(target, prop)
-          },
-          // 拦截设置属性值或添加新属性
-          set (target, prop, value) {
-          	return Reflect.set(target, prop, value)
-          },
-          // 拦截删除属性
-          deleteProperty (target, prop) {
-          	return Reflect.deleteProperty(target, prop)
-          }
-      })
-      
-      proxy.name = 'tom'   
-      ```
+
+    ![20220607163452](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220607163452.png)
+
+    ```js
+      Reflect.deleteProperty(target, propertyKey)
+    ```
+- 代码 示例
+```js
+new Proxy(data, {
+	// 拦截读取属性值
+    get (target, prop) {
+    	return Reflect.get(target, prop)
+    },
+    // 拦截设置属性值或添加新属性
+    set (target, prop, value) {
+    	return Reflect.set(target, prop, value)
+    },
+    // 拦截删除属性
+    deleteProperty (target, prop) {
+    	return Reflect.deleteProperty(target, prop)
+    }
+})
+
+proxy.name = 'tom'   
+```
 
 ## 5.reactive对比ref
 
