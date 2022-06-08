@@ -777,9 +777,54 @@ watch(sum, (newValue, oldValue) => {
 - 作用：创建一个 ref 对象，其value值指向另一个对象中的某个属性。
 - 语法：```const name = toRef(person,'name')```
 - 应用:   要将响应式对象中的某个属性单独提供给外部使用时。
+  把 xxx 变成 ref :`RefImpl`
 
 
 - 扩展：```toRefs``` 与```toRef```功能一致，但可以批量创建多个 ref 对象，语法：```toRefs(person)```
+
+- 代码:
+```js
+<template>
+  <br>
+  <h2>name:{{name}}</h2>
+  <h3>age:{{age}}</h3>
+  <h3>salary:{{person.job.j1.salary}}k</h3>
+  <button @click="person.name+='--'">修改姓名</button>
+  <button @click="person.age++">年龄增长</button>
+  <button @click="person.job.j1.salary++">点击涨薪</button>
+
+</template>
+
+<script>
+// import HelloWorld from './components/HelloWorld.vue'
+import { reactive, toRef, toRefs} from "vue";
+export default {
+  name: "MyDemo",
+
+ 
+  setup() {
+    const person = reactive({
+      name:'xdd',
+      age:10,
+      job:{
+        j1:{
+        salary:30
+        }
+      }
+    })
+
+    const name = toRef(person, 'name')
+    return {
+      person,
+      name,
+      ...toRefs(person)// 合并 对象
+    };
+  },
+};
+</script>
+
+
+```
 
 
 # 三、其它 Composition API
