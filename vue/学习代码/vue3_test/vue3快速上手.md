@@ -700,6 +700,76 @@ watch(sum, (newValue, oldValue) => {
 
 - 自定义hook的优势: 复用代码, 让setup中的逻辑更清楚易懂。
 
+- 代码
+  - `usePoint.js`
+    以`use xxx`命名
+    ```js
+      import { reactive, onMounted, onBeforeUnmount } from "vue";
+
+      function savePoint() {
+          // 鼠标打点 相关数据
+          let point = reactive({
+              x: 0,
+              y: 0,
+          })
+
+          // 方法
+          function savePoint(e) {
+              console.log(e.pageX, e.pageY);
+              point.x = e.pageX;
+              point.y = e.pageY;
+          }
+          // 生命周期钩子
+          onMounted(() => {
+              window.addEventListener("click", savePoint);
+          })
+
+          onBeforeUnmount(() => {
+              window.removeEventListener("click", savePoint);
+          })
+          return point
+      }
+
+      export default savePoint
+    ```
+   - `Demo.vue`
+
+    ```js
+      <template>
+        <h2>当前求和为：{{ sum }}</h2>
+        <button @click="sum++">点击+1</button>
+        <br />
+        <h2>当前信息时：{{ msg }}</h2>
+        <button @click="msg += '!'">点击+'!'</button>
+        <br />
+
+        <hr />
+        <h2>当前坐标为x:{{ point.x }}, y:{{ point.y }}</h2>
+      </template>
+
+      <script>
+      // import HelloWorld from './components/HelloWorld.vue'
+      import { reactive, ref, onMounted, onBeforeUnmount } from "vue";
+      import usePoint from '../hooks/usePoint' // 得到一个函数
+
+      export default {
+        name: "MyDemo",
+
+        setup() {
+          console.log("---set up");
+          let sum = ref(0);
+          let msg = ref("你好");
+
+          let point = usePoint() // 执行函数
+          return {
+            sum,
+            msg,
+            point,
+          };
+        },
+      };
+      </script>
+    ```
 
 
 ## 10.toRef
