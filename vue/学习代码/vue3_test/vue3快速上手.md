@@ -941,6 +941,10 @@ export default {
      	......
      }
      ```
+![20220608154731](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220608154731.png)
+
+> 修改父组件的数据, 子组件的数据也会发生变化;
+> 在孙组件上修改数据 数据也同样会一块发生变化
 
 ## 6.响应式数据的判断
 
