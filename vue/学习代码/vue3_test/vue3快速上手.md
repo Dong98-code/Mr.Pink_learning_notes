@@ -841,7 +841,12 @@ export default {
 ## 2.readonly 与 shallowReadonly
 
 - readonly: 让一个响应式数据变为只读的（深只读）。
+  ![20220608142607](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220608142607.png)
+  ![20220608142630](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220608142630.png)
+  会提示 报错信息
+  数据不会发生变化
 - shallowReadonly：让一个响应式数据变为只读的（浅只读）。
+  浅层数据可以更改, 但是深层数据 不会
 - 应用场景: 不希望数据被修改时。
 
 ## 3.toRaw 与 markRaw
@@ -859,9 +864,10 @@ export default {
 
 - 作用：创建一个自定义的 ref，并对其依赖项跟踪和更新触发进行显式控制。
 
+![20220608150058](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220608150058.png)
 - 实现防抖效果：
 
-  ```vue
+  ```js
   <template>
   	<input type="text" v-model="keyword">
   	<h3>{{keyword}}</h3>
