@@ -1,6 +1,12 @@
 import Vue from 'vue'
 import App from './App.vue'
 
+// 全局组件 TYpeNav
+import TypeNav from '@/pages/Home/TypeNav'
+// params:组件名字，
+// console.log(TypeNav.name);
+Vue.component(TypeNav.name, TypeNav)
+
 Vue.config.productionTip = false
 
 // 引入路由

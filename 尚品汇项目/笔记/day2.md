@@ -31,23 +31,63 @@ this.$route.params|query
 this.$route.meta
 
 
-1)编程式导航路由跳转到当前路由(参数不变), 多次执行会抛出NavigationDuplicated的警告错误?
-注意:编程式导航（push|replace）才会有这种情况的异常，声明式导航是没有这种问题，因为声明式导航内部已经解决这种问题。
+## 1. NavigationDuplicated错位
+编程式导航路由跳转到当前路由(参数不变), 多次执行会抛出`NavigationDuplicated`的警告错误?
+注意:编程式导航（`push|replace`）才会有这种情况的异常，声明式导航是没有这种问题，因为声明式导航内部已经解决这种问题。
 这种异常，对于程序没有任何影响的。
 为什么会出现这种现象:
-由于vue-router最新版本3.5.2，引入了promise，当传递参数多次且重复，会抛出异常，因此出现上面现象,
+由于`vue-router`最新版本3.5.2，引入了`promise`，当传递参数多次且重复，会抛出异常，因此出现上面现象,
 第一种解决方案：是给push函数，传入相应的成功的回调与失败的回调
-第一种解决方案可以暂时解决当前问题，但是以后再用push|replace还是会出现类似现象，因此我们需要从‘根’治病；
+第一种解决方案可以暂时解决当前问题，但是以后再用`push|replace`还是会出现类似现象，因此我们需要从‘根’治病；
 
+`this.$router`为`VueRouter`类的实例，`push`方法为 `VueRouter.prototype.push()` 原型对象的方法；
+重写`push` 和 `replace`
 
+```js
+// 保存原始
+let originPush = VueRouter.prototype.push;
+let originReplace = VueRouter.prototype.replace;
+// 重写push
+VueRouter.prototype.push = function (location, resolve, reject) {
+    // location 为原本传入的目标 
+    if (reject && resolve) {
+        // call 和 apply传参的方式不一样， call用逗号隔开
+        originPush.call(this, location, resolve, reject)
+    } else {
+        originPush.call(this, location, ()=>{}, ()=>{}) // 手动传入两个回调函数 占位
+    }
+}
 
-2)将Home组件的静态组件拆分
-2.1静态页面（样式）
-2.2拆分静态组件
-2.3发请求获取服务器数据进行展示
-2.4开发动态业务
+VueRouter.prototype.replace = function (location, resolve, reject) {
+    // location 为原本传入的目标 
+    if (reject && resolve) {
+        // call 和 apply传参的方式不一样， call用逗号隔开
+        originReplace.call(this, location, resolve, reject)
+    } else {
+        originReplace.call(this, location, ()=>{}, ()=>{}) // 手动传入两个回调函数 占位
+    }
+}
+```
+
+## 2. 拆分Home组件
+将Home组件的静态组件拆分
+- 2.1静态页面（样式）
+- 2.2拆分静态组件
+- 2.3发请求获取服务器数据进行展示
+- 2.4开发动态业务
 拆分组件：结构+样式+图片资源
 一共要拆分为七个组件
+
+### 2.1 三级联动
+
+该组件多次使用， 注册为全局组件
+```js
+// 全局组件 TYpeNav
+import TypeNav from '@/pages/Home/TypeNav'
+// params:组件名字，
+// console.log(TypeNav.name);
+Vue.component(TypeNav.name, TypeNav)
+```
 
 
 
