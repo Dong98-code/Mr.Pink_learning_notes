@@ -1,7 +1,7 @@
 <template>
   <div>搜索页面
     <h2>--params{{this.$route.params.keyword}}</h2>
-    <h2>--query{{this.$route.query.k}}</h2>
+    <h2>--query{{this.$route.query}}</h2>
   </div>
   
 </template>
