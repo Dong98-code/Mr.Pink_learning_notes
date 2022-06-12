@@ -16,6 +16,8 @@ import router from '@/router'
 // 测试接口
 // import { reqCategoryList } from '@/api'
 // reqCategoryList();
+// 引入mock,执行mock
+import '@/mock/mockServe'
 
 new Vue({
   render: h => h(App),

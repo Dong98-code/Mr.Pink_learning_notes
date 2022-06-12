@@ -2,44 +2,58 @@
   <div class="type-nav">
     <!-- <h1>{{categoryList}}</h1> -->
     <div class="container">
-      <div @mouseleave="resetIndex">
+      <div @mouseleave="leaveShow" @mouseenter="enterShow">
         <h2 class="all">全部商品分类</h2>
-        <div class="sort">
-          <div class="all-sort-list2" @click="goSearch">
-            <div
-              class="item bo"
-              v-for="(c1, index) in categoryList.slice(0, 16)"
-              :key="c1.categoryId"
-              :class="{ cur: curIndex === index }"
-            >
-              <h3 @mouseenter="changeBackgroundColor(index)">
-                <a :data-categoryName="c1.categoryName" :data-category1Id="c1.categoryId">{{ c1.categoryName }}</a>
-              </h3>
-              <!-- 二三级分类 -->
-              <div class="item-list clearfix">
-                <div
-                  class="subitem"
-                  v-for="c2 in c1.categoryChild"
-                  :key="c2.categoryId"
-                >
-                  <dl class="fore">
-                    <dt>
-                      <a :data-categoryName="c2.categoryName" :data-category2Id="c2.categoryId">{{ c2.categoryName }}</a>
-                    </dt>
-                    <dd>
-                      <em
-                        v-for="c3 in c2.categoryChild"
-                        :key="c3.categoryChild"
-                      >
-                        <a :data-categoryName="c3.categoryName" :data-category3Id="c3.categoryId">{{ c3.categoryName }}</a>
-                      </em>
-                    </dd>
-                  </dl>
+        <transition name="sort">
+          <div class="sort" v-show="isShow">
+            <div class="all-sort-list2" @click="goSearch">
+              <div
+                class="item bo"
+                v-for="(c1, index) in categoryList.slice(0, 16)"
+                :key="c1.categoryId"
+                :class="{ cur: curIndex === index }"
+              >
+                <h3 @mouseenter="changeBackgroundColor(index)">
+                  <a
+                    :data-categoryName="c1.categoryName"
+                    :data-category1Id="c1.categoryId"
+                    >{{ c1.categoryName }}</a
+                  >
+                </h3>
+                <!-- 二三级分类 -->
+                <div class="item-list clearfix">
+                  <div
+                    class="subitem"
+                    v-for="c2 in c1.categoryChild"
+                    :key="c2.categoryId"
+                  >
+                    <dl class="fore">
+                      <dt>
+                        <a
+                          :data-categoryName="c2.categoryName"
+                          :data-category2Id="c2.categoryId"
+                          >{{ c2.categoryName }}</a
+                        >
+                      </dt>
+                      <dd>
+                        <em
+                          v-for="c3 in c2.categoryChild"
+                          :key="c3.categoryChild"
+                        >
+                          <a
+                            :data-categoryName="c3.categoryName"
+                            :data-category3Id="c3.categoryId"
+                            >{{ c3.categoryName }}</a
+                          >
+                        </em>
+                      </dd>
+                    </dl>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        </transition>
       </div>
       <nav class="nav">
         <a href="###">服装城</a>
@@ -58,17 +72,20 @@
 <script>
 import { mapState } from "vuex";
 // import debounce from 'lodash/debounce'
-import throttle from 'lodash/throttle'
+import throttle from "lodash/throttle";
 export default {
   name: "TypeNav",
   // 挂载完毕 就发请求
   data() {
     return {
       curIndex: -1,
+      isShow: true,
     };
   },
   mounted() {
-    this.$store.dispatch("categoryList");
+    if (this.$route.path != "/home") {
+      this.isShow = false;
+    }
   },
   computed: {
     // 传入对象形式的参数， 右侧需要为一个函数， 该函数自动执行
@@ -80,12 +97,11 @@ export default {
     }),
   },
   methods: {
-
     // changeBackgroundColor(index) {
     //   // 注意this
     //   this.curIndex = index;
     // },
-    changeBackgroundColor: throttle(function(index){
+    changeBackgroundColor: throttle(function (index) {
       this.curIndex = index;
     }, 50),
     resetIndex() {
@@ -96,28 +112,45 @@ export default {
       // 路由跳转 参数传递
       // 获取自定义属性和属性值
       let el = event.target;
-      let {categoryname, category1id, category2id, category3id} = el.dataset;
+      let { categoryname, category1id, category2id, category3id } = el.dataset;
       if (categoryname) {
         // 带有dategoryName的才是 a标签
         // 整理路由跳转参数
-        let location = {name:'search'}
-        let query = {categoryname:categoryname}
+        let location = { name: "search" };
+        let query = { categoryname: categoryname };
         if (category1id) {
           // 1级标
-          query.category1id = category1id
+          query.category1id = category1id;
         } else if (category2id) {
           // 2级标签
-          query.category2id = category2id
-
+          query.category2id = category2id;
         } else {
-          category3id
-          query.category2id = category2id
-
+          category3id;
+          query.category2id = category2id;
         }
-        location.query = query
+        location.query = query;
+        // 路由参数 是否含有paramscanshu 
+        // 
+        // console.log(JSON.stringify(this.$route.params) !== '{}');
+        // console.log(this.$route.params);
+        if (JSON.stringify(this.$route.params) !== '{}') {
+          location.params = this.$route.params
+        }
         this.$router.push(location); //跳转
       }
-    }
+    },
+    enterShow() {
+      // 鼠标移入， 显示全部分类
+      this.isShow = true;
+    },
+    leaveShow() {
+      // console.log(this.$route.path);
+      this.curIndex = -1;
+
+      if (this.$route.path != "/home") {
+        this.isShow = false;
+      }
+    },
   },
 };
 </script>
@@ -242,6 +275,17 @@ export default {
           background-color: skyblue;
         }
       }
+    }
+
+    // 过度动画眼视光hi
+    .sort-enter {
+      height: 0;
+    }
+    .sort-enter-to {
+      height: 461px;
+    }
+    .sort-enter-active {
+      transition: linear .5s all;
     }
   }
 }

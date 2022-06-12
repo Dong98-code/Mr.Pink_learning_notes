@@ -92,8 +92,19 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 export default {
   name: "ListContainer",
+  mounted() {
+    // 派发location 获取 mock封装的数据， 数据在仓库中存储中
+    // console.log(this.$store);
+    this.$store.dispatch('home/getBannerList')
+  },
+  computed:{
+    ...mapState({
+      bannnerList: state => state.home.banner
+    })
+  }
 };
 </script>
 

@@ -21,7 +21,11 @@ export default {
     // isShowFooter() {
     //   return this.$route.path === '/home' || this.$route.path === '/search'
     // }
-  }
+  },
+  mounted() {
+    this.$store.dispatch("home/categoryList");
+    
+  },
 };
 </script>
 

@@ -58,13 +58,20 @@ export default {
   },
   methods: {
     goSearch() {
-      this.$router.push({
+      let location ={
         name:"search",
-        params:{keyword:this.keyword},
-        query:{
-          k:this.keyword
-        }
-      })
+        params:{keyword:this.keyword || undefined},
+      }
+      // console.log(this.$route.query);
+      // console.log(this.$route.hasOwnProperty('query')); // 含有该属性，该属性为空对象
+      // console.log(JSON.stringify(this.$route.query) === '{}');
+      if (JSON.stringify(this.$route.query) !== '{}') {
+        // 不为空
+        location.query = this.$route.query
+      }
+      // 跳转
+      // console.log(location);
+      this.$router.push(location)
     }
   },
 };
