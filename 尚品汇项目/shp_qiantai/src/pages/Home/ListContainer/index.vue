@@ -5,8 +5,8 @@
         <!--banner轮播-->
         <div class="swiper-container" id="mySwiper">
           <div class="swiper-wrapper">
-            <div class="swiper-slide">
-              <img src="./images/banner1.jpg" />
+            <div class="swiper-slide" v-for="(c) in bannnerList" :key="c.id">
+              <img :src="c.imgUrl" />
             </div>
            
           </div>
@@ -93,17 +93,54 @@
 
 <script>
 import { mapState } from 'vuex';
+// 引入sawiper .css
+import 'swiper/css/swiper.css'
+// 引入组件
+import Swiper from 'swiper'
 export default {
   name: "ListContainer",
+  components: {Swiper},
+  
   mounted() {
     // 派发location 获取 mock封装的数据， 数据在仓库中存储中
     // console.log(this.$store);
-    this.$store.dispatch('home/getBannerList')
+    this.$store.dispatch('home/getBannerList') // 异步执行
+    // 在这里会同步执行 语句，  此时 并不会 立刻得到数据
+
   },
   computed:{
     ...mapState({
       bannnerList: state => state.home.banner
     })
+  },
+  watch:{
+    bannnerList:{
+      handler(newValue, odlValue) {
+        if (this.bannnerList.length === 0) return 
+
+        // console.log('watch carouselList', this.bannnerList.length)
+
+        //nextTick
+        this.$nextTick(() => {
+          let mySwiper = new Swiper(document.querySelector('.swiper-container'),{
+            loop: true, // 循环模式
+
+            // 分页器
+            pagination: {
+              el: '.swiper-pagination',
+            },
+
+            // 前进后退按钮
+            navigation: {
+              nextEl: '.swiper-button-next',
+              prevEl: '.swiper-button-prev',
+            },
+
+          })
+        })
+        
+      }
+    }
   }
 };
 </script>

@@ -239,7 +239,7 @@ export default mockAjax
 
 
 
-8)swiper基本的使用？
+## 8)swiper基本的使用？
 
 8.1:swiper可以在移动端使用？还是PC端使用？
 答：swiper移动端可以使用，pc端也可以使用。
@@ -249,6 +249,9 @@ export default mockAjax
 swiper最新版本为7版本的，项目当中使用的是5版本
 
 https://www.swiper.com.cn/ 官网地址
+
+1. 引入 swiper
+
 
 
 

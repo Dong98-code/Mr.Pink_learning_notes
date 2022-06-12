@@ -82,9 +82,157 @@ nextTick官网解释:
 2:组件实例的$nextTick方法。
 在下次DOM更新, 循环结束之后,执行延迟回调。在 修改数据之后 立即使用这个方法，获取更新后的DOM
 
+![20220612184514](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220612184514.png)
 
+swiper组件：
+```js
+<template>
+  <div class="list-container">
+    <div class="sortList clearfix">
+      <div class="center">
+        <!--banner轮播-->
+        <div class="swiper-container" id="mySwiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide" v-for="(c) in bannnerList" :key="c.id">
+              <img :src="c.imgUrl" />
+            </div>
+           
+          </div>
+          <!-- 如果需要分页器 -->
+          <div class="swiper-pagination"></div>
 
+          <!-- 如果需要导航按钮 -->
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
+        </div>
+      </div>
+      <div class="right">
+        <div class="news">
+          <h4>
+            <em class="fl">尚品汇快报</em>
+            <span class="fr tip">更多 ></span>
+          </h4>
+          <div class="clearix"></div>
+          <ul class="news-list unstyled">
+            <li><span class="bold">[特惠]</span>备战开学季 全民半价购数码</li>
+            <li><span class="bold">[公告]</span>备战开学季 全民半价购数码</li>
+            <li><span class="bold">[特惠]</span>备战开学季 全民半价购数码</li>
+            <li><span class="bold">[公告]</span>备战开学季 全民半价购数码</li>
+            <li><span class="bold">[特惠]</span>备战开学季 全民半价购数码</li>
+          </ul>
+        </div>
+        <ul class="lifeservices">
+          <li class="life-item">
+            <i class="list-item"></i>
+            <span class="service-intro">话费</span>
+          </li>
+          <li class="life-item">
+            <i class="list-item"></i>
+            <span class="service-intro">机票</span>
+          </li>
+          <li class="life-item">
+            <i class="list-item"></i>
+            <span class="service-intro">电影票</span>
+          </li>
+          <li class="life-item">
+            <i class="list-item"></i>
+            <span class="service-intro">游戏</span>
+          </li>
+          <li class="life-item">
+            <i class="list-item"></i>
+            <span class="service-intro">彩票</span>
+          </li>
+          <li class="life-item">
+            <i class="list-item"></i>
+            <span class="service-intro">加油站</span>
+          </li>
+          <li class="life-item">
+            <i class="list-item"></i>
+            <span class="service-intro">酒店</span>
+          </li>
+          <li class="life-item">
+            <i class="list-item"></i>
+            <span class="service-intro">火车票</span>
+          </li>
+          <li class="life-item">
+            <i class="list-item"></i>
+            <span class="service-intro">众筹</span>
+          </li>
+          <li class="life-item">
+            <i class="list-item"></i>
+            <span class="service-intro">理财</span>
+          </li>
+          <li class="life-item">
+            <i class="list-item"></i>
+            <span class="service-intro">礼品卡</span>
+          </li>
+          <li class="life-item">
+            <i class="list-item"></i>
+            <span class="service-intro">白条</span>
+          </li>
+        </ul>
+        <div class="ads">
+          <img src="./images/ad1.png" />
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
 
+<script>
+import { mapState } from 'vuex';
+// 引入sawiper .css
+import 'swiper/css/swiper.css'
+// 引入组件
+import Swiper from 'swiper'
+export default {
+  name: "ListContainer",
+  components: {Swiper},
+  
+  mounted() {
+    // 派发location 获取 mock封装的数据， 数据在仓库中存储中
+    // console.log(this.$store);
+    this.$store.dispatch('home/getBannerList') // 异步执行
+    // 在这里会同步执行 语句，  此时 并不会 立刻得到数据
+
+  },
+  computed:{
+    ...mapState({
+      bannnerList: state => state.home.banner
+    })
+  },
+  watch:{
+    bannnerList:{
+      handler(newValue, odlValue) {
+        if (this.bannnerList.length === 0) return 
+
+        // console.log('watch carouselList', this.bannnerList.length)
+
+        //nextTick
+        this.$nextTick(() => {
+          let mySwiper = new Swiper(document.querySelector('.swiper-container'),{
+            loop: true, // 循环模式
+
+            // 分页器
+            pagination: {
+              el: '.swiper-pagination',
+            },
+
+            // 前进后退按钮
+            navigation: {
+              nextEl: '.swiper-button-next',
+              prevEl: '.swiper-button-prev',
+            },
+
+          })
+        })
+        
+      }
+    }
+  }
+};
+</script>
+```
 
 3)开发Floor组件
 开发Floor组件：Floor组件它被复用的（重复使用两次）

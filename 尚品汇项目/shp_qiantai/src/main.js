@@ -18,7 +18,8 @@ import router from '@/router'
 // reqCategoryList();
 // 引入mock,执行mock
 import '@/mock/mockServe'
-
+  
+  
 new Vue({
   render: h => h(App),
   // kv一致, 组件身上拥有$route, 路由信息 和 $router

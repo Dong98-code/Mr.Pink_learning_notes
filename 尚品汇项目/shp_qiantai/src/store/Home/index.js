@@ -19,12 +19,12 @@ const actions = {
 
     async getBannerList(contex, value) {
         let res = await reqBanners()
-        console.log(res);
+        // console.log(res);
 
         if (res.code === 200) {
             // 获取成功
             // contex.commit('')
-            console.log(res);
+            // console.log(res);
             contex.commit('GETBANNERS', res.data)
 
         }
