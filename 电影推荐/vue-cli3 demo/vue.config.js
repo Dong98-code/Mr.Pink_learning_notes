@@ -13,6 +13,5 @@ module.exports = {
             }
         }
     },
-    lintOnSave: false,
-    
+    lintOnSave: false //关闭eslint检查
 }
