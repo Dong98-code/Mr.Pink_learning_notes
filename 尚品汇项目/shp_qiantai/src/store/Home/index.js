@@ -28,6 +28,20 @@ const actions = {
             contex.commit('GETBANNERS', res.data)
 
         }
+    },
+
+    async getFloorList(contex, value) {
+        let res = await reqFloors()
+        // console.log(res);
+
+        if (res.code === 200) {
+            // 获取成功
+            // contex.commit('')
+            // console.log(res);
+            // 提交mutation
+            contex.commit('GETFLOORLIST', res.data)
+
+        }
     }
 }
 // 准备mutations——用于操作数据（state）	
@@ -38,6 +52,9 @@ const mutations = {
     },
     GETBANNERS(state, value) {
         state.banner = value
+    },
+    GETFLOORLIST(state, value) {
+        state.floor = value
     }
 }
 // 准备state——用于存储数据

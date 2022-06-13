@@ -252,7 +252,12 @@ https://www.swiper.com.cn/ 官网地址
 
 1. 引入 swiper
 
+```js
 
+import 'swiper/css/swiper.css'
+// 引入组件
+import Swiper from 'swiper'
+```
 
 
 
