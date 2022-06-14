@@ -12,17 +12,11 @@ Vue.use(Vuex)	// 应用Vuex插件
 // 创建并暴露store
 
 import home from './Home'
-// export default new Vuex.Store({
-// 	actions,
-// 	mutations,
-// 	state,
-// 	getters
-// })
-
+import search from './Search'
 // 模块开发
 export default new Vuex.Store({
 	modules: {
 		home,
-		
+		search
 	}
 })

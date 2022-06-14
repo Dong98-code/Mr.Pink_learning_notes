@@ -29,6 +29,7 @@
 2.4玩业务
 
 //是搜索模块需要携带给接口的参数
+```js
 {
   "category1Id": "61",//一级分类的id
   "category2Id": "61",//二级分类的id
@@ -41,7 +42,7 @@
   "props": ["1:1700-2799:价格", "2:6.65-6.74英寸:屏幕尺寸"],//平台属性的选择参数
   "trademark": "4:小米"//品牌参数
 }
-
+```
 注意：搜索的接口，需要传递参数，至少是一个空对象（KV没有，但是至少给服务器一个对象）
 3)获取search模块数据
 4)展示商品列表数据
@@ -50,16 +51,30 @@
 
 
 
-5)根据用户的搜索条件展示不同的数据。
+## 5)根据用户的搜索条件展示不同的数据。
 
 根据前台传递参数决定的
 根据不同条件，展示不同的数据。----->取决于后台返回的数据
 
 
 1:发请求，获取搜索模块的数据
+
+`api/index.js`
+post方法
+```js
+export const reqGetSearchInfo = (params) => requests({
+    // 
+    url: '/list', // api baseUrl
+    method: 'post',
+    data: {
+        
+    }
+})
+```
 2:根据用户搜索的条件携带参数给服务器，展示用户搜索的内筒
+返回的数据类型： `{}`
 
-
+![20220614180046](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220614180046.png)
 
 开发遇见问题:用户条件可以发生多次变化，但是咱们的请求，只是会发一次【mounted中书写的】
 
@@ -69,18 +84,37 @@
 对于给服务器携带的参数：如果数值为undefind，向服务器发请求的时候，参数步携带给服务器的
 
 
+3. 动态展示产品列表
+  
+  数据在`searchList()`
 
+  ![20220614180601](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220614180601.png)
+
+  `attrList`: ![20220614180635](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220614180635.png)
+
+  其他的数据 。。。 
+  `pagesize`  和 `pageNo`:分页器的数据
+
+  - `...mapState` 转换为组件身上的数据
+    使用`getters()`简化仓库中的数据，
+    ![20220614181333](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220614181333.png)
+
+    - 接收参数：`state`
+    ![20220614181626](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220614181626.png)
+    - 使用：
+      ![20220614181551](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220614181551.png)
+```js
+computed:{
+    // 映射数据
+    // 注意 namespaced的使用
+    ...mapGetters({goodsList:'search/goodsList'})
+  }
+```
 
 6)面包屑的业务完成
 -----务必把今天的套路---书写三遍
 '作业':什么是富文本，插件有哪些，一些如何使用【在Vue当中使用】
 
-
-
-
-7）另外一件事情？
-
-豪哥就是带你们到前台项目结束。
 
 
 

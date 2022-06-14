@@ -58,7 +58,7 @@ export default {
   },
   methods: {
     goSearch() {
-      let location ={
+      let location = {
         name:"search",
         params:{keyword:this.keyword || undefined},
       }
@@ -70,7 +70,8 @@ export default {
         location.query = this.$route.query
       }
       // 跳转
-      // console.log(location);
+      console.log(location);
+      // console.log(this.$route.params);
       this.$router.push(location)
     }
   },

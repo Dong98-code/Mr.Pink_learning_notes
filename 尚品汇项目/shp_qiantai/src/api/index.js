@@ -16,3 +16,13 @@ export const reqBanners = ()=> mockAjax.get('/banner')
 // 获取首页楼层列表
 export const reqFloors = ()=> mockAjax.get('/floor')
 
+
+// 获取搜索模块的数据, post请求，
+// 带参数 /api/list
+
+export const reqGetSearchInfo = (params) => requests({
+    // 
+    url: '/list', // api baseUrl
+    method: 'post',
+    data: params
+})

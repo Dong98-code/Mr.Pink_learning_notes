@@ -63,7 +63,9 @@ const router = new VueRouter({
         },
         {
             name: 'search',
-            path: '/search',
+            path: '/search/:keyword?',
+            // path: '/search',
+
             component: MySearch,
             meta:{isShowFooter:false}
             

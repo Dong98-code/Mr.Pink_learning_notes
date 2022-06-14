@@ -112,6 +112,7 @@ export default {
       // 路由跳转 参数传递
       // 获取自定义属性和属性值
       let el = event.target;
+      // console.log(el.dataset);
       let { categoryname, category1id, category2id, category3id } = el.dataset;
       if (categoryname) {
         // 带有dategoryName的才是 a标签
@@ -120,14 +121,17 @@ export default {
         let query = { categoryname: categoryname };
         if (category1id) {
           // 1级标
-          query.category1id = category1id;
+          query.category1Id = category1id;
         } else if (category2id) {
           // 2级标签
-          query.category2id = category2id;
+          query.category2Id = category2id;
         } else {
-          category3id;
-          query.category2id = category2id;
+          console.log(category3id);
+
+          query.category3Id = category3id;
+          // query.category2id = category2id;
         }
+        
         location.query = query;
         // 路由参数 是否含有paramscanshu 
         // 
@@ -136,6 +140,7 @@ export default {
         if (JSON.stringify(this.$route.params) !== '{}') {
           location.params = this.$route.params
         }
+        // console.log(location);
         this.$router.push(location); //跳转
       }
     },
