@@ -269,18 +269,75 @@ Floor组件结构可能没有完整，但是服务器的数据回来以后Floor�
 
 
 
-4)carousel全局组件
+## 4) carousel全局组件
 如果项目当中出现类似的功能，且重复利用，封装为全局组件----【不封装也可以】
 
 为了封装全局的轮播图组件:让Floor与listContainer组件中的代码一样，如果一样完全可以独立出来
 封装为一个全局组件。
 
+拆分为全局组件：
+`Carousel/index.vue`
+```js
+<template>
+  <div class="swiper-container" id="floor1Swiper" ref="cur">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide" v-for="c in list" :key="c.id">
+        <img :src="c.imgUrl" />
+      </div>
+    </div>
+    <!-- 如果需要分页器 -->
+    <div class="swiper-pagination"></div>
 
+    <!-- 如果需要导航按钮 -->
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+  </div>
+</template>
 
+<script>
+import "swiper/css/swiper.css";
 
-最终:今天项目当中那部分业务有问题（没明白的）  ----1
+import Swiper from "swiper";
+export default {
+  name: "Carousel",
+  components: { Swiper },
+  props: ["list"], // 父亲传入数据
+  watch: {
+    list: {
+      immediate: true,
+      handler() {
+        this.$nextTick(() => {
+          let mySwiper = new Swiper(this.$refs.cur, {
+            loop: true, // 循环模式
 
-    项目业务逻辑OK的   -------------------------2
+            // 分页器
+            pagination: {
+              el: ".swiper-pagination",
+            },
+
+            // 前进后退按钮
+            navigation: {
+              nextEl: ".swiper-button-next",
+              prevEl: ".swiper-button-prev",
+            },
+          });
+        });
+      },
+    },
+  },
+};
+</script>
+
+<style>
+</style>
+```
+`main.js` 中注册为全局组件：
+```js
+import Carousel from '@/components/Carousel'
+Vue.component(Carousel.name, Carousel)
+```
+使用该组件：
+
 
 
 

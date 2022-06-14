@@ -3,20 +3,21 @@
     <div class="sortList clearfix">
       <div class="center">
         <!--banner轮播-->
-        <div class="swiper-container" ref="mySwiper">
+        <!-- <div class="swiper-container" ref="mySwiper">
           <div class="swiper-wrapper">
             <div class="swiper-slide" v-for="(c) in bannnerList" :key="c.id">
               <img :src="c.imgUrl" />
             </div>
            
           </div>
-          <!-- 如果需要分页器 -->
+
           <div class="swiper-pagination"></div>
 
-          <!-- 如果需要导航按钮 -->
+
           <div class="swiper-button-prev"></div>
           <div class="swiper-button-next"></div>
-        </div>
+        </div> -->
+        <Carousel :list="bannnerList"/>
       </div>
       <div class="right">
         <div class="news">
@@ -93,13 +94,9 @@
 
 <script>
 import { mapState } from 'vuex';
-// 引入sawiper .css
-import 'swiper/css/swiper.css'
-// 引入组件
-import Swiper from 'swiper'
+
 export default {
   name: "ListContainer",
-  components: {Swiper},
   
   mounted() {
     // 派发location 获取 mock封装的数据， 数据在仓库中存储中
@@ -121,23 +118,23 @@ export default {
         // console.log('watch carouselList', this.bannnerList.length)
 
         //nextTick
-        this.$nextTick(() => {
-          let mySwiper = new Swiper(this.$refs.mySwiper,{
-            loop: true, // 循环模式
+        // this.$nextTick(() => {
+        //   let mySwiper = new Swiper(this.$refs.mySwiper,{
+        //     loop: true, // 循环模式
 
-            // 分页器
-            pagination: {
-              el: '.swiper-pagination',
-            },
+        //     // 分页器
+        //     pagination: {
+        //       el: '.swiper-pagination',
+        //     },
 
-            // 前进后退按钮
-            navigation: {
-              nextEl: '.swiper-button-next',
-              prevEl: '.swiper-button-prev',
-            },
+        //     // 前进后退按钮
+        //     navigation: {
+        //       nextEl: '.swiper-button-next',
+        //       prevEl: '.swiper-button-prev',
+        //     },
 
-          })
-        })
+        //   })
+        // })
         
       }
     }

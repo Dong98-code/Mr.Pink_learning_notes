@@ -7,6 +7,8 @@ import TypeNav from '@/components/TypeNav'
 // params:组件名字，
 // console.log(TypeNav.name);
 Vue.component(TypeNav.name, TypeNav)
+import Carousel from '@/components/Carousel'
+Vue.component(Carousel.name, Carousel)
 
 Vue.config.productionTip = false
 
