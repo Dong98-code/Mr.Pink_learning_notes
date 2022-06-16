@@ -11,15 +11,17 @@
             </li>
           </ul>
           <ul class="fl sui-tag">
-            <li class="with-x">手机</li>
-            <li class="with-x">iphone<i>×</i></li>
-            <li class="with-x">华为<i>×</i></li>
-            <li class="with-x">OPPO<i>×</i></li>
+            <!-- 分类面包屑 -->
+            <li class="with-x" v-if="searchParams.categoryName">{{searchParams.categoryName}}<i @click="removeCategoryName">×</i></li>
+            <li class="with-x" v-if="searchParams.keyword">{{searchParams.keyword}}<i @click="removeKeyword">×</i></li>
+            <!-- trademark面包屑 -->
+            <li class="with-x" v-if="searchParams.trademark">{{searchParams.trademark.split(":")[1]}}<i @click="removeTrademark">×</i></li>
+
           </ul>
         </div>
 
         <!--selector-->
-        <SearchSelector />
+        <SearchSelector @trademarkInfo="trademarkInfo"/>
 
         <!--details-->
         <div class="details clearfix">
@@ -173,6 +175,58 @@ export default {
     getSearchData() {
       this.$store.dispatch("search/getSearchInfo", this.searchParams);
     },
+    removeCategoryName() {
+      // 可有业务的 属性值为空的字符串 还是会把相应的字段带给服务器；
+      this.searchParams.category1Id = undefined;
+      this.searchParams.category2Id = undefined
+      this.searchParams.category3Id = undefined;
+      this.searchParams.categoryName = undefined;
+      // 
+      this.getSearchData()
+      // 修改地址栏， 如果此时的路由中带有 params参数， 不应该删除
+      //删除query参数
+      if (JSON.stringify(this.$route.params) !== "") {
+        this.$router.push({
+          name:'search',
+          params:this.$route.params
+        })
+      }
+    },
+    removeKeyword() {
+      // 可有业务的 属性值为空的字符串 还是会把相应的字段带给服务器；
+      this.searchParams.keyword = undefined;
+      // 
+      this.getSearchData()
+      // 修改地址栏， 如果此时的路由中带有 params参数， 不应该删除
+      //删除query参数
+      // 在这触发 $bus身上的挂载的事件 clear
+      this.$bus.$emit('clear')
+      if (JSON.stringify(this.$route.query) !== "") {
+        this.$router.push({
+          name:'search',
+          query:this.$route.query
+        })
+      }
+
+    },
+    // trademarkInfo的回调函数
+    trademarkInfo(trademark) {
+      //此时执行自定义事件的回调
+      // console.log(trademark);
+      // 整理参数 发请求 ，此时已经得到了 对应的品牌的信息
+      // 整理品牌字段参数, 字符串类性 "1:苹果"
+      this.searchParams.trademark = `${trademark.tmId}:${trademark.tmName}`
+      // console.log(this.searchParams.trademark);
+      //再次发i请求
+      this.getSearchData();
+      // 之后面包屑 也应该展示
+    },
+    removeTrademark(){
+      // 可有业务的 属性值为空的字符串 还是会把相应的字段带给服务器；
+      this.searchParams.trademark = undefined;
+      // 
+      this.getSearchData()
+    }
   },
   computed: {
     // 映射数据
@@ -190,16 +244,16 @@ export default {
       // 监听路由。 变化，如果变化，再次发生请求
       // 合并新值和旧值
       // console.log(oldValue);
+      
       Object.assign(this.searchParams, this.$route.params, this.$route.query);
       // 
       this.getSearchData()
       // console.log(this.searchParams);
-      this.searchParams.category1Id = "";
-      this.searchParams.category2Id = "";
 
-      this.searchParams.category3Id = "";
-
-
+      this.searchParams.category1Id = undefined;
+      this.searchParams.category2Id = undefined
+      this.searchParams.category3Id = undefined;
+      
     }
   }
 };

@@ -4,7 +4,7 @@
       <div class="fl key brand">品牌</div>
       <div class="value logos">
         <ul class="logo-list">
-          <li v-for="(trademark) in trademarkList" :key="trademark.tmId">{{trademark.tmName}}</li>
+          <li v-for="(trademark) in trademarkList" :key="trademark.tmId" @click="trademarkHandler(trademark)">{{trademark.tmName}}</li>
         </ul>
       </div>
       <div class="ext">
@@ -36,6 +36,15 @@ export default {
       attrsList: "search/attrsList",
       trademarkList: "search/trademarkList",
     }),
+  },
+  methods: {
+    trademarkHandler(trademark) {
+      // 点击显示对应的品牌，子组件 把电子的品牌信息，传给父组件， 父组件合并params 向服务器请求参数
+      //自定义事件
+      // 触发事件
+      this.$emit('trademarkInfo',trademark)
+      
+    }
   },
 };
 </script>

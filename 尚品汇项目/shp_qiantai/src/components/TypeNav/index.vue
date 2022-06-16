@@ -118,7 +118,7 @@ export default {
         // 带有dategoryName的才是 a标签
         // 整理路由跳转参数
         let location = { name: "search" };
-        let query = { categoryname: categoryname };
+        let query = { categoryName: categoryname };
         if (category1id) {
           // 1级标
           query.category1Id = category1id;

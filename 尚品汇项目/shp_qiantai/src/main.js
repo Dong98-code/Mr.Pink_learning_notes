@@ -16,9 +16,9 @@ Vue.config.productionTip = false
 import router from '@/router'
 
 // 测试接口
-// import { reqGetSearchInfo } from '@/api'
-// let data = reqGetSearchInfo({});
-// console.log(data);
+import { reqGetSearchInfo ,reqCategoryList} from '@/api'
+let data = reqCategoryList();
+console.log(data);
 // 引入mock,执行mock
 import '@/mock/mockServe'
   
@@ -27,5 +27,8 @@ new Vue({
   render: h => h(App),
   // kv一致, 组件身上拥有$route, 路由信息 和 $router
   router: router,
-  store
+  store,
+  beforeCreate() {
+    Vue.prototype.$bus = this;
+  }
 }).$mount('#app')

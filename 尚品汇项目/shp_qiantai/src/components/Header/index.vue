@@ -75,6 +75,13 @@ export default {
       this.$router.push(location)
     }
   },
+  mounted() {
+    // 挂载 清除
+    //事件被触发之后，执行相对应的回调函数 ，指控 keyword,箭头函数并不改变this
+    this.$bus.$on("clear", () => {
+      this.keyword = ""
+    })
+  },
 };
 </script>
 
