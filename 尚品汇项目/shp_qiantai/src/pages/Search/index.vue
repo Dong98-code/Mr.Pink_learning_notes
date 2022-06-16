@@ -16,12 +16,14 @@
             <li class="with-x" v-if="searchParams.keyword">{{searchParams.keyword}}<i @click="removeKeyword">×</i></li>
             <!-- trademark面包屑 -->
             <li class="with-x" v-if="searchParams.trademark">{{searchParams.trademark.split(":")[1]}}<i @click="removeTrademark">×</i></li>
+            <!-- 属性值面包屑 -->
+            <li class="with-x" v-for="(attr, idx) in searchParams.props" :key="idx">{{attr.split(":")[1]}}<i @click="removeAttrInfo(idx)">×</i></li>
 
           </ul>
         </div>
 
         <!--selector-->
-        <SearchSelector @trademarkInfo="trademarkInfo"/>
+        <SearchSelector @trademarkInfo="trademarkInfo" @attrInfo="attrInfo"/>
 
         <!--details-->
         <div class="details clearfix">
@@ -225,6 +227,17 @@ export default {
       // 可有业务的 属性值为空的字符串 还是会把相应的字段带给服务器；
       this.searchParams.trademark = undefined;
       // 
+      this.getSearchData()
+    },
+    attrInfo(attr, attrValue) {
+      // `props:['属性的ID:属性值:属性名']`
+      // this.searchParams.props
+      let props = `${attr.attrId}:${attrValue}:${attr.attrName}`
+      //去重
+      if (this.searchParams.props.indexOf(props) === -1) this.searchParams.props.push(props)
+    },
+    removeAttrInfo(index) {
+      this.searchParams.props.splice(index, 1);
       this.getSearchData()
     }
   },

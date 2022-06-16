@@ -12,11 +12,12 @@
         <a href="javascript:void(0);">更多</a>
       </div>
     </div>
+    <!-- 售卖属性 -->
     <div class="type-wrap" v-for="(attr) in attrsList" :key="attr.id">
       <div class="fl key">{{attr.attrName}}</div>
       <div class="fl value">
         <ul class="type-list">
-          <li v-for="(value, idx) in attr.attrValueList" :key="idx">
+          <li v-for="(value, idx) in attr.attrValueList" :key="idx" @click="attrInfo(attr, value)">
             <a>{{value}}</a>
           </li>
         </ul>
@@ -43,7 +44,14 @@ export default {
       //自定义事件
       // 触发事件
       this.$emit('trademarkInfo',trademark)
-      
+
+    },
+    // 售卖属性值的回调
+    attrInfo(attr, value) {
+      // 传递 ID 属性值 属性名 :  
+      // console.log(attr.attrId, attr.attrName);
+      // console.log(value); 
+      this.$emit('attrInfo', attr, value)
     }
   },
 };

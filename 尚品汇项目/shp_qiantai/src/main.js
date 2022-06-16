@@ -16,9 +16,9 @@ Vue.config.productionTip = false
 import router from '@/router'
 
 // 测试接口
-import { reqGetSearchInfo ,reqCategoryList} from '@/api'
-let data = reqCategoryList();
-console.log(data);
+// import { reqGetSearchInfo ,reqCategoryList} from '@/api'
+// let data = reqCategoryList();
+// console.log(data);
 // 引入mock,执行mock
 import '@/mock/mockServe'
   
