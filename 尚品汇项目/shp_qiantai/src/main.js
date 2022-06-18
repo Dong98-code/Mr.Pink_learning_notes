@@ -9,6 +9,9 @@ import TypeNav from '@/components/TypeNav'
 Vue.component(TypeNav.name, TypeNav)
 import Carousel from '@/components/Carousel'
 Vue.component(Carousel.name, Carousel)
+// 全局分页器
+import Pagination from '@/components/Pagination'
+Vue.component(Pagination.name, Pagination)
 
 Vue.config.productionTip = false
 

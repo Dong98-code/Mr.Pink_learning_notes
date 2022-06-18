@@ -12,41 +12,51 @@
           </ul>
           <ul class="fl sui-tag">
             <!-- 分类面包屑 -->
-            <li class="with-x" v-if="searchParams.categoryName">{{searchParams.categoryName}}<i @click="removeCategoryName">×</i></li>
-            <li class="with-x" v-if="searchParams.keyword">{{searchParams.keyword}}<i @click="removeKeyword">×</i></li>
+            <li class="with-x" v-if="searchParams.categoryName">
+              {{ searchParams.categoryName
+              }}<i @click="removeCategoryName">×</i>
+            </li>
+            <li class="with-x" v-if="searchParams.keyword">
+              {{ searchParams.keyword }}<i @click="removeKeyword">×</i>
+            </li>
             <!-- trademark面包屑 -->
-            <li class="with-x" v-if="searchParams.trademark">{{searchParams.trademark.split(":")[1]}}<i @click="removeTrademark">×</i></li>
+            <li class="with-x" v-if="searchParams.trademark">
+              {{ searchParams.trademark.split(":")[1]
+              }}<i @click="removeTrademark">×</i>
+            </li>
             <!-- 属性值面包屑 -->
-            <li class="with-x" v-for="(attr, idx) in searchParams.props" :key="idx">{{attr.split(":")[1]}}<i @click="removeAttrInfo(idx)">×</i></li>
-
+            <li
+              class="with-x"
+              v-for="(attr, idx) in searchParams.props"
+              :key="idx"
+            >
+              {{ attr.split(":")[1] }}<i @click="removeAttrInfo(idx)">×</i>
+            </li>
           </ul>
         </div>
 
         <!--selector-->
-        <SearchSelector @trademarkInfo="trademarkInfo" @attrInfo="attrInfo"/>
+        <SearchSelector @trademarkInfo="trademarkInfo" @attrInfo="attrInfo" />
 
         <!--details-->
         <div class="details clearfix">
           <div class="sui-navbar">
             <div class="navbar-inner filter">
               <ul class="sui-nav">
-                <li class="active">
-                  <a href="#">综合</a>
+                <li :class="{ active: isOne }" @click="sort(1)">
+                  <a href="#">综合<span v-show="isOne" class="iconfont" :class="{'icon-paixu':isAsc, 'icon-paixu1':isDesc}"></span></a>
                 </li>
-                <li>
-                  <a href="#">销量</a>
+                <li :class="{ active: isTwo }" @click="sort(2)">
+                  <a href="#">价格<span v-show="isTwo" class="iconfont" :class="{'icon-paixu':isAsc, 'icon-paixu1':isDesc}"></span></a>
                 </li>
-                <li>
+                <li :class="{ active: isThree }">
                   <a href="#">新品</a>
                 </li>
-                <li>
+                <li :class="{ active: isFour }">
                   <a href="#">评价</a>
                 </li>
-                <li>
-                  <a href="#">价格⬆</a>
-                </li>
-                <li>
-                  <a href="#">价格⬇</a>
+                <li :class="{ active: isFive }">
+                  <a href="#">价格</a>
                 </li>
               </ul>
             </div>
@@ -91,35 +101,7 @@
               </li>
             </ul>
           </div>
-          <div class="fr page">
-            <div class="sui-pagination clearfix">
-              <ul>
-                <li class="prev disabled">
-                  <a href="#">«上一页</a>
-                </li>
-                <li class="active">
-                  <a href="#">1</a>
-                </li>
-                <li>
-                  <a href="#">2</a>
-                </li>
-                <li>
-                  <a href="#">3</a>
-                </li>
-                <li>
-                  <a href="#">4</a>
-                </li>
-                <li>
-                  <a href="#">5</a>
-                </li>
-                <li class="dotted"><span>...</span></li>
-                <li class="next">
-                  <a href="#">下一页»</a>
-                </li>
-              </ul>
-              <div><span>共10页&nbsp;</span></div>
-            </div>
-          </div>
+        <Pagination :pageNo="searchParams.pageNo" :pageSize="searchParams.pageSize" :total="total" :continues="5" @getPageInfo="getPageInfo"/>
         </div>
       </div>
     </div>
@@ -130,13 +112,16 @@
 <script>
 import MyFooter from "@/components/Footer";
 import SearchSelector from "./SearchSelector/SearchSelector";
-import { mapGetters } from "vuex";
+import Pagination from "@/components/Pagination"
+import { mapGetters, mapState } from "vuex";
 export default {
   name: "MySearch",
 
   components: {
     SearchSelector,
     MyFooter,
+    Pagination
+  
   },
   data() {
     return {
@@ -148,8 +133,8 @@ export default {
         category3Id: "",
         categoryName: "",
         keyword: "",
-        // 是否升序
-        order: "",
+        // 是否升序, 默认综合
+        order: "1:asc",
         // 分页器
         pageNo: 1,
         // 每一页展示数据个数
@@ -159,7 +144,7 @@ export default {
         props: [],
         // 品牌 apple xiaomi等
         trademark: "",
-      },
+      }
     };
   },
   mounted() {
@@ -174,42 +159,47 @@ export default {
     Object.assign(this.searchParams, this.$route.params, this.$route.query);
   },
   methods: {
+    getPageInfo(pageNow) {
+      // 第几页
+      // pageNow会触发回调时传入的数据
+      this.searchParams.pageNo = pageNow;
+      this.getSearchData();
+    },
     getSearchData() {
       this.$store.dispatch("search/getSearchInfo", this.searchParams);
     },
     removeCategoryName() {
       // 可有业务的 属性值为空的字符串 还是会把相应的字段带给服务器；
       this.searchParams.category1Id = undefined;
-      this.searchParams.category2Id = undefined
+      this.searchParams.category2Id = undefined;
       this.searchParams.category3Id = undefined;
       this.searchParams.categoryName = undefined;
-      // 
-      this.getSearchData()
+      //
+      this.getSearchData();
       // 修改地址栏， 如果此时的路由中带有 params参数， 不应该删除
       //删除query参数
       if (JSON.stringify(this.$route.params) !== "") {
         this.$router.push({
-          name:'search',
-          params:this.$route.params
-        })
+          name: "search",
+          params: this.$route.params,
+        });
       }
     },
     removeKeyword() {
       // 可有业务的 属性值为空的字符串 还是会把相应的字段带给服务器；
       this.searchParams.keyword = undefined;
-      // 
-      this.getSearchData()
+      //
+      this.getSearchData();
       // 修改地址栏， 如果此时的路由中带有 params参数， 不应该删除
       //删除query参数
       // 在这触发 $bus身上的挂载的事件 clear
-      this.$bus.$emit('clear')
+      this.$bus.$emit("clear");
       if (JSON.stringify(this.$route.query) !== "") {
         this.$router.push({
-          name:'search',
-          query:this.$route.query
-        })
+          name: "search",
+          query: this.$route.query,
+        });
       }
-
     },
     // trademarkInfo的回调函数
     trademarkInfo(trademark) {
@@ -217,58 +207,105 @@ export default {
       // console.log(trademark);
       // 整理参数 发请求 ，此时已经得到了 对应的品牌的信息
       // 整理品牌字段参数, 字符串类性 "1:苹果"
-      this.searchParams.trademark = `${trademark.tmId}:${trademark.tmName}`
+      this.searchParams.trademark = `${trademark.tmId}:${trademark.tmName}`;
       // console.log(this.searchParams.trademark);
       //再次发i请求
       this.getSearchData();
       // 之后面包屑 也应该展示
     },
-    removeTrademark(){
+    removeTrademark() {
       // 可有业务的 属性值为空的字符串 还是会把相应的字段带给服务器；
       this.searchParams.trademark = undefined;
-      // 
-      this.getSearchData()
+      //
+      this.getSearchData();
     },
     attrInfo(attr, attrValue) {
       // `props:['属性的ID:属性值:属性名']`
       // this.searchParams.props
-      let props = `${attr.attrId}:${attrValue}:${attr.attrName}`
+      let props = `${attr.attrId}:${attrValue}:${attr.attrName}`;
       //去重
-      if (this.searchParams.props.indexOf(props) === -1) this.searchParams.props.push(props)
+      if (this.searchParams.props.indexOf(props) === -1)
+        this.searchParams.props.push(props);
     },
     removeAttrInfo(index) {
       this.searchParams.props.splice(index, 1);
-      this.getSearchData()
-    }
+      this.getSearchData();
+    },
+    sort(flag) {
+      //获取每一次order初始值,与用户点击传递进来的flag进行判断
+      
+      let originFlag = this.searchParams.order.split(":")[0];
+      let originSortType = this.searchParams.order.split(":")[1];
+      // console.log(originSortType);
+      //准备一个新的数值，将来赋值给order
+      let newOrder = "";
+      //高亮的判断
+      if (flag == originFlag) {
+        newOrder = `${originFlag}:${originSortType == "desc" ? "asc" : "desc"}`;
+      } else {
+        //不是高亮的按钮
+        newOrder = `${flag}:${"desc"}`;
+        
+      }
+      console.log(newOrder);
+      //重新给order赋予新的数值
+      this.searchParams.order = newOrder;
+      //重新发一次请求
+      this.getSearchData();
+    },
   },
   computed: {
     // 映射数据
     //
     ...mapGetters({
       goodsList: "search/goodsList",
-      attrsList:"search/attrsList",
-      trademarkList:"search/trademarkList"
+      attrsList: "search/attrsList",
+      trademarkList: "search/trademarkList",
     }),
-  },
-  watch:{
-    // 监听属性
+    ...mapState({
+      total:state => state.search.searchList.total
+    }),
     
-    $route(oldValue, newValue){
+    isOne() {
+      return this.searchParams.order.indexOf("1") !== -1;
+    },
+    isThree() {
+      return this.searchParams.order.indexOf("3") !== -1;
+    },
+    isTwo() {
+      return this.searchParams.order.indexOf("2") !== -1;
+    },
+    isFour() {
+      return this.searchParams.order.indexOf("4") !== -1;
+    },
+    isFive() {
+      return this.searchParams.order.indexOf("5") !== -1;
+    },
+    isDesc() {
+      return this.searchParams.order.indexOf("desc") !== -1;
+    },
+    isAsc() {
+      return this.searchParams.order.indexOf("asc") !== -1;
+    },
+  },
+  watch: {
+    // 监听属性
+
+    $route(oldValue, newValue) {
       // 监听路由。 变化，如果变化，再次发生请求
       // 合并新值和旧值
       // console.log(oldValue);
-      
+
       Object.assign(this.searchParams, this.$route.params, this.$route.query);
-      // 
-      this.getSearchData()
+      //
+      this.getSearchData();
       // console.log(this.searchParams);
 
       this.searchParams.category1Id = undefined;
-      this.searchParams.category2Id = undefined
+      this.searchParams.category2Id = undefined;
       this.searchParams.category3Id = undefined;
-      
-    }
-  }
+    },
+  },
 };
 </script>
 

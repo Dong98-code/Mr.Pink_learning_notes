@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapState } from "vuex";
 export default {
   name: "SearchSelector",
   computed: {
@@ -37,6 +37,7 @@ export default {
       attrsList: "search/attrsList",
       trademarkList: "search/trademarkList",
     }),
+
   },
   methods: {
     trademarkHandler(trademark) {
