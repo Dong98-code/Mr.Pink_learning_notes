@@ -118,7 +118,7 @@ push与replace是有区别的
 
 7)滚动行为的设置。
 
-
+![20220619152127](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220619152127.png)
 
 
 8)项目当中控制台

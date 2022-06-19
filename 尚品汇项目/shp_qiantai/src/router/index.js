@@ -4,16 +4,12 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
+import routes from '@/router/routes'
 // 使用插件
 Vue.use(VueRouter)
 
-// 
-import MyHome from '@/pages/Home'
-import MyLogin from '@/pages/Login'
-import MySearch from '@/pages/Search'
-import MyRegister from '@/pages/Register'
 
-// 暴露 路由
+
 
 
 // 重写push
@@ -27,7 +23,7 @@ VueRouter.prototype.push = function (location, resolve, reject) {
         // call 和 apply传参的方式不一样， call用逗号隔开
         originPush.call(this, location, resolve, reject)
     } else {
-        originPush.call(this, location, ()=>{}, ()=>{}) // 手动传入两个回调函数 占位
+        originPush.call(this, location, () => {}, () => {}) // 手动传入两个回调函数 占位
     }
 }
 
@@ -37,45 +33,19 @@ VueRouter.prototype.replace = function (location, resolve, reject) {
         // call 和 apply传参的方式不一样， call用逗号隔开
         originReplace.call(this, location, resolve, reject)
     } else {
-        originReplace.call(this, location, ()=>{}, ()=>{}) // 手动传入两个回调函数 占位
+        originReplace.call(this, location, () => {}, () => {}) // 手动传入两个回调函数 占位
     }
 }
 
 const router = new VueRouter({
     // 配置路由
-    routes: [
-        {   
-            name:'home',
-            path: "/home",
-            component: MyHome,
-            meta:{isShowFooter:true}
-            
-        },
-        {
-            name: 'login',
-            path: '/login',
-            component: MyLogin,
-        },
-        {
-            name: 'register',
-            path: '/register',
-            component:MyRegister
-        },
-        {
-            name: 'search',
-            path: '/search/:keyword?',
-            // path: '/search',
-
-            component: MySearch,
-            meta:{isShowFooter:false}
-            
-        },
-        // 重定向
-        {
-            path: '*',
-            redirect:'/home'
+    routes,
+    scrollBehavior(to, from, savedPosition) {
+        // 始终滚动到顶部
+        return {
+            top: 0
         }
-    ]
+    },
 })
 
 // 暴露

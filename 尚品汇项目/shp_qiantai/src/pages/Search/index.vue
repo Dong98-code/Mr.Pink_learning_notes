@@ -44,10 +44,22 @@
             <div class="navbar-inner filter">
               <ul class="sui-nav">
                 <li :class="{ active: isOne }" @click="sort(1)">
-                  <a href="#">综合<span v-show="isOne" class="iconfont" :class="{'icon-paixu':isAsc, 'icon-paixu1':isDesc}"></span></a>
+                  <a href="#"
+                    >综合<span
+                      v-show="isOne"
+                      class="iconfont"
+                      :class="{ 'icon-paixu': isAsc, 'icon-paixu1': isDesc }"
+                    ></span
+                  ></a>
                 </li>
                 <li :class="{ active: isTwo }" @click="sort(2)">
-                  <a href="#">价格<span v-show="isTwo" class="iconfont" :class="{'icon-paixu':isAsc, 'icon-paixu1':isDesc}"></span></a>
+                  <a href="#"
+                    >价格<span
+                      v-show="isTwo"
+                      class="iconfont"
+                      :class="{ 'icon-paixu': isAsc, 'icon-paixu1': isDesc }"
+                    ></span
+                  ></a>
                 </li>
                 <li :class="{ active: isThree }">
                   <a href="#">新品</a>
@@ -66,9 +78,15 @@
               <li class="yui3-u-1-5" v-for="good in goodsList" :key="good.id">
                 <div class="list-wrap">
                   <div class="p-img">
-                    <a href="item.html" target="_blank"
-                      ><img :src="good.defaultImg"
-                    /></a>
+                    <!-- 点击图片 跳往详情页面 -->
+                    <router-link
+                      :to="{
+                        name: 'detail',
+                        params: { skuId: good.id },
+                      }"
+                    >
+                      <img :src="good.defaultImg" />
+                    </router-link>
                   </div>
                   <div class="price">
                     <strong>
@@ -101,7 +119,13 @@
               </li>
             </ul>
           </div>
-        <Pagination :pageNo="searchParams.pageNo" :pageSize="searchParams.pageSize" :total="total" :continues="5" @getPageInfo="getPageInfo"/>
+          <Pagination
+            :pageNo="searchParams.pageNo"
+            :pageSize="searchParams.pageSize"
+            :total="total"
+            :continues="5"
+            @getPageInfo="getPageInfo"
+          />
         </div>
       </div>
     </div>
@@ -112,7 +136,7 @@
 <script>
 import MyFooter from "@/components/Footer";
 import SearchSelector from "./SearchSelector/SearchSelector";
-import Pagination from "@/components/Pagination"
+import Pagination from "@/components/Pagination";
 import { mapGetters, mapState } from "vuex";
 export default {
   name: "MySearch",
@@ -120,8 +144,7 @@ export default {
   components: {
     SearchSelector,
     MyFooter,
-    Pagination
-  
+    Pagination,
   },
   data() {
     return {
@@ -144,7 +167,7 @@ export default {
         props: [],
         // 品牌 apple xiaomi等
         trademark: "",
-      }
+      },
     };
   },
   mounted() {
@@ -233,7 +256,7 @@ export default {
     },
     sort(flag) {
       //获取每一次order初始值,与用户点击传递进来的flag进行判断
-      
+
       let originFlag = this.searchParams.order.split(":")[0];
       let originSortType = this.searchParams.order.split(":")[1];
       // console.log(originSortType);
@@ -245,9 +268,8 @@ export default {
       } else {
         //不是高亮的按钮
         newOrder = `${flag}:${"desc"}`;
-        
       }
-      console.log(newOrder);
+      // console.log(newOrder);
       //重新给order赋予新的数值
       this.searchParams.order = newOrder;
       //重新发一次请求
@@ -263,9 +285,9 @@ export default {
       trademarkList: "search/trademarkList",
     }),
     ...mapState({
-      total:state => state.search.searchList.total
+      total: (state) => state.search.searchList.total,
     }),
-    
+
     isOne() {
       return this.searchParams.order.indexOf("1") !== -1;
     },

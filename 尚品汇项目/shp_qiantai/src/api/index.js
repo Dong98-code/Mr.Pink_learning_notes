@@ -26,3 +26,11 @@ export const reqGetSearchInfo = (params) => requests({
     method: 'post',
     data: params
 })
+
+// 后去产品详情数据： URL : api/item/{skuID}
+
+export const reqGetGoodsInfo = (skuId) => requests({
+    // 
+    url: `/item/${skuId}`, // api baseUrL
+    method: 'get'
+})
