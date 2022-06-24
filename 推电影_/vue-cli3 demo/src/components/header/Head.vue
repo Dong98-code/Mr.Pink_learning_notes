@@ -1,6 +1,6 @@
 <template>
     <header>
-        <div class="nav-left" v-if="goBack" @click="goBackDo"><i class="iconfont icon-left-arrow"></i></div>
+        <div class="nav-left" v-if="goBack" @click="goBackDo"><i class="iconfont icon-left"></i></div>
         <div class="header-tit ellipsis" s v-if="headTitle">{{headTitle}}</div>
     </header>
 </template>

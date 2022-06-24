@@ -14,14 +14,21 @@ axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded
 Vue.prototype.$qs = qs;
 
 import "lib-flexible/flexible"
-import { Toast } from 'vant'
+import { Toast, Tab, Tabs, ImagePreview } from 'vant'
 Vue.use(Toast)
+Vue.use(Tab)
+Vue.use(Tabs)
+Vue.use(ImagePreview)
+
 
 Vue.config.productionTip = false
 
 new Vue({
   router,
   store,
+  beforeCreate() {
+    Vue.prototype.$bus = this // 安装事件总线 
+  },
   render: h => h(App)
 }).$mount('#app')
 
