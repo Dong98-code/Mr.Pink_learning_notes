@@ -7,9 +7,15 @@
     <section class="con">
       <!-- 导航路径区域 -->
       <div class="conPoin">
-        <span v-show="categoryView.category1Name">{{categoryView.category1Name}}</span>
-        <span v-show="categoryView.category2Name">{{categoryView.category2Name}}</span>
-        <span v-show="categoryView.category3Name">{{categoryView.category3Name}}</span>
+        <span v-show="categoryView.category1Name">{{
+          categoryView.category1Name
+        }}</span>
+        <span v-show="categoryView.category2Name">{{
+          categoryView.category2Name
+        }}</span>
+        <span v-show="categoryView.category3Name">{{
+          categoryView.category3Name
+        }}</span>
         <span>iphone 6S系类</span>
       </div>
       <!-- 主要内容区域 -->
@@ -17,15 +23,15 @@
         <!-- 左侧放大镜区域 -->
         <div class="previewWrap">
           <!--放大镜效果-->
-          <Zoom :imageList="imageList"/>
+          <Zoom :imageList="imageList" />
           <!-- 小图列表 -->
-          <ImageList :imageList="imageList"/>
+          <ImageList :imageList="imageList" />
         </div>
         <!-- 右侧选择区域布局 -->
         <div class="InfoWrap">
           <div class="goodsDetail">
             <h3 class="InfoName">
-              {{skuInfo.skuName}}
+              {{ skuInfo.skuName }}
             </h3>
             <p class="news">
               推荐选择下方[移动优惠购],手机套餐齐搞定,不用换号,每月还有花费返
@@ -37,7 +43,7 @@
                 </div>
                 <div class="price">
                   <i>¥</i>
-                  <em>{{skuInfo.price}}</em>
+                  <em>{{ skuInfo.price }}</em>
                   <span>降价通知</span>
                 </div>
                 <div class="remark">
@@ -77,19 +83,34 @@
             <div class="chooseArea">
               <div class="choosed"></div>
               <dl v-for="(attr, index) in spuSaleAttrList" :key="index">
-                <dt class="title">{{attr.saleAttrName}}</dt>
-                <dd v-for="(saleValue) in attr.spuSaleAttrValueList" :key="saleValue.id" @click="changeChecked(attr.spuSaleAttrValueList, saleValue)" :class="{active:saleValue.isChecked==1}">{{saleValue.saleAttrValueName}}</dd>
-
+                <dt class="title">{{ attr.saleAttrName }}</dt>
+                <dd
+                  v-for="saleValue in attr.spuSaleAttrValueList"
+                  :key="saleValue.id"
+                  @click="changeChecked(attr.spuSaleAttrValueList, saleValue)"
+                  :class="{ active: saleValue.isChecked == 1 }"
+                >
+                  {{ saleValue.saleAttrValueName }}
+                </dd>
               </dl>
-              
             </div>
             <div class="cartWrap">
               <div class="controls">
-                <input autocomplete="off" class="itxt" />
-                <a href="javascript:" class="plus">+</a>
-                <a href="javascript:" class="mins">-</a>
+                <input
+                  autocomplete="off"
+                  class="itxt"
+                  v-model="skuNum"
+                  @change="changeSkuNum"
+                />
+                <a href="javascript:" class="plus" @click="skuNum++">+</a>
+                <a
+                  href="javascript:"
+                  class="mins"
+                  @click="skuNum > 1 ? skuNum-- : (skuNum = 1)"
+                  >-</a
+                >
               </div>
-              <div class="add">
+              <div class="add" @click="addshopcar">
                 <a href="javascript:">加入购物车</a>
               </div>
             </div>
@@ -335,6 +356,11 @@ import Zoom from "./Zoom/Zoom";
 
 export default {
   name: "Detail",
+  data() {
+    return {
+      skuNum: 1, // 购物车 个数
+    };
+  },
 
   components: {
     ImageList,
@@ -347,22 +373,55 @@ export default {
   },
   computed: {
     ...mapGetters({
-      categoryView:'detail/categoryView',
-      skuInfo:'detail/skuInfo',
-      spuSaleAttrList:'detail/spuSaleAttrList'
+      categoryView: "detail/categoryView",
+      skuInfo: "detail/skuInfo",
+      spuSaleAttrList: "detail/spuSaleAttrList",
     }),
     imageList() {
       return this.skuInfo.skuImageList || [];
-    }
+    },
   },
   methods: {
     changeChecked(attr, saleValue) {
       // console.log(attr);
-      attr.forEach(element => {
-        element.isChecked = "0"
+      attr.forEach((element) => {
+        element.isChecked = "0";
       });
-      saleValue.isChecked = "1"
-    }
+      saleValue.isChecked = "1";
+    },
+    changeSkuNum(event) {
+      let value = event.target.value * 1;
+      if (isNaN(value) || value < 1) {
+        this.skuNum = 1;
+      } else {
+        this.skuNum = parseInt(value);
+      }
+    },
+    async addshopcar() {
+      // dispatch
+      // console.log('尝试调用');
+      try {
+        // 调用成功的
+        await this.$store.dispatch("detail/addorUpdateSku", {
+          skuId: this.$route.params.skuId,
+          // skuId: this.skuId,
+
+          skuNum: this.skuNum,
+        });
+        // 之后路由跳转
+        // 使用本地存储 传递参数
+        sessionStorage.setItem('SKUINFO', JSON.stringify(this.skuInfo))
+        // 路由跳转
+        this.$router.push({
+          path:'/addcarsuccess',
+          qurry:{skuNum:this.skuNum}
+        })
+      } catch (error) {
+
+        // 调用失败的 捕获错位u
+        alert('加入购入车失败')
+      }
+    },
   },
 };
 </script>

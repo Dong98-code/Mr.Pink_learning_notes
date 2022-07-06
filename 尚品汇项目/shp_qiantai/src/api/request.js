@@ -3,7 +3,9 @@ import axios from "axios";
 import nprogress from "nprogress";
 // 引入样式
 import 'nprogress/nprogress.css'
-
+// 判断是否存在 临时游客的id
+import ShopCart from "@/store/ShopCart";
+import Users from '@/store/Users'
 // 创建 axios实例对象
 
 const requests = axios.create({
@@ -20,7 +22,16 @@ requests.interceptors.request.use((config) => {
     // header请求头
     // 进度条开始 
     nprogress.start()
-    return config;
+    // return config;
+    if (ShopCart.state.USER_ID) {
+        // 请求头 添加字段 userTempId 临时id, 生成的临时身份
+        config.headers.userTempId = ShopCart.state.USER_ID;
+    }
+
+    if(Users.state.token){
+        config.headers.token = Users.state.token;
+    }
+    return config
 })
 
 // 响应拦截器

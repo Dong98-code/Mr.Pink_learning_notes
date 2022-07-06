@@ -1,14 +1,34 @@
 <template>
   <div class="pagination">
-    <button :disabled="pageNo==1" @click="$emit('getPageInfo', pageNo-1)">上一页</button>
-    <button v-if="startNumAndEndNum.startPage> 1" @click="$emit('getPageInfo', 1)">1</button>
+    <button :disabled="pageNo == 1" @click="$emit('getPageInfo', pageNo - 1)">
+      上一页
+    </button>
+    <button
+      v-if="startNumAndEndNum.startPage > 1"
+      @click="$emit('getPageInfo', 1)"
+    >
+      1
+    </button>
     <button v-show="startNumAndEndNum.startPage > 2">···</button>
 
-    <button v-for="page in startNumAndEndNum.endPage" :key="page" :class="{active:pageNo==page}" v-show="page >= startNumAndEndNum.startPage" @click="$emit('getPageInfo', page)">{{ page }}</button>
+    <button
+      v-for="page in startNumAndEndNum.endPage"
+      :key="page"
+      :class="{ active: pageNo == page }"
+      v-show="page >= startNumAndEndNum.startPage"
+      @click="$emit('getPageInfo', page)"
+    >
+      {{ page }}
+    </button>
 
     <button>···</button>
-    <button :disabled="pageNo==totalPage" @click="$emit('getPageInfo', pageNo+1)">下一页</button>
-    <button>共{{totalPage}}页</button>
+    <button
+      :disabled="pageNo == totalPage"
+      @click="$emit('getPageInfo', pageNo + 1)"
+    >
+      下一页
+    </button>
+    <button>共{{ totalPage }}页</button>
     <button style="margin-left: 30px">共{{ total }}条</button>
   </div>
 </template>
@@ -30,20 +50,22 @@ export default {
         endPage = 0;
       // 1. 连续页 > 总页数
       if (continues > totalPage) {
-        startPage = 0;
-        endPage = totalPage; //结束页的总页数
-      }
-      // 连续页
-      startPage = pageNo - Math.floor(continues / 2);
-      endPage = pageNo + Math.floor(continues / 2);
-      if (startPage < 1) {
         startPage = 1;
-        endPage = continues;
+        endPage = totalPage; //结束页的总页数
+      } else {
+        // 连续页
+        startPage = pageNo - Math.floor(continues / 2);
+        endPage = pageNo + Math.floor(continues / 2);
+        if (startPage < 1) {
+          startPage = 1;
+          endPage = continues;
+        }
+        if (endPage > totalPage) {
+          endPage = totalPage;
+          startPage = endPage - continues + 1;
+        }
       }
-      if (endPage > totalPage) {
-        endPage = totalPage;
-        startPage = endPage - continues + 1;
-      }
+
       return { startPage, endPage };
     },
   },

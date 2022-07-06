@@ -10,10 +10,12 @@
   "dependencies": {
     "axios": "^0.27.2",
     "core-js": "^3.8.3",
+    "element-ui": "^2.15.9",
     "install": "^0.13.0",
     "less-loader": "^6.2.0",
     "mockjs": "^1.1.0",
     "nprogress": "^0.2.0",
+    "qrcode": "^1.5.0",
     "swiper": "^5.4.5",
     "vue": "^2.6.14",
     "vue-router": "^3.5.4",

@@ -6,15 +6,23 @@
       <div class="container">
         <div class="loginList">
           <p>尚品汇欢迎您！</p>
-          <p>
+          <p v-if="!$store.state.users.nickName">
             <span>请</span>
-            <a href="###">登录</a>
-            <a href="###" class="register">免费注册</a>
+            <!-- <a href="###">登录</a> -->
+            <router-link to="/login">登录</router-link>
+
+            <router-link class="register" to="/register">注册</router-link>
+
+            <!-- <a href="###" class="register">免费注册</a> -->
+          </p>
+          <p v-else>
+            <a>{{ $store.state.users.nickName }}</a>
+            <a class="register" @click="logout">退出登录</a>
           </p>
         </div>
         <div class="typeList">
-          <a href="###">我的订单</a>
-          <a href="###">我的购物车</a>
+          <router-link to="/center">我的订单</router-link>
+          <router-link to="/shopcar">我的购物车</router-link>
           <a href="###">我的尚品汇</a>
           <a href="###">尚品汇会员</a>
           <a href="###">企业采购</a>
@@ -39,7 +47,11 @@
             class="input-error input-xxlarge"
             v-model="keyword"
           />
-          <button class="sui-btn btn-xlarge btn-danger" type="button" @click="goSearch">
+          <button
+            class="sui-btn btn-xlarge btn-danger"
+            type="button"
+            @click="goSearch"
+          >
             搜索
           </button>
         </form>
@@ -50,37 +62,41 @@
 
 <script>
 export default {
-  name:"MyHeader",
+  name: "MyHeader",
   data() {
     return {
-      keyword:'',
-    }
+      keyword: "",
+    };
   },
   methods: {
     goSearch() {
       let location = {
-        name:"search",
-        params:{keyword:this.keyword || undefined},
-      }
+        name: "search",
+        params: { keyword: this.keyword || undefined },
+      };
       // console.log(this.$route.query);
       // console.log(this.$route.hasOwnProperty('query')); // 含有该属性，该属性为空对象
       // console.log(JSON.stringify(this.$route.query) === '{}');
-      if (JSON.stringify(this.$route.query) !== '{}') {
+      if (JSON.stringify(this.$route.query) !== "{}") {
         // 不为空
-        location.query = this.$route.query
+        location.query = this.$route.query;
       }
       // 跳转
       console.log(location);
       // console.log(this.$route.params);
-      this.$router.push(location)
-    }
+      this.$router.push(location);
+    },
+    logout() {
+      //派遣action退出登录
+      this.$store.dispatch("users/logout");
+    },
   },
   mounted() {
     // 挂载 清除
     //事件被触发之后，执行相对应的回调函数 ，指控 keyword,箭头函数并不改变this
     this.$bus.$on("clear", () => {
-      this.keyword = ""
-    })
+      this.keyword = "";
+    });
   },
 };
 </script>

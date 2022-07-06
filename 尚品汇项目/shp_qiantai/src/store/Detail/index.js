@@ -1,5 +1,6 @@
 import {
-    reqGetGoodsInfo
+    reqGetGoodsInfo,
+    reqAddorUpdateSku
 } from "@/api"
 // 准备actions——用于响应组件中的动作
 const actions = {
@@ -15,6 +16,17 @@ const actions = {
         }
 
     },
+    async addorUpdateSku(contex, { skuId, skuNum }) {
+        // console.log({ skuId, skuNum });
+        let res = await reqAddorUpdateSku(skuId, skuNum);
+        // console.log(res);
+        if (res.code === 200) {
+            // console.log('调用成功');
+            return 'ok'
+        } else {
+            return Promise.reject('fail');
+        }
+    }
 
     
 }
@@ -29,7 +41,8 @@ const mutations = {
 // 准备state——用于存储数据
 const state = {
     // 初始值新对象
-    goodInfo:{}
+    goodInfo: {},
+    uuid_token: {}
 }
 
 const getters = {
