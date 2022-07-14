@@ -13,6 +13,9 @@
     <div>
       <router-link to="/u/movieDetail">电影详情</router-link>
     </div>
+    <div>
+      <router-link to="/u/movieList">电影列表</router-link>
+    </div>
   </div>
 </template>
 

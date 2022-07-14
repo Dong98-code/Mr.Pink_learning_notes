@@ -5,6 +5,7 @@ import Index from '../views/Index.vue'
 import login from '../views/login/login'
 import bindMobile from '../views/login/bindMobile'
 import movieDetail from '../views/movieDetail'
+import movieList from '../views/movieList'
 
 Vue.use(VueRouter)
 
@@ -16,7 +17,8 @@ const routes = [
       {path: '/index',  component: Index, meta: { title:"在线实习" } },
       {path: '/u/login',  component: login, meta: { title:"登录" } },
       { path: '/u/bindMobile', component: bindMobile, meta: { title: "绑定手机" } },
-      {path: '/u/movieDetail',  component: movieDetail, meta: { title:"电影详情" } },
+      { path: '/u/movieDetail', component: movieDetail, meta: { title: "电影详情" } },
+      {path: '/u/movieList',  component: movieList, meta: { title:"电影列表" } },
       
     ]
   },
