@@ -12,7 +12,7 @@
           icon="el-icon-plus"
           style="margin-bottom: 10px"
           :disabled="!category3Id"
-          @click="isShowTable = false"
+          @click="addAttr"
           >添加属性</el-button
         >
         <el-table style="width: 100%" border :data="attrList">
@@ -61,21 +61,28 @@
       </div>
       <!-- 添加属性和修改属性 -->
       <div v-show="!isShowTable">
-        <el-form :inline="true" ref="form" label-width="80px">
+        <el-form :inline="true" ref="form" label-width="80px" :model="attrInfo">
           <el-form-item label="属性名">
-            <el-input placeholder="请输入属性名"></el-input>
+            <el-input placeholder="请输入属性名" v-model="attrInfo.attrName"></el-input>
           </el-form-item>
         </el-form>
         <!-- 添加属性名按钮和取消 -->
-        <el-button type="primary" icon="el-icon-plus">添加属性值</el-button>
+        <el-button type="primary" icon="el-icon-plus" @click="addAttrValue" :disabled="!attrInfo.attrName">添加属性值</el-button>
         <el-button type="" @click="isShowTable=true">取消</el-button>
         <!-- 表格 -->
-        <el-table style="width: 100%;margin:20px 0px" border>
+        <el-table style="width: 100%;margin:20px 0px" border :data="attrInfo.attrValueList">
           <el-table-column label="序号" type="index" width="80" align="center">
           </el-table-column>
           <el-table-column label="属性值名称" prop="prop" width="width" align="center">
+          <template slot-scope="{row}">
+              <el-input v-model="row.valueName" placeholder="请输入属性值名称" size="mini"></el-input>
+            
+          </template>
           </el-table-column>
-          <el-table-column label="操作" prop="prop" width="width" align="center">
+          <el-table-column label="操作" prop="prop" width="width" align="left">
+            <template slot-scope="{}">
+              <el-button type="danger" icon="el-icon-delete" size="mini"></el-button>
+            </template>
           </el-table-column>
         </el-table>
         <!-- 保存和取消按钮 -->
@@ -99,6 +106,16 @@ export default {
       attrList: [],
       // 是否展示table
       isShowTable: false,
+      //收集新增属性|修改属性使用的
+      attrInfo: {
+        attrName: "", //属性名
+        attrValueList: [
+          //属性值，因为属性值可以有多个因此用数组，每一个属性值都是一个对象需要attrId，valueName
+          
+        ],
+        categoryId: 0, //三级分类的id
+        categoryLevel: 3, //因为服务器也需要区分几级id
+      },
     };
   },
   methods: {
@@ -134,6 +151,28 @@ export default {
         this.attrList = result.data;
       }
     },
+    //添加属性按钮回调
+    addAttr(){
+      //切换table显示与隐藏
+      this.isShowTable = false;
+      //清除数据
+      //收集三级分类的id
+      this.attrInfo = {
+        attrName: "", //属性名
+        attrValueList: [
+          //属性值，因为属性值可以有多个因此用数组，每一个属性值都是一个对象需要attrId，valueName
+        ],
+        categoryId: this.category3Id, //三级分类的id
+        categoryLevel: 3, //因为服务器也需要区分几级id
+      };
+    },
+    addAttrValue(){
+      // 向list中push数据
+      this.attrInfo.attrValueList.push({
+        attrId: undefined,         
+        valueName:  ""
+      })
+    }
   },
 };
 </script>

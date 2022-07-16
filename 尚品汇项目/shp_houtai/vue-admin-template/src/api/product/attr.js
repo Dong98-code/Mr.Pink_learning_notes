@@ -30,3 +30,27 @@ export const reqAttrList = (category1Id, category2Id, category3Id) => request({
   url: `/admin/product/attrInfoList/${category1Id}/${category2Id}/${category3Id}`,
   method: 'get'
 });
+
+// 添加属性与属性值
+
+//添加属性与属性值接口
+///admin/product/saveAttrInfo  post
+export const reqAddOrUpdateAttr = (data) => request({
+  url: '/admin/product/saveAttrInfo',
+  method: 'post',
+  data
+});
+// data格式
+/*
+{
+  "attrName": "",      属性名
+  "attrValueList": [   属性名中属性值，因为属性值可以是多个，因此需要的是数组
+    {
+      "attrId": 0,          属性的id
+      "valueName": "string"  属性值
+    }
+  ],
+  "categoryId": 0,    category3Id
+  "categoryLevel":3,
+}
+*/
