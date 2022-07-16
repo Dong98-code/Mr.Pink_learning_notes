@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-card style="margin: 20px 0px">
-      <CategorySelect @getCategoryId="getCategoryId"></CategorySelect>
+      <CategorySelect @getCategoryId="getCategoryId" :show="!isShowTable"></CategorySelect>
     </el-card>
     <el-card>
       <!-- 表格部分 -->

@@ -7,6 +7,7 @@
           value=""
           v-model="cForm.category1Id"
           @change="handler1"
+          :disabled="show"
         >
           <!-- value 收集表单数据，需要收集的是1id -->
           <!-- v-model的值为当前被选中的el-option的 value 属性值, 因此1Id被收集到了 -->
@@ -24,6 +25,7 @@
           value=""
           v-model="cForm.category2Id"
           @change="handler2"
+          :disabled="show"
         >
           <el-option
             :label="c2.name"
@@ -39,6 +41,7 @@
           value=""
           v-model="cForm.category3Id"
           @change="handler3"
+          :disabled="show"
         >
           <el-option
             v-for="c3 in list3"
@@ -55,6 +58,7 @@
 <script>
 export default {
   name: "CategorySelect",
+  props: ["show"],
   data() {
     return {
       list1: [],
