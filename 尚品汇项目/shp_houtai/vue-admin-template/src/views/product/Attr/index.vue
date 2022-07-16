@@ -216,8 +216,13 @@ export default {
         attrId: this.attrInfo.id, //对于修改某一个属性的时候，可以在已有的属性值基础之上新增新的属性值（新增属性值的时候，需要把已有的属性的id带上）
         valueName: "",
         flag: true,
-        //flag属性：给每一个属性值添加一个标记flag，用户切换查看模式与编辑模式，好处，每一个属性值可以控制自己的模式切换
+       
+        
+      });
+       //flag属性：给每一个属性值添加一个标记flag，用户切换查看模式与编辑模式，好处，每一个属性值可以控制自己的模式切换
         //当前flag属性，响应式数据（数据变化视图跟着变化）
+      this.$nextTick(() => {
+        this.$refs[this.attrInfo.attrValueList.length - 1].focus();
       });
     },
     updateAttr(row) {
@@ -233,7 +238,7 @@ export default {
       //这样书写也可以给属性值添加flag自动，但是会发现视图不会跟着变化（因为flag不是响应式数据）
       //因为Vue无法探测普通的新增 property,这样书写的属性并非响应式属性（数据变化视图跟这边）
       //第一个参数:对象  第二个参数:添加新的响应式属性  第三参数：新的属性的属性值
-      this.$set(item, "flag", false);
+        this.$set(item, "flag", false);
       });
     },
 
