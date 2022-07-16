@@ -93,7 +93,7 @@
             width="width"
             align="center"
           >
-            <template slot-scope="{ row, $index}">
+            <template slot-scope="{ row, $index }">
               <!-- <el-input
                 v-model="row.valueName"
                 placeholder="请输入属性值名称"
@@ -118,17 +118,34 @@
             </template>
           </el-table-column>
           <el-table-column label="操作" prop="prop" width="width" align="left">
-            <template slot-scope="{}">
-              <el-button
+            <template slot-scope="{ row, $index }">
+              <!-- <el-button
                 type="danger"
                 icon="el-icon-delete"
                 size="mini"
-              ></el-button>
+              ></el-button> -->
+              <!-- 气泡确认框 -->
+              <el-popconfirm
+                :title="`确定删除${row.valueName}?`"
+                @onConfirm="deleteAttrValue($index)"
+              >
+                <el-button
+                  type="danger"
+                  icon="el-icon-delete"
+                  size="mini"
+                  slot="reference"
+                ></el-button>
+              </el-popconfirm>
             </template>
           </el-table-column>
         </el-table>
         <!-- 保存和取消按钮 -->
-        <el-button type="primary">保存</el-button>
+        <el-button
+          type="primary"
+          @click="addOrUpdateAttr"
+          :disabled="attrInfo.attrValueList.length < 1"
+          >保存</el-button
+        >
         <el-button type="" @click="isShowTable = true">取消</el-button>
       </div>
     </el-card>
@@ -216,11 +233,9 @@ export default {
         attrId: this.attrInfo.id, //对于修改某一个属性的时候，可以在已有的属性值基础之上新增新的属性值（新增属性值的时候，需要把已有的属性的id带上）
         valueName: "",
         flag: true,
-       
-        
       });
-       //flag属性：给每一个属性值添加一个标记flag，用户切换查看模式与编辑模式，好处，每一个属性值可以控制自己的模式切换
-        //当前flag属性，响应式数据（数据变化视图跟着变化）
+      //flag属性：给每一个属性值添加一个标记flag，用户切换查看模式与编辑模式，好处，每一个属性值可以控制自己的模式切换
+      //当前flag属性，响应式数据（数据变化视图跟着变化）
       this.$nextTick(() => {
         this.$refs[this.attrInfo.attrValueList.length - 1].focus();
       });
@@ -235,9 +250,9 @@ export default {
       this.attrInfo = cloneDeep(row);
       //在修改某一个属性的时候，将相应的属性值元素添加上flag这个标记
       this.attrInfo.attrValueList.forEach((item) => {
-      //这样书写也可以给属性值添加flag自动，但是会发现视图不会跟着变化（因为flag不是响应式数据）
-      //因为Vue无法探测普通的新增 property,这样书写的属性并非响应式属性（数据变化视图跟这边）
-      //第一个参数:对象  第二个参数:添加新的响应式属性  第三参数：新的属性的属性值
+        //这样书写也可以给属性值添加flag自动，但是会发现视图不会跟着变化（因为flag不是响应式数据）
+        //因为Vue无法探测普通的新增 property,这样书写的属性并非响应式属性（数据变化视图跟这边）
+        //第一个参数:对象  第二个参数:添加新的响应式属性  第三参数：新的属性的属性值
         this.$set(item, "flag", false);
       });
     },
@@ -275,6 +290,39 @@ export default {
         //获取相应的input表单元素实现聚焦
         this.$refs[index].focus();
       });
+    },
+    //删除属性值
+    deleteAttrValue(index) {
+      // 1.点击删除按钮 出现气泡框
+      this.attrInfo.attrValueList.splice(index, 1);
+    },
+    // 保存按钮的回调
+    async addOrUpdateAttr() {
+      // 1.整理参数 属性值为空 不提交请求
+      // 2. 去掉 flag字段
+      this.attrInfo.attrValueList = this.attrInfo.attrValueList.filter(
+        (item) => {
+          // 属性值不为空
+          if (item.valueName !== "") {
+            delete item.flag;
+            return true; //返回 true
+          }
+        }
+      );
+      // 3. 过滤玩发送请求
+      try {
+        //
+        await this.$API.attr.reqAddOrUpdateAttr(this.attrInfo);
+        // table展示切换
+        this.isShowTable = true;
+        //提示消失
+        this.$message({ type: "success", message: "保存成功" });
+        //保存成功以后需要再次获取平台属性进行展示
+        this.getAttrList();
+      } catch (error) {
+        //失败
+        this.$message("保存失败");
+      }
     },
   },
 };
