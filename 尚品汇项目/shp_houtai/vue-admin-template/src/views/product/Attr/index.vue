@@ -5,6 +5,50 @@
     </el-card>
     <el-card>
       <el-button type="primary" icon="el-icon-plus">添加属性</el-button>
+      <!-- 表格部分 -->
+      <el-table style="width: 100%" border :data="attrList">
+        <el-table-column align="center" type="index" width="80" label="序号">
+        </el-table-column>
+        <el-table-column
+          header-align="center"
+          align="center"
+          prop="attrName"
+          width="150"
+          label="属性列表"
+        >
+        </el-table-column>
+        <el-table-column header-align="center" prop="prop" label="属性值列表">
+          <template slot-scope="{ row }">
+            <el-tag
+              type="success"
+              v-for="attrValue in row.attrValueList"
+              :key="attrValue.id"
+              style="margin-left: 20px"
+              >{{ attrValue.valueName }}</el-tag
+            >
+          </template>
+        </el-table-column>
+        <el-table-column
+          header-align="center"
+          align="center"
+          prop="prop"
+          width="150"
+          label="操作"
+        >
+          <template slot-scope="{}">
+            <el-button
+              type="warning"
+              icon="el-icon-edit"
+              size="mini"
+            ></el-button>
+            <el-button
+              type="danger"
+              icon="el-icon-delete"
+              size="mini"
+            ></el-button>
+          </template>
+        </el-table-column>
+      </el-table>
     </el-card>
     <!-- <el-card></el-card> -->
   </div>
