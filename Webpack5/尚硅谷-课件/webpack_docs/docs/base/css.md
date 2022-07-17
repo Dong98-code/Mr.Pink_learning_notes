@@ -12,6 +12,10 @@ Webpack 本身是不能识别样式资源的，所以我们需要借助 Loader �
 
 [Webpack 官方 Loader 文档](https://webpack.docschina.org/loaders/)
 
+## 为引入css-loader
+报错
+![20220717145940](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220717145940.png)
+
 ## 处理 Css 资源
 
 ### 1. 下载包
@@ -108,6 +112,8 @@ npx webpack
 
 打开 index.html 页面查看效果
 
+![20220717150825](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220717150825.png)
+
 ## 处理 Less 资源
 
 ### 1. 下载包
@@ -120,6 +126,8 @@ npm i less-loader -D
 
 - `less-loader`：负责将 Less 文件编译成 Css 文件
 
+无法处理 less:
+![20220717151117](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220717151117.png)
 ### 3. 配置
 
 ```js{17-20}
