@@ -15,7 +15,7 @@ module.exports = {
     // filename: 输出文件名
     filename: "static/js/main.js",
     // 打包前 清除 path目录中 的资源
-    cleam:true
+    clean:true
   },
   // 加载器
   module: {
@@ -56,6 +56,14 @@ module.exports = {
           filename:"static/imgs/[hash:10][ext][query]"
         }
       },
+      // icon-font处理
+      {
+        test:/\.(ttf|woff2?)$/,
+        type: "asset/resource",
+        generator: {
+          filename: "static/media/[hash:8][ext][query]",
+        },
+      }
     ],
   },
   // 插件

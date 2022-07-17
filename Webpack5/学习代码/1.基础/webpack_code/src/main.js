@@ -3,6 +3,7 @@ import count from "./js/count";
 import sum from "./js/sum";
 
 // 引入css文件，让webpack打包
+import "./css/iconfont.css";
 import "./css/index.css"
 import "./less/index.less"
 import "./sass/index.sass";
