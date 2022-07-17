@@ -2,4 +2,6 @@
     height: 10px;
     width: 100px;
     background-color: pink;
+    background-image: url("../images/1.jpeg");
+    background-size: cover;
 }
