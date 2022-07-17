@@ -82,6 +82,7 @@ module.exports = {
         exclude: /node_modules/, // 排除node_modules代码不编译
         loader: "babel-loader",
       },
+      
     ],
   },
   // 插件
@@ -97,5 +98,11 @@ module.exports = {
     }),
   ],
   // 模式
-  mode: "development", // 开发模式
+  mode: "development", // 开发模式，
+  // 开发服务器
+  devServer: {
+    host: "localhost", // 启动服务器域名
+    port: "3000", // 启动服务器端口号
+    open: true, // 是否自动打开浏览器
+  },
 };

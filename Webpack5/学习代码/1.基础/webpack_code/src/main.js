@@ -6,7 +6,7 @@ import sum from "./js/sum";
 import "./css/iconfont.css";
 import "./css/index.css"
 import "./less/index.less"
-import "./sass/index.sass";
+// import "./sass/index.sass";
 import "./sass/index.scss";
 let res = count(2, 2)
 console.log(res);
