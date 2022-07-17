@@ -14,6 +14,8 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
     // filename: 输出文件名
     filename: "static/js/main.js",
+    // 打包前 清除 path目录中 的资源
+    cleam:true
   },
   // 加载器
   module: {
