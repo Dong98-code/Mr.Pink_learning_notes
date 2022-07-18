@@ -182,7 +182,7 @@ module.exports = {
     },
     // 提取runtime文件
     runtimeChunk: {
-      name: (entrypoint) => `runtime~${entrypoint.name}`, // runtime文件命名规则
+      name: (entrypoint) => `runtime~${entrypoint.name}.js`, // runtime文件命名规则
     },
   },
   // 模式

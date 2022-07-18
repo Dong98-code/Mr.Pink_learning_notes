@@ -1,4 +1,5 @@
 //入口文件
+// import "core-js/es/promise";
 import count from "./js/count";
 import sum from "./js/sum";
 // import { add } from "./js/math"
@@ -37,3 +38,12 @@ document.getElementById("btn").onclick = function () {
     alert(add(1, 2))
   })
 };
+
+// 添加promise代码
+const promise = Promise.resolve();
+promise.then(() => {
+  console.log("hello promise");
+});
+
+const arr = [1, 2, 3]
+console.log(arr.includes(1))
