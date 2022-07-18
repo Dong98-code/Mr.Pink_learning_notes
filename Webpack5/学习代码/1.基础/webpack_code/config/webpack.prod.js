@@ -8,6 +8,9 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 //css压缩包的插件
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 
+// 图片压缩包
+const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
+
 // 获取loaders包装成一个函数
 // 获取处理样式的Loaders
 const getStyleLoaders = (preProcessor) => {
