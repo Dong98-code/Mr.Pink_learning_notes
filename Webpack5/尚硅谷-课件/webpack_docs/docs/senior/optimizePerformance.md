@@ -257,6 +257,9 @@ console.log("hello app");
 </html>
 ```
 
+点击之后 加载对应的js:
+
+![20220718152244](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220718152244.png)
 2. 运行指令
 
 ```
