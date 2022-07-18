@@ -11,7 +11,7 @@ const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 // 图片压缩包
 // const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
 
-const PreloadWebpackPlugin = require("@vue/preload-webpack-plugin");
+const PreloadWebpackPlugin = require("preload-webpack-plugin");
 // 获取loaders包装成一个函数
 // 获取处理样式的Loaders
 const getStyleLoaders = (preProcessor) => {
@@ -45,8 +45,8 @@ module.exports = {
     path: path.resolve(__dirname, "../dist"), //生产模式输出
     // filename: 输出文件名
     // filename: "static/js/main.js",
-    filename: "static/js/[name].js", // 入口文件打包输出资源命名方式
-    chunkFilename: "static/js/[name].chunk.js", // 动态导入输出资源命名方式
+    filename: "static/js/[name].[contenthash:8].js", // 入口文件打包输出资源命名方式
+    chunkFilename: "static/js/[name].[contenthash:8].chunk.js", // 动态导入输出资源命名方式
     assetModuleFilename: "static/media/[name].[hash][ext]", // 图片、字体等资源命名方式（注意用hash
     // 打包前 清除 path目录中 的资源
     clean: true
@@ -146,8 +146,8 @@ module.exports = {
       //定义输出的文件的名称
       // filename: 'static/css/main.css'
       // // 定义输出文件名和目录
-      filename: "static/css/[name].css",
-      chunkFilename: "static/css/[name].chunk.css",
+      filename: "static/css/[name].[contenthash].css",
+      chunkFilename: "static/css/[name].[contenthash].chunk.css",
     }),
     // css压缩
     new CssMinimizerPlugin(),
@@ -179,7 +179,11 @@ module.exports = {
       //     priority: -20,
       //     reuseExistingChunk: true,
       //   },
-      },
+    },
+    // 提取runtime文件
+    runtimeChunk: {
+      name: (entrypoint) => `runtime~${entrypoint.name}`, // runtime文件命名规则
+    },
   },
   // 模式
   mode: "production", // 开发模式，
