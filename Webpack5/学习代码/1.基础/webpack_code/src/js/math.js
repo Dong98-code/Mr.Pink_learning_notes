@@ -1,7 +1,7 @@
-function add(x, y) {
+export const add = (x, y) => {
     return x + y;
 }
 
-function mul(x, y) {
+export const mul = (x, y) => {
     return x * y;
 }

@@ -1,7 +1,7 @@
 //入口文件
 import count from "./js/count";
 import sum from "./js/sum";
-import { add } from "./js/math"
+// import { add } from "./js/math"
 
 // 引入css文件，让webpack打包
 import "./css/iconfont.css";
@@ -29,4 +29,11 @@ if (module.hot) {
       const result2 = sum(1, 2, 3, 4);
       console.log(result2);
     });
-  }
+}
+  
+// 添加一个按钮
+document.getElementById("btn").onclick = function () {
+  import(/*webpackChunkName:"math"*/"./js/math.js").then(({ add }) => {
+    alert(add(1, 2))
+  })
+};
