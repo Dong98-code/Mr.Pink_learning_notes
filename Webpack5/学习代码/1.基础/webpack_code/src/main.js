@@ -1,6 +1,7 @@
 //入口文件
 import count from "./js/count";
 import sum from "./js/sum";
+import { add } from "./js/math"
 
 // 引入css文件，让webpack打包
 import "./css/iconfont.css";

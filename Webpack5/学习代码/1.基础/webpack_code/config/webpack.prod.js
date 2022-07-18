@@ -9,8 +9,9 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 
 // 图片压缩包
-const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
+// const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
 
+const PreloadWebpackPlugin = require("@vue/preload-webpack-plugin");
 // 获取loaders包装成一个函数
 // 获取处理样式的Loaders
 const getStyleLoaders = (preProcessor) => {
@@ -144,6 +145,11 @@ module.exports = {
     }),
     // css压缩
     new CssMinimizerPlugin(),
+    new PreloadWebpackPlugin({
+      rel: "preload", // preload兼容性更好
+      as: "script",
+      // rel: 'prefetch' // prefetch兼容性更差
+    }),
   ],
   // 模式
   mode: "production", // 开发模式，
