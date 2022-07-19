@@ -149,7 +149,7 @@ module.exports = function (content, map, meta) {
 ### 3. Raw Loader
 
 默认情况下，资源文件会被转化为 UTF-8 字符串，然后传给 loader。通过设置 raw 为 true，loader 可以接收原始的 Buffer。
-
+每一个 loader 都可以用 `String` 或者 `Buffer` 的形式传递它的处理结果。`complier` 将会把它们在 `loader` 之间相互转换。
 ```js
 module.exports = function (content) {
   // content是一个Buffer数据
@@ -170,13 +170,13 @@ module.exports.pitch = function (remainingRequest, precedingRequest, data) {
 ```
 
 webpack 会先从左到右执行 loader 链中的每个 loader 上的 pitch 方法（如果有），然后再从右到左执行 loader 链中的每个 loader 上的普通 loader 方法。
+![20220719110843](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220719110843.png)
 
-![loader执行流程](/imgs/source/loader1.png)
+![loader执行流程](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220719110858.png)
 
 在这个过程中如果任何 pitch 有返回值，则 loader 链被阻断。webpack 会跳过后面所有的的 pitch 和 loader，直接进入上一个 loader 。
 
-![loader执行流程](/imgs/source/loader2.png)
-
+![loader执行流程](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220719110937.png)
 ## loader API
 
 | 方法名                  | 含义                                       | 用法                                           |
