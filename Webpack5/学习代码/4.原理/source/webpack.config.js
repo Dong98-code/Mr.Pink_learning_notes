@@ -3,6 +3,7 @@ const path = require("path")
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const TestPlugin = require("./plugins/test-plugin")
 const BannerWebpackPlugin = require("./plugins/banner-webpack-plugin")
+const CleanWebpackPlugin = require("./plugins/clean-webpack-plugin")
 
 module.exports = {
     entry: "./src/main.js",
@@ -10,7 +11,7 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, './dist'),
         filename: 'js/[name].js',
-        clean: true
+        // clean: true
     },
     module: {
         rules: [{
@@ -75,7 +76,8 @@ module.exports = {
         // new TestPlugin() // 测试插件
         new BannerWebpackPlugin({
             author:"xdd"
-        })
+        }),
+        new CleanWebpackPlugin()
     ],
     devServer: {
         host: "localhost", // 启动服务器域名
