@@ -1,7 +1,7 @@
 const path = require("path")
 // 引入html插件
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-
+const TestPlugin = require("./plugins/test-plugin")
 module.exports = {
     entry: "./src/main.js",
     // 输出路径
@@ -69,7 +69,8 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, './public/index.html')
-        })
+        }),
+        new TestPlugin() // 测试插件
     ],
     devServer: {
         host: "localhost", // 启动服务器域名
