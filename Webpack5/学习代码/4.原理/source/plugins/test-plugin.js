@@ -6,8 +6,9 @@ class TestPlugin {
     // 2. webpack创建 compiler 对象
     // 3. 遍历所有插件，调用插件的 apply 方法
     apply(compiler) {
+        debugger;
         console.log("test-plugin compiler");
-
+        // console.log("compiler", compiler)
         // environment 同步钩子函数
         compiler.hooks.environment.tap('TestPlugin', () => {
             console.log("test-plugin environment");
