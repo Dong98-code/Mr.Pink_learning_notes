@@ -27,6 +27,13 @@ module.exports = {
                     author:"xdd"
                 }
             },
+            {
+                test: /\.js$/, // 处理js的loader
+                loader: './loaders/babel-loader/index.js', // 使用这个js文件去处理 js文件
+                options: {
+                    presets:["@babel/preset-env"]
+                }
+            },
         ],
     },
     // 插件

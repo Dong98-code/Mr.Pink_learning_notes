@@ -281,7 +281,8 @@ module.exports = function (content) {
   "additionalProperties": true
 }
 ```
-
+结果：
+![20220719115015](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220719115015.png)
 ## 手写 file-loader
 
 作用：将文件原封不动输出出去
