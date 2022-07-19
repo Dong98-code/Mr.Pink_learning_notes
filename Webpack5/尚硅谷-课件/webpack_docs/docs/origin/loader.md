@@ -239,7 +239,8 @@ module.exports = function (content) {
   "additionalProperties": false
 }
 ```
-
+结果：
+![20220719113204](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220719113204.png)
 ## 手写 babel-loader
 
 作用：编译 js 代码，将 ES6+语法编译成 ES5-语法。
