@@ -389,6 +389,8 @@ class AnalyzeWebpackPlugin {
 
 module.exports = AnalyzeWebpackPlugin;
 ```
+结果：
+![20220719220127](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220719220127.png)
 
 ## InlineChunkWebpackPlugin
 

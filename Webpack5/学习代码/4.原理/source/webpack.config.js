@@ -4,6 +4,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const TestPlugin = require("./plugins/test-plugin")
 const BannerWebpackPlugin = require("./plugins/banner-webpack-plugin")
 const CleanWebpackPlugin = require("./plugins/clean-webpack-plugin")
+const AnalyzeWebpackPlugin = require("./plugins/analyze-webpack-plugin")
+
 
 module.exports = {
     entry: "./src/main.js",
@@ -77,7 +79,8 @@ module.exports = {
         new BannerWebpackPlugin({
             author:"xdd"
         }),
-        new CleanWebpackPlugin()
+        new CleanWebpackPlugin(),
+        new AnalyzeWebpackPlugin() // 分析资源大小
     ],
     devServer: {
         host: "localhost", // 启动服务器域名
