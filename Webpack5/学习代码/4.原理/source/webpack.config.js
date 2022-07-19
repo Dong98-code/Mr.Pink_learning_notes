@@ -2,6 +2,8 @@ const path = require("path")
 // 引入html插件
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const TestPlugin = require("./plugins/test-plugin")
+const BannerWebpackPlugin = require("./plugins/banner-webpack-plugin")
+
 module.exports = {
     entry: "./src/main.js",
     // 输出路径
@@ -70,7 +72,10 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, './public/index.html')
         }),
-        new TestPlugin() // 测试插件
+        // new TestPlugin() // 测试插件
+        new BannerWebpackPlugin({
+            author:"xdd"
+        })
     ],
     devServer: {
         host: "localhost", // 启动服务器域名
@@ -78,6 +83,7 @@ module.exports = {
         open: true, // 是否自动打开浏览器
         hot: true // HotModuleRepalcement HMR 热模替换
     },
-    mode: "development"
+    // mode: "development"
+    mode:'production'
 
 }
