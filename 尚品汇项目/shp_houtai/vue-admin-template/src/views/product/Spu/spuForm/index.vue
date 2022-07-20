@@ -42,10 +42,10 @@
       <!-- 销售属性 -->
       <el-form-item label="销售属性">
         <el-select :placeholder="`还有${unSelectSaleAttr.length}未选择`" v-model="attrIdAndAttrName">
-          <el-option :value="`${unSelect.id}:${unSelect.name}}`" :label="unSelect.name" v-for="(unSelect) in unSelectSaleAttr" :key="unSelect.id"> </el-option>
+          <el-option :value="`${unSelect.id}:${unSelect.name}`" :label="unSelect.name" v-for="(unSelect) in unSelectSaleAttr" :key="unSelect.id"> </el-option>
         </el-select>
-        <el-button type="primary" icon="el-icon-plus" style="margin-left: 10px"
-          >添加销售属性名称</el-button
+        <el-button type="primary" icon="el-icon-plus" style="margin-left: 10px" :disabled="!attrIdAndAttrName"
+          @click="addSaleAttr">添加销售属性名称</el-button
         >
         <el-table style="width: 100%" border :data="spu.spuSaleAttrList">
           <el-table-column type="index" label="序号" width="80" align="center">
@@ -211,6 +211,19 @@ export default {
     },
     handleInputConfirm() {},
     addSaleAttrValue() {},
+    addSaleAttr() {
+      // 将新添加到的attrid和name添加到spu。种去
+      let [baseSaleAttrId, saleAttrName] = this.attrIdAndAttrName.split(":");
+      let newSaleAttr = {
+        baseSaleAttrId,
+        saleAttrName,
+        spuSaleAttrValueList:[]
+      }
+      //将newAttr传入到spu。去
+      this.spu.spuSaleAttrList.push(newSaleAttr);
+      // 清空数据
+      this.attrIdAndAttrName = "";
+    }
   },
   computed: {
     unSelectSaleAttr() {
