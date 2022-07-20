@@ -7,7 +7,8 @@
       ></CategorySelect>
     </el-card>
     <el-card>
-      <div>
+      <!-- spu列表 -->
+      <div v-show="scene==0">
         <!-- spu列表 -->
         <el-button type="primary" icon="el-icon-plus" style="margin-bottom:10px">添加SPU</el-button>
         <!-- table -->
@@ -61,11 +62,17 @@
         >
         </el-pagination>
       </div>
+      <!-- spuForm -->
+      <SpuForm v-show="scene==1" ></SpuForm>
+      <SkuForm v-show="scene==2" ></SkuForm>
+      <!-- skuForm -->
     </el-card>
   </div>
 </template>
 
 <script>
+import SpuForm from "./spuForm";
+import SkuForm from "./skuForm";
 export default {
   name: "Spu",
   data() {
@@ -79,6 +86,7 @@ export default {
       limit: 2, // 分页器展示数据个数
       records: [], // spu数据
       total: 0, // 一共多少条数据
+      scene: 0, // 0表示spu列表 1 添加修改spu 2 添加修改skU
     };
   },
   methods: {
@@ -118,6 +126,10 @@ export default {
       //再发请求
       this.getSpuList();
     },
+  },
+  components: {
+    SpuForm,
+    SkuForm,
   },
 };
 </script>
