@@ -41,11 +41,25 @@
       </el-form-item>
       <!-- 销售属性 -->
       <el-form-item label="销售属性">
-        <el-select :placeholder="`还有${unSelectSaleAttr.length}未选择`" v-model="attrIdAndAttrName">
-          <el-option :value="`${unSelect.id}:${unSelect.name}`" :label="unSelect.name" v-for="(unSelect) in unSelectSaleAttr" :key="unSelect.id"> </el-option>
+        <el-select
+          :placeholder="`还有${unSelectSaleAttr.length}未选择`"
+          v-model="attrIdAndAttrName"
+        >
+          <el-option
+            :value="`${unSelect.id}:${unSelect.name}`"
+            :label="unSelect.name"
+            v-for="unSelect in unSelectSaleAttr"
+            :key="unSelect.id"
+          >
+          </el-option>
         </el-select>
-        <el-button type="primary" icon="el-icon-plus" style="margin-left: 10px" :disabled="!attrIdAndAttrName"
-          @click="addSaleAttr">添加销售属性名称</el-button
+        <el-button
+          type="primary"
+          icon="el-icon-plus"
+          style="margin-left: 10px"
+          :disabled="!attrIdAndAttrName"
+          @click="addSaleAttr"
+          >添加销售属性名称</el-button
         >
         <el-table style="width: 100%" border :data="spu.spuSaleAttrList">
           <el-table-column type="index" label="序号" width="80" align="center">
@@ -98,7 +112,7 @@
         </el-table>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary">保存</el-button>
+        <el-button type="primary" @click="addOrUpdate">保存</el-button>
         <el-button type="" @click="cancel">取消</el-button>
       </el-form-item>
     </el-form>
@@ -167,14 +181,21 @@ export default {
       this.dialogImageUrl = file.url;
       this.dialogVisible = true;
     },
-    hanleUpload(response, file, fileList){
+    hanleUpload(response, file, fileList) {
       //上传成功之后 的回调函数
       this.spuImageList = fileList;
     },
-    
+
     // 取消 按钮的回调 改变 scene
     cancel() {
-      this.$emit("changeScene", 0);
+      this.$emit("changeScene", { scene: 0, flag: "" });
+      Object.assign(this._data, this.$options.data());
+      //取消按钮的回调，通知父亲切换场景为0
+
+      //清理数据
+      //Object.assign:es6中新增的方法可以合并对象
+      //组件实例this._data,可以操作data当中响应式数据
+      //this.$options可以获取配置对象，配置对象的data函数执行，返回的响应式数据为空的
     },
     async initSpuData(spu) {
       // console.log(spu);
@@ -209,34 +230,102 @@ export default {
         this.saleAttrList = saleResult.data;
       }
     },
-    handleInputConfirm() {},
-    addSaleAttrValue() {},
+    handleInputConfirm(row) {
+      // 失去焦点之后，将新增的属性值 添加到对应的数组种去
+      let { baseSaleAttrId, inputValue } = row;
+      if (inputValue.trim() == "") {
+        this.$message("属性值不为空");
+        row.inputVisible = false;
+        return;
+      }
+      // 不为空时， 判断是否重复
+      // console.log(inputValue);
+      let res = row.spuSaleAttrValueList.every(
+        (item) => item.saleAttrValueName != inputValue
+      );
+      // console.log(11);
+      // console.log(res);
+      if (!res) {
+        row.inputVisible = false;
+        return;
+      }
+
+      // 新增属性值
+      let newSaleAttrValue = { baseSaleAttrId, saleAttrValueName: inputValue };
+      row.spuSaleAttrValueList.push(newSaleAttrValue);
+      row.inputVisible = false;
+    },
+    addSaleAttrValue(row) {
+      // 添加属性值
+      //点击之后 变成input框
+      this.$set(row, "inputVisible", true);
+      // 通过inputValue收集数据
+      this.$set(row, "inputValue", "");
+    },
     addSaleAttr() {
       // 将新添加到的attrid和name添加到spu。种去
       let [baseSaleAttrId, saleAttrName] = this.attrIdAndAttrName.split(":");
       let newSaleAttr = {
         baseSaleAttrId,
         saleAttrName,
-        spuSaleAttrValueList:[]
-      }
+        spuSaleAttrValueList: [],
+      };
       //将newAttr传入到spu。去
       this.spu.spuSaleAttrList.push(newSaleAttr);
       // 清空数据
       this.attrIdAndAttrName = "";
-    }
+    },
+    async addOrUpdate() {
+      // 整理图片数据， 需要传递的参数时
+      // imageNmae 和imageUrl
+      this.spu.spuImageList = this.spuImageList.map((item) => {
+        return {
+          imageName: item.name,
+          imageUrl: (item.response && item.response.data) || item.url,
+        };
+      });
+      // qingqiu
+      let res = await this.$API.spu.reqAddOrUpdateSpu(this.spu);
+      if (res.code == 200) {
+        this.$message({ type: "success", message: "保存成功" });
+        // 通知父组件
+        this.$emit("changeScene", {
+          scene: 0,
+          flag: this.spu.id ? "修改" : "添加",
+        });
+      }
+      //清除数据
+      Object.assign(this._data, this.$options.data());
+
+    },
+    // 添加新的spu
+    async addSpuData(category3Id) {
+      //添加SPU的时候收集三级分类的id
+      this.spu.category3Id = category3Id;
+      //获取品牌的信息
+      let tradeMarkResult = await this.$API.spu.reqTradeMarkList();
+      if (tradeMarkResult.code == 200) {
+        this.tradeMarkList = tradeMarkResult.data;
+      }
+      //获取平台全部的销售属性
+      let saleResult = await this.$API.spu.reqBaseSaleAttrList();
+      if (saleResult.code == 200) {
+        this.saleAttrList = saleResult.data;
+      }
+    },
   },
   computed: {
     unSelectSaleAttr() {
       // 计算还没有选择 的销售属性
       let result = this.saleAttrList.filter((item) => {
         // 再去遍历spu.spuSaleAttrList 已有的属性
-        return this.spu.spuSaleAttrList.every((item1)=>{
+        return this.spu.spuSaleAttrList.every((item1) => {
           return item.name !== item1.saleAttrName;
-        })
-      })
+        });
+      });
       return result;
-    }
-  }
+    },
+  },
 };
 </script>
 

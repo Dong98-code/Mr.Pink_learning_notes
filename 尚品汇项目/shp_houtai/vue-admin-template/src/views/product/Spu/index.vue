@@ -3,7 +3,7 @@
     <el-card style="margin: 20px 0px">
       <CategorySelect
         @getCategoryId="getCategoryId"
-        :show="!show"
+        :show="scene!=0"
       ></CategorySelect>
     </el-card>
     <el-card>
@@ -42,12 +42,18 @@
                 title="查看当前spu全部sku列表"
               ></hint-button>
 
-              <hint-button
-                type="danger"
-                icon="el-icon-delete"
-                size="mini"
-                title="删除spu"
-              ></hint-button>
+              <el-popconfirm
+                title="这是一段内容确定删除吗？"
+                @onConfirm="deleteSpu(row)"
+              >
+                <hint-button
+                  type="danger"
+                  icon="el-icon-delete"
+                  size="mini"
+                  title="删除spu"
+                  slot="reference"
+                ></hint-button>
+              </el-popconfirm>
             </template>
           </el-table-column>
         </el-table>
@@ -130,6 +136,8 @@ export default {
     // 添加spu
     addSpu() {
       this.scene = 1;
+      //通知子组件SpuForm发请求---两个
+      this.$refs.spu.addSpuData(this.category3Id);
     },
     updateSpu(row) {
       this.scene = 1;
@@ -137,9 +145,26 @@ export default {
       this.$refs.spu.initSpuData(row);
     },
     // 修改scene
-    changeScene(scene) {
+    changeScene({scene, flag}) {
+      // console.log(scene);
       this.scene = scene;
-    }
+      // this.getSpuList(this.page)
+      //子组件通知父组件切换场景，需要再次获取SPU列表的数据进行展示
+      if (flag == "修改") {
+        this.getSpuList(this.page); // 修改当前页
+      } else {
+        this.getSpuList();
+      }
+    },
+    //删除SPU的回调
+    async deleteSpu(row) {
+      let result = await this.$API.spu.reqDeleteSpu(row.id);
+      if (result.code == 200) {
+        this.$message({ type: "success", message: "删除成功" });
+        //代表SPU个数大于1删除的时候停留在当前页，如果SPU个数小于1 回到上一页
+        this.getSpuList(this.records.length > 1 ? this.page : this.page - 1);
+      }
+    },
   },
   components: {
     SpuForm,
