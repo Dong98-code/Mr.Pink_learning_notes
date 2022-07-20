@@ -10,7 +10,7 @@
       <!-- spu列表 -->
       <div v-show="scene==0">
         <!-- spu列表 -->
-        <el-button type="primary" icon="el-icon-plus" style="margin-bottom:10px">添加SPU</el-button>
+        <el-button type="primary" icon="el-icon-plus" style="margin-bottom:10px" :disabled="!category3Id" @click="addSpu">添加SPU</el-button>
         <!-- table -->
         <el-table style="width: 100%" :data="records" border>
           <el-table-column label="序号" width="80" type="index" align="center">
@@ -20,7 +20,7 @@
           <el-table-column prop="description" label="SPU描述" width="width">
           </el-table-column>
           <el-table-column label="操作" width="width">
-            <template slot-scope="{}">
+            <template slot-scope="{row}">
               <!-- 这里按钮将来用hintButton替换 -->
               <hint-button
                 type="success"
@@ -33,6 +33,7 @@
                 icon="el-icon-edit"
                 size="mini"
                 title="修改spu"
+                @click="updateSpu(row)"
               ></hint-button>
               <hint-button
                 type="info"
@@ -63,7 +64,7 @@
         </el-pagination>
       </div>
       <!-- spuForm -->
-      <SpuForm v-show="scene==1" ></SpuForm>
+      <SpuForm v-show="scene==1" @changeScene="changeScene" ref="spu"></SpuForm>
       <SkuForm v-show="scene==2" ></SkuForm>
       <!-- skuForm -->
     </el-card>
@@ -113,7 +114,7 @@ export default {
       let { page, limit, category3Id } = this;
       // 调用 api请求数据， 携带三个参数
       let res = await this.$API.spu.reqSpuList(page, limit, category3Id);
-      console.log(res);
+      // console.log(res);
       if (res.code == 200) {
         this.total = res.data.total;
         this.records = res.data.records; // spu数据
@@ -126,6 +127,19 @@ export default {
       //再发请求
       this.getSpuList();
     },
+    // 添加spu
+    addSpu() {
+      this.scene = 1;
+    },
+    updateSpu(row) {
+      this.scene = 1;
+      // 点击修改按钮 然后 调用子组件的方法， 请求数据
+      this.$refs.spu.initSpuData(row);
+    },
+    // 修改scene
+    changeScene(scene) {
+      this.scene = scene;
+    }
   },
   components: {
     SpuForm,
