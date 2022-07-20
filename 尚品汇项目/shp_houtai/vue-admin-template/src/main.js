@@ -42,9 +42,13 @@ Vue.config.productionTip = false
 // 任意的组件均可以通过调用API来获取相对应的接口函数
 import API from '@/api'
 import CategorySelect from '@/components/CategorySelect'
+import HintButton from "@/components/HintButton"
 Vue.prototype.$API = API
 // 注册全局组件
 Vue.component(CategorySelect.name, CategorySelect)
+// console.log(HintButton.name);
+Vue.component(HintButton.name, HintButton)
+
 new Vue({
   el: '#app',
   router,
