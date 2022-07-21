@@ -72,7 +72,7 @@
       </div>
       <!-- spuForm -->
       <SpuForm v-show="scene==1" @changeScene="changeScene" ref="spu"></SpuForm>
-      <SkuForm v-show="scene==2" ref="sku"></SkuForm>
+      <SkuForm v-show="scene==2" ref="sku" @changeScene="changeScene"></SkuForm>
       <!-- skuForm -->
     </el-card>
   </div>
