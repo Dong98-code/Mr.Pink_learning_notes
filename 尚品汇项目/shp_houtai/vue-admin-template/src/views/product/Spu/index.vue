@@ -27,6 +27,7 @@
                 icon="el-icon-plus"
                 size="mini"
                 title="添加sku"
+                @click="addSku(row)"
               ></hint-button>
               <hint-button
                 type="warning"
@@ -71,7 +72,7 @@
       </div>
       <!-- spuForm -->
       <SpuForm v-show="scene==1" @changeScene="changeScene" ref="spu"></SpuForm>
-      <SkuForm v-show="scene==2" ></SkuForm>
+      <SkuForm v-show="scene==2" ref="sku"></SkuForm>
       <!-- skuForm -->
     </el-card>
   </div>
@@ -138,6 +139,11 @@ export default {
       this.scene = 1;
       //通知子组件SpuForm发请求---两个
       this.$refs.spu.addSpuData(this.category3Id);
+    },
+    // 添加sku
+    addSku(row){
+      this.scene = 2;
+      this.$refs.sku.getData(this.category1Id, this.category2Id, row)
     },
     updateSpu(row) {
       this.scene = 1;
