@@ -3,14 +3,21 @@
     <el-card style="margin: 20px 0px">
       <CategorySelect
         @getCategoryId="getCategoryId"
-        :show="scene!=0"
+        :show="scene != 0"
       ></CategorySelect>
     </el-card>
     <el-card>
       <!-- spu列表 -->
-      <div v-show="scene==0">
+      <div v-show="scene == 0">
         <!-- spu列表 -->
-        <el-button type="primary" icon="el-icon-plus" style="margin-bottom:10px" :disabled="!category3Id" @click="addSpu">添加SPU</el-button>
+        <el-button
+          type="primary"
+          icon="el-icon-plus"
+          style="margin-bottom: 10px"
+          :disabled="!category3Id"
+          @click="addSpu"
+          >添加SPU</el-button
+        >
         <!-- table -->
         <el-table style="width: 100%" :data="records" border>
           <el-table-column label="序号" width="80" type="index" align="center">
@@ -20,7 +27,7 @@
           <el-table-column prop="description" label="SPU描述" width="width">
           </el-table-column>
           <el-table-column label="操作" width="width">
-            <template slot-scope="{row}">
+            <template slot-scope="{ row }">
               <!-- 这里按钮将来用hintButton替换 -->
               <hint-button
                 type="success"
@@ -41,6 +48,7 @@
                 icon="el-icon-info"
                 size="mini"
                 title="查看当前spu全部sku列表"
+                @click="handleDialog(row)"
               ></hint-button>
 
               <el-popconfirm
@@ -71,10 +79,31 @@
         </el-pagination>
       </div>
       <!-- spuForm -->
-      <SpuForm v-show="scene==1" @changeScene="changeScene" ref="spu"></SpuForm>
-      <SkuForm v-show="scene==2" ref="sku" @changeScene="changeScene"></SkuForm>
+      <SpuForm
+        v-show="scene == 1"
+        @changeScene="changeScene"
+        ref="spu"
+      ></SpuForm>
+      <SkuForm
+        v-show="scene == 2"
+        ref="sku"
+        @changeScene="changeScene"
+      ></SkuForm>
       <!-- skuForm -->
     </el-card>
+    <!-- skulist对话框 -->
+    <el-dialog :title="`${spu.spuName}的sku列表`" :visible.sync="dialogTableVisible" :before-close="close">
+      <el-table :data="skuList" border v-loading="loading">
+        <el-table-column label="名称" width="width" prop="skuName"></el-table-column>
+        <el-table-column label="价格" width="width" prop="price"></el-table-column>
+        <el-table-column label="重量" width="width" prop="weight"></el-table-column>
+        <el-table-column label="默认图片" width="width" prop="skuDefaultImg">
+          <template slot-scope="{row}">
+            <img :src="row.skuDefaultImg" alt="" style="height:100px;width:100px">
+          </template>
+        </el-table-column>
+      </el-table>
+    </el-dialog>
   </div>
 </template>
 
@@ -95,6 +124,10 @@ export default {
       records: [], // spu数据
       total: 0, // 一共多少条数据
       scene: 0, // 0表示spu列表 1 添加修改spu 2 添加修改skU
+      dialogTableVisible: false, //控制对话框是否展示
+      spu: {},
+      skuList: [],
+      loading:true,
     };
   },
   methods: {
@@ -128,7 +161,7 @@ export default {
       }
     },
     // 点击改变当前页数；
-    handleSizeChange() {
+    handleSizeChange(limit) {
       //修改参数
       this.limit = limit;
       //再发请求
@@ -141,9 +174,9 @@ export default {
       this.$refs.spu.addSpuData(this.category3Id);
     },
     // 添加sku
-    addSku(row){
+    addSku(row) {
       this.scene = 2;
-      this.$refs.sku.getData(this.category1Id, this.category2Id, row)
+      this.$refs.sku.getData(this.category1Id, this.category2Id, row);
     },
     updateSpu(row) {
       this.scene = 1;
@@ -151,7 +184,7 @@ export default {
       this.$refs.spu.initSpuData(row);
     },
     // 修改scene
-    changeScene({scene, flag}) {
+    changeScene({ scene, flag }) {
       // console.log(scene);
       this.scene = scene;
       // this.getSpuList(this.page)
@@ -171,6 +204,24 @@ export default {
         this.getSpuList(this.records.length > 1 ? this.page : this.page - 1);
       }
     },
+    async handleDialog(spu){
+      // console.log(spu);
+      this.spu = spu;
+      this.dialogTableVisible = true;
+      //获取sku列表的数据进行展示
+      let result = await this.$API.spu.reqSkuList(spu.id);
+      console.log(result);
+      if (result.code == 200) {
+        this.skuList = result.data;
+        //loading隐藏
+        this.loading = false;
+      }
+    },
+    close(done) {
+      this.loading = true;
+      this.skuList = []; //清空数据
+      done();
+    }
   },
   components: {
     SpuForm,
