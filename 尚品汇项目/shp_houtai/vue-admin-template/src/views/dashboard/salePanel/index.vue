@@ -14,6 +14,7 @@
         <span @click="setYear">本年</span>
         <el-date-picker
           class="date"
+          v-model="date"
           type="daterange"
           range-separator="-"
           start-placeholder="开始日期"
@@ -32,7 +33,7 @@
         </el-col>
         <el-col :span="4">
           <h3>门店{{ title }}排名</h3>
-          <ul >
+          <ul class="order">
             <li v-for="(item, index) in rankList" :key="index">
               <!-- <span :class="item.no<3?'reindex':''">{{item.no}}</span> -->
               <span :class="item.no<=3?'rindex':'rindex2'">{{item.no}}</span>
@@ -245,18 +246,18 @@ export default {
   width: 100%;
   height: 300px;
 }
-ul {
+.order {
   list-style: none;
   width: 100%;
   height: 300px;
   padding: 0px;
 }
-ul li {
+.order li {
   height: 8%;
   margin: 10px 0px;
 }
 
-ul li span:nth-child(2) {
+.order li span:nth-child(2) {
   margin-left: 20px;
 }
 .rindex {
