@@ -15,6 +15,9 @@ export default {
     salePanel
   },
   computed: {},
+  mounted() {
+    this.$store.dispatch("home/getData")
+  },
 };
 </script>
 
