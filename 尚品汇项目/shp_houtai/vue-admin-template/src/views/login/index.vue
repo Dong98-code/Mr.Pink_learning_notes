@@ -115,6 +115,7 @@ export default {
         if (valid) {
           this.loading = true
           //派发请求，用户名 和密码
+          
           this.$store.dispatch('user/login', this.loginForm).then(() => {
             //成功 路由跳转
             this.$router.push({ path: this.redirect || '/' })
