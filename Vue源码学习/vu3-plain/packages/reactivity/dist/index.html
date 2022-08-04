@@ -1,36 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-
 <body>
+    <!-- <script src="../../../node_modules/@vue/reactivity/dist/reactivity.global.js"></script> -->
     <script src="./reactivity.global.js"></script>
     <div id="app"></div>
     <script>
+        let waiting = false;
         const {
             reactive,
-            effect
-            
+            effect,
+            computed
         } = VueReactivity;
-        // let state = reactive({ name: 'jw', age: 30 });
-        // const state = shallowReactive({ name: 'jw', age: 30 })
-        // const state = readonly({ name: 'jw', age: 30 })
-        const state = reactive({
-            name: 'jw',
-            age: 30
+        // console.log(VueReactivity);
+        // console.log(computed);
+        debugger
+        const state  = reactive({firname:'姜',lastname:'文'});
+        // 这里
+        // const fullName = computed({
+        //     get(){ // defineProperty中的getter
+        //         console.log('runner')
+        //         return state.firname + state.lastname
+        //     },
+        //     set(newValue){ // definePropety中的setter 
+        //         console.log(newValue)
+        //     }
+        // })
+        const fullName = computed( ()=>{ // defineProperty中的getter
+            console.log('runner')
+            return state.firname + state.lastname
         })
-        effect(() => { // 副作用函数 (effect执行渲染了页面)
-            document.getElementById("app").innerHTML = state.name + '今年' + state.age + '岁了'
-        });
-        setInterval(() => {
-            state.age++;
-        }, 1000)
+        // 计算属性的缓存问题
+        
+        effect(()=>{
+            document.getElementById("app").innerHTML = fullName.value
+        })
+
+        setTimeout(()=>{
+            state.firname = '珠'
+        },1000)
+
+        // 1. firstname要依赖于计算属性的effect 
+        // 2.计算属性收集了外层effect
+        // 依赖的值变化了会触发计算属性effect重新执行， 计算属性重新执行的时候会触发外层effect来执行
+
+
+
+        // console.log( )
+
+        // fullName.value  =100;
+        // fullName.value  =200;
+        // computed 特点：缓存  
+
+
+        // 计算属性中肯定要有一个缓存的标识 如果这个依赖有变化 要重新执行get，没有变化就不重新执行get
+        // dirty 是否是脏的
+        // 计算属性是一个effect， 依赖的属性变化了 会更新dirty的值
+
+
     </script>
 </body>
-
 </html>

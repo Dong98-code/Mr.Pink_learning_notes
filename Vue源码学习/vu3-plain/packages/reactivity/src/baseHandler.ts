@@ -17,7 +17,7 @@ export const mutableHandlers = {
         let res =  Reflect.get(target,key,receiver)
 
         if(isObject(res)){
-            return reactive(res); // 深度代理实现, 性能好 取值就可以进行代理
+            return reactive(res); // 深度代理实现
         }
         return res;
     },
