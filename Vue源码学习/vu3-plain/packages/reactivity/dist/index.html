@@ -9,7 +9,8 @@
 </head>
 
 <body>
-    <script src="../../../node_modules/@vue/reactivity/dist/reactivity.global.js"></script>
+    <script src="./reactivity.global.js"></script>
+    <div id="app"></div>
     <script>
         const {
             reactive,
@@ -24,9 +25,9 @@
             age: 30
         })
         effect(() => { // 副作用函数 (effect执行渲染了页面)
-            app.innerHTML = state.name + '今年' + state.age + '岁了'
+            document.getElementById("app").innerHTML = state.name + '今年' + state.age + '岁了'
         });
-        setTimeout(() => {
+        setInterval(() => {
             state.age++;
         }, 1000)
     </script>

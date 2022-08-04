@@ -13,6 +13,7 @@ export const mutableHandlers = {
         track(target,'get',key)
         // 去代理对象上取值 就走get
         // 这里可以监控到用户取值了
+        // debugger
         let res =  Reflect.get(target,key,receiver)
 
         if(isObject(res)){
@@ -22,6 +23,7 @@ export const mutableHandlers = {
     },
     set(target,key,value,receiver){
         // 去代理上设置值 执行set
+        // debugger
         let oldValue = target[key];
         let result = Reflect.set(target,key,value,receiver);
         if(oldValue !== value){ // 值变化了
