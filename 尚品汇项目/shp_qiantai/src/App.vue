@@ -23,6 +23,8 @@ export default {
     // }
   },
   mounted() {
+    console.log(window.performance.getEntriesByType('navigation')[0].startTime);
+    console.log('time:',new Date() - window.performance.getEntriesByType('navigation')[0].startTime)
     this.$store.dispatch("home/categoryList");
     
   },
