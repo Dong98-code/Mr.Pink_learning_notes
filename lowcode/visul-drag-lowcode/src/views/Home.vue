@@ -6,7 +6,9 @@
         <section class="left">组件列表</section>
         <!-- 中 -->
         <section class="center">
-            <div class="content">画布</div>
+            <div class="content">
+                <Editor/>
+            </div>
         </section>
         <!-- 右 -->
         <section class="right">
@@ -18,8 +20,9 @@
 
 <script>
 import Toolbar from '@/components/Toolbar'
+import Editor from '@/components/Editor'
 export default {
-    components:{Toolbar}
+    components:{Toolbar, Editor}
 }
 </script>
 
