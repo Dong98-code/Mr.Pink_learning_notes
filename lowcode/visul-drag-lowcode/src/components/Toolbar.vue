@@ -11,9 +11,9 @@
             <!-- 画布大小设置 -->
             <div class="canvas-config">
                 <span>画布大小</span>
-                <input>
+                <input v-model="canvasStyleData.width">
                 <span>*</span>
-                <input>
+                <input v-model="canvasStyleData.height">
             </div>
             <div class="canvas-config">
                 <span>画布比例</span>
@@ -26,8 +26,10 @@
 </template>
 
 <script>
+import {mapState} from 'vuex'
 export default {
     name:'Toolbar',
+    computed: mapState(['canvasStyleData',])
 
 }
 </script>
