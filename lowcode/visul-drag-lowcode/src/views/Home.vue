@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <Toolbar/>
     <main>
         <!-- 左 -->
         <section class="left">组件列表</section>
@@ -16,8 +17,9 @@
 </template>
 
 <script>
+import Toolbar from '@/components/Toolbar'
 export default {
-
+    components:{Toolbar}
 }
 </script>
 

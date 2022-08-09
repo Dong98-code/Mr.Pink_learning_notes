@@ -23,6 +23,7 @@
     "compression-webpack-plugin": "^10.0.0",
     "eslint": "^7.32.0",
     "eslint-plugin-vue": "^8.0.3",
+    "lint-staged": "^13.0.3",
     "sass": "^1.54.3",
     "sass-loader": "^13.0.2",
     "vue-template-compiler": "^2.6.14"
