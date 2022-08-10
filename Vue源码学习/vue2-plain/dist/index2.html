@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <div>
+            {{name}}
+        </div>
+    </div>
+    <script src="./vue.js">
+
+    </script>
+    <script>
+        const vm = new Vue({
+            data() {
+                return {
+                    name:'xdd',
+                    age:24,
+                    arr:[1,23, {c:"sss"}]
+                }
+            },
+            el:'#app',
+            template:'<div>ssss</div>'
+        })
+        // 将模板变成js语法 生成虚拟dom
+        // 从语法树 转为 render函数
+    </script>
+</body>
+
+</html>
