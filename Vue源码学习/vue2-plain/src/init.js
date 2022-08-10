@@ -1,7 +1,7 @@
 import { initState } from "./initState";
 export function initMixin(Vue) {
     // 初始化
-    Vue.protutype._init = function _init(options) {
+    Vue.prototype._init = function _init(options) {
         // this , $开头 自身属性
         const vm = this;
         vm.$options = options; //用户选项挂载实例身上

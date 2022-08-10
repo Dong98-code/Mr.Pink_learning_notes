@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <script src="vue.js">
+    <script src="./vue.js">
 
     </script>
     <script>
@@ -17,10 +17,14 @@
             data() {
                 return {
                     name:'xdd',
-                    age:24
+                    age:24,
+                    arr:[1,23, {c:"sss"}]
                 }
             }
         })
+        vm.address = 'xxsxsx'
+        vm.arr.shift()
+        console.log(vm);
     </script>
 </body>
 
