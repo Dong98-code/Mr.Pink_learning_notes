@@ -1,6 +1,9 @@
 import {
     initState
 } from "./initState";
+import {
+    compileToFunction
+} from "./compiler/index";
 export function initMixin(Vue) {
     // 初始化
     Vue.prototype._init = function _init(options) {
@@ -40,8 +43,16 @@ export function initMixin(Vue) {
         if (template) {
             // 此时再去做模板编译
             // console.log(template);
+            if (/^[\.#a-zA-Z_]/i.test(template)) {
+                // 模板标签
+                template = document.querySelector(template).innerHTML;
+            }
+            // TODO 去除开头和结尾的空白符 m是忽略换行 进行多行匹配
+            // template = template.trim();
+            template = template.replace(/^\s+|\s+$/gm, "");
+            debugger;
             const render = compileToFunction(template);
-            ops.render;
+            ops.render = render;
         }
 
 

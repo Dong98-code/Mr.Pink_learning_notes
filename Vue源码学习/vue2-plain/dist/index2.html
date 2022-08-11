@@ -10,9 +10,11 @@
 
 <body>
     <div id="app">
-        <div>
-            {{name}}
+        <div style="color: red">
+            {{name}} hello
+
         </div>
+        <span>{{age}}</span>
     </div>
     <script src="./vue.js">
 
@@ -27,7 +29,6 @@
                 }
             },
             el:'#app',
-            template:'<div>ssss</div>'
         })
         // 将模板变成js语法 生成虚拟dom
         // 从语法树 转为 render函数

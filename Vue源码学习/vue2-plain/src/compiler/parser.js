@@ -6,45 +6,55 @@ import { ELEMENT_TYPE, TEXT_TYPE } from "./type";
  *  div _div _ab88 a_9.//a
  *
  */
-const ncname = "[a-zA-Z_][\\-\\.0-9a-zA-Z]*";
+const ncname = "[a-zA-Z_][\\-\\.0-9a-zA-Z]*"; //开始必须是字母或者下划线  ， \放到引号里里面也就是字符串的形式，第一个\将第二个\转换成正则表达式中的转义字符，第二个\再去转豁免的所以是两个\\
+
 /**
  * 捕获 标签名
  * 注意 ?: 只匹配不捕获
  * 这里的匹配标签名 后面还有:的这种 是带命名空间的标签 比如 a:b
  */
 const qnameCapture = `((?:${ncname}\\:)?${ncname})`;
+
 // ((?:[a-zA-Z_][\\-\\.0-9a-zA-Z]*\\:)?[a-zA-Z_][\\-\\.0-9a-zA-Z]*)
 /**
  * 匹配到的分组是一个 标签名 <div
  */
 // ^<((?:[a-zA-Z_][\\-\\.0-9a-zA-Z]*\\:)?[a-zA-Z_][\\-\\.0-9a-zA-Z]*)
 const startTagOpen = new RegExp(`^<${qnameCapture}`);
+
+
 /**
  * 匹配标签名结束 <\/div> 因为 /具有特殊含义
  */
 // ^<\\/((?:[a-zA-Z_][\\-\\.0-9a-zA-Z]*\\:)?[a-zA-Z_][\\-\\.0-9a-zA-Z]*)[^>]*>
 const endTag = new RegExp(`^<\\/${qnameCapture}[^>]*>`);
 // `^<\\/${qnameCapture}[^>]*>`
-/**
- * 匹配属性  a="abc" a='abc' a=abc a
- * 分组一的值就是键key 分组3/4/5匹配到的是value
- */
+
+
 const attribute =
-  /^\s*([^\s"'<>\/=]+)(?:\s*(=)\s*(?:"([^"]*)"+|'([^']*)'+|([^\s"'=<>`]+)))?/;
+  /^\s*([^\s"'<>\/=]+)(?:\s*(=)\s*(?:"([^"]*)"+|'([^']*)'+|([^\s"'=<>`]+)))?/; //在这里一个 \就行 因为使用了 //来表示正则表达式
+/*
+属性值前可以有空白： \s*, *表示前面的表达式 0次或者多次
+第一个分组：([^\s"'<>\/=]+)， 组1中不能有空白 单引号 双引号， <> / = 这些字符
+中间是 = 左右可以有空白字符 组2（=）左右 \s*表示空白
+等号右边可以是： 1. 双引号，但是双引号中不能再有双引号 ?:"([^"]*)"+, +表示匹配前一个字符一次或者多次
+第一个分组为key 第二个分组为 = 
+*/
+
+
 /**
  * 匹配标签结束
  * 标签可能自闭合 <div></div> <br/>  />
  */
 const startTagClose = /^\s*(\/?)>/;
+
+
 /**
  * 匹配 双花括号语法 {{}} 匹配到的是就是双花括号的 变量
  */
 export const defaultTagRE = /\{\{((?:.|\r?\n)+?)\}\}/g;
-/**
- * 解析 模板
- * @param {string} html 模板字符串
- * vue2采用正则编译解析 vue3不是采用正则了
- */
+
+// 模板解析幻术
 function parseHTML(html) {
   /**
    * 最终需要转换为一颗抽象语法树 ast abstract syntax tree
@@ -57,13 +67,9 @@ function parseHTML(html) {
   let curParent = null;
   let root = null; // 根元素
 
-  /**
-   * 创建 ast
-   * @param {string} tag 标签名
-   * @param {Array<{name:string,value:any}>} attrs 属性
-   * @returns
-   */
+
   function createASTElement(tag, attrs) {
+    // 根据tag和属性值 返回 ele
     return {
       tag,
       type: ELEMENT_TYPE,
@@ -72,19 +78,15 @@ function parseHTML(html) {
       parent: null,
     };
   }
-  /**
-   * 处理开始标签 并且开始构造抽象语法树
-   * @param {string} tag
-   * @param {Array<{name:string,value:any}>} attrs
-   * @param {boolean} isSelfClose 是否自闭合
-   */
+
   function start(tag, attrs, isSelfClose) {
     // console.log(tag, attrs);
     // 当前节点
     const node = createASTElement(tag, attrs);
     // 根节点
     root = root ?? node;
-    // 更新当前节点的父节点 更新父元素的子元素节点
+    // 更新当前节点的父节点 更新父元素的子元素节点， 
+    // 父元素的子元素节点
     curParent && ((node.parent = curParent), curParent.children.push(node));
     // TODO 是自闭合标签 不需要入栈的
     if (isSelfClose) return;
@@ -94,10 +96,7 @@ function parseHTML(html) {
     curParent = node;
     // console.log(node, root);
   }
-  /**
-   * 处理文本内容
-   * @param {string} text
-   */
+
   function chars(text) {
     // 去除空字符串
     text = text.replace(/^\s+|\s+$/gm, "");
@@ -110,10 +109,7 @@ function parseHTML(html) {
         parent: curParent,
       });
   }
-  /**
-   * 处理结束标签
-   * @param {string} tag 标签名称
-   */
+
   function end(tag) {
     // console.log(tag);
     // 弹出最后一个栈元素 并更新指向的父节点
@@ -121,16 +117,14 @@ function parseHTML(html) {
     // TODO 可以根据tag和node.tag 校验标签是否合法等 也需要考虑自闭合标签
     if (tag !== node.tag) {
       // console.log("标签不合法---------",tag, node);
+      // 校验标签是否合法
     }
     curParent = stack[stack.length - 1];
   }
-  /**
-   * 解析模板的开始标签
-   * @param {string} html 模板字符串
-   */
+
   function parseStartTag() {
     // 匹配标签起始位置
-    const start = html.match(startTagOpen);
+    const start = html.match(startTagOpen); // mathch返回字符串匹配正则返回的结果
     if (start) {
       // 是开始标签
       const match = {
@@ -145,6 +139,7 @@ function parseHTML(html) {
       // 不是标签结束位置 一直匹配
       let attr, end;
       while (
+        // 如果不是开始标签 的结束
         !(end = html.match(startTagClose)) &&
         (attr = html.match(attribute))
       ) {
@@ -170,11 +165,9 @@ function parseHTML(html) {
     // 不是开始标签
     return false;
   }
-  /**
-   * 字符串截取
-   * @param {number} start 截取的起始位置
-   */
+
   function advance(start) {
+    // 去除字符
     html = html.substring(start);
   }
   // vue2中 html 开头肯定是 <  <div>hello</div>

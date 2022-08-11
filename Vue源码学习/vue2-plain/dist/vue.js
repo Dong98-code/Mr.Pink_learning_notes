@@ -39,6 +39,65 @@
     return Constructor;
   }
 
+  function _slicedToArray(arr, i) {
+    return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
+  }
+
+  function _arrayWithHoles(arr) {
+    if (Array.isArray(arr)) return arr;
+  }
+
+  function _iterableToArrayLimit(arr, i) {
+    var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"];
+
+    if (_i == null) return;
+    var _arr = [];
+    var _n = true;
+    var _d = false;
+
+    var _s, _e;
+
+    try {
+      for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) {
+        _arr.push(_s.value);
+
+        if (i && _arr.length === i) break;
+      }
+    } catch (err) {
+      _d = true;
+      _e = err;
+    } finally {
+      try {
+        if (!_n && _i["return"] != null) _i["return"]();
+      } finally {
+        if (_d) throw _e;
+      }
+    }
+
+    return _arr;
+  }
+
+  function _unsupportedIterableToArray(o, minLen) {
+    if (!o) return;
+    if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+    var n = Object.prototype.toString.call(o).slice(8, -1);
+    if (n === "Object" && o.constructor) n = o.constructor.name;
+    if (n === "Map" || n === "Set") return Array.from(o);
+    if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+  }
+
+  function _arrayLikeToArray(arr, len) {
+    if (len == null || len > arr.length) len = arr.length;
+
+    for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+
+    return arr2;
+  }
+
+  function _nonIterableRest() {
+    throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+  }
+
   /**
    * 是否是函数
    * @param {*} source 对象
@@ -222,6 +281,370 @@
     }
   }
 
+  // 元素类型
+  var ELEMENT_TYPE = 1; // 文本类型
+
+  var TEXT_TYPE = 3;
+
+  /**
+   * 匹配标签名
+   * 开头不能包含特殊字符和数字
+   * 第二个字符开始 可以是任意字符了 / \ 空白符 . 都可以
+   *  div _div _ab88 a_9.//a
+   *
+   */
+
+  var ncname = "[a-zA-Z_][\\-\\.0-9a-zA-Z]*"; //开始必须是字母或者下划线  ， \放到引号里里面也就是字符串的形式，第一个\将第二个\转换成正则表达式中的转义字符，第二个\再去转豁免的所以是两个\\
+
+  /**
+   * 捕获 标签名
+   * 注意 ?: 只匹配不捕获
+   * 这里的匹配标签名 后面还有:的这种 是带命名空间的标签 比如 a:b
+   */
+
+  var qnameCapture = "((?:".concat(ncname, "\\:)?").concat(ncname, ")"); // ((?:[a-zA-Z_][\\-\\.0-9a-zA-Z]*\\:)?[a-zA-Z_][\\-\\.0-9a-zA-Z]*)
+
+  /**
+   * 匹配到的分组是一个 标签名 <div
+   */
+  // ^<((?:[a-zA-Z_][\\-\\.0-9a-zA-Z]*\\:)?[a-zA-Z_][\\-\\.0-9a-zA-Z]*)
+
+  var startTagOpen = new RegExp("^<".concat(qnameCapture));
+  /**
+   * 匹配标签名结束 <\/div> 因为 /具有特殊含义
+   */
+  // ^<\\/((?:[a-zA-Z_][\\-\\.0-9a-zA-Z]*\\:)?[a-zA-Z_][\\-\\.0-9a-zA-Z]*)[^>]*>
+
+  var endTag = new RegExp("^<\\/".concat(qnameCapture, "[^>]*>")); // `^<\\/${qnameCapture}[^>]*>`
+
+  var attribute = /^\s*([^\s"'<>\/=]+)(?:\s*(=)\s*(?:"([^"]*)"+|'([^']*)'+|([^\s"'=<>`]+)))?/; //在这里一个 \就行 因为使用了 //来表示正则表达式
+
+  /*
+  属性值前可以有空白： \s*, *表示前面的表达式 0次或者多次
+  第一个分组：([^\s"'<>\/=]+)， 组1中不能有空白 单引号 双引号， <> / = 这些字符
+  中间是 = 左右可以有空白字符 组2（=）左右 \s*表示空白
+  等号右边可以是： 1. 双引号，但是双引号中不能再有双引号 ?:"([^"]*)"+, +表示匹配前一个字符一次或者多次
+  第一个分组为key 第二个分组为 = 
+  */
+
+  /**
+   * 匹配标签结束
+   * 标签可能自闭合 <div></div> <br/>  />
+   */
+
+  var startTagClose = /^\s*(\/?)>/;
+  /**
+   * 匹配 双花括号语法 {{}} 匹配到的是就是双花括号的 变量
+   */
+
+  var defaultTagRE = /\{\{((?:.|\r?\n)+?)\}\}/g; // 模板解析幻术
+
+  function parseHTML(html) {
+    /**
+     * 最终需要转换为一颗抽象语法树 ast abstract syntax tree
+     * 可以借助栈思想
+     * 栈中的最后一个标签元素 就是当前正在匹配的元素的父元素
+     * @type {Array<{tag:string,type:number,children:Array}>}
+     */
+    var stack = []; // 栈帧 指向最后一个元素
+
+    var curParent = null;
+    var root = null; // 根元素
+
+    function createASTElement(tag, attrs) {
+      // 根据tag和属性值 返回 ele
+      return {
+        tag: tag,
+        type: ELEMENT_TYPE,
+        children: [],
+        attrs: attrs,
+        parent: null
+      };
+    }
+
+    function start(tag, attrs, isSelfClose) {
+      var _root;
+
+      // console.log(tag, attrs);
+      // 当前节点
+      var node = createASTElement(tag, attrs); // 根节点
+
+      root = (_root = root) !== null && _root !== void 0 ? _root : node; // 更新当前节点的父节点 更新父元素的子元素节点， 
+      // 父元素的子元素节点
+
+      curParent && (node.parent = curParent, curParent.children.push(node)); // TODO 是自闭合标签 不需要入栈的
+
+      if (isSelfClose) return; // 新节点入栈
+
+      stack.push(node); // 更新当前指向的最前面的父节点
+
+      curParent = node; // console.log(node, root);
+    }
+
+    function chars(text) {
+      // 去除空字符串
+      text = text.replace(/^\s+|\s+$/gm, ""); // console.log(text);
+      // 文本节点 插入到父元素的孩子中
+
+      text && curParent.children.push({
+        type: TEXT_TYPE,
+        text: text,
+        parent: curParent
+      });
+    }
+
+    function end(tag) {
+      // console.log(tag);
+      // 弹出最后一个栈元素 并更新指向的父节点
+      var node = stack.pop(); // TODO 可以根据tag和node.tag 校验标签是否合法等 也需要考虑自闭合标签
+
+      if (tag !== node.tag) ;
+
+      curParent = stack[stack.length - 1];
+    }
+
+    function parseStartTag() {
+      // 匹配标签起始位置
+      var start = html.match(startTagOpen); // mathch返回字符串匹配正则返回的结果
+
+      if (start) {
+        // 是开始标签
+        var match = {
+          // 标签名
+          tagName: start[1],
+          // 属性
+          attrs: [],
+          // 是否是自闭合标签
+          isSelfClose: false
+        };
+        advance(start[0].length); // 不是标签结束位置 一直匹配
+
+        var attr, _end;
+
+        while ( // 如果不是开始标签 的结束
+        !(_end = html.match(startTagClose)) && (attr = html.match(attribute))) {
+          // 去除属性
+          advance(attr[0].length);
+          match.attrs.push({
+            // 属性名
+            name: attr[1],
+            // 属性值 key="value" key='value' key=value
+            // key  对于只有key的这种，我们给默认值true
+            value: attr[3] || attr[4] || attr[5] || true
+          });
+        } // 去除标签的右闭合箭头  <div> 中的 > 或者自闭合标签 <br/> />
+
+
+        if (_end) {
+          advance(_end[0].length); // 自闭合
+
+          if (_end[0].endsWith("/>")) match.isSelfClose = true;
+        } // console.log(match);
+
+
+        return match;
+      } // 不是开始标签
+
+
+      return false;
+    }
+
+    function advance(start) {
+      // 去除字符
+      html = html.substring(start);
+    } // vue2中 html 开头肯定是 <  <div>hello</div>
+
+
+    while (html) {
+      // 如果indexOf中索引的值是 0 则说明是个开始标签 或者 结束标签
+      // > 0 是文本的结束位置  </div>
+      var textEnd = html.indexOf("<");
+
+      if (textEnd === 0) {
+        // 解析开始标签 开始标签及其标签内的属性等
+        var startTagMatch = parseStartTag(); // 匹配结果
+
+        if (startTagMatch) {
+          // console.log(startTagMatch);
+          start(startTagMatch.tagName, startTagMatch.attrs, startTagMatch.isSelfClose);
+          continue;
+        } // 去除结束标签 来到这里 肯定是 </xxx>
+
+
+        var endTagMatch = html.match(endTag);
+
+        if (endTagMatch) {
+          advance(endTagMatch[0].length); // console.log(endTagMatch, html);
+
+          end(endTagMatch[1]);
+          continue;
+        }
+      } // 文本内容  adb<h2></h2>
+
+
+      if (textEnd > 0) {
+        // 获取文本内容
+        var text = html.substring(0, textEnd);
+
+        if (text) {
+          advance(text.length); // 解析到的文本
+
+          chars(text);
+        } // console.log(html);
+
+      }
+    } // console.log(root);
+    // 返回 生成的vNode树 ast
+
+
+    return root;
+  }
+
+  /**
+   * 生成 render函数
+   * @param {*} template 模板
+   * @returns {Function}
+   */
+
+  function compileToFunction(template) {
+    // console.log("compileToFunction-------------->" + template + "---------");
+    // 1. template 转 ast
+    var ast = parseHTML(template); // console.log(ast);
+    // 2. 生成render方法（该方法的执行结果是返回虚拟dom）
+    // TODO 三个方法 _v文本节点 _s把变量转为字符串 _c元素节点
+    // 2.1 生成render函数的返回代码块字符串形式
+
+    var renderCodeBlock = codeGenerator(ast); // 2.2 生成render函数 new Function
+    // 生成的代码中，取变量的值的时候，并没有去当前组件实例的上下文中取值
+    // 而是直接 name age 所以这里绑定上下文（组件实例） name -> vm.name -> vm._data.name
+    // this -> render.call(thisArg)
+
+    var render = new Function("with(this){\n return ".concat(renderCodeBlock, "}")); // console.log(render);
+
+    return render;
+  }
+  /**
+   * 根据ast生成代码
+   * @param {{tag:string,children:Array,type:number,text:string,attrs:Array}} ast
+   */
+
+  function codeGenerator(ast) {
+    var _ast$children;
+
+    var children = generateChildren(ast.children);
+    var code = "_c('".concat(ast.tag, "',").concat(ast.attrs.length > 0 ? generateProps(ast.attrs) : "null").concat((_ast$children = ast.children) !== null && _ast$children !== void 0 && _ast$children.length ? ",".concat(children) : "", ")");
+    return code;
+  }
+  /**
+   * 生成属性对象 {name:"",id:"app"}
+   * @param {Array<{name:string|symbol,value:any}>} attrs
+   */
+
+
+  function generateProps(attrs) {
+    var str = "";
+
+    for (var i = 0; i < attrs.length; i++) {
+      var attr = attrs[i];
+
+      if (attr.name === "style") {
+        (function () {
+          // style:"color:red;background-color:{{backgroundColor}}"
+          // style:{color:"red","background-color":"{{backgroundColor}}"}
+          // let style = "";
+          var style = {};
+          attr.value.split(";").forEach(function (item) {
+            if (!item.trim()) return;
+
+            var _item$split = item.split(":"),
+                _item$split2 = _slicedToArray(_item$split, 2),
+                key = _item$split2[0],
+                value = _item$split2[1]; // let match = null;
+            // defaultTagRE.lastIndex = 0;
+            // match = defaultTagRE.exec(value);
+            // if (match) {
+            //   value = `_s(${match[1]})`;
+            // } else value = `'${value}'`;
+
+
+            style[key] = value; // style += `'${key}':${value},`;
+            // console.log(style);
+          }); // str += `${attr.name}:{${style.slice(0, -1)}},`;
+
+          str += "".concat(attr.name, ":").concat(JSON.stringify(style), ",");
+        })();
+      } else str += "\"".concat(attr.name, "\":").concat(JSON.stringify(attr.value), ",");
+    }
+
+    return "{".concat(str.slice(0, -1), "}");
+  }
+  /**
+   * 生成节点的子节点数组对象
+   * @param {*} children
+   */
+
+
+  function generateChildren(children) {
+    if (children) {
+      return children.map(function (child) {
+        return generateChild(child);
+      }).join(",");
+    }
+  }
+  /**
+   * 根据节点生成子字符串形式
+   * @param {*} node
+   * @returns
+   */
+
+
+  function generateChild(node) {
+    switch (node.type) {
+      case ELEMENT_TYPE:
+        // 元素节点
+        // console.log(codeGenerator(node))
+        return codeGenerator(node);
+
+      case TEXT_TYPE:
+        // console.log(node.text)
+        // 文本节点
+        var text = node.text;
+
+        if (!defaultTagRE.test(text)) {
+          // 纯文本节点 没有 {{xx}}
+          return "_v(".concat(JSON.stringify(text), ")");
+        } // console.log(text);
+
+
+        var tokens = []; // 匹配结果
+
+        var match = null;
+        defaultTagRE.lastIndex = 0; // 最后一次匹配结果的起始索引位置
+
+        var lastIndex = 0;
+
+        while (match = defaultTagRE.exec(text)) {
+          // console.log(match)
+          // 当前匹配的到的起始位置
+          var index = match.index;
+          if (index > lastIndex) tokens.push(JSON.stringify(text.slice(lastIndex, index)));
+          tokens.push("_s(".concat(match[1].trim(), ")"));
+          lastIndex = index + match[0].length;
+        } // {{age}}--- 最后一次匹配后还有内容
+
+
+        if (lastIndex < text.length) {
+          tokens.push(JSON.stringify(text.slice(lastIndex)));
+        } // console.log(tokens);
+
+
+        return "_v(".concat(tokens.join("+"), ")");
+
+      default:
+        return "";
+    }
+  }
+
   function initMixin(Vue) {
     // 初始化
     Vue.prototype._init = function _init(options) {
@@ -259,8 +682,17 @@
       if (template) {
         // 此时再去做模板编译
         // console.log(template);
-        compileToFunction(template);
-        ops.render;
+        if (/^[\.#a-zA-Z_]/i.test(template)) {
+          // 模板标签
+          template = document.querySelector(template).innerHTML;
+        } // TODO 去除开头和结尾的空白符 m是忽略换行 进行多行匹配
+        // template = template.trim();
+
+
+        template = template.replace(/^\s+|\s+$/gm, "");
+        debugger;
+        var render = compileToFunction(template);
+        ops.render = render;
       }
     };
   }
