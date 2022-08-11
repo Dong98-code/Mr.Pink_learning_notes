@@ -1,4 +1,5 @@
-import { initMixin} from './init'
+import { initMixin } from './init'
+import {initLifcycle} from './lifecycle'
 /**
  * Vue构造函数
  * @param {*} options 用户选项
@@ -10,5 +11,5 @@ function Vue(options) {
 }
 
 initMixin(Vue); // 扩展_init方法
-
+initLifcycle(Vue);
 export default Vue; 
