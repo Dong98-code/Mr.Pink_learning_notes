@@ -102,7 +102,17 @@ module.exports =  {
 **Vue2中使用的是Object.definedProperty**，**Vue3中直接使用Proxy了**
 
 ## 模板编译为ast
-
+实现函数： `parseHtml()`，主要原理是使用正则表达式来讲字符串形式的template转换成一个ast语法树；
+对象的结构大致如下：树状结构
+```js
+{
+      tag,
+      type: ELEMENT_TYPE,
+      children: [],
+      attrs,
+      parent: null,
+    };
+```
 vue2中使用的是正则表达式进行匹配，然后转换为ast树。
 
 模板引擎 性能差 需要正则匹配 替换 vue1.0 没有引入虚拟dom的改变，vue2 采用虚拟dom 数据变化后比较虚拟dom的差异 最后更新需要更新的地方， 核心就是我们需要将模板变成我们的js语法 通过js语法生成虚拟dom，语法之间的转换 需要先变成抽象语法树AST 再组装为新的语法，这里就是把template语法转为render函数。
@@ -110,12 +120,15 @@ vue2中使用的是正则表达式进行匹配，然后转换为ast树。
 ### ast转render
 
 把生成的ast语法树，通过字符串拼接等方式转为render函数。
+用过使用 new Function + with的当时，将字符串，变成可执行的js代码
 render函数内部主要用到：
 
 1. _c函数：创建元素虚拟dom节点
 2. _v函数：创建文本虚拟dom节点
 3. _s函数：将函数内的变量字符串化
+   
 
+之后使用 `mountComponent()`，实现虚拟dom真实dom的转换
 ### render函数生成真实dom
 
 调用render函数，会生成虚拟dom，然后把虚拟dom转为真实DOM，挂载到页面即可。

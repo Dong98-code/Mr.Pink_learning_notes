@@ -4,6 +4,7 @@ import {
 import {
     compileToFunction
 } from "./compiler/index";
+import { mountComponent } from "./lifecycle";
 export function initMixin(Vue) {
     // 初始化
     Vue.prototype._init = function _init(options) {
@@ -50,12 +51,11 @@ export function initMixin(Vue) {
             // TODO 去除开头和结尾的空白符 m是忽略换行 进行多行匹配
             // template = template.trim();
             template = template.replace(/^\s+|\s+$/gm, "");
-            debugger;
             const render = compileToFunction(template);
             ops.render = render;
         }
-
-
+    // 组件挂载
+        mountComponent(vm, el);//vm挂载到el上
     }
 
 }

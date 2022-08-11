@@ -509,15 +509,14 @@
   function compileToFunction(template) {
     // console.log("compileToFunction-------------->" + template + "---------");
     // 1. template 转 ast
-    var ast = parseHTML(template); // console.log(ast);
-    // 2. 生成render方法（该方法的执行结果是返回虚拟dom）
+    var ast = parseHTML(template); // 2. 生成render方法（该方法的执行结果是返回虚拟dom）
     // TODO 三个方法 _v文本节点 _s把变量转为字符串 _c元素节点
     // 2.1 生成render函数的返回代码块字符串形式
 
     var renderCodeBlock = codeGenerator(ast); // 2.2 生成render函数 new Function
     // 生成的代码中，取变量的值的时候，并没有去当前组件实例的上下文中取值
     // 而是直接 name age 所以这里绑定上下文（组件实例） name -> vm.name -> vm._data.name
-    // this -> render.call(thisArg)
+    // this -> render.call(thisArg) with{}语法扩展作用域链，执行函数的时候，获取到this，之后执行的函数，会在作用域链上去寻找对应的变量；
 
     var render = new Function("with(this){\n return ".concat(renderCodeBlock, "}")); // console.log(render);
 
@@ -525,14 +524,13 @@
   }
   /**
    * 根据ast生成代码
-   * @param {{tag:string,children:Array,type:number,text:string,attrs:Array}} ast
+   * @param {{tag:string,children:Array,type:number,text:string,attrs:Array}} 
+   * _c('div',{"id":"app"},_c('div',{style:{"color":" red"}},_v(_s(name)+" hello")),_c('span',null,_v(_s(age))))
    */
 
   function codeGenerator(ast) {
-    var _ast$children;
-
     var children = generateChildren(ast.children);
-    var code = "_c('".concat(ast.tag, "',").concat(ast.attrs.length > 0 ? generateProps(ast.attrs) : "null").concat((_ast$children = ast.children) !== null && _ast$children !== void 0 && _ast$children.length ? ",".concat(children) : "", ")");
+    var code = "_c('".concat(ast.tag, "',").concat(ast.attrs.length > 0 ? generateProps(ast.attrs) : "null").concat(ast.children.length ? ",".concat(children) : "", ")");
     return code;
   }
   /**
@@ -542,7 +540,7 @@
 
 
   function generateProps(attrs) {
-    var str = "";
+    var str = ""; // 返回值是一个字符串
 
     for (var i = 0; i < attrs.length; i++) {
       var attr = attrs[i];
@@ -551,32 +549,24 @@
         (function () {
           // style:"color:red;background-color:{{backgroundColor}}"
           // style:{color:"red","background-color":"{{backgroundColor}}"}
-          // let style = "";
           var style = {};
           attr.value.split(";").forEach(function (item) {
-            if (!item.trim()) return;
+            if (!item.trim()) return; // 空白 ，color:red
 
             var _item$split = item.split(":"),
                 _item$split2 = _slicedToArray(_item$split, 2),
                 key = _item$split2[0],
-                value = _item$split2[1]; // let match = null;
-            // defaultTagRE.lastIndex = 0;
-            // match = defaultTagRE.exec(value);
-            // if (match) {
-            //   value = `_s(${match[1]})`;
-            // } else value = `'${value}'`;
+                value = _item$split2[1];
 
-
-            style[key] = value; // style += `'${key}':${value},`;
-            // console.log(style);
-          }); // str += `${attr.name}:{${style.slice(0, -1)}},`;
-
+            style[key] = value;
+          });
           str += "".concat(attr.name, ":").concat(JSON.stringify(style), ",");
         })();
-      } else str += "\"".concat(attr.name, "\":").concat(JSON.stringify(attr.value), ",");
+      } else str += "\"".concat(attr.name, "\":").concat(JSON.stringify(attr.value), ","); //把value转成字符串
+
     }
 
-    return "{".concat(str.slice(0, -1), "}");
+    return "{".concat(str.slice(0, -1), "}"); //去掉多余的 逗号
   }
   /**
    * 生成节点的子节点数组对象
@@ -604,6 +594,7 @@
         // 元素节点
         // console.log(codeGenerator(node))
         return codeGenerator(node);
+      // 节点类型， 递归调用codeGenerator(node)
 
       case TEXT_TYPE:
         // console.log(node.text)
@@ -613,13 +604,14 @@
         if (!defaultTagRE.test(text)) {
           // 纯文本节点 没有 {{xx}}
           return "_v(".concat(JSON.stringify(text), ")");
-        } // console.log(text);
+        } // 之后匹配的是 {{name}}这种形式
 
 
         var tokens = []; // 匹配结果
 
         var match = null;
-        defaultTagRE.lastIndex = 0; // 最后一次匹配结果的起始索引位置
+        defaultTagRE.lastIndex = 0; //exec 跟全局匹配标志一块使用的时候，需要重置 lastIndex 0 
+        // 上一次匹配结果的起始索引位置
 
         var lastIndex = 0;
 
@@ -627,8 +619,10 @@
           // console.log(match)
           // 当前匹配的到的起始位置
           var index = match.index;
-          if (index > lastIndex) tokens.push(JSON.stringify(text.slice(lastIndex, index)));
-          tokens.push("_s(".concat(match[1].trim(), ")"));
+          if (index > lastIndex) tokens.push(JSON.stringify(text.slice(lastIndex, index))); // 两个匹配位置之间的内容 {{}} name {{}}
+
+          tokens.push("_s(".concat(match[1].trim(), ")")); // 去除空格
+
           lastIndex = index + match[0].length;
         } // {{age}}--- 最后一次匹配后还有内容
 
@@ -643,6 +637,231 @@
       default:
         return "";
     }
+  }
+
+  // 虚拟节点相关的方法
+  // h函数
+  function vnode(vm, tag, key, props, children, text, componentOptions) {
+    // 创建一个虚拟的dom,返回值是一个js对象,增加自定义属性
+    // * 虚拟dom是和ast不一样的 -> ast是语法层面的转换，他描述的是dom本身（可以描述 js css html等等）
+    return {
+      vm: vm,
+      tag: tag,
+      key: key,
+      // diff算法，每一个虚拟dom应该有一个独一无二的key值
+      text: text,
+      props: props,
+      // data
+      componentOptions: componentOptions,
+      children: children
+    };
+  }
+
+  function createElementVNode(vm, tag, data) {
+    // 返回的是一个节点
+    var key = data === null || data === void 0 ? void 0 : data.key;
+    key && delete data.key;
+
+    for (var _len = arguments.length, children = new Array(_len > 3 ? _len - 3 : 0), _key = 3; _key < _len; _key++) {
+      children[_key - 3] = arguments[_key];
+    }
+
+    return vnode(vm, tag, key, data, children);
+  } // _v创建文本节点
+
+
+  function createTextVNode(vm, text) {
+    return vnode(vm, undefined, undefined, undefined, undefined, text, undefined);
+  }
+
+  function patch(oldVNode, vnode) {
+    if (!oldVNode) return createEle(vnode);
+    var isRealElement = oldVNode.nodeType; //真实节点身上会有一个nodeType属性,如果是虚拟dom，没有该属性
+
+    if (isRealElement) {
+      var elm = oldVNode;
+      var parentElm = elm.parentNode; // console.log(parentElm)
+
+      var newEle = createEle(vnode); // 插入新dom 移除父节点上的老dom节点
+
+      insertBefore(parentElm, newEle, elm.nextSibling); //下一个节点 nextSibling, 先插入 然后再移除旧的节点
+
+      removeChild(parentElm, elm); // console.log(newEle)
+
+      return newEle; // 返回新的elm
+    }
+  }
+
+  function createEle(vnode) {
+    //vnode一个js对象
+    //根据这个对象 然后创建真实的dom节点
+    var tag = vnode.tag,
+        props = vnode.props,
+        children = vnode.children,
+        text = vnode.text;
+
+    if (typeof tag === 'string') {
+      vnode.el = createElement(tag); // 更新属性值
+
+      patchProps(vnode.el, {}, props);
+      children.forEach(function (child) {
+        // 如果孩子是组件 会实例化组件 并且插入到父组件内部子节点的最后
+        appendChild(vnode.el, createEle(child));
+      });
+    } else if (_typeof(tag) === "object") ; else {
+      vnode.el = createTextNode(text); // 创建真实的文本节点
+    }
+
+    return vnode.el;
+  }
+
+  function createTextNode(tag) {
+    var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "browser";
+
+    switch (type.toLowerCase()) {
+      case "browser":
+        return document.createTextNode(tag);
+    }
+  }
+
+  function createElement(tag) {
+    var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "browser";
+
+    switch (type.toLowerCase()) {
+      case "browser":
+        return document.createElement(tag);
+      // 原生创建节点的方法
+    }
+  }
+
+  function patchProps(el, oldProps, props) {
+    // 节点，原来的属性值，新的属性值
+    var oldStyle = (oldProps === null || oldProps === void 0 ? void 0 : oldProps.style) || {}; // 旧的属性值存在 且 style不为空
+
+    var newStyle = (props === null || props === void 0 ? void 0 : props.style) || {}; // 样式移除
+
+    for (var key in oldStyle) {
+      if (!newStyle[key]) {
+        el.style[key] = "";
+      }
+    }
+
+    for (var _key in oldProps) {
+      if (!props[_key]) {
+        removeAttribute(el, _key);
+      }
+    } // 属性存在 则覆盖
+
+
+    for (var _key2 in props) {
+      if (_key2 === "style") {
+        Object.keys(props[_key2]).forEach(function (k) {
+          return el.style[k] = props["style"][k];
+        });
+      } else {
+        setAttribute(el, _key2, props[_key2]);
+      }
+    }
+  }
+
+  function setAttribute(el, key, value) {
+    var type = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : "browser";
+
+    switch (type.toLowerCase()) {
+      case "browser":
+        el.setAttribute(key, value);
+        break;
+    }
+  }
+
+  function appendChild(parent, child) {
+    var type = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "browser";
+
+    switch (type.toLowerCase()) {
+      case "browser":
+        parent.appendChild(child);
+        break;
+    }
+  }
+
+  function insertBefore(parent, child, prevChild) {
+    var type = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : "browser";
+
+    switch (type.toLowerCase()) {
+      case "browser":
+        // document.insertBefore
+        parent.insertBefore(child, prevChild);
+        break;
+    }
+  }
+
+  function removeChild(parent, child) {
+    var type = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "browser";
+
+    switch (type.toLowerCase()) {
+      case "browser":
+        parent.removeChild(child);
+        break;
+    }
+  }
+
+  function initLifcycle(Vue) {
+    Object.defineProperties(Vue.prototype, {
+      _render: {
+        value: function _render() {
+          var vm = this;
+          return vm.$options.render.call(vm); // 执行 属性上的render函数，该边this的指向
+          // _c返回一个虚拟节点
+        }
+      },
+      _c: {
+        // _c("div",{name:'zs'},...children) 元素 虚拟dom
+        value: function _c() {
+          return createElementVNode.apply(void 0, [this].concat(Array.prototype.slice.call(arguments)));
+        }
+      },
+      _s: {
+        // 变量转成字符串
+        // 对于不是对象的字符串，没必要再次转字符串了，不然会多出引号 zs -> \"zs\"
+        value: function _s(value) {
+          return _typeof(value) === "object" ? JSON.stringify(value) : value;
+        }
+      },
+      _v: {
+        // 文本的虚拟dom
+        value: function _v() {
+          return createTextVNode.apply(void 0, [this].concat(Array.prototype.slice.call(arguments)));
+        }
+      },
+      _update: {
+        value: function _update(vnode) {
+          var vm = this; // 挂载的容器 
+
+          var el = vm.$el;
+          var preVnode = vm._vnode; // 记录每次产生 vnode,每次render一次就会产生一个新的 vnode
+
+          vm._vnode = vnode;
+
+          if (preVnode) {
+            vm.$el = patch(preVnode, vnode);
+          } else {
+            // 初始 渲染
+            vm.$el = patch(el, vnode);
+          }
+        }
+      }
+    });
+  }
+  function mountComponent(vm, container) {
+    // 组件挂载
+    // 1.render创建虚拟dom，
+    // 2. 根绝虚拟dom产生真实dom
+    //3. 挂载el到元素中
+    // vm._render(); //vm.$options.render()
+    // vm._update(); // 虚拟dom -> 真实dom
+    vm.$el = container; //记录挂载的元素
+
+    vm._update(vm._render());
   }
 
   function initMixin(Vue) {
@@ -690,10 +909,12 @@
 
 
         template = template.replace(/^\s+|\s+$/gm, "");
-        debugger;
         var render = compileToFunction(template);
         ops.render = render;
-      }
+      } // 组件挂载
+
+
+      mountComponent(vm, el); //vm挂载到el上
     };
   }
   /**
@@ -713,6 +934,8 @@
   }
 
   initMixin(Vue); // 扩展_init方法
+
+  initLifcycle(Vue);
 
   return Vue;
 

@@ -12,7 +12,6 @@
     <div id="app">
         <div style="color: red">
             {{name}} hello
-
         </div>
         <span>{{age}}</span>
     </div>
@@ -25,11 +24,21 @@
                 return {
                     name:'xdd',
                     age:24,
-                    arr:[1,23, {c:"sss"}]
+                    adress:{
+                        num:30,
+                        content:'回龙观'
+                    },
+                    hobby:["eat", "sleep"]
                 }
-            },
-            el:'#app',
+            }
         })
+        vm.$mount("#app")
+
+        setTimeout(()=>{
+            vm.name = 'xddddd',
+            vm.age = 30
+            vm._update(vm._render()) // 手动强制更新
+        }, 1000)
         // 将模板变成js语法 生成虚拟dom
         // 从语法树 转为 render函数
     </script>
