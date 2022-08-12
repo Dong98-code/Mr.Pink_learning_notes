@@ -5,6 +5,7 @@ import {
 import {
     patch
 } from "./vdom/patch";
+import Watcher from "./observer/watcher";
 export function initLifcycle(Vue) {
     Object.defineProperties(Vue.prototype, {
         _render: {
