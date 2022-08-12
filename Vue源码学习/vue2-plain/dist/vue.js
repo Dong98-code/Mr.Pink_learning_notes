@@ -39,6 +39,21 @@
     return Constructor;
   }
 
+  function _defineProperty(obj, key, value) {
+    if (key in obj) {
+      Object.defineProperty(obj, key, {
+        value: value,
+        enumerable: true,
+        configurable: true,
+        writable: true
+      });
+    } else {
+      obj[key] = value;
+    }
+
+    return obj;
+  }
+
   function _slicedToArray(arr, i) {
     return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
   }
@@ -155,6 +170,62 @@
     };
   });
 
+  var id = 0;
+
+  var Dep = /*#__PURE__*/function () {
+    function Dep() {
+      _classCallCheck(this, Dep);
+
+      _defineProperty(this, "id", id++);
+
+      // 属性的dep要收集watcher， 一个属性可以对应多个watcher
+      this.subs = [];
+    }
+    /**
+     * 收集当前属性 对应的视图 watcher
+     */
+
+
+    _createClass(Dep, [{
+      key: "depend",
+      value: function depend() {
+        // 这里我们不希望收集重复的watcher，而且现在还只是单向的关系 dep -> watcher
+        // watcher 也需要记录 dep
+        // this.subs.push(Dep.target);
+        // console.log(this.subs);
+        // 这里是让watcher先记住dep
+        Dep.target.addDep(this); //  this -> dep; 此时的this指向调用者 dep this
+      }
+      /**
+       * dep 在反过来记录watcher
+       * @param {*} watcher
+       */
+
+    }, {
+      key: "addSub",
+      value: function addSub(watcher) {
+        this.subs.push(watcher); // console.log(watcher);
+      }
+      /**
+       * 更新视图
+       */
+
+    }, {
+      key: "notify",
+      value: function notify() {
+        this.subs.forEach(function (watcher) {
+          return watcher.update();
+        });
+      } // 当前的watcher
+
+    }]);
+
+    return Dep;
+  }(); // watcher queue 视图渲染栈
+
+
+  _defineProperty(Dep, "target", null);
+
   var Observer = /*#__PURE__*/function () {
     function Observer(data) {
       _classCallCheck(this, Observer);
@@ -213,11 +284,18 @@
 
 
   function defineReactive(obj, key, value) {
+    var dep = new Dep(); // 每一个属性都有一个dep
     // 如果属性也是对象 再次劫持 childOb有值的情况下是Observe实例，实例上挂载了dep
+
     observer(value); // 每个属性都有一个dep
 
     Object.defineProperty(obj, key, {
       get: function get() {
+        if (Dep.target) {
+          //当前属性，记住watcher 视图依赖收集
+          dep.depend();
+        }
+
         return value;
       },
       set: function set(newVal) {
@@ -225,7 +303,9 @@
         if (newVal === value) return; // 新值是对象 则需要重新观测
 
         observer(newVal);
-        value = newVal;
+        value = newVal; // 设置属性值的时候，通知对应watcher去更新属性值
+
+        dep.notify();
       }
     });
   }
@@ -859,9 +939,23 @@
     //3. 挂载el到元素中
     // vm._render(); //vm.$options.render()
     // vm._update(); // 虚拟dom -> 真实dom
-    vm.$el = container; //记录挂载的元素
+    // vm.$el = container; //记录挂载的容器
+    Object.defineProperty(vm, "$el", {
+      value: container,
+      writable: true
+    }); // 这里把渲染逻辑封装到watcher中
+    // 该函数调用一次渲染一次
 
-    vm._update(vm._render());
+    var updateComponent = function updateComponent() {
+      // 1.调用render 产生虚拟节点 vNode
+      var vNodes = vm._render(); // 2. 根据虚拟dom 产生真实dom
+
+
+      vm._update(vNodes);
+    };
+
+    new Watcher(vm, updateComponent, true); //每执行一次这个函数， 再构造函数中， updateComponent就执行一次
+    // 3. 挂载到container上 _update中实现
   }
 
   function initMixin(Vue) {

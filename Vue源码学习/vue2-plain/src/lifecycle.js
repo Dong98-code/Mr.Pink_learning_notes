@@ -2,7 +2,9 @@ import {
     createElementVNode,
     createTextVNode
 } from "./vdom/index";
-import { patch } from "./vdom/patch";
+import {
+    patch
+} from "./vdom/patch";
 export function initLifcycle(Vue) {
     Object.defineProperties(Vue.prototype, {
         _render: {
@@ -57,7 +59,20 @@ export function mountComponent(vm, container) {
     // vm._render(); //vm.$options.render()
     // vm._update(); // 虚拟dom -> 真实dom
 
-    vm.$el = container; //记录挂载的元素
-    vm._update(vm._render())
+    // vm.$el = container; //记录挂载的容器
+    Object.defineProperty(vm, "$el", {
+        value: container,
+        writable: true,
+    });
+    // 这里把渲染逻辑封装到watcher中
+    // 该函数调用一次渲染一次
+    const updateComponent = () => {
+        // 1.调用render 产生虚拟节点 vNode
+        const vNodes = vm._render();
+        // 2. 根据虚拟dom 产生真实dom
+        vm._update(vNodes);
+    };
+    new Watcher(vm, updateComponent, true); //每执行一次这个函数， 再构造函数中， updateComponent就执行一次
+    // 3. 挂载到container上 _update中实现
 
 }

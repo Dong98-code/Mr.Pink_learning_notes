@@ -2,6 +2,7 @@ import {
     isObject
 } from '../utils/index';
 import arrayProto from './array'
+import Dep from './dep';
 class Observer {
     constructor(data) {
         // object.definedProperty已有的数据的劫持
@@ -43,11 +44,16 @@ class Observer {
  * @param {*} value
  */
 export function defineReactive(obj, key, value) {
+    let dep = new Dep() // 每一个属性都有一个dep
     // 如果属性也是对象 再次劫持 childOb有值的情况下是Observe实例，实例上挂载了dep
     observer(value);
     // 每个属性都有一个dep
     Object.defineProperty(obj, key, {
         get() {
+            if (Dep.target) {
+                //当前属性，记住watcher 视图依赖收集
+                dep.depend();
+            }
             return value;
         },
         set(newVal) {
@@ -56,7 +62,8 @@ export function defineReactive(obj, key, value) {
             // 新值是对象 则需要重新观测
             observer(newVal)
             value = newVal;
-
+            // 设置属性值的时候，通知对应watcher去更新属性值
+            dep.notify()
         },
     });
 }
