@@ -1,5 +1,6 @@
 import { initMixin } from './init'
-import {initLifcycle} from './lifecycle'
+import { initLifcycle } from './lifecycle'
+import { initGlobalStaticAPI } from './global-static-api';
 /**
  * Vue构造函数
  * @param {*} options 用户选项
@@ -12,4 +13,6 @@ function Vue(options) {
 
 initMixin(Vue); // 扩展_init方法
 initLifcycle(Vue);
+// 静态方法
+initGlobalStaticAPI(Vue);
 export default Vue; 

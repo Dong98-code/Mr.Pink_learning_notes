@@ -4,17 +4,28 @@ import {
 import {
     compileToFunction
 } from "./compiler/index";
-import { mountComponent } from "./lifecycle";
+import {
+    mountComponent
+} from "./lifecycle";
+import { mergeOptions } from "./utils/merge";
+import { callhooks } from "./hooks/life-hooks";
 export function initMixin(Vue) {
     // 初始化
     Vue.prototype._init = function _init(options) {
         // this , $开头 自身属性
         const vm = this;
-        vm.$options = options; //用户选项挂载实例身上
+        // 合并 Vue.options 和 传入的配置项
+        // TODO 目前还只是可以合并生命周期和普通属性等，对于 data 这种选项还需要特殊的合并处理
+        // 这种使用this获取其构造函数上的静态属性options，因为构造函数不一定直接是 Vue，也可以是Vue的子类（组件
+        vm.$options = mergeOptions(this.constructor.options, options); //用户选项挂载实例身上
 
+        // 初始化之前调用 beforeCreated
+        callhooks(vm, "beforeCreate")
         // 初始化状态
         // TODO computed methods watcher ....
         initState(vm);
+        // 之后 ceated
+        callhooks(vm, "created")
         // el 实现数据挂载
         if (options.el) {
             // 有el配置
@@ -54,8 +65,8 @@ export function initMixin(Vue) {
             const render = compileToFunction(template);
             ops.render = render;
         }
-    // 组件挂载
-        mountComponent(vm, el);//vm挂载到el上
+        // 组件挂载
+        mountComponent(vm, el); //vm挂载到el上
     }
 
 }

@@ -1271,16 +1271,120 @@
     // 3. 挂载到container上 _update中实现
   }
 
+  // 定义合并策略
+  // 策略模式
+  var strategy = {}; // 生命周期
+
+  var LIFE_CYCLE = ["beforeCreate", "created", "beforeMount", "mounted", "beforeUpdate", "update"];
+  LIFE_CYCLE.forEach(function (hook) {
+    // 策略是一个对象，key为声明周期的钩子，分别定义为不同的函数
+    strategy[hook] = function (s1, s2) {
+      //  s1 s2为 source1[key], source2[key]
+      if (s2) {
+        // minin混入的有这个key
+        if (s1) {
+          // 原来也有,现在也有
+          // 合并选项
+          // return s1.concat(s2);
+          return [].concat(_toConsumableArray(s1), [s2]);
+        } else {
+          // 全局options没有 用户传递的有 变成数组
+          return [s2];
+        }
+      } else {
+        return s1;
+      }
+    };
+  }); // 组件的合并策略
+
+  strategy.components = function (parentVal, childVal) {
+    // TODO 这里这种做法不一定很好 该条件是不是应该有还应该考究 有了该条件 全局的组件定义的位置不同 可能最后的结果不同
+    // 已经和全局组件对象创建关系了，则不需要再次建立关系 直接返回
+    // if (Object.getPrototypeOf(parentVal) === Vue.options.components)
+    //   return parentVal;
+    // 通过父亲 创建一个对象 原型上有父亲的所有属性和方法
+    var res = Object.create(parentVal); // {}.__proto__ = parentVal
+
+    if (childVal) {
+      for (var key in childVal) {
+        // 拿到所有的孩子的属性和方法
+        res[key] = childVal[key];
+      }
+    }
+
+    console.log(res);
+    return res;
+  };
+
+  function mergeOptions() {
+    function mergeField(key) {
+      // 需要用到的处理函数
+      if (strategy[key]) {
+        opts[key] = strategy[key](source1[key], source2[key]);
+      } else {
+        opts[key] = source2[key] === void 0 ? source1[key] : source2[key];
+      }
+    } // 
+
+
+    var opts = {};
+
+    for (var _len = arguments.length, options = new Array(_len), _key = 0; _key < _len; _key++) {
+      options[_key] = arguments[_key];
+    }
+
+    var source1 = options[0],
+        source2 = options[1];
+
+    for (var key in source1) {
+      // 遍历key属性
+      mergeField(key);
+    }
+
+    for (var _key2 in source2) {
+      // 遍历孩子的key
+      // source1没有的key 再去处理 source2中的key
+      if (!source1.hasOwnProperty(_key2)) {
+        mergeField(_key2);
+      }
+    }
+
+    if (options.length > 2) {
+      options.splice(0, 2);
+      return mergeOptions.apply(void 0, [opts].concat(options));
+    }
+
+    return opts;
+  }
+
+  // 调用声明周期的不同阶段定义的函数
+  function callhooks(vm, hook) {
+    var handles = vm.$options[hook];
+
+    if (handles) {
+      handles.forEach(function (handle) {
+        return handle.call(vm);
+      }); // 声明周期上的钩子函数的this都是指向当前的实例上
+    }
+  }
+
   function initMixin(Vue) {
     // 初始化
     Vue.prototype._init = function _init(options) {
       // this , $开头 自身属性
-      var vm = this;
-      vm.$options = options; //用户选项挂载实例身上
-      // 初始化状态
+      var vm = this; // 合并 Vue.options 和 传入的配置项
+      // TODO 目前还只是可以合并生命周期和普通属性等，对于 data 这种选项还需要特殊的合并处理
+      // 这种使用this获取其构造函数上的静态属性options，因为构造函数不一定直接是 Vue，也可以是Vue的子类（组件
+
+      vm.$options = mergeOptions(this.constructor.options, options); //用户选项挂载实例身上
+      // 初始化之前调用 beforeCreated
+
+      callhooks(vm, "beforeCreate"); // 初始化状态
       // TODO computed methods watcher ....
 
-      initState(vm); // el 实现数据挂载
+      initState(vm); // 之后 ceated
+
+      callhooks(vm, "created"); // el 实现数据挂载
 
       if (options.el) {
         // 有el配置
@@ -1330,6 +1434,18 @@
    * 用runtime的时候 不能使用模板template（可以使用.vue，loader处理就行了）
    */
 
+  function initGlobalStaticAPI(Vue) {
+    Vue.options = {}; // 全局的配置
+    //混入 mixin
+
+    Vue.mixin = function mixin(mixin) {
+      // 用户的选项和全局的options进行合并
+      this.options = mergeOptions(Vue.options, mixin); //mixin为混入的内容
+
+      return this;
+    };
+  }
+
   /**
    * Vue构造函数
    * @param {*} options 用户选项
@@ -1342,7 +1458,9 @@
 
   initMixin(Vue); // 扩展_init方法
 
-  initLifcycle(Vue);
+  initLifcycle(Vue); // 静态方法
+
+  initGlobalStaticAPI(Vue);
 
   return Vue;
 
