@@ -52,7 +52,7 @@ class Watcher {
         this.lazy = options?.lazy;
         // dirty  计算属性使用的
         this.dirty = this.lazy;
-        this.value = this.lazy ? void 0 : this.get();
+        this.value = this.lazy ? void 0 : this.get(); // lazy是false的时候，创建watcher的时候就会执行一次get()
     }
     get() {
         /**
@@ -62,8 +62,9 @@ class Watcher {
         // Dep.target = this;
         pushWatcherTarget(this);
         // 去 vm上取值 这里的this不是vm了，所以取值需要绑定vm
+        // getter函数调用为创建 watcher时的 updateComponent函数，回去调用虚拟节点的创建和更新
         const val = this.getter.call(this.vm);
-        // 渲染完毕后清空
+        // 渲染完毕后清空，出栈
         // Dep.target = null;
         popWatcherTarget();
         return val; // 计算属性执行的返回值
@@ -97,6 +98,7 @@ class Watcher {
         // 是计算属性
         if (this.lazy) {
             // 依赖的值变化 就标识计算属性的值是脏值了
+
             return (this.dirty = true);
         }
         // 同步更新视图 改为异步更新视图
@@ -119,12 +121,15 @@ class Watcher {
     depend() {
         // 之前是属性dep记录watcher
         // 这里是watcher记录属性dep
+        // 计算属性watcher记录完之后
         let i = this.deps.length;
         while (i--) {
             // 让计算属性watcher收集上层watcher
             // curr dep -> prev watcher -> curr dep -> prev watcher
             // dep.depend() -> watcher.addDep(dep) -> dep.addSub(watcher)
-            this.deps[i].depend();
+            this.deps[i].depend(); 
+            // 这里的this是上一层的watcher,target此时为最新的watcher,让这个新的watcher记录pop出去的dep
+            // target.addDep(this); //  this -> dep; 此时的this指向调用者 dep this, 
         }
     }
 }

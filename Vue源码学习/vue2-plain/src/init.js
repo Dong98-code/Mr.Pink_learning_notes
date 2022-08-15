@@ -22,7 +22,7 @@ export function initMixin(Vue) {
         // 初始化之前调用 beforeCreated
         callhooks(vm, "beforeCreate")
         // 初始化状态
-        // TODO computed methods watcher ....
+        // TODO computed methods watcher .... 计算属性 watch
         initState(vm);
         // 之后 ceated
         callhooks(vm, "created")

@@ -12,7 +12,7 @@ class Dep {
     // 这里我们不希望收集重复的watcher，而且现在还只是单向的关系 dep -> watcher
     // watcher 也需要记录 dep
     // this.subs.push(Dep.target);
-    // console.log(this.subs);
+
     // 这里是让watcher先记住dep
     Dep.target.addDep(this); //  this -> dep; 此时的this指向调用者 dep this
   }
@@ -30,7 +30,7 @@ class Dep {
   notify() {
     this.subs.forEach((watcher) => watcher.update());
   }
-  // 当前的watcher
+  // 当前的watcher，类似于一个指针 指向当前的watcher
   static target = null;
 }
 
