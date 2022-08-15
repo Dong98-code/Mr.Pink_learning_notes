@@ -1,7 +1,9 @@
 function patch(oldVNode, vnode) {
     if (!oldVNode) return createEle(vnode);
     const isRealElement = oldVNode.nodeType; //真实节点身上会有一个nodeType属性,如果是虚拟dom，没有该属性
+    // debugger;
     if (isRealElement) {
+        // debugger;
         const elm = oldVNode
         const parentElm = elm.parentNode;
         // console.log(parentElm)

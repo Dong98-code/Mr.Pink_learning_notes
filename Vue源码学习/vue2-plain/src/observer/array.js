@@ -33,8 +33,9 @@ methods.forEach(method => {
             // 观测新增的内容,数组
             ob.observeArray(inserted);
           }
-        const res = oldArrayProto[method].call(this, ...args);
-        return res
+      const res = oldArrayProto[method].call(this, ...args);
+      ob.dep.notify();
+      return res
 
     }
 })

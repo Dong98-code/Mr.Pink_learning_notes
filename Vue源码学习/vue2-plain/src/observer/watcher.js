@@ -113,6 +113,7 @@ class Watcher {
     run() {
         // console.log("run------------------");
         // 可以拿到watch最新的值
+        // debugger;
         const newVal = this.get();
         // watch的回调函数 传入最新的值 和上次还未更新的值
         this.user && this.callback.call(this.vm, newVal, this.value);
@@ -172,6 +173,7 @@ function flushSchedulerQueue() {
     queue = [];// 清空queue和has， pending改为false
     has = {};
     pending = false;
+    // debugger;
     // 刷新视图 如果在刷新过程中 还有新的watcher 会重新放到queueWatcher中
     flushQueue.forEach((watcher) => watcher.run());
 }

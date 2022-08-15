@@ -25,6 +25,10 @@
          * 计算属性也是watcher 默认渲染会创建一个watcher
          */
         // 只有get的计算属性
+        fullName1() {
+          console.log("fullName1", this)
+          return this.firstName + " " + this.lastName
+        },
         // getter and setter
         fullName2: {
           get() {

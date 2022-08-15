@@ -208,6 +208,7 @@
 
       var res = (_oldArrayProto$method = oldArrayProto[method]).call.apply(_oldArrayProto$method, [this].concat(args));
 
+      ob.dep.notify();
       return res;
     };
   });
@@ -291,6 +292,8 @@
       _classCallCheck(this, Observer);
 
       // object.definedProperty已有的数据的劫持
+      this.dep = new Dep(); // this.__ob__身上再增加一dep
+
       Object.defineProperty(data, "__ob__", {
         value: this,
         // observe的实例
@@ -302,7 +305,7 @@
         // 重写数组上的7个方法 这7个变异方法是可以修改数组本身的
         // 保留数组原有的方法，重新部分方法
         Object.setPrototypeOf(data, newArrayProto);
-        this.observeArray(data);
+        this.observeArray(data); // 数组深度检测
       } else {
         this.walk(data);
       }
@@ -344,15 +347,22 @@
 
 
   function defineReactive(obj, key, value) {
+    var childOb = observer$1(value); // value可能是对象
+
     var dep = new Dep(); // 每一个属性都有一个dep
     // 如果属性也是对象 再次劫持 childOb有值的情况下是Observe实例，实例上挂载了dep
-
-    observer$1(value); // 每个属性都有一个dep
+    // 每个属性都有一个dep
 
     Object.defineProperty(obj, key, {
       get: function get() {
         if (Dep.target) {
-          //当前属性，记住watcher 视图依赖收集
+          if (childOb) {
+            // 返回的不是undefined 那么说明，value是一个对象；
+            childOb.dep.depend();
+            if (Array.isArray(value)) dependArray(value); //数组 依赖收集
+          } //当前属性，记住watcher 视图依赖收集
+
+
           dep.depend();
         }
 
@@ -377,6 +387,21 @@
     if (data.__ob__ instanceof Observer) return data.__ob__; //判断是否劫持过对象
 
     return new Observer(data);
+  }
+
+  function dependArray(arr) {
+    // 数组，递归收集依赖
+    for (var i = 0; i < arr.length; i++) {
+      var cur = arr[i];
+
+      if (Array.isArray(cur)) {
+        // cur还是数组
+        cur.__ob__.dep.depend(); //数组中的每一项都会收集依赖
+
+
+        dependArray(cur);
+      }
+    }
   }
 
   var id = 0;
@@ -514,6 +539,7 @@
       value: function run() {
         // console.log("run------------------");
         // 可以拿到watch最新的值
+        // debugger;
         var newVal = this.get(); // watch的回调函数 传入最新的值 和上次还未更新的值
 
         this.user && this.callback.call(this.vm, newVal, this.value);
@@ -580,7 +606,8 @@
     queue = []; // 清空queue和has， pending改为false
 
     has = {};
-    pending = false; // 刷新视图 如果在刷新过程中 还有新的watcher 会重新放到queueWatcher中
+    pending = false; // debugger;
+    // 刷新视图 如果在刷新过程中 还有新的watcher 会重新放到queueWatcher中
 
     flushQueue.forEach(function (watcher) {
       return watcher.run();
@@ -1217,8 +1244,10 @@
   function patch(oldVNode, vnode) {
     if (!oldVNode) return createEle(vnode);
     var isRealElement = oldVNode.nodeType; //真实节点身上会有一个nodeType属性,如果是虚拟dom，没有该属性
+    // debugger;
 
     if (isRealElement) {
+      // debugger;
       var elm = oldVNode;
       var parentElm = elm.parentNode; // console.log(parentElm)
 
@@ -1378,16 +1407,16 @@
           var vm = this; // 挂载的容器 
 
           var el = vm.$el;
-          var preVnode = vm._vnode; // 记录每次产生 vnode,每次render一次就会产生一个新的 vnode
-
-          vm._vnode = vnode;
-
-          if (preVnode) {
-            vm.$el = patch(preVnode, vnode);
-          } else {
-            // 初始 渲染
-            vm.$el = patch(el, vnode);
-          }
+          vm.$el = patch(el, vnode); // const preVnode = vm._vnode;
+          // // 记录每次产生 vnode,每次render一次就会产生一个新的 vnode
+          // vm._vnode = vnode;
+          // if (preVnode) {
+          //     // console.log(preVnode.nodeType);
+          //     vm.$el = patch(preVnode, vnode)
+          // } else {
+          //     // 初始 渲染
+          //     vm.$el = patch(el, vnode)
+          // }
         }
       }
     });

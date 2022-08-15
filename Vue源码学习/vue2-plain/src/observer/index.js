@@ -6,6 +6,7 @@ import Dep from './dep';
 class Observer {
     constructor(data) {
         // object.definedProperty已有的数据的劫持
+        this.dep = new Dep() // this.__ob__身上再增加一dep
         Object.defineProperty(data, "__ob__", {
             value: this, // observe的实例
             enumerable:false //该属性不可枚举
@@ -14,7 +15,7 @@ class Observer {
             // 重写数组上的7个方法 这7个变异方法是可以修改数组本身的
             // 保留数组原有的方法，重新部分方法
             Object.setPrototypeOf(data, arrayProto);
-            this.observeArray(data);
+            this.observeArray(data); // 数组深度检测
         } else {
             this.walk(data);
 
@@ -44,13 +45,18 @@ class Observer {
  * @param {*} value
  */
 export function defineReactive(obj, key, value) {
+    const childOb = observer(value) // value可能是对象
     let dep = new Dep() // 每一个属性都有一个dep
     // 如果属性也是对象 再次劫持 childOb有值的情况下是Observe实例，实例上挂载了dep
-    observer(value);
     // 每个属性都有一个dep
     Object.defineProperty(obj, key, {
         get() {
             if (Dep.target) {
+                if (childOb) {
+                    // 返回的不是undefined 那么说明，value是一个对象；
+                    childOb.dep.depend()
+                    if (Array.isArray(value)) dependArray(value);//数组 依赖收集
+                }
                 //当前属性，记住watcher 视图依赖收集
                 dep.depend();
             }
@@ -77,4 +83,18 @@ export function observer(data) {
     //判断是否劫持过对象
     return new Observer(data)
 
+}
+
+function dependArray(arr) {
+    // 数组，递归收集依赖
+    for (let i = 0; i < arr.length; i++) {
+        const cur = arr[i];
+
+        if (Array.isArray(cur)) {
+            // cur还是数组
+            cur.__ob__.dep.depend();//数组中的每一项都会收集依赖
+
+            dependArray(cur);
+        }
+    }
 }
