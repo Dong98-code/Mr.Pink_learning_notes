@@ -4,6 +4,32 @@
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.Vue = factory());
 })(this, (function () { 'use strict';
 
+  function ownKeys(object, enumerableOnly) {
+    var keys = Object.keys(object);
+
+    if (Object.getOwnPropertySymbols) {
+      var symbols = Object.getOwnPropertySymbols(object);
+      enumerableOnly && (symbols = symbols.filter(function (sym) {
+        return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+      })), keys.push.apply(keys, symbols);
+    }
+
+    return keys;
+  }
+
+  function _objectSpread2(target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = null != arguments[i] ? arguments[i] : {};
+      i % 2 ? ownKeys(Object(source), !0).forEach(function (key) {
+        _defineProperty(target, key, source[key]);
+      }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) {
+        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+      });
+    }
+
+    return target;
+  }
+
   function _typeof(obj) {
     "@babel/helpers - typeof";
 
@@ -658,7 +684,42 @@
     if (opts.computed) {
       // 初始化computed
       initComputed(vm);
+    } // 初始化watch，标记为自己 user
+
+
+    if (opts.watch) {
+      initWatch(vm);
     }
+  }
+
+  function initWatch(vm) {
+    // 初始化watch
+    // watch的写法：
+    // 1. firstName(){} 函数, firstName变化之后，执行改回调函数
+    //2. firstName:[fn1, fn2],数组形式
+    // 3. $watch(函数/字符串， 回调函数)
+    var watch = vm.$options.watch; // 获取watch函数配置项
+
+    for (var key in watch) {
+      // 遍历键名，例如 fisrtName, 字符串
+      var handler = watch[key]; // 对应的回调函数s;
+
+      if (Array.isArray(handler)) {
+        for (var i = 0; i < handler.length; i++) {
+          creatWatch(vm, key, handler[i]);
+        }
+      } else {
+        creatWatch(vm, key, handler);
+      }
+    }
+  }
+
+  function creatWatch(vm, exprOrFn, handler) {
+    if (typeof handler === "string") {
+      handler = vm[handler];
+    }
+
+    return vm.$watch(exprOrFn, handler);
   }
 
   function initData(vm) {
@@ -731,6 +792,33 @@
 
       return watcher.value; //之后再调用get 返回watcher.value
     };
+  }
+
+  function initStateMixin(Vue) {
+    Vue.prototype.$nextTick = nextTick;
+    Vue.prototype.$nextTick = nextTick;
+    /**
+     * 实现 $watch
+     */
+    // watch的底层实现 全是通过$watch
+
+    Object.defineProperty(Vue.prototype, "$watch", {
+      /**
+       * watch的实现 也是使用观察者模式
+       * @param {Function|string} exprOrFn 监控的值
+       * @param {*} callback 回调函数
+       * @param {*} options 选项
+       */
+      value: function value(exprOrFn, callback) {
+        var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+        // console.log(exprOrFn, callback);
+        // 创建观察者 user属性 表名这是用户自己定义的watch
+        // 侦听的属性值发生改变 直接执行callback即可
+        new Watcher(this, exprOrFn, _objectSpread2({
+          user: true
+        }, options), callback);
+      }
+    });
   }
 
   // 元素类型
@@ -1520,6 +1608,7 @@
   initLifcycle(Vue); // 静态方法
 
   initGlobalStaticAPI(Vue);
+  initStateMixin(Vue);
 
   return Vue;
 

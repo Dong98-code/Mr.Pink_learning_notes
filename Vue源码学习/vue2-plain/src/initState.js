@@ -1,6 +1,6 @@
 import { isFunction } from './utils/index'
 import { observer } from './observer/index'
-import Watcher from './observer/watcher';
+import Watcher, {nextTick} from './observer/watcher';
 import Dep from './observer/dep';
 // 代理函数 vm_data 代理data
 function proxy(vm, target, key) {
@@ -25,9 +25,38 @@ function initState(vm) {
     // 初始化computed
     initComputed(vm)
   }
+  // 初始化watch，标记为自己 user
+  if (opts.watch) {
+    initWatch(vm);
+  }
   
 }
+function initWatch(vm) {
+  // 初始化watch
+  // watch的写法：
+  // 1. firstName(){} 函数, firstName变化之后，执行改回调函数
+  //2. firstName:[fn1, fn2],数组形式
+  // 3. $watch(函数/字符串， 回调函数)
+  const watch = vm.$options.watch; // 获取watch函数配置项
+  for (let key in watch) {
+    // 遍历键名，例如 fisrtName, 字符串
+    const handler = watch[key]; // 对应的回调函数s;
+    if (Array.isArray(handler)) {
+      for (let i = 0; i < handler.length; i++) {
+        creatWatch(vm, key, handler[i])
+      }
+    } else {
+      creatWatch(vm, key, handler)
+    }
+  }
+}
 
+function creatWatch(vm, exprOrFn, handler) {
+  if (typeof handler === "string") {
+    handler = vm[handler];
+  }
+  return vm.$watch(exprOrFn, handler);
+}
 function initData(vm) {
     // 函数 或者是对象； vue3为函数
     // 判断函数是否为函数或者对象
@@ -91,6 +120,29 @@ function createComputedGetter(key) {
     }
     return watcher.value; //之后再调用get 返回watcher.value
   }
+}
+
+export function initStateMixin(Vue) {
+  Vue.prototype.$nextTick = nextTick;
+  Vue.prototype.$nextTick = nextTick;
+  /**
+   * 实现 $watch
+   */
+  // watch的底层实现 全是通过$watch
+  Object.defineProperty(Vue.prototype, "$watch", {
+    /**
+     * watch的实现 也是使用观察者模式
+     * @param {Function|string} exprOrFn 监控的值
+     * @param {*} callback 回调函数
+     * @param {*} options 选项
+     */
+    value(exprOrFn, callback, options = {}) {
+      // console.log(exprOrFn, callback);
+      // 创建观察者 user属性 表名这是用户自己定义的watch
+      // 侦听的属性值发生改变 直接执行callback即可
+      new Watcher(this, exprOrFn, { user: true, ...options }, callback);
+    },
+  });
 }
 export {
     initState
