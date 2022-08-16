@@ -39,18 +39,18 @@ export function initLifcycle(Vue) {
                 const vm = this;
                 // 挂载的容器 
                 const el = vm.$el;
-                vm.$el = patch(el, vnode)
-                // const preVnode = vm._vnode;
+                // vm.$el = patch(el, vnode)
+                const preVnode = vm._vnode;
                 
-                // // 记录每次产生 vnode,每次render一次就会产生一个新的 vnode
-                // vm._vnode = vnode;
-                // if (preVnode) {
-                //     // console.log(preVnode.nodeType);
-                //     vm.$el = patch(preVnode, vnode)
-                // } else {
-                //     // 初始 渲染
-                //     vm.$el = patch(el, vnode)
-                // }
+                // 记录每次产生 vnode,每次render一次就会产生一个新的 vnode
+                vm._vnode = vnode;
+                if (preVnode) {
+                    // console.log(preVnode.nodeType);
+                    vm.$el = patch(preVnode, vnode)
+                } else {
+                    // 初始 渲染
+                    vm.$el = patch(el, vnode)
+                }
             }
         }
     })

@@ -25,7 +25,11 @@ function createTextVNode(vm, text) {
     return vnode(vm, undefined, undefined, undefined, undefined, text, undefined)
 }
 
+function isSameNode(node1, node2) {
+    return node1.tag === node2.tag && node1.key === node2.key;
+}
 export {
     createElementVNode,
-    createTextVNode
+    createTextVNode,
+    isSameNode
 }
