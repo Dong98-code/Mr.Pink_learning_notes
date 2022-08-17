@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script> -->
+    <script src="./vue.js"></script>
+    <div id="app"></div>
+    <script>
+       
+        Vue.component('my-button', {
+            template:'<button>全局</button>'
+        })
+        const vmp =  Vue.extend({
+            template:'<div>子组件 <my-button></my-button></div>',
+            components:{
+                'my-button':{
+                    template:'<button>子组件</button>'
+                }
+            }
+        })
+
+        const cmp = new vmp({
+            data:{
+                name:'张三'
+            }
+        })
+        cmp.$mount("#app")
+    </script>
+</body>
+
+</html>

@@ -38,13 +38,13 @@ strategy.components = function (parentVal, childVal) {
     // if (Object.getPrototypeOf(parentVal) === Vue.options.components)
     //   return parentVal;
     // 通过父亲 创建一个对象 原型上有父亲的所有属性和方法
-    const res = Object.create(parentVal); // {}.__proto__ = parentVal
+    const res = Object.create(parentVal); // {}.__proto__ = parentVal, 包含着父亲的多有属性，res的原型为parentVal
     if (childVal) {
         for (const key in childVal) {
             // 拿到所有的孩子的属性和方法
-            res[key] = childVal[key];
+            res[key] = childVal[key];//res自身的有的方法， res[[proto]]上为全局的components
         }
     }
-    console.log(res);
+    // console.log(res);
     return res;
 };

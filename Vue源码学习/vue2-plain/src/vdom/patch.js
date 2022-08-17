@@ -3,7 +3,8 @@ import {
 } from './index'
 
 function patch(oldVNode, vnode) {
-    if (!oldVNode) return createEle(vnode);
+    // 组件挂载 ，组件初始化 调用 $mount() -》 到patch这， 递归调用vnode
+    if (!oldVNode) return createEle(vnode); 
     const isRealElement = oldVNode.nodeType; //真实节点身上会有一个nodeType属性,如果是虚拟dom，没有该属性
     // debugger;
     if (isRealElement) {
@@ -19,7 +20,7 @@ function patch(oldVNode, vnode) {
         return newEle; // 返回新的elm
     } else {
         // diff 更新节点
-        patchVnode(oldVNode, vnode);
+        return patchVnode(oldVNode, vnode);
     }
 }
 
@@ -34,6 +35,10 @@ function createEle(vnode) {
         text
     } = vnode
     if (typeof tag === 'string') {
+        // 组件节点和真实节点
+        if (createComponent(vnode)) {
+            return vnode.componentInstance.$el;
+        }
         vnode.el = createElement(tag); // vnode.el为一个真实的dom 
         // 更新属性值
         patchProps(vnode.el, {}, props);
@@ -49,7 +54,15 @@ function createEle(vnode) {
     }
     return vnode.el;
 }
-
+function createComponent(vnode) {
+    // 尝试创建组件节点
+    let i = vnode.props;
+    if ((i = i.hook) && (i = i.init)) {
+        i(vnode);
+    }
+    // vnode.props?.hook.init(vnode);
+    return vnode.componentInstance;
+}
 function createTextNode(tag, type = "browser") {
     switch (type.toLowerCase()) {
         case "browser":

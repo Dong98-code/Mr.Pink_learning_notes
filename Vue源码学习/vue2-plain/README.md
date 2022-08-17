@@ -1326,6 +1326,7 @@ const isReservedTag = (tag) => {
 
 #### 渲染流程
 
+![20220817120733](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220817120733.png)
 **Vue.component**的作用就是进行组件的全局定义而已。把id和definition对应。让   Vue.options.componnets[id] = definition。只是如果definition是对象的情况下，会帮我们使用extend进行包裹成构造函数（Vue子类）。
 
 - Vue.extend返回值就是一个Vue子类，一个继承了父类Vue的构造函数。（为什么Vue的组件中的data不能是一个对象呢？）

@@ -1207,7 +1207,13 @@
   }
 
   // 虚拟节点相关的方法
-  // h函数
+
+  var ReservedTags = ["div", "h1", "h2", "h3", "h4", "h5", "h6", "span", "ul", "ol", "li", "a", "table", "button", "input"];
+
+  var isReservedTag = function isReservedTag(tag) {
+    return ReservedTags.includes(tag);
+  };
+
   function vnode(vm, tag, key, props, children, text, componentOptions) {
     // 创建一个虚拟的dom,返回值是一个js对象,增加自定义属性
     // * 虚拟dom是和ast不一样的 -> ast是语法层面的转换，他描述的是dom本身（可以描述 js css html等等）
@@ -1226,6 +1232,7 @@
 
   function createElementVNode(vm, tag, data) {
     // 返回的是一个节点
+    // 如果是原始节点,返回
     var key = data === null || data === void 0 ? void 0 : data.key;
     key && delete data.key;
 
@@ -1233,7 +1240,33 @@
       children[_key - 3] = arguments[_key];
     }
 
-    return vnode(vm, tag, key, data, children);
+    if (isReservedTag(tag)) return vnode(vm, tag, key, data, children); // 不是虚拟节点，创建组件的虚拟节点
+
+    var CtorOrObj = vm.$options.components[tag]; // 在options上可以拿到这个 tag
+
+    return createComponentVnode(vm, tag, key, data, children, CtorOrObj); // 使用函数创建组件的虚拟doM
+  }
+
+  function createComponentVnode(vm, tag, key, data, children, CtorOrObj) {
+    var _data;
+
+    if (isObject(CtorOrObj)) {
+      // 对象， -》构造函数
+      CtorOrObj = vm.$options._base.extend(CtorOrObj); // _base指向Vue
+    }
+
+    data = (_data = data) !== null && _data !== void 0 ? _data : {};
+    data.hook = {
+      // 创建真实节点，如果是组件，调用此init方法；
+      init: function init(vnode) {
+        var instance = vnode.componentInstance = new vnode.componentOptions.Ctor(); // instance.$el = 组件渲染的真实节点
+
+        instance.$mount(); // 没有传递挂载的dom 最后会去 patch方法
+      }
+    };
+    return vnode(vm, tag, key, data, children, null, {
+      Ctor: CtorOrObj
+    });
   } // _v创建文本节点
 
 
@@ -1246,6 +1279,7 @@
   }
 
   function patch(oldVNode, vnode) {
+    // 组件挂载 ，组件初始化 调用 $mount() -》 到patch这， 递归调用vnode
     if (!oldVNode) return createEle(vnode);
     var isRealElement = oldVNode.nodeType; //真实节点身上会有一个nodeType属性,如果是虚拟dom，没有该属性
     // debugger;
@@ -1264,7 +1298,7 @@
       return newEle; // 返回新的elm
     } else {
       // diff 更新节点
-      patchVnode(oldVNode, vnode);
+      return patchVnode(oldVNode, vnode);
     }
   }
 
@@ -1277,6 +1311,11 @@
         text = vnode.text;
 
     if (typeof tag === 'string') {
+      // 组件节点和真实节点
+      if (createComponent(vnode)) {
+        return vnode.componentInstance.$el;
+      }
+
       vnode.el = createElement(tag); // vnode.el为一个真实的dom 
       // 更新属性值
 
@@ -1290,6 +1329,18 @@
     }
 
     return vnode.el;
+  }
+
+  function createComponent(vnode) {
+    // 尝试创建组件节点
+    var i = vnode.props;
+
+    if ((i = i.hook) && (i = i.init)) {
+      i(vnode);
+    } // vnode.props?.hook.init(vnode);
+
+
+    return vnode.componentInstance;
   }
 
   function createTextNode(tag) {
@@ -1676,16 +1727,16 @@
     // if (Object.getPrototypeOf(parentVal) === Vue.options.components)
     //   return parentVal;
     // 通过父亲 创建一个对象 原型上有父亲的所有属性和方法
-    var res = Object.create(parentVal); // {}.__proto__ = parentVal
+    var res = Object.create(parentVal); // {}.__proto__ = parentVal, 包含着父亲的多有属性，res的原型为parentVal
 
     if (childVal) {
       for (var key in childVal) {
         // 拿到所有的孩子的属性和方法
-        res[key] = childVal[key];
+        res[key] = childVal[key]; //res自身的有的方法， res[[proto]]上为全局的components
       }
-    }
+    } // console.log(res);
 
-    console.log(res);
+
     return res;
   };
 
@@ -1767,6 +1818,7 @@
 
 
     Vue.prototype.$mount = function $mount(el) {
+      debugger;
       var vm = this;
       el = document.querySelector(el);
       var ops = vm.$options;
@@ -1809,13 +1861,53 @@
 
   function initGlobalStaticAPI(Vue) {
     Vue.options = {}; // 全局的配置
-    //混入 mixin
+
+    Object.defineProperty(Vue.options, "_base", {
+      value: Vue,
+      enumerable: true
+    }); //混入 mixin
 
     Vue.mixin = function mixin(mixin) {
       // 用户的选项和全局的options进行合并
       this.options = mergeOptions(Vue.options, mixin); //mixin为混入的内容
 
       return this;
+    };
+
+    Vue.extend = function extend(options) {
+      // 创建一个组件的构造函数, 通过new来返回一个 vue的组件实例
+      function Sub() {
+        var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+        this._init(options);
+      } // 
+
+
+      Sub.prototype = Object.create(Vue.prototype); // 改变constaor的指向
+      // Sub.prototype.constructor = Sub;
+
+      Object.defineProperty(Sub.prototype, "constructor", {
+        value: Sub,
+        writable: true,
+        configurable: true
+      }); // 合并选项; 创建组件的时候，当自身的components上没有 相应的组件名 那么应该使用全局的components
+
+      Sub.options = mergeOptions(Vue.options, options); // Sub.options = options;
+
+      return Sub;
+    }; //
+
+
+    Vue.options.components = {}; //全局组件对象
+
+    Vue.component = function component(id, definition) {
+      // 如果definition不是一个函数，即没有手动调用 extend,
+      if (!isFunction(definition)) {
+        definition = Vue.extend(definition);
+      }
+
+      Vue.options.components[id] = definition; // 使用options.components讲id和definition对应起来
+      // console.log(Vue.options.components);
     };
   }
 
@@ -1835,30 +1927,6 @@
 
   initGlobalStaticAPI(Vue);
   initStateMixin(Vue);
-  var render1 = compileToFunction("<ul key=\"a\" a=\"1\" style=\"color:blue\">\n<li key=\"a\">a</li>\n<li key=\"b\">b</li>\n<li key=\"c\">c</li>\n</ul>");
-  var vm1 = new Vue({
-    data: function data() {
-      return {
-        name: "xddd"
-      };
-    }
-  });
-  var preVnode = render1.call(vm1);
-  var el = createEle(preVnode);
-  document.body.appendChild(el);
-  console.log(document.body);
-  var render2 = compileToFunction("<ul key=\"a\" a=\"1\" style=\"color:blue\">\n<li key=\"d\">d</li>\n<li key=\"e\">e</li>\n<li key=\"a\">a</li>\n<li key=\"b\">b</li>\n<li key=\"f\">f</li>\n</ul>");
-  var vm2 = new Vue({
-    data: function data() {
-      return {
-        name: "xddd"
-      };
-    }
-  });
-  var nextNode = render2.call(vm2);
-  setTimeout(function () {
-    patch(preVnode, nextNode);
-  }, 1000);
 
   return Vue;
 

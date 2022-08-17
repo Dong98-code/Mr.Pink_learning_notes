@@ -36,6 +36,7 @@ export function initMixin(Vue) {
 
     // 手动调用
     Vue.prototype.$mount = function $mount(el) {
+        debugger;
         const vm = this;
         el = document.querySelector(el);
         let ops = vm.$options;
