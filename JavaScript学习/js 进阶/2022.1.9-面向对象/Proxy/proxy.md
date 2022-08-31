@@ -175,3 +175,22 @@ var proxy = new Proxy(target, handler);
 返回一个 可取消的Proxy实现
 
 ![20220831150117](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220831150117.png)
+
+## Reflect()
+
+使用 Proxy实现观察者模式
+
+```js
+const queuedObservers = new Set();
+
+const observe = fn => queuedObservers.add(fn);
+const observable = obj => new Proxy(obj, {set});// obj使用Proxy拦截set操作；
+//拦截到了 即 对象的属性值发生变化时， 通知所有的观察者去改变数据
+
+
+function set(target, key, value, receiver) {
+  const result = Reflect.set(target, key, value, receiver);
+  queuedObservers.forEach(observer => observer());
+  return result;
+}
+```
