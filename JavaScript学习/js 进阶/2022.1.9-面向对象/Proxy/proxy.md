@@ -149,3 +149,29 @@ var proxy = new Proxy(target, handler);
 
 
 #### 5. construct()拦截 new命令
+
+参数：target  args 构造函数
+
+返回的必须是对象，否则报错
+拦截的target 必须是一个函数
+
+![20220831145805](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220831145805.png)
+
+
+#### 其他
+
+`deleteProperty`
+`defineProperty`
+
+`getOwnPropertyDescriptor() `
+
+`getPrototypeOf`
+![20220831145933](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220831145933.png)
+
+`ownKeys`
+![20220831145957](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220831145957.png)
+
+### Proxy.revocable()
+返回一个 可取消的Proxy实现
+
+![20220831150117](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220831150117.png)
