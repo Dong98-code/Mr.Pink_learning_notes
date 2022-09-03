@@ -1,0 +1,68 @@
+/* 字体文件 */
+@import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
+
+/* 设置为标准和模型 */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Muli', sans-serif;
+    display: flex;
+    /* 居中对其 */
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    margin: 0;
+    height: 100vh;
+}
+
+.container {
+    display: flex;
+    width: 90vw;
+}
+
+/* 设置原始 pannel样式 */
+.panel {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 80vh;
+    border-radius: 50px;
+    color: white;
+    flex: 0.5;
+    margin: 10px;
+    position: relative;
+    transition: all 700ms ease-out
+}
+
+.panel h3 {
+    font-size: 24px;
+    /* 子绝父相对定位 */
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    margin: 0;
+    opacity: 0;
+}
+
+.panel.active {
+    flex: 5;
+}
+
+.panel.active h3 {
+    opacity: 1;
+    transition: opacity 0.3s ease-in 0.4s;
+}
+
+/* 媒体查询 */
+@media(max-width:480px) {
+    .container {
+        width: 100vm;
+    }
+
+    .panel:nth-of-type(4),
+    .panel:nth-of-type(5) {
+        display: none;
+    }
+}

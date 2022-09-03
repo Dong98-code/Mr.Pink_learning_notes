@@ -1396,19 +1396,258 @@ function createComponent(vnode) {
 1. 安装源码依赖 *npm install*
 2. *npm run dev*是否可以打包成功
 
+## Vue Router
+
+路由
+
+### 前端路由
+
+随着前端单页应用(SPA)的兴起，前端页面完全变成了组件化，不同的页面就是不同的组件，页面的切换就是组件的切换；页面切换的时候不需要再通过http请求，直接通过JS解析url地址，然后找到对应的组件进行渲染
+前端路由与后端路由最大的不同就是不需要再经过服务器，直接在浏览器下通过JS解析页面之后就可以拿到相应的页面
+
+### hash模式
+
+标志是域名之后带有一个`#`
+
+```js
+http://localhost:8888/#/home
+```
+当前url的hash ：
+
+```js
+window.location.hash
+```
+使用 hashchange监听hash的改变
+```js
+window.addEventListener("hashchange", function(){}, false)
+```
+- 优点：hash模式的特点是兼容性更好，并且hash的变化会在浏览器的history中增加一条记录，可以实现浏览器的前进和后退功能；
+- 缺点：由于多了一个#，所以url整体上不够美观
 
 
-**代码结构：**
+### history 模式
+
+HTML5的history对象
+`pushState` 和 `replaceState`修改URL地址 结合popState 监听 路由的变化
+![20220901101700](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220901101700.png)
+
+### vue-router工作流程
+
+1. url改变
+2. 触发事件监听
+3. 改变vue-router中 current变量
+4. 监视current变量的监视者
+5. 获取新的组件
+6. render 渲染
+
+#### Vue插件
+
+Vue.use() ： 传入一个参数对象，如果该对象含有install方法， 则执行；
+如果收到的是一个函数：那么把它当成一个install方法执行
+![20220901102242](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220901102242.png)
+
+```js
+class vueRouter {
+    constructor(){
+    }
+}
+vueRouter.install = function(Vue) {//install的输入为vue的示例
+    
+}
+```
+
+#### Vue.mixin()
+![20220901102508](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220901102508.png)
+
+### 实现一个router.js
+```js
+
+<!-- index.js -->
+import vueRouter from './router'
+import App from 'app.vue'
+Vue.use(vueRouter) //作为插件使用 vueRouter
+
+const router = new vueRouter({
+    routes: [] //创建 router示例
+})
+//创建 Vue实例
+new Vue({
+    router,
+    render: h => h(App)
+})
+```
+
+#### install方法
+`install`方法接收一个`Vue`实例作为参数，通过`Vue.mixin()`全局混入`beforeCreated`生命周期钩子；通过Vue实例暴露的工具方法`defineReactive`将current属性变成一个监视者
+```js
+class vueRouter{
+  constructor(){}
+}
+
+vueRouter.install = function(vue) {
+  //传入参数为vue实例
+  Vue.mixin({
+    //全局混入一个beforeCreated钩子
+    beforeCreate() {
+      // $options.router存在则表示是根组件
+            if (this.$options && this.$options.router) {
+                this._root = this // _root保根组件
+                this._router = this.$options.router
+                Vue.util.defineReactive(this, 'current', this._router.history) // current 指向 挡墙的 _router.history
+            } else {
+              this._root = this.$parent._root
+            }
+
+            // 使用$router代理对this._root._router的访问,设置为只读属性
+            Object.defineProperty(this, '$router', {
+                get() {
+                    return this._root._router
+                }
+             })
+    }
+
+  })
+  Vue.component('router-view', {
+    // render为渲染组件的函数
+        render(h) {
+            let current = this._self._root._router.history.current  // 当前路由
+            let routerMap = this._self._root._router.routeMap
+            return h(routerMap[current])
+        }
+    })
+}
+```
+#### router初始化
+
+vue-router 使用new关键字 初始化； 提供一个vueRouter类， 然后 一个hsitory保存当前的路径
+
+```js
+
+class HistoryRoute {
+    constructor() {
+        this.current = null
+    }
+}
+class vueRouter {
+    // options 为初始化时的参数
+    constructor(options) {
+        this.mode = options.mode || 'hash'
+        this.routes = options.routes || [];//routes传入的为数组形式
+        this.history = new HistoryRoute //history为一个实现定义的historyRoute类
+        this.init()
+
+        // 根据routes信息创建一个map 便于查询
+        this.routeMap = this.createMap(this.routes)
+    }
+    init() {
+        if (this.mode === 'hash') {
+            // 初始化一个#
+            location.hash ? '' : location.hash = '/'
+            // 页面加载完成获取当前路由
+            window.addEventListener('load', () => {
+                this.history.current = location.hash.slice(1)
+            })
+            window.addEventListener('hashchange', () => {
+                this.history.current = location.hash.slice(1)//书初始化为 "/"
+            })
+        } else {
+          //history模式
+            window.addEventListener('load', () => {
+                this.history.current = location.pathname
+            })
+            window.addEventListener('popstate', () => {
+                this.history.current = location.pathname
+            })
+        }
+    }
+
+    creatMap(routes) {
+      return routes.reduce((memo, current) => {
+        memo[current.path] = current.component;
+        return memo
+      },{});// 初始值是一个空{} 使用 reduce函数 遍历数组， i创建键值对k-v: path:component
+    }
+}
+export default vueRouter
+```
+#### router-view组件和路由渲染
+根据路由的变化来渲染出来 路由所对应的组件  注册的时候包含一个render函数
+![20220901105327](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220901105327.png)
+
+```js
+Vue.component('router-view', {
+    render(h) {
+          
+    }
+})
+```
+如和找到需要渲染的组件：
+可以知道的是，当路由变化的时候可以获取到最新的路由地址，同时也可以访问到routes(路由表)的数据；
+所以只需要根据路由地址从路由表中拿到相应的组件然后交给render函数执行就可以了
+
+从路由表 获取组件的方式：
+
+- 1. 将路由与它所对应的组件以键值对的方式进行储存，路由变化的时候只需要根据路由地址进行查询即可；这种方式只需要遍历一次，路由变化时直接使用键值对的方式获取组件，能够非常有效的提高渲染速度
+- 2. 一种是路由每次变化的时候都是用find方法从路由表中查询一次，获取到路由对象，这种方式虽然可行，但是每次路有变化都去查询一次性能消耗太大；
 
 
+#### push方法和replace方法
+
+history模式下, 路由切换通过window.history.pushState方法完成；在hash模式下，路由的切换是直接通过hash值的变化来实现
+
+push 和replace 的区别：
+保存历史记录， 往历史的栈中添加路径
+![20220901144223](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220901144223.png)
+状态对象 标题和URL 
+
+stateObj： 历史记录条目关联；
+popState()事件触发 状态对象传入回调函数，浏览器把改对象序列化之后保存在本地，重新加载拿到这个本地的对象
+
+![20220901144649](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220901144649.png)
+```js
+class vueRouter {
+    constructor(options) {}
+    push(url) {
+        if (this.mode === 'hash') {
+            location.hash = url
+        } else {
+          //hash模式 修改当前的；
+          //不是hash模式 第哦啊用pushState函数
+            pushState(url)
+        }
+    }
+  replace(url) {
+      if (this.mode === 'hash') {
+          location.hash = url
+      } else {
+          pushState(url, true)
+      }
+  }
+}
+function pushState(url, replace) {
+  //第二个参数为 是否replace模式
+    const history = window.history
+    if (replace) {
+        history.replaceState({key: history.state.key}, '', url)
+    } else {
+        history.pushState({key: Date.now()}, '', url)
+    }
+}
+
+```
+> window.history 为一个只读属性，用来获取History对象的引用，提供操作浏览器绘画历史，通过框架加载页面
 
 
+#### router-link
+Vue.Component()注册全局组件
 
-
-
-
-
-
-
-
-
+```js
+Vue.component('router-link', {
+    render(h) {
+          
+    }
+})
+//to: 目标路由地址
+// tag: 渲染的标签
+// replace: 使用replace方式进行路由跳转，不留下history记录
+```
