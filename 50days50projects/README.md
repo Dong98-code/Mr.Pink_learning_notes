@@ -138,3 +138,33 @@ function update() {
 }
 
 ```
+
+## day3:rotating-nav-animation 
+
+旋转页面
+![20220904114301](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220904114301.png)
+点击左上方的logo,页面旋转一定角度， 然后露出菜单列表：
+![20220904114339](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220904114339.png)
+
+点击❌ 然后复原
+
+[live demo](https://50projects50days.com/projects/rotating-navigation-animation/)
+
+### 实现
+
+- js
+
+这部分的JS代码比较简答，给对应的dom添加事件监听， 添加和删除对应的类名，实现样式的切换，难点在于css样式的书写
+
+- html
+
+主要的dom包括三部分
+1. 左上角的圆圈 点击之后 会发生旋转
+2. container 部分 点击之后旋转20度
+3. 左下角的nav部分， 点击旋转之后 使用transform 移入到页面中去
+
+使用： transition + transform 实现动画
+
+- css
+
+当点击 菜单栏之后， 添加`.show-nav`的类名， `transform`属性发生变化， 触发了设置的`transition`设置的过度动画效果，实现 动画
