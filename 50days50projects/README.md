@@ -209,3 +209,50 @@ btn.addEventListener('click', () => {
     input.focus() // input获取焦点
 })
 ```
+
+## day5: blurry-loading
+
+模糊加载
+
+模糊的遮罩层逐渐消失
+显示加载的百分比数字；
+
+![20220904150301](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220904150301.png)
+
+[live-demo](https://50projects50days.com/projects/blurry-loading/)
+
+### 实现
+
+主要使用css里面： `filter`实现模糊的遮罩层的变化 
+
+
+![20220904154515](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220904154515.png)
+
+设置一个定时器，没30ms执行一次，然后使用一个映射函数，计算出来透明度和模糊值
+
+```js
+
+const loadText = document.querySelector('.loading-text')
+const bg = document.querySelector('.bg')
+
+let load = 0
+
+let int = setInterval(blurring, 30)
+
+function blurring() {
+  load++
+
+  if (load > 99) {
+    clearInterval(int)
+  }
+
+  loadText.innerText = `${load}%`
+  loadText.style.opacity = scale(load, 0, 100, 1, 0)
+  bg.style.filter = `blur(${scale(load, 0, 100, 30, 0)}px)`
+}
+
+// https://stackoverflow.com/questions/10756313/javascript-jquery-map-a-range-of-numbers-to-another-range-of-numbers
+const scale = (num, in_min, in_max, out_min, out_max) => {
+  return ((num - in_min) * (out_max - out_min)) / (in_max - in_min) + out_min
+}
+```
