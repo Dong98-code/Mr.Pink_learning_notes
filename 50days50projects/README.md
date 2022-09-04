@@ -168,3 +168,44 @@ function update() {
 - css
 
 当点击 菜单栏之后， 添加`.show-nav`的类名， `transform`属性发生变化， 触发了设置的`transition`设置的过度动画效果，实现 动画
+
+
+## day4: hidden-search
+
+效果：
+点击搜索标志，弹出搜索框
+再点击隐藏样式
+[live demo](https://50projects50days.com/projects/hidden-search-widget/)
+![20220904142555](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220904142555.png)
+![20220904142548](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220904142548.png)
+
+### 实现
+
+- html
+
+结构很简单就是一个搜索`div`里面有两个盒子：一个`input`搜索框， 一个button搜索按钮
+
+初始状态： 使用定位`position:absolute`使得搜索按钮浮动起来，置于 input框的上方，父盒子 `search`使用相对定位，子绝父相；
+
+点击按钮之后：1. 改变input盒子的宽度
+2. `btn`相对于父盒子往右移动相应的距离，这样 两者就都显示出来了
+
+- css
+
+通过添加 `.active`，结合`transition`实现动画效果；
+
+- js
+重点再`toggle()`使用
+![20220904145627](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220904145627.png)
+```js
+let search = document.querySelector('.search')
+let input = document.querySelector('.input')
+let btn = document.querySelector('.btn')
+
+btn.addEventListener('click', () => {
+    // toggle如果标记存在则 删除给定的标记，返回fasle
+    //不存在 则添加 对应的 标记， 返回true
+    search.classList.toggle('active')
+    input.focus() // input获取焦点
+})
+```
