@@ -256,3 +256,49 @@ const scale = (num, in_min, in_max, out_min, out_max) => {
   return ((num - in_min) * (out_max - out_min)) / (in_max - in_min) + out_min
 }
 ```
+
+## day6: scroll animation 
+
+效果： 滚动滑轮，页面中的盒子分别从左右移入或者移出页面
+
+从上往下 盒子移除， 从下往上， 盒子移入页面；
+
+### 实现
+
+[live demo](https://50projects50days.com/projects/scroll-animation/)
+监控盒子到页面边缘的距离 和 页面可视窗口的高度
+
+当 到页面的 距离大于 设定的可视窗口的高度之后， 盒子从页面外移入进来：
+
+```js
+checkBoxes(); // 首先执行一次
+
+function checkBoxes() {
+    const triggerBottom = window.innerHeight * 4 / 5; // innerHeight的4/5
+    boxes.forEach(box => {
+        let boxTop = box.getBoundingClientRect().top;
+
+        if (boxTop < triggerBottom) {
+            box.classList.add('show');
+        } else {
+            box.classList.remove('show')
+        }
+    })
+}
+```
+
+两个关键的高度：
+`innerHeight`:
+![20220905094536](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220905094536.png)
+
+
+![20220905094630](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220905094630.png)
+
+盒子到边缘的距离：
+`element.getBoundingClientRect()`
+
+返回一个对象，包含整个元素的最小矩形，包含 left top right bottom x y  width height等属性；
+
+相当于视口的左上角计算的
+
+![20220905094915](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220905094915.png)
