@@ -302,3 +302,27 @@ function checkBoxes() {
 相当于视口的左上角计算的
 
 ![20220905094915](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220905094915.png)
+
+
+## day7: split_landing_page
+
+效果： 当鼠标位于页面左侧，左侧的盒子变大；
+鼠标位于右侧的盒子，右侧的盒子变大；
+
+![20220906100506](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220906100506.png)
+[live demo](https://50projects50days.com/projects/split-landing-page/)
+
+### 实现
+
+监听鼠标事件`mouseleave`和`mouseenter`
+改变对应的盒子的大小；
+
+- css:
+
+两个盒子都相对于父盒子 绝对定位， 脱离文档流；
+
+当检测到 鼠标移入事件之后，改变 盒子的宽度`width`
+
+媒体查询：
+
+最大宽度为：800px;改变按钮和文字的大小
