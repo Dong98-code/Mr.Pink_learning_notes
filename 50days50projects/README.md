@@ -384,3 +384,39 @@ async function generateJoke() {
 ```
 
 > 429状态码 短时间内 连续的请求 触发了429网络错误；![20220915101124](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220915101124.png)
+
+
+## day11; keyboard 显示
+
+效果： 
+按下键盘的任意事件， 然后页面显示 按下按键的 key code 和keyCode值
+![20220915141036](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220915141036.png)
+
+点击 按键`h` 显示对应的key keyCode和code
+![20220915141109](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220915141109.png)
+
+### 实现
+- js 监听window 监听键盘的 `keyDoWN`获取事件 event的对应的值
+
+```js
+const insert = document.getElementById('insert')
+
+window.addEventListener('keydown', (event) => {
+  insert.innerHTML = `
+  <div class="key">
+  ${event.key === ' ' ? 'Space' : event.key} 
+  <small>event.key</small>
+</div>
+<div class="key">
+  ${event.keyCode}
+  <small>event.keyCode</small>
+</div>
+<div class="key">
+  ${event.code}
+  <small>event.code</small>
+</div>
+  `
+})
+
+```
+![20220915140946](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220915140946.png)

@@ -1,0 +1,44 @@
+@import url("https://fonts.googleapis.com/css?family=Muli&display=swap");
+* {
+  box-sizing: border-box;
+}
+
+body {
+  /* background-color: #383838; */
+  font-family: "Muli", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  margin: 0;
+  height: 100vh;
+  text-align: center;
+}
+.key {
+    border: 1px solid #999;
+    background-color: #eeeeee;
+    /* 每一个key为行内元素，其宽度被其内容的值撑开 */
+    /* 设置最大值为150px */
+    display: inline-flex;
+    align-items: center;
+    font-size: 20px;
+    padding: 20px;
+    /* 通过设置的左右的margin值 占据位置 */
+    margin:10px;
+    position: relative;
+    flex-direction: column;
+    /* 设置宽度 */
+    max-width: 150px;
+
+}
+
+.key small {
+    position: absolute;
+    /* 设置的文字的位置 */
+    top: -24px;
+    left: 0;
+    text-align: center;
+    width: 100%;
+    color: #c4c4c4;
+    font-size: 14px;
+  }
