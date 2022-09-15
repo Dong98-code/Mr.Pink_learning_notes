@@ -1,0 +1,118 @@
+@import url("https://fonts.googleapis.com/css?family=Muli&display=swap");
+
+@font-face {
+  font-family: "iconfont"; /* Project id 2712792 */
+  src: url("http://at.alicdn.com/t/c/font_2712792_cezr7e9mthi.woff2?t=1663223882754")
+      format("woff2"),
+    url("http://at.alicdn.com/t/c/font_2712792_cezr7e9mthi.woff?t=1663223882754")
+      format("woff"),
+    url("http://at.alicdn.com/t/c/font_2712792_cezr7e9mthi.ttf?t=1663223882754")
+      format("truetype");
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  font-family: "Muli", sans-serif;
+  background-color: #f0f0f0;
+}
+h1 {
+  margin: 50px 0 30px;
+  text-align: center;
+}
+
+.faq-container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.faq {
+  border: 1px solid black;
+  border-radius: 20px;
+  background-color: transparent;
+  margin: 20px 0;
+  padding: 30px;
+  position: relative;
+  overflow: hidden;
+  transform: 0.3s ease;
+}
+
+.faq.active {
+  background-color: #fff;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+.faq.active::before,
+.faq.active::after {
+  content: "\e622";
+  font-family: "iconfont";
+  color: #2ecc71;
+  font-size: 7rem;
+  font-weight: 800;
+  position: absolute;
+  opacity: 0.2;
+  top: 20px;
+  left: 20px;
+  z-index: 0;
+}
+
+.faq.active::before {
+  color: #3498db;
+  top: -10px;
+  left: -30px;
+  transform: rotateY(180deg);
+}
+
+.faq-title {
+  margin: 0 35px 0 0;
+}
+
+.faq-text {
+  display: none;
+  margin: 30px 0 0;
+}
+
+.faq.active .faq-text {
+  display: block;
+}
+
+/* 按钮的样式 */
+
+.faq-toggle {
+  background-color: transparent;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  padding: 0;
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  height: 30px;
+  width: 30px;
+  font-weight: 800;
+}
+
+.faq-toggle:focus {
+  outline: 0;
+}
+
+.faq-toggle .icon-chahao {
+  display: none;
+}
+
+.faq.active .faq-toggle .icon-LC_icon_down_line {
+    display: none;
+}
+
+.faq.active .faq-toggle .icon-chahao {
+    display: block;
+    /* color: #fff; */
+}
+
+.faq.active .faq-toggle {
+    background-color: #9fa4a8;
+  }
