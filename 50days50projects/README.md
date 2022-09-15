@@ -326,3 +326,61 @@ function checkBoxes() {
 媒体查询：
 
 最大宽度为：800px;改变按钮和文字的大小
+
+## day10 jock
+
+### 效果
+
+点击按钮切换 文字的内容
+
+[live demo](https://50projects50days.com/projects/dad-jokes/)
+
+![20220915095415](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220915095415.png)
+
+
+### 实现
+
+- css
+
+`letter-spacing`:设置文本字符的间距
+可选在的值为：
+
+`normal`:![20220915095541](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220915095541.png)
+
+```css
+/* <length> values */
+letter-spacing: 0.3em;
+letter-spacing: 3px;
+letter-spacing: .3px;
+```
+
+指定文字间的间距以替代默认间距。可以是负值，但有可能会出现 implementation 限制。用户代理不会在此基础上进一步增加或缩减间距来对齐文字。
+
+- js
+
+使用fetch 发送网络请求；
+使用 async /await 等待返回之后的数据， 然后将其 返回的内容变成对应的html;
+```js
+
+// 绑定事件
+
+btn.addEventListener('click', generateJoke);
+
+generateJoke(); // 默认加载的时候执行一次
+
+async function generateJoke() {
+    // 异步的该函数，发送网络请求
+    // 请求的头部
+    const config = {
+        headers: {
+            Accept:'application/json'
+        }
+    }
+    const res = await fetch('https://icanhazdadjoke.com', config)
+
+    let data = await res.json();
+    jock.innerHTML = data.joke
+}
+```
+
+> 429状态码 短时间内 连续的请求 触发了429网络错误；![20220915101124](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220915101124.png)
