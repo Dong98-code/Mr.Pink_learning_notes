@@ -61,7 +61,28 @@ jsx语法总结：
 	- (2).若大写字母开头，react就去渲染对应的组件，若组件没有定义，则报错。
 
 babel 将jsx转译成 一个名为 `React.creatElement()`函数调用
-### 虚拟dom
+
+jsx练习：
+
+```js
+
+//模拟一些数据
+const data = ['Angular','React','Vue']
+//1.创建虚拟DOM
+const VDOM = (
+	<div>
+		<h1>前端js框架列表</h1>
+		<ul>
+			{
+				data.map((item,index)=>{
+					return <li key={index}>{item}</li>
+				})
+			}
+		</ul>
+	</div>
+)
+```
+### 虚拟dom基础
 关于虚拟DOM：
 1.本质是Object类型的对象（一般对象）
 2.虚拟DOM比较“轻”，真实DOM比较“重”，因为虚拟DOM是React内部在用，无需真实DOM上那么多的属性。
