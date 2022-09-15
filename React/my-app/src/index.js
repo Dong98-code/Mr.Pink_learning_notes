@@ -1,6 +1,6 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
 // class Square extends React.Component {
 //   constructor(props) {
 //     super(props);
@@ -55,84 +55,144 @@ function Square(props) {
   );
 }
 class Board extends React.Component {
-    // 将每一方格的 子组件中的数组 在父组件中存储
+  // 将每一方格的 子组件中的数组 在父组件中存储
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     squares: Array(9).fill(null),//初始化一个空的方格
+  //     xIsNext:true
+  //   }
+  // }
+  // handleClick(i) {
+  //   // 处理点击的回调函数
+  //   // alert(i)
+  //   const squares = this.state.squares.slice(); // 使用slice进行浅拷贝
+  //   // squares[i] = 'X';
+  //   //判断输赢
+  //   if (calculateWinner(squares) || squares[i]) {
+  //     return;
+  //   }
+  //   squares[i] = this.state.xIsNext ? "X" : "O"
+  //   this.setState({
+  //     squares: squares,
+  //     xIsNext:!this.state.xIsNext, // 每一次都取反，改变状态
+  //   }); // 重新调用setState
+  // }
+  renderSquare(i) {
+    // 传入 名为value的prop
+    return (
+      <Square
+        value={this.props.squares[i]}
+        // onClick={()=>this.props.handleClick(i)}
+        onClick={() => this.props.onClick(i)}
+      />
+    );
+  }
+
+  render() {
+    // const status = 'Next player: X';
+    // const status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
+
+    return (
+      <div>
+        {/* <div className="status">{status}</div> */}
+        <div className="board-row">
+          {this.renderSquare(0)}
+          {this.renderSquare(1)}
+          {this.renderSquare(2)}
+        </div>
+        <div className="board-row">
+          {this.renderSquare(3)}
+          {this.renderSquare(4)}
+          {this.renderSquare(5)}
+        </div>
+        <div className="board-row">
+          {this.renderSquare(6)}
+          {this.renderSquare(7)}
+          {this.renderSquare(8)}
+        </div>
+      </div>
+    );
+  }
+}
+
+class Game extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      squares: Array(9).fill(null),//初始化一个空的方格
-      xIsNext:true
-    }
+      history: [
+        {
+          squares: Array(9).fill(null),
+        },
+      ],
+      xIsNext: true,
+      stepNumber: 0,
+    };
   }
   handleClick(i) {
-    // 处理点击的回调函数
-    // alert(i)
-    const squares = this.state.squares.slice(); // 使用slice进行浅拷贝
-    // squares[i] = 'X';
-    //判断输赢
+    const history = this.state.history.slice(0, this.state.stepNumber + 1);
+    const current = history[this.state.stepNumber];
+    const squares = current.squares.slice();
     if (calculateWinner(squares) || squares[i]) {
       return;
     }
-    squares[i] = this.state.xIsNext ? "X" : "O"
+    squares[i] = this.state.xIsNext ? "X" : "O";
     this.setState({
-      squares: squares,
-      xIsNext:!this.state.xIsNext, // 每一次都取反，改变状态
-    }); // 重新调用setState
+      history: history.concat([
+        {
+          squares: squares,
+        },
+      ]),
+      xIsNext: !this.state.xIsNext,
+    });
   }
-    renderSquare(i) {
-      // 传入 名为value的prop
+
+  jumpTo(step) {
+    this.setState({
+      stepNumber: step,
+      // 偶数步的时候更改对应的选手
+      xIsNext: step % 2 === 0,
+    });
+  }
+  render() {
+    const history = this.state.history;
+    const current = history[history.length - 1];
+    const winner = calculateWinner(current.squares);
+    // 展示历史的步骤
+    const moves = history.map((step, move) => {
+      const desc = move ? "Go to move #" + move : "Go to game start";
       return (
-        <Square
-          value={this.state.squares[i]}
-          onClick={()=>this.handleClick(i)}
-        />
+        <li key={move}>
+          <button onClick={() => this.jumpTo(move)}>{desc}</button>
+        </li>
       );
+    });
+
+    let status;
+    if (winner) {
+      status = "Winner:" + winner;
+    } else {
+      status = "Next player:" + (this.state.xIsNext ? "X" : "O");
     }
-  
-    render() {
-      // const status = 'Next player: X';
-      const status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
-  
-      return (
-        <div>
-          <div className="status">{status}</div>
-          <div className="board-row">
-            {this.renderSquare(0)}
-            {this.renderSquare(1)}
-            {this.renderSquare(2)}
-          </div>
-          <div className="board-row">
-            {this.renderSquare(3)}
-            {this.renderSquare(4)}
-            {this.renderSquare(5)}
-          </div>
-          <div className="board-row">
-            {this.renderSquare(6)}
-            {this.renderSquare(7)}
-            {this.renderSquare(8)}
-          </div>
+    return (
+      <div className="game">
+        <div className="game-board">
+          {/* 通过props给board传参 */}
+          <Board
+            squares={current.squares}
+            onClick={(i) => this.handleClick(i)}
+          />
         </div>
-      );
-    }
-  }
-  
-  class Game extends React.Component {
-    render() {
-      return (
-        <div className="game">
-          <div className="game-board">
-            <Board />
-          </div>
-          <div className="game-info">
-            <div>{/* status */}</div>
-            <ol>{/* TODO */}</ol>
-          </div>
+        <div className="game-info">
+          <div>{status}</div>
+          <ol>{moves}</ol>
         </div>
-      );
-    }
+      </div>
+    );
   }
-  
-  // ========================================
-  
-  const root = ReactDOM.createRoot(document.getElementById("root"));
-  root.render(<Game />);
-  
+}
+
+// ========================================
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<Game />);
