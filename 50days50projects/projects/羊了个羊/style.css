@@ -1,0 +1,92 @@
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-image: url("https://pic.qy566.com/snake/bg.jpeg");
+  background-size: cover;
+}
+#box {
+  width: 600px;
+  height: 600px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+}
+#temp {
+  width: 840px;
+  height: 120px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+  bottom: 0;
+  background-image: url("https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fup.92sucai.com%2Fimage%2F20180626%2F1529979993472449.jpg&refer=http%3A%2F%2Fup.92sucai.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1665795593&t=0c74935a1fa75d5861903e8249c15bbb");
+  background-size: contain;
+  border-radius: 16px;
+  display: flex;
+}
+.item {
+  width: 120px;
+  height: 120px;
+  border-radius: 16px;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  border: 1px solid #333;
+  cursor: pointer;
+}
+.shadow {
+  box-shadow: 0 0 50px 10px #333 inset;
+}
+#source {
+  width: 260px;
+  height: 120px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+#source1 {
+  width: 260px;
+  height: 120px;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.result {
+  width: 200px;
+  height: 120px;
+  border: 4px dashed cyan;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  background-color: #fff;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  display: none;
+}
+.restart {
+  width: 120px;
+  height: 40px;
+  line-height: 40px;
+  border: 1px solid #333;
+  text-align: center;
+  cursor: pointer;
+  margin: auto;
+}
