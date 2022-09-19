@@ -88,3 +88,44 @@ const VDOM = (
 2.虚拟DOM比较“轻”，真实DOM比较“重”，因为虚拟DOM是React内部在用，无需真实DOM上那么多的属性。
 3.虚拟DOM最终会被React转化为真实DOM，呈现在页面上。
 
+
+### 组件
+
+1. 函数式组件
+
+```js 
+function MyComponent(){
+	console.log(this); //此处的this是undefined，因为babel编译后开启了严格模式
+	return <h2>我是用函数定义的组件(适用于【简单组件】的定义)</h2>
+}
+```
+
+返回一个组件： H2 标签， 之后渲染组件到页面；
+
+```js
+ReactDOM.render(<MyComponent/>,document.getElementById('test'))
+```
+- 组件名字的书写： 自定义组件都以大写字母开头，小写字母默认为原生标签- `</>` 闭合标签形式 书写；
+
+
+2. 类式组件
+
+```js
+class MyComponent extends React.Component {
+	render(){
+		//render是放在哪里的？——MyComponent的原型对象上，供实使用。
+		//render中的this是谁？——MyComponent的实例对象 <=>MyComponent组件实例对象。
+		console.log('render中的this:'this);
+		return <h2>我是用类定义的组件(用于【复杂组件】的定义)</h2>
+	}
+}
+```
+
+- 类式组件的构造器 可以不写
+- `render()`函数必须写
+- `render()`函数必须有返回值；
+  
+执行了`ReactDOM.render(<MyComponent/>`之后，发生了什么？
+1.`React`解析组件标签，找到了`MyComponent`组件。
+2.发现组件是使用类定义的，随后`new`出来该类的实例，并通过该实例调用到原型上的`render`方法。`render()`函数在组件实例身上
+3.将`render`返回的虚拟`DOM`转为真实`DOM`，随后呈现在页面中。
