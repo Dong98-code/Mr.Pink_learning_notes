@@ -420,3 +420,8 @@ window.addEventListener('keydown', (event) => {
 
 ```
 ![20220915140946](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220915140946.png)
+
+
+## day13： random choice picker
+
+在输入框内输入 选择以逗号隔开， 之后选择在页面之下显示，监控enter键， 以跑马灯 的形式 选择最后的选项；
