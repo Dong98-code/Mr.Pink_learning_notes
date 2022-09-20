@@ -249,4 +249,129 @@ changeWeather = ()=>{
 ```
 
 ### 2.4 props
+1. `props`传参
 
+```js
+class Person extends React.Component{
+	render(){
+		console.log(this);
+	const {name,age,sex} = this.props
+	return (
+			<ul>
+				<li>姓名：{name}</li>
+				<li>性别：{sex}</li>
+				<li>年龄：{age+1}</li>
+			</ul>
+			)
+		}
+	}
+	//渲染组件到页面
+	ReactDOM.render(<Person name="jerry" age={19}  sex="男"/>,document.getElementById('test1'))
+
+```
+
+批量传值： 对象传值 ，本质上是 收组件身上的那个 对象得值：
+展开运算符得使用： es9支持 对象得展开；
+
+
+```js
+const p = {name:'老刘',age:18,sex:'女'}
+ReactDOM.render(<Person {...p}/>,document.getElementById('test3'))
+
+。。。
+const obj = {...obj1}// 复制对象
+
+```
+- 注意react中得`{}`表示里面得语句为 js语法和 实际得`{}`得含义不一样；
+
+用过 babel 来实现这样的 批量传参；
+
+
+2. `props`限制
+
+对组件传入的props 的值的类型进行限制；
+`PropTypes.string|number|func`进行限制；
+```js
+//对标签属性进行类型、必要性的限制
+Person.propTypes = {
+	name:PropTypes.string.isRequired,//限制name必传，且为字符串
+	sex:PropTypes.string,//限制sex符串
+	age:PropTypes.number,//限制age值
+	speak:PropTypes.func,//限制spea函数
+}
+
+```
+
+注意：
+- `propTypes`: 必须是这个字段； 为一个对象，对象的书写规则为： 
+```js
+name: PropTypes.string
+```
+
+其中。`PropTypes`为React自身的属性 
+```html
+<!-- 引入prop-types，用于对组件标签属性进行限制 -->
+<script type="text/javascript" src="../js/prop-types.js"></script>
+```
+引入之后，全局增加了一个对象`PropTypes`,之后使用这个接口对 传入的值进行限制；
+
+- 设置默认值
+
+```js
+Person.defaultProps = {
+	sex:'男',//sex默认值为男
+	age:18 //age默认值为18
+}
+```
+
+- `props`为只读属性
+
+- `props`属性的简写
+
+```js
+constructor(props) {
+	//构造器是否接收props，是否传递给super，取决于：是否希望在构造器中通过this访问props
+
+	super(props)
+	...
+	...
+
+	//对标签属性进行类型、必要性的限制
+	static propTypes = {
+		...
+	}
+	//指定默认标签属性值
+	static defaultProps = {
+		...
+	}
+}
+```
+使用`static`关键字给类本身而不是其实例 添加属性和方法；此时 `propTypes`为类本身的有的一个属性
+
+- 函数式组件的 `props`
+
+```js
+function Person (props){
+	const {name,age,sex} = props
+	return (
+			<ul>
+				<li>姓名：{name}</li>
+				<li>性别：{sex}</li>
+				<li>年龄：{age}</li>
+			</ul>
+		)
+	}
+	Person.propTypes = {
+		name:PropTypes.string.isRequired, /限制name必传，且为字符串
+		sex:PropTypes.string,//限制sex为符串
+		age:PropTypes.number,//限制age为值
+	}
+
+	//指定默认标签属性值
+	Person.defaultProps = {
+		sex:'男',//sex默认值为男
+		age:18 //age默认值为18
+	}
+	//渲染组件到页面
+	ReactDOM.render(<Person name="jerry"/>document.getElementById('test1'))
+```
