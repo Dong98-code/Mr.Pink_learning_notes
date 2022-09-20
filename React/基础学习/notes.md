@@ -129,3 +129,124 @@ class MyComponent extends React.Component {
 1.`React`解析组件标签，找到了`MyComponent`组件。
 2.发现组件是使用类定义的，随后`new`出来该类的实例，并通过该实例调用到原型上的`render`方法。`render()`函数在组件实例身上
 3.将`render`返回的虚拟`DOM`转为真实`DOM`，随后呈现在页面中。
+
+### 2.2 state
+
+状态驱动 页面；
+组件的状态 数据 -》 数据改变-》 页面改变
+
+```js
+class Weather extends React.Component{
+			
+	//构造器调用几次？ ———— 1次
+	constructor(props){
+		console.log('constructor');
+		super(props)
+		//初始化状态
+		this.state = {isHot:false,wind:'微风'}
+		//解决changeWeather中this指向问题
+		this.changeWeather = this.changeWeather.bind(this)
+	}
+
+	//render调用几次？ ———— 1+n次 1是初始化的那次 n是状态更新的次数
+	render(){
+		console.log('render');
+		//读取状态
+		const {isHot,wind} = this.state
+		return <h1 onClick={this.changeWeather}>今天天气很{isHot ? '炎热' : '凉爽'}，{wind}</h1>
+	}
+
+	//changeWeather调用几次？ ———— 点几次调几次
+	changeWeather(){
+		//changeWeather放在哪里？ ———— Weather的原型对象上，供实例使用
+		//由于changeWeather是作为onClick的回调，所以不是通过实例调用的，是直接调用
+		//类中的方法默认开启了局部的严格模式，所以changeWeather中的this为undefined
+		
+		console.log('changeWeather');
+		//获取原来的isHot值
+		const isHot = this.state.isHot
+		//严重注意：状态必须通过setState进行更新,且更新是一种合并，不是替换。
+		this.setState({isHot:!isHot})
+		console.log(this);
+
+		//严重注意：状态(state)不可直接更改，下面这行就是直接更改！！！
+		//this.state.isHot = !isHot //这是错误的写法
+	}
+}
+```
+
+初始化状态： `this.state = {}`
+读取 实例身上的 state
+
+1. 绑定事件
+
+`onClick={回调函数}`  `C`大写吗然后，写回调函数的名字， 不能带 小括号，`函数（）`这样传入的是 该回调函数的返回结果；
+
+2. 类中的this指向；
+
+在`render`中的this指向 组件实例对象；
+
+函数直接写道 组件实例身上：
+
+```js
+
+class Weather extends React.Component{
+			
+	...
+	changeWeather(){
+	...
+	}
+}
+```
+
+
+```js
+
+changeWeather(){
+	//changeWeather放在哪里？ ——Weather的原型对象上，供实例使用
+	//由于changeWeatheronClick的回调，所以不是通过用的，是直接调用
+	//类中的方法默认开启了局部模式，所以changeWeather中的t为undefined
+	
+	console.log('changeWeather');
+	//获取原来的isHot值
+	const isHot = this.state.isHot
+	//严重注意：状态必须通过setSt进行更新,且更新是一种合并，换。
+	this.setState({isHot:!isHot})
+	console.log(this)
+	//严重注意：状态(state)不可改，下面这行就是直接更改！！！
+	//this.state.isHot = !isHot这是错误的写
+}
+```
+
+默认开启了局部的 严格模式； 调用`changeWeather`的时候， 并不是 实例调用；
+
+
+```js
+//解决changeWeather中this指向问题
+this.changeWeather = this.changeWeather.bind(this)
+```
+
+= 右侧 的 `this.changeWeather`刚开始并不出现在实例身上， 通过 其原型链在其父类上找到这个方法；之后于使用`bind`方法，返回一个改变了`this`指向的函数；
+之后 实例身上有了一个方法，叫做`this.changeWeather`
+
+
+- 修改state 使用`setState()`
+ `this.setState({isHot:！isHot})`
+
+
+- state简写方式
+
+1. 初始化状态： 赋值语句
+```js
+state = {...}
+...
+//自定义方法————要用赋值语句的形式+箭头函数
+changeWeather = ()=>{
+	const isHot = this.state.isHot
+	this.setState({isHot:!isHot})
+}
+
+```
+
+### 2.4 props
+
