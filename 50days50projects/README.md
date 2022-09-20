@@ -425,3 +425,63 @@ window.addEventListener('keydown', (event) => {
 ## day13： random choice picker
 
 在输入框内输入 选择以逗号隔开， 之后选择在页面之下显示，监控enter键， 以跑马灯 的形式 选择最后的选项；
+
+
+
+## day14 animated navigation
+
+点击按钮 动画显示菜单栏
+
+[live demo](https://50projects50days.com/projects/animated-navigation/#)
+
+
+### 实现
+
+css: `classList.toggle`来实现 样式的切换；
+`opacity：0`仍然占据空间位置。但是此时设置父盒子宽度=0则在页面中不显示；
+
+
+## day15 incrementing-counter
+
+刷新页面，对应的数字 变化的显示在页面上
+
+[live demo](https://50projects50days.com/projects/incrementing-counter/)
+
+![20220920103432](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220920103432.png)
+
+### 实现
+
+- css: 使用媒体查询，当屏幕宽度小于 一定值的时候，改变`flex-directions` colmun;
+![20220920110134](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220920110134.png)
+- js
+
+`innerText`和`innerHtml`的区别：
+
+![20220920110310](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220920110310.png)
+
+`Element.getAttribute()`:得到 标签上的属性值， 返回的是string格式的值；
+
+ 获取属性值，和目标值做对比；如果小于目标值， 使用计时器再调用该更新函数；
+
+ ```js
+const counters = document.querySelectorAll(".counter");
+counters.forEach((counter) => {
+  counter.innerText = "0";
+  const updateCounter = () => {
+    const target = +counter.getAttribute("data-target"); // 字符串 -》 number
+    const c = +counter.innerText; // 0
+    const delta = target / 200;
+    if (c < target) {
+      // 现在还小于目标
+      counter.innerText = `${Math.ceil(c + delta)}`;
+      setTimeout(updateCounter, 1);
+    } else {
+      counter.innerText = target;
+    }
+  };
+
+  updateCounter();
+});
+
+
+ ```
