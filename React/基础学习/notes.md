@@ -375,3 +375,42 @@ function Person (props){
 	//渲染组件到页面
 	ReactDOM.render(<Person name="jerry"/>document.getElementById('test1'))
 ```
+
+### 组件:`ref`
+`ref`用来访问 在render方法中创建的DOM元素或者React组件实例；
+- 创建refs
+使用 `React.creatRef()`创建，并通过 ref属性附加到React元素； 在构造组件时，通常使用Refs 分配给实例属性 
+
+```js
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.myRef = React.createRef();
+  }
+  render() {
+    return <div ref={this.myRef} />;
+  }
+}
+```
+
+- 访问
+![20220920162022](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220920162022.png)
+
+- 1. 字符串形式的ref
+
+该方法官方放弃；
+效率问题比较低；
+
+
+- 2. 回调形式 ref
+
+```js
+<input ref={(current)=>{this. = current}}>
+
+```
+`ref=回调函数` 回调函数传入的参数为 他所标记的那个dom元素或者 组件实例；
+
+执行语句： 把节点放到组件实例上
+
+回调函数的次数：
+
