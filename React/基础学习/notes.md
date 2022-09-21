@@ -451,3 +451,55 @@ savePassword = (event)=>{
 
 React为单向的数据绑定；
 有点：减少了Ref的使用，效果提升；（官方推荐不要过度使用ref）
+
+### 高阶函数
+1. 函数A接收得参数是一个函数 A为高阶函数
+2. 函数A返回得是一个函数 A为高阶函数；
+
+Promise 传入一个执行器函数； `excutor`
+定时器`setTimeout`
+数组： 	`map`函数
+
+- 函数柯里化 
+
+实现通过函数调用 返回函数得方式，实现多次接收参数 最后统一处理得函数编码形式；
+
+### 生命周期
+![2_react生命周期(旧)](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/2_react生命周期(旧).png)
+组件挂载 `mount`
+组件卸载 `unmount`:`ReactDOM.unmountComponent()`
+
+![20220921154126](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220921154126.png)
+
+点击执行 卸载组件得回调函数：
+```js
+death = () =>{
+ReactDOM.unmountComponentAtNode(document.getElementById('test'))}
+```
+
+ - `componentDidMount()`
+
+![20220921155618](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220921155618.png)
+- `componentWillUnmount()`
+
+组件即将卸载之前，执行对应的回调函数；
+完成例如清除定时器等 任务：`clearInterval()`
+
+- 组件挂载
+
+1. 初始化阶段: 由ReactDOM.render()触发---初次渲染
+	1.	constructor()
+	2.	componentWillMount()
+	3.	render()
+	4.	componentDidMount() =====> 常用
+												一般在这个钩子中做一些初始化的事，例如：开启定时器、发送网络请求、订阅消息
+
+- 组件更新
+
+2. 更新阶段: 由组件内部this.setSate()或父组件render触发
+	1.	shouldComponentUpdate()
+	默认返回true
+	
+	2.	componentWillUpdate()
+	3.	render() =====> 必须使用的一个
+	4.	componentDidUpdate()
