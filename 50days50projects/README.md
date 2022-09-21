@@ -485,3 +485,87 @@ counters.forEach((counter) => {
 
 
  ```
+
+ ## DAY16 drink water
+
+效果： 点击对应的被子中的水， 大杯子重点额总体的水变化， 再点击一次减少已被水的量
+
+![20220921090303](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220921090303.png)
+
+![20220921090317](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220921090317.png)
+
+[live demo](https://50projects50days.com/projects/drink-water/)
+
+### 实现
+
+主要分为两部分： 小的杯子的变化和大的杯子中百分比和水量的变化；
+
+1. 点击事件之后，给小杯子添加 类名`full`改变北京颜色， 然后使用`transition`实现动画效果；
+2. 根据点击 `idx`,判断那些需要添加类名： 注意： `nextElementSibling`
+
+![20220921101057](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220921101057.png) 
+
+和其属于同一父元素 的后一个 节点元素；
+3. 通过设置 `visibility`来实现对应的部分隐藏和展示；
+```js
+// 获取dom
+
+const smallCups = document.querySelectorAll(".cup-small");
+
+const remained = document.getElementById("remained");
+
+const percentage = document.getElementById("percentage");
+
+const liters = document.getElementById("liters");
+
+updateBigCup();
+
+smallCups.forEach((cup, idx) => {
+  cup.addEventListener("click", () => highlightCups(idx));
+});
+
+function highlightCups(idx) {
+  if (idx === 7 && smallCups[idx].classList.contains("full")) idx--;
+  else if (
+    smallCups[idx].classList.contains("full") &&
+    !smallCups[idx].nextElementSibling.classList.contains("full")
+  ) {
+    idx--;
+  }
+  // 小于等于他的 都添加 类名full
+  smallCups.forEach((cup, idx2) => {
+    if (idx2 <= idx) {
+      cup.classList.add("full");
+    } else {
+      cup.classList.remove("full");
+    }
+  });
+
+  updateBigCup();
+}
+
+function updateBigCup() {
+  // 计算现在的被子的长度
+  let length = document.querySelectorAll(".cup-small.full").length;
+  let total = smallCups.length;
+  if (length === 0) {
+    // 空
+    percentage.style.visibility = "hidden";
+    percentage.style.height = 0;
+  } else {
+    percentage.style.visibility = "visible";
+    percentage.style.height = `${(length / total) * 330}px`;
+    percentage.innerText = `${(length / total) * 100}%`;
+  }
+
+  if (length === total) {
+    remained.style.visibility = "hidden";
+    remained.style.height = 0;
+  } else {
+    remained.style.visibility = "visible";
+    liters.innerText = `${2 - (250 * length) / 1000}L`;
+  }
+}
+
+
+```
