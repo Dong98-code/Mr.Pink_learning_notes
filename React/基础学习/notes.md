@@ -130,7 +130,7 @@ class MyComponent extends React.Component {
 2.发现组件是使用类定义的，随后`new`出来该类的实例，并通过该实例调用到原型上的`render`方法。`render()`函数在组件实例身上
 3.将`render`返回的虚拟`DOM`转为真实`DOM`，随后呈现在页面中。
 
-### 2.2 state
+### 组件：state
 
 状态驱动 页面；
 组件的状态 数据 -》 数据改变-》 页面改变
@@ -248,7 +248,7 @@ changeWeather = ()=>{
 
 ```
 
-### 2.4 props
+### 组件：props
 1. `props`传参
 
 ```js
@@ -414,3 +414,40 @@ class MyComponent extends React.Component {
 
 回调函数的次数：
 
+### 事件处理
+ 
+(1).通过`onXxx`属性指定事件处理函数(注意大小写)
+	- `React`使用的是自定义(合成)事件, 而不是使用的原生`DOM`事件 —————— 为了更好的兼容性
+	- `React`中的事件是通过事件委托方式处理的(委托给组件最外层的元素) ————————为了的高效
+(2).通过`event.target`得到发生事件的DOM元素对象 ——————————不要过度使用ref 
+
+
+- 非受控组件：
+
+输入类dom的值， 现用现取
+
+- 受控组件
+
+检测 事件触发
+```js 
+return(
+	<form onSubmit={this.handleSubmit}>
+						用户名：<input onChange={this.saveUsername} type="text" name="username"/>
+						密码：<input onChange={this.savePassword} type="password" name="password"/>
+						<button>登录</button>
+					</form>
+				)
+```
+
+改变状态：
+```js
+savePassword = (event)=>{
+	this.setState({password:event.target.value})
+}
+
+```
+
+输入 -> 状态 -> 页面展示
+
+React为单向的数据绑定；
+有点：减少了Ref的使用，效果提升；（官方推荐不要过度使用ref）
