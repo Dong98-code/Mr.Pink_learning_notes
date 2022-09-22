@@ -2,7 +2,7 @@ const body = document.body;
 const slides = document.querySelectorAll(".slide");
 const leftBtn = document.getElementById("left");
 const rightBtn = document.getElementById("right");
-
+const circles = document.querySelectorAll(".circle");
 let activeSlide = 0;
 rightBtn.addEventListener("click", () => {
   activeSlide += 1;
@@ -12,6 +12,7 @@ rightBtn.addEventListener("click", () => {
   }
   setBgToBody();
   setActiveSlide();
+  setCircles();
 });
 
 leftBtn.addEventListener("click", () => {
@@ -22,9 +23,20 @@ leftBtn.addEventListener("click", () => {
   }
   setBgToBody();
   setActiveSlide();
+  setCircles();
 });
 
+circles.forEach((circle, index) => {
+  circle.addEventListener("click", () => {
+    activeSlide = index;
+    setBgToBody();
+    setActiveSlide();
+    setCircles();
+  });
+});
 setBgToBody();
+setCircles();
+
 function setBgToBody() {
   body.style.backgroundImage = slides[activeSlide].style.backgroundImage;
 }
@@ -35,4 +47,12 @@ function setActiveSlide() {
   });
 
   slides[activeSlide].classList.add("active");
+}
+
+function setCircles() {
+  circles.forEach((circle) => {
+    circle.classList.remove("active");
+  });
+
+  circles[activeSlide].classList.add("active");
 }

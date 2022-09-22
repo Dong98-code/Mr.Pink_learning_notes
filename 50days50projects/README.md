@@ -569,3 +569,53 @@ function updateBigCup() {
 
 
 ```
+
+## day18 slide
+
+效果： 1. 简单的轮播效果，点击左右按钮实现图片的切换；
+      2. 图片的中心和大的背景 图片一致吗但是 中心盒子显示部分 背景图片， 底层背景显示另外的图片部分，底层上加了一个遮罩层
+      3. 轮播效果的实现是：通过给 slide 设置透明度， 要显示的设置为1，不透明的设置为0；
+
+### 实现
+
+```js
+const body = document.body;
+const slides = document.querySelectorAll(".slide");
+const leftBtn = document.getElementById("left");
+const rightBtn = document.getElementById("right");
+
+let activeSlide = 0;
+rightBtn.addEventListener("click", () => {
+  activeSlide += 1;
+
+  if (activeSlide > slides.length - 1) {
+    activeSlide = 0;
+  }
+  setBgToBody();
+  setActiveSlide();
+});
+
+leftBtn.addEventListener("click", () => {
+  activeSlide -= 1;
+
+  if (activeSlide < 0) {
+    activeSlide = slides.length - 1;
+  }
+  setBgToBody();
+  setActiveSlide();
+});
+
+setBgToBody();
+function setBgToBody() {
+  body.style.backgroundImage = slides[activeSlide].style.backgroundImage;
+}
+
+function setActiveSlide() {
+  slides.forEach((slide) => {
+    slide.classList.remove("active");
+  });
+
+  slides[activeSlide].classList.add("active");
+}
+
+```

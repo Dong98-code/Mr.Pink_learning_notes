@@ -18,6 +18,7 @@ body {
   transition: 0.4s;
 }
 
+/* mask层，直接改透明度，设置 z-index的值为-1 置于底层； */
 body::before {
   content: "";
   position: absolute;
@@ -76,4 +77,32 @@ body::before {
 
 .right-arrow {
   right: calc(15vw - 65px);
+}
+
+
+.circles {
+    position: fixed;
+    /* background-color: pink; */
+    left: 50%;
+    bottom: 5vh;
+    /* transform: translateY(30px); */
+    width: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.circles li {
+    list-style: none;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin: 10px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.circles li.active {
+    background-color: rgba(255, 255, 255, 1);
 }
