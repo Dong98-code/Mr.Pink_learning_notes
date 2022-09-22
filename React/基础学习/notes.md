@@ -499,7 +499,106 @@ ReactDOM.unmountComponentAtNode(document.getElementById('test'))}
 2. 更新阶段: 由组件内部this.setSate()或父组件render触发
 	1.	shouldComponentUpdate()
 	默认返回true
-	
+	继续下面的流程
+	控制组件 更新的阀门
 	2.	componentWillUpdate()
+
 	3.	render() =====> 必须使用的一个
+
+	
 	4.	componentDidUpdate()
+
+	更新完毕的
+
+
+    5. 强制更新
+
+	`this.forceUpdate()`
+
+
+3. 父子组件更新
+
+`componentWillReceiveProps`
+接收新的 Props会进入这个 生命周期；
+第一次传入的Props不算；
+父组件 调用`setState` 会引发父组件的 render()函数引入 `props`传参；
+
+4. 卸载组件
+由`ReactDOM.unmountComponentAtNode()`触发
+`componentWillUnmount()`  =====> 一般在这个钩子中做一些收尾的事，例如：关闭定时器、取消订阅消息
+
+### 生命周期（新）
+
+![3_react生命周期(新)](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/3_react生命周期(新).png)
+
+`UNSAFE_`: `componentWillMount`, `componentWillReceiveProps` 和 `componentWillUpdate`
+
+所有 老版本的带有 `Will`的钩子函数，新版的的生命周期 改名；
+
+`getDerivedStateFromProps()`
+
+`shouldComponentUpdate()`和render中间的 `componentWillUpdate()`
+
+- `getDerivedFromProps()`
+
+静态方法，不能通过实例调用;
+返回：
+
+返回一个状态对象 或者 `null`;
+
+改方法只适用于一个 特殊的情况： 状态只由 props决定
+![20220922155909](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220922155909.png)
+
+
+- `getSnapshotBeforeUpdate(prevProps, prevState)`
+
+实例方法；传入的两个参数值为：之前的`Props`和之前的`State`
+组件能够 在发生更改之前从dom中捕获一些消息，
+返回值 ：
+
+返回 snapshot ，传入到  `componentDidUpdate(preProps, prevState, snapshot)`中去；
+
+使用：
+
+```js
+class NewsList extends React.Component{
+
+	state = {newsArr:[]}
+
+	// 刚开始没有新闻 每隔1s中 增加一个新的新闻 用数字模拟
+	// 定时器开始时间为 挂载完毕之后
+	componentDidMount(){
+		setInterval(() => {
+			//获取原状态
+			const {newsArr} = this.state
+			//模拟一条新闻
+			const news = '新闻'+ (newsArr.length+1)
+			//更新状态
+			this.setState({newsArr:[news,...newsArr]})
+		}, 1000);
+	}
+	// 获取之前的快照值
+	getSnapshotBeforeUpdate(){
+		return this.refs.list.scrollHeight
+	}
+
+	componentDidUpdate(preProps,preState,height){
+		// hight为 getSnapshotBeforeUpdate()的返回值
+		this.refs.list.scrollTop += this.refs.list.scrollHeight - height；
+	}
+
+	render(){
+		return(
+			<div className="list" ref="list">
+				{
+					this.state.newsArr.map((n,index)=>{
+						return <div key={index} className="news">{n}</div>
+					})
+				}
+			</div>
+		)
+	}
+}
+ReactDOM.render(<NewsList/>,document.getElementBy('test'))
+
+```
