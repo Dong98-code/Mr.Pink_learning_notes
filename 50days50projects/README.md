@@ -619,3 +619,37 @@ function setActiveSlide() {
 }
 
 ```
+
+## day20 drag 
+
+拖动图片，实现拖拽的效果
+![20220926100849](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220926100849.png)
+
+### 实现
+
+tips：
+常见的几个拖拽事件
+
+`dragover`:
+当元素或者选择的文本拖曳到一个有效的放置目标上，触发`dragover`事件
+
+![20220926101016](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220926101016.png)
+
+`dragenter`:
+![20220926101318](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220926101318.png)
+事件对象为：被拖动的元素的下面的元素
+
+`dragleave`:
+![20220926101457](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220926101457.png)
+
+`drop`
+
+![20220926101636](https://xd-imgsubmit.oss-cn-beijing.aliyuncs.com/images/20220926101636.png)
+
+实现的逻辑：
+1. 子盒子里放图片，父盒子为`empty`
+2. 点击子盒子拖动，触发`dragstart`事件，此时`this`指向原来的盒子，使用事件循环，将原来的盒子设置为不可见；
+3. 此时拖动的子盒子会触发 父盒子身上的`dragover`事件,其默认事件为撤销这一拖动操作，需要在组织其默认事件；
+4. 继续移动子盒子，触发 父盒子的`dragleave`事件，之后设置大盒子为空盒子的样式；
+5. 之后进入到新的大盒子，还未drop之前，设置其大盒子的样式为`hovered`
+6. drop 之后，触发子盒子`dragend`和父盒子`drop`事件，完成对应的逻辑‘
