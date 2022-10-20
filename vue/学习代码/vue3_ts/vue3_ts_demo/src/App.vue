@@ -1,11 +1,11 @@
 <script setup lang="ts">
 
-import builtInDirectives from './components/builtInDirectives.vue'
+import Comp from './components/Comp.vue'
 </script>
 
 <template>
   <div>
-    <builtInDirectives/>
+    <Comp></Comp>
   </div>
 </template>
 
