@@ -5,6 +5,11 @@
   </div>
   <!-- 代办事项的内容 -->
   <div v-for="(item, index) in items" :key="item.id">{{item.name}}</div>
+
+  <!-- titleIFNO -->
+  <div>
+    <h1 :style="{color:titleInfo.color}">{{titleInfo.value}}</h1>
+  </div>
 </template>
 
 <!-- <script lang='ts' setup>
@@ -13,13 +18,25 @@
 </script> -->
 
 <script lang="ts">
-import { defineComponent } from "vue"
+import { defineComponent,PropType} from "vue"
 
 type Todo = {
     id: number,
     name:string
 }
+
+type TitleInfo = {
+    value: string,
+    color:string
+}
 export default defineComponent({
+    // props
+    props: {
+        titleInfo: {
+            type: Object as PropType<TitleInfo>,
+            required:true
+        }  
+    },
     data() {
         return {
             counter: 1,

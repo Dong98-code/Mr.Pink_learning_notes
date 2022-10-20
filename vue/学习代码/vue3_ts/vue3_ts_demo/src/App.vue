@@ -5,7 +5,7 @@ import Comp from './components/Comp.vue'
 
 <template>
   <div>
-    <Comp></Comp>
+    <Comp :title-info="{value:'代办',color:'red'}"></Comp>
   </div>
 </template>
 
