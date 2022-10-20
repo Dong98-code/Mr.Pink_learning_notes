@@ -10,6 +10,13 @@
   <div>
     <h1 :style="{color:titleInfo.color}">{{titleInfo.value}}</h1>
   </div>
+
+  <!-- 计算属性 -->
+  <div>
+    {{doubleCounter}}
+  </div>
+  <!-- 新增代办 -->
+  <input type="text" v-model="todoName" @keydown.enter="addTodo(newTodo(todoName))">
 </template>
 
 <!-- <script lang='ts' setup>
@@ -40,7 +47,8 @@ export default defineComponent({
     data() {
         return {
             counter: 1,
-            items: [] as Todo[] // 断言
+            items: [] as Todo[], // 断言
+            todoName:""
         }
     },
     created() {
@@ -48,6 +56,24 @@ export default defineComponent({
             id: 1,
             name:"xddd"
         });
+    },
+    // 约束 computed类型，之约束返回值
+    computed: {
+        doubleCounter(): number{
+            return this.counter*2
+        }
+    },
+    methods: {
+        newTodo(todoName: string): Todo {
+            return {
+                id: this.items.length + 1,
+                name: todoName,
+            }
+        },
+        addTodo(todo: Todo): void {
+            this.items.push(todo);
+            this.todoName = ""
+        }
     }
 })
 </script>
